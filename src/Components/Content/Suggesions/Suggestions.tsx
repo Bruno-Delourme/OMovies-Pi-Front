@@ -1,6 +1,8 @@
+import React from "react";
+
 function Suggestion() {
     return (
-        <h1>Suggestion</h1>
+        <h1>Suggestion : films populaire </h1>
     );
 }
 
