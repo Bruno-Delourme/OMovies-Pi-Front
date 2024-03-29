@@ -1,6 +1,6 @@
 function ByMood() {
     return (
-        <h1>ByMood</h1>
+        <h1>ByMood: Chill by default</h1>
     );
 }
 
