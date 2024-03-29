@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 
-import React from 'react';
+
 // importe ReactDom to inject our application into the DOM
 import ReactDOM from 'react-dom/client';
 

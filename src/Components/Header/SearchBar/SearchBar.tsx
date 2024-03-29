@@ -1,8 +1,8 @@
-import React from "react";
+
 
 function SearchBar () {
     return (
-        <h1> SearchBar </h1>
+        <div className="black-banner"></div>
     );
 }
 

@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import Content from "../Content/Content";
 import Footer from "../Footer/Footer";
-import React from "react";
+
 
 
 
