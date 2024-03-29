@@ -16,7 +16,6 @@ import Home from "./Components/Home/Home.tsx";
 import List from "./Components/List/List.tsx";
 import Group from "./Components/Group/Group.tsx";
 import MemberSpace from "./Components/MemberSpace/MemberSpace.tsx";
-import Movie from "./Components/Content/Movie/Movie.tsx";
 
 
 
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
     // loader: moviesLoader,
     children : [
       {index: true, element: <Home />},
-      {path: "/movie/:id", element: <Movie />},
+
 
 
 
