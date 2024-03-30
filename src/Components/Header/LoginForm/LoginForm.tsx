@@ -2,7 +2,7 @@
 
 function LoginForm () {
     return (
-        <h1> LoginForm </h1>
+        <div className="logoPi"><span>Pi</span></div>
     );
 }
 
