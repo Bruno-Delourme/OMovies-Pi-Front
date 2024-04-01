@@ -1,4 +1,5 @@
 .search-bar-container {
+  position: relative;
   background-color: #424141;
   border-radius: 10px;
   width: 700px;
@@ -54,4 +55,32 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
    
 }
+
+/* Partie suggestion*/
+
+.suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+  top: 20px; 
+  left: 5px; 
+  right: 48px; 
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  max-height: 0;
+  overflow-y: auto;
+  transition: opacity 0.5s, max-height 0.5s ease;
+  z-index: 10;
+  visibility: hidden; // Initialement caché
+}
+
+.suggestions-list.active {
+  opacity: 1;
+  max-height: 250px; 
+  visibility: visible; // visible quand c'est actif
+}
+
+
   
