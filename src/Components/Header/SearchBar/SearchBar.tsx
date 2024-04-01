@@ -3,9 +3,7 @@ import "./SearchBar.scss";
 import clapperboardIcon from "../../../assets/clapperboard.png";
 
 type Movie = {
-  id: number;
   title: string;
-  release_date: string;
 };
 
 //fonction pour avoir de l'auto suggestion pour le titre du film (pour l'instant) + validation de la recherche par le bouton "validation img"
@@ -47,6 +45,13 @@ function SearchBar() {
     // Annuler le délai si l'utilisateur continue d'écrire
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      // Il faudra ajouter la logique pour exécuter la recherche
+      alert(`Recherche pour: ${searchTerm}`); // Exemple de logique de validation
+    }
+  };
 
   return (
     <>
