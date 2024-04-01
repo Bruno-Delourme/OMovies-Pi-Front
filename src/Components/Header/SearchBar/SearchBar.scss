@@ -24,13 +24,7 @@
   transition: border-color 0.3s;
 }
 
-.search-input:hover {
-  box-shadow: 0 0 0 1px blue;
-  cursor: pointer;
-}
-
 .search-button {
-  
   border-radius: 8px;
   outline: none;
   cursor: pointer;
@@ -42,18 +36,15 @@
   cursor: onclick;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
- .search-button:active {
-  
+.search-button:active {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transform: translateY(1px);
+}
 
- }
-
- img {
-  width: 24px; 
+img {
+  width: 24px;
   height: 28px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-   
 }
 
 /* Partie suggestion*/
@@ -62,9 +53,10 @@
   list-style-type: none;
   padding: 0;
   position: absolute;
-  top: 20px; 
-  left: 5px; 
-  right: 48px; 
+  top: 20px;
+  left: 5px;
+  right: 48px;
+  text-align: left;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -78,9 +70,21 @@
 
 .suggestions-list.active {
   opacity: 1;
-  max-height: 250px; 
+  max-height: 250px;
   visibility: visible; // visible quand c'est actif
 }
 
+.suggestions-list li {
+  padding: 10px 5px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
 
-  
+  &:last-child {
+    border-bottom: none;
+    
+  }
+
+  &:hover {
+    background-color: #f0f0f0; 
+    color: #333; 
+  }
+}
