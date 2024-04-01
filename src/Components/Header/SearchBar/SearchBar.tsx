@@ -16,11 +16,24 @@ function SearchBar() {
   useEffect(() => {
     const fetchMovies = async () => {
       if (searchTerm.length > 2) {
-        // Uniquement si la saisie a au moins 3 caractères
         const url = `https://api.themoviedb.org/3/search/movie?api_key=51f618f32abf234bda3c45a35fcc9a30&query=${searchTerm}`;
         const response = await fetch(url);
         const data = await response.json();
-        setSuggestions(data.results.slice(0, 5));
+        const uniqueMovies = data.results.reduce(
+          (acc: Movie[], current: Movie) => {
+            const x = acc.find((item: Movie) => item.title === current.title);
+            if (!x) {
+              return [...acc, current]; // décomposition pour ajouter 'current' à 'acc'
+            } else {
+              return acc;
+            }
+          },
+          [] as Movie[]
+        ); //pour spécifier le type de la valeur initiale
+
+        setSuggestions(
+          uniqueMovies.length === 1 ? uniqueMovies : uniqueMovies.slice(0, 5)
+        ); // pour que le ttitre ne soit pas répété 5 fois si c'est le même
       } else {
         setSuggestions([]);
       }
@@ -31,13 +44,17 @@ function SearchBar() {
       fetchMovies();
     }, 500);
 
-    // Annuler le délai si l'utilisateur continue de taper
+    // Annuler le délai si l'utilisateur continue d'écrire
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
 
   return (
     <>
-      <div className={`search-bar-container ${suggestions.length > 0 ? 'active' : ''}`}>
+      <div
+        className={`search-bar-container ${
+          suggestions.length > 0 ? "active" : ""
+        }`}
+      >
         <input
           type="text"
           placeholder="Rechercher un film..."
@@ -51,11 +68,13 @@ function SearchBar() {
         </button>
 
         {suggestions.length > 0 && (
-          <ul className={`suggestions-list ${suggestions.length > 0 ? 'active' : ''}`}>
+          <ul
+            className={`suggestions-list ${
+              suggestions.length > 0 ? "active" : ""
+            }`}
+          >
             {suggestions.map((movie, index) => (
-              <li key={index}>
-                {movie.title} 
-              </li>
+              <li key={index}>{movie.title}</li>
             ))}
           </ul>
         )}
