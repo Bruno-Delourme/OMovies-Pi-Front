@@ -1,8 +1,8 @@
-import React from "react";
+
 
 function LoginForm () {
     return (
-        <h1> LoginForm </h1>
+        <h1>loginform</h1>
     );
 }
 

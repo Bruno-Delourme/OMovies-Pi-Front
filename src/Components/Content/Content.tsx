@@ -1,4 +1,4 @@
-import React from "react";
+
 
 import NewMovie from "./NewMovies/NewMovies";
 import Suggestion from "./Suggesions/Suggestions";
