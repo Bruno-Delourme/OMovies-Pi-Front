@@ -12,10 +12,10 @@ const Header = () => {
         <div className="LogoPandaRoux">
         <img src={LogoPandaRoux} alt="Logo" />
         </div>
-
         <LoginForm />
         <SubscribeForm />
         <SearchBar />
+
       </div>
     </div>
   );

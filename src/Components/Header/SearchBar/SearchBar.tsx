@@ -31,7 +31,7 @@ function SearchBar() {
 
         setSuggestions(
           uniqueMovies.length === 1 ? uniqueMovies : uniqueMovies.slice(0, 5)
-        ); // pour que le ttitre ne soit pas répété 5 fois si c'est le même
+        ); // pour que le titre ne soit pas répété 5 fois si c'est le même
       } else {
         setSuggestions([]);
       }
