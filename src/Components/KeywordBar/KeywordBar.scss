@@ -1,0 +1,58 @@
+
+
+.div-keywordbar{
+
+    background-color: rgb(27, 27, 27);
+    width: 100%;
+    height: 6vh;
+    display: flex;
+    justify-content: space-between; 
+
+
+
+    .btn{
+        padding: 50em;
+
+        &-romance {
+          background-color: rgb(86, 35, 21);
+          border-radius: 10px;
+          width: 100em;
+
+      
+        }
+        &-comédie {
+          color : white;
+          background-color: black;
+          border-radius: 10px;
+          width: 100em;
+
+      
+        }
+        &-marvel {
+          background-color: rgb(183, 64, 33);
+          border-radius: 10px;
+          width: 100em;
+
+      
+        }
+      
+        &-sciencefiction{
+          background-color: rgb(203, 116, 101);
+          border-radius: 10px;
+          width: 100em;
+
+      
+        }
+        &-anime{
+          background-color: white;
+          border-radius: 10px;
+          width: 100em;
+
+      
+        }
+      
+      }
+
+      
+}
+
