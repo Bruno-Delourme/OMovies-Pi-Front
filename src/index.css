@@ -1,4 +1,11 @@
+@font-face {
+  font-family: 'Kodaschan';
+  src: url('../assets/fonts/Kodaschan-Medium.ttf') format('truetype');
+}
+
 body {
+  font-family: 'Kodaschan', sans-serif;
+
   /* Dégradé linéaire */
   background: linear-gradient(to bottom, #161616, #3b3b3b);
 
