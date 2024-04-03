@@ -15,13 +15,14 @@ const Header = () => {
       <div className="black-banner">
         <img src="src/assets/pandaRoux2.png" className="LogoPandaRoux"  alt="Logo"/>
         <SearchBar/>
+        <div className="acces-buttons">
         <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
         {/* <Group /> */}
         <button className="acces-button" id="login-btn" onClick={LoginForm}><FaRegCircleUser size={32}/></button>
         {/* <LoginForm /> */}
         <button className="acces-button" id="newUser-btn" onClick={SubscribeForm}><GrUserNew size={32}/></button>
         {/* <SubscribeForm /> */}
-        
+        </div>
       </div>
   );
 };
