@@ -1,6 +1,6 @@
 
 
-.div-keywordbar{
+.keywordbar{
 
     background-color: rgb(27, 27, 27);
     width: 100%;
@@ -8,51 +8,29 @@
     display: flex;
     justify-content: space-between; 
 
+  &-btn {
+    border-radius: 10px;
+    width: 100em;
+  }
 
-
-    .btn{
-        padding: 50em;
-
-        &-romance {
+    #romance-btn {
           background-color: rgb(86, 35, 21);
-          border-radius: 10px;
-          width: 100em;
-
-      
         }
-        &-comédie {
+    #comedie-btn {
           color : white;
           background-color: black;
-          border-radius: 10px;
-          width: 100em;
-
-      
         }
-        &-marvel {
+    #marvel-btn {
           background-color: rgb(183, 64, 33);
-          border-radius: 10px;
-          width: 100em;
-
-      
         }
       
-        &-sciencefiction{
-          background-color: rgb(203, 116, 101);
-          border-radius: 10px;
-          width: 100em;
-
-      
+    #sciencefiction-btn{
+          background-color: rgb(203, 116, 101);  
         }
-        &-anime{
+    #anime-btn{
           background-color: white;
-          border-radius: 10px;
-          width: 100em;
-
-      
         }
-      
-      }
-
       
 }
+
 
