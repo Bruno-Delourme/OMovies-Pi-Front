@@ -11,7 +11,7 @@ import "./Header.scss";
 
 const Header = () => {
   return (
-    <div>
+    
       <div className="black-banner">
         <img src="src/assets/pandaRoux2.png" className="LogoPandaRoux"  alt="Logo"/>
         <SearchBar/>
@@ -22,9 +22,7 @@ const Header = () => {
         <button className="acces-button" id="newUser-btn" onClick={SubscribeForm}><GrUserNew size={32}/></button>
         {/* <SubscribeForm /> */}
         
-
       </div>
-    </div>
   );
 };
 
