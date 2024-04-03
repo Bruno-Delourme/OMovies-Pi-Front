@@ -1,6 +1,11 @@
-# LIST DEBUG
+# To Do List
 
-- AJOUTER POLICE KODASCHAN
-- AJOUTER RESET SCSS
-- SI POSSIBLE QUE LA SUGGESTION LIST SOIT CENTREE A LA VERTICALE PAR RAPPORT A LA MINIATURE
-- AJOUTER LE CODE POUR QUE SI LA MINIATURE DE LA SUGGESTION LIST N'EXISTE PAS QU'IL N'Y AIT PAS D'ICONE DEGUEU
+- Ajouter police Kodaschan
+
+- Ajouter reset CSS
+
+- La suggestion liste doit être centrée par rapport à la miniature
+
+- ajouter algo pour que les films sans miniatures ne soit pas référencé avec un icone "no png"
+
+- Transition searchbar agrandissement

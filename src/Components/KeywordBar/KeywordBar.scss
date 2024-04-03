@@ -1,15 +1,17 @@
 
 .keywordbar{
 
-    background-color: rgb(27, 27, 27);
+    
     width: 100%;
     height: 6vh;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
+
 
   &-btn {
     border-radius: 10px;
     width: 100em;
+    padding: 2px;
   }
 
     #romance-btn {
