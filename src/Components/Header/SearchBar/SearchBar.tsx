@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
 import clapperboardIcon from "../../../assets/clapperboard.png";
 
+
 type Movie = {
   title: string;
 };
