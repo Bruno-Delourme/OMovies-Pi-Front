@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
-
-
+import clapperboardIcon from "../../../assets/clapperboard.png";
 
 type Movie = {
   title: string;
+  poster_path?: string;
 };
 
-//fonction pour avoir de l'auto suggestion pour le titre du film (pour l'instant) + validation de la recherche par le bouton "validation img"
 function SearchBar() {
-  const [query, setquery] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
 
   useEffect(() => {
@@ -22,17 +21,27 @@ function SearchBar() {
           (acc: Movie[], current: Movie) => {
             const x = acc.find((item: Movie) => item.title === current.title);
             if (!x) {
-              return [...acc, current]; // décomposition pour ajouter 'current' à 'acc'
+              return [...acc, current]; // Ajoutez l'objet de film unique
             } else {
               return acc;
             }
           },
           [] as Movie[]
-        ); //pour spécifier le type de la valeur initiale
+        );
+
+        // Mettez à jour les films avec l'URL de la miniature
+        const moviesWithPosterPath = uniqueMovies.map((movie: Movie) => {
+          return {
+            ...movie,
+            poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path || ''}` // Assurez-vous de remplacer `poster_path` par la clé correcte pour l'URL de la miniature dans vos données
+          };
+        });
 
         setSuggestions(
-          uniqueMovies.length === 1 ? uniqueMovies : uniqueMovies.slice(0, 5)
-        ); // pour que le titre ne soit pas répété 5 fois si c'est le même
+          moviesWithPosterPath.length === 1
+            ? moviesWithPosterPath
+            : moviesWithPosterPath.slice(0, 5)
+        );
       } else {
         setSuggestions([]);
       }
@@ -65,12 +74,12 @@ function SearchBar() {
           type="text"
           placeholder="Rechercher un film..."
           value={query}
-          onChange={(e) => setquery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
           className="search-input"
         />
 
         <button className="search-button">
-          <img src="src/assets/clapperboard.png" alt="Search" />
+          <img src={clapperboardIcon} alt="Search" />
         </button>
 
         {suggestions.length > 0 && (
@@ -80,7 +89,12 @@ function SearchBar() {
             }`}
           >
             {suggestions.map((movie, index) => (
-              <li key={index}>{movie.title}</li>
+              <li key={index}>
+                <div>
+                  <img src={movie.poster_path} alt={movie.title} /> {/* Ajoutez la miniature */}
+                  <span>{movie.title}</span>
+                </div>
+              </li>
             ))}
           </ul>
         )}
