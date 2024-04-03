@@ -8,13 +8,13 @@ type Movie = {
 
 //fonction pour avoir de l'auto suggestion pour le titre du film (pour l'instant) + validation de la recherche par le bouton "validation img"
 function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [query, setquery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      if (searchTerm.length > 2) {
-        const url = `https://api.themoviedb.org/3/search/movie?api_key=51f618f32abf234bda3c45a35fcc9a30&query=${searchTerm}`;
+      if (query.length > 2) {
+        const url = `http://localhost:3000/api/searchBar?query=${query}`;
         const response = await fetch(url);
         const data = await response.json();
         const uniqueMovies = data.results.reduce(
@@ -44,12 +44,12 @@ function SearchBar() {
 
     // Annuler le délai si l'utilisateur continue d'écrire
     return () => clearTimeout(timeoutId);
-  }, [searchTerm]);
+  }, [query]);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       // Il faudra ajouter la logique pour exécuter la recherche
-      alert(`Recherche pour: ${searchTerm}`); // Exemple de logique de validation
+      alert(`Recherche pour: ${query}`); // Exemple de logique de validation
     }
   };
 
@@ -63,8 +63,8 @@ function SearchBar() {
         <input
           type="text"
           placeholder="Rechercher un film..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={query}
+          onChange={(e) => setquery(e.target.value)}
           className="search-input"
         />
 
