@@ -1,7 +1,11 @@
-function NewMovie() {
+
+import "./NewMovies.scss"
+
+
+function NewMovies() {
     return (
-        <h1>NewMovie</h1>
+        <h1 className="titleNewMovie">Nouveautés</h1>
     );
 }
 
-export default NewMovie;
+export default NewMovies;
