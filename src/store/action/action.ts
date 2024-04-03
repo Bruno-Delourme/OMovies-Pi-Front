@@ -1,4 +1,33 @@
+
+
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//import movies ( from @types )
+
+import { Movie } from "../../@types/movie";
+
+const axiosInstance = axios.create({
+    baseURL: "http://localhost:3000/api",
+  });
+
+
+//Romance movies 
+const FETCH_ROMANCE_MOVIES = "FETCH_ROMANCE_MOVIES";
+export const fetchRomanceMovies = createAsyncThunk<Movie[]>(
+  FETCH_ROMANCE_MOVIES ,
+  async () => {
+    const response = await axiosInstance.get("/movies/romance");
+    const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+
+    console.log("Dispatched action:", {
+      type: FETCH_ROMANCE_MOVIES,
+      payload: movies, // This is the data dispatched to the store
+    });
+
+    return movies;
+  }
+);
+
+
+const SET_ROMANCE_MOVIES="SET_ROMANCE_MOVIES";
+export const setRomanceMovies = createAction<Movie[]>(SET_ROMANCE_MOVIES);
