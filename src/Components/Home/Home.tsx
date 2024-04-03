@@ -11,7 +11,6 @@ import Footer from "../Footer/Footer";
 function Home() {
     return (
         <Layout>
-            
             <Header />
             <KeywordBar />
             <Content />
