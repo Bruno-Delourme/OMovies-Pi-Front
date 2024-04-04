@@ -19,5 +19,3 @@ function OneMovie({ title, poster_path, overview, release_date }: MovieProps) {
   }
 
   export default OneMovie;
-
-

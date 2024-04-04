@@ -19,10 +19,7 @@ export const fetchRomanceMovies = createAsyncThunk<Movie[]>(
     const response = await axiosInstance.get("/movies/romance");
     const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
 
-    console.log("Dispatched action:", {
-      type: FETCH_ROMANCE_MOVIES,
-      payload: movies, // This is the data dispatched to the store
-    });
+    //console.log(movies);
 
     return movies;
   }

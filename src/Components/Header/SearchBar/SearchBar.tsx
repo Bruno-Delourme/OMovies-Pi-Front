@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> eba0e53a4d0bfbed83c602bc49ac4ffa1017401c
 type Movie = {
   title: string;
   poster_path?: string;
 };
-
 function SearchBar() {
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
+<<<<<<< HEAD
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
 
+=======
+>>>>>>> eba0e53a4d0bfbed83c602bc49ac4ffa1017401c
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) {
@@ -29,7 +34,6 @@ function SearchBar() {
           },
           [] as Movie[]
         );
-
         // Mettez à jour les films avec l'URL de la miniature
         const moviesWithPosterPath = uniqueMovies.map((movie: Movie) => {
           return {
@@ -39,7 +43,6 @@ function SearchBar() {
             }` // Assurez-vous de remplacer `poster_path` par la clé correcte pour l'URL de la miniature dans vos données
           };
         });
-
         setSuggestions(
           moviesWithPosterPath.length === 1
             ? moviesWithPosterPath
@@ -52,16 +55,23 @@ function SearchBar() {
         setShowSuggestions(false); // Masquer les suggestions si la longueur de la recherche est insuffisante
       }
     };
-
     // Afin de définir un délai pour réduire le nombre de requêtes lors de la frappe
     const timeoutId = setTimeout(() => {
       fetchMovies();
     }, 500);
-
     // Annuler le délai si l'utilisateur continue d'écrire
     return () => clearTimeout(timeoutId);
   }, [query]);
+<<<<<<< HEAD
 
+=======
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      // Il faudra ajouter la logique pour exécuter la recherche
+      alert(`Recherche pour: ${query}`); // Exemple de logique de validation
+    }
+  };
+>>>>>>> eba0e53a4d0bfbed83c602bc49ac4ffa1017401c
   return (
     <>
       <div
@@ -76,12 +86,15 @@ function SearchBar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-
         <button className="search-button">
           <img src="public/clapperboard.png" alt="Search" />
         </button>
+<<<<<<< HEAD
 
         {showSuggestions && (
+=======
+        {suggestions.length > 0 && (
+>>>>>>> eba0e53a4d0bfbed83c602bc49ac4ffa1017401c
           <ul
             className={`suggestions-list ${
               showSuggestions ? "active" : ""
@@ -102,5 +115,8 @@ function SearchBar() {
     </>
   );
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> eba0e53a4d0bfbed83c602bc49ac4ffa1017401c
 export default SearchBar;

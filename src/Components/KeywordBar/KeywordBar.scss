@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .keywordbar{
     width: 100%;
@@ -34,6 +35,41 @@
           background-color: white;
         }
       
+=======
+.keywordbar{
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  justify-content: space-evenly; 
+
+
+&-btn {
+  width: 27vh;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  font-size: larger;
+  font-weight: bold;
+  width: 100em;
+  padding: 2px;
+>>>>>>> eba0e53a4d0bfbed83c602bc49ac4ffa1017401c
 }
 
+  #romance-btn {
+        background-color: rgb(86, 35, 21,);
+      }
+  #comedie-btn {
+        color : white;
+        background-color: rgb(13, 13, 13);
+      }
+  #marvel-btn {
+        background-color: rgb(183, 64, 33);
+      }
 
+  #sciencefiction-btn{
+        background-color: rgb(203, 116, 101);
+      }
+  #anime-btn{
+        background-color: white;
+      }
+
+}

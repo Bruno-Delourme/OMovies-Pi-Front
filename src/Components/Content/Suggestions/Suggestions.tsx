@@ -1,4 +1,4 @@
-import "./Suggestion.scss";
+import "./Suggestions.scss";
 
 function Suggestion() {
     return (

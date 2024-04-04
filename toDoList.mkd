@@ -9,3 +9,5 @@
 - ajouter algo pour que les films sans miniatures ne soit pas référencé avec un icone "no png"
 
 - Transition searchbar agrandissement
+
+- 
