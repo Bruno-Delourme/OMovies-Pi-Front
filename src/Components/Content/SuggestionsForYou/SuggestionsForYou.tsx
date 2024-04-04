@@ -1,6 +1,8 @@
+import "./SuggestionsForYou.scss";
+
 function SuggestionForYou() {
     return (
-        <h1>SuggestionForYou</h1>
+        <h1 className="titleSuggestionForYou">SuggestionForYou</h1>
     );
 }
 

@@ -1,6 +1,8 @@
+import "./Suggestion.scss";
+
 function Suggestion() {
     return (
-        <h1>Suggestion : films populaire </h1>
+        <h1 className="titleSuggestion">Suggestion : films populaire </h1>
     );
 }
 
