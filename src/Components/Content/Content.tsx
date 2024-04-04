@@ -4,7 +4,7 @@ import { useAppSelector } from "../../hooks/redux";
 
 
 import NewMovie from "./NewMovies/NewMovies";
-import Suggestion from "./Suggesions/Suggestions";
+import Suggestion from "./Suggestions/Suggestions";
 import SuggestionForYou from "./SuggestionsForYou/SuggestionsForYou";
 import ByMood from "./ByMood/ByMood";
 import ByGenre from "./ByGenre/ByGenre";
