@@ -10,7 +10,7 @@ interface MovieProps {
 function OneMovie({ title, poster_path, overview, release_date }: MovieProps) {
     return (
         <div className="movie-card">
-          {poster_path && <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />} {/* show img only if poster_path existe */}
+          {poster_path && <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />} {/* show img only if poster_path exist */}
           <h2>{title}</h2>
           <p>{overview}</p>
           <p>Release Date: {release_date}</p>

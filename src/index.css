@@ -4,11 +4,8 @@
 }
 
 body {
-<<<<<<< HEAD
-=======
   font-family: 'Kodaschan', sans-serif;
 
->>>>>>> 3f8f75093b2f42b1f1176c26e599419b3f73f41f
   height: 100vh;
   /* Dégradé linéaire */
   background: linear-gradient(to bottom, #0b0b0b, #3b3b3b);

@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 
 
-// importe ReactDom to inject our application into the DOM
+// import ReactDom to inject our application into the DOM
 import ReactDOM from 'react-dom/client';
 
 //Import  Provider for routes

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
-import clapperboardIcon from "../../../assets/clapperboard.png";
+
 
 type Movie = {
   title: string;
@@ -79,7 +79,7 @@ function SearchBar() {
         />
 
         <button className="search-button">
-          <img src={clapperboardIcon} alt="Search" />
+          <img src="public/clapperboard.png" alt="Search" />
         </button>
 
         {suggestions.length > 0 && (
