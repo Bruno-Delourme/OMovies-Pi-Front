@@ -1,13 +1,23 @@
+@font-face {
+  font-family: 'Kodaschan';
+  src: url('../assets/fonts/Kodaschan-Medium.ttf') format('truetype');
+}
+
 body {
+<<<<<<< HEAD
+=======
+  font-family: 'Kodaschan', sans-serif;
+
+>>>>>>> 3f8f75093b2f42b1f1176c26e599419b3f73f41f
   height: 100vh;
   /* Dégradé linéaire */
-  background: linear-gradient(to bottom, #161616, #3b3b3b);
+  background: linear-gradient(to bottom, #0b0b0b, #3b3b3b);
 
   
   /* Pour une compatibilité maximale */
   /* Fallback en cas de non-support */
-  background: -webkit-linear-gradient(top, #161616, #3b3b3b);
-  background: -moz-linear-gradient(top, #161616, #3b3b3b);
-  background: -o-linear-gradient(top, #161616, #3b3b3b);
-  background: -ms-linear-gradient(top, #161616, #3b3b3b);
+  background: -webkit-linear-gradient(top, #0b0b0b, #3b3b3b);
+  background: -moz-linear-gradient(top, #0b0b0b, #3b3b3b);
+  background: -o-linear-gradient(top, #0b0b0b, #3b3b3b);
+  background: -ms-linear-gradient(top, #0b0b0b, #3b3b3b);
 }
