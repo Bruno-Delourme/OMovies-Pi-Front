@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
 
+const clapperboard = "../../../clapperboard.png"
+
 
 type Movie = {
   title: string;
@@ -11,7 +13,7 @@ function SearchBar() {
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-
+ 
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) {
@@ -78,7 +80,7 @@ function SearchBar() {
         />
 
         <button className="search-button">
-          <img src="public/clapperboard.png" alt="Search" />
+          <img src={clapperboard} alt="Search" />
         </button>
 
         {showSuggestions && (

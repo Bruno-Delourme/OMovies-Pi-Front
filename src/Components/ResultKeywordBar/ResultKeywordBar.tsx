@@ -4,6 +4,7 @@ import KeywordBar from "../KeywordBar/KeywordBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import React, { useEffect } from 'react';
 import { fetchRomanceMovies } from "../../store/action/action";
+
 function ResultKeywordBar() {
   const dispatch = useAppDispatch();
   const romanceMovies = useAppSelector((state) => state.movies.romanceMovies);
