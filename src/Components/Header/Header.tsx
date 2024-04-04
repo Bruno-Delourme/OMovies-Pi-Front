@@ -7,12 +7,16 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { GrUserNew } from "react-icons/gr";
 
 import "./Header.scss";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     
       <div className="black-banner">
-        <img src="public/pandaRoux2.png" className="LogoPandaRoux"  alt="Logo"/>
+        {/* <img src="public/pandaRoux2.png" className="LogoPandaRoux" alt="Logo"/> */}
+        <Link to="/">
+      <img src="public/pandaRoux2.png" className="LogoPandaRoux" alt="Logo" />
+    </Link>
         <SearchBar/>
         <div className="acces-buttons">
         <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
