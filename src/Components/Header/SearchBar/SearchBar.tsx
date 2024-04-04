@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
-
-
 type Movie = {
   title: string;
   poster_path?: string;
 };
-
 function SearchBar() {
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
-
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) {
@@ -28,7 +24,6 @@ function SearchBar() {
           },
           [] as Movie[]
         );
-
         // Mettez à jour les films avec l'URL de la miniature
         const moviesWithPosterPath = uniqueMovies.map((movie: Movie) => {
           return {
@@ -36,7 +31,6 @@ function SearchBar() {
             poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path || ''}` // Assurez-vous de remplacer `poster_path` par la clé correcte pour l'URL de la miniature dans vos données
           };
         });
-
         setSuggestions(
           moviesWithPosterPath.length === 1
             ? moviesWithPosterPath
@@ -46,23 +40,19 @@ function SearchBar() {
         setSuggestions([]);
       }
     };
-
     // Afin de définir un délai pour réduire le nombre de requêtes lors de la frappe
     const timeoutId = setTimeout(() => {
       fetchMovies();
     }, 500);
-
     // Annuler le délai si l'utilisateur continue d'écrire
     return () => clearTimeout(timeoutId);
   }, [query]);
-
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       // Il faudra ajouter la logique pour exécuter la recherche
       alert(`Recherche pour: ${query}`); // Exemple de logique de validation
     }
   };
-
   return (
     <>
       <div
@@ -77,11 +67,9 @@ function SearchBar() {
           onChange={(e) => setQuery(e.target.value)}
           className="search-input"
         />
-
         <button className="search-button">
           <img src="public/clapperboard.png" alt="Search" />
         </button>
-
         {suggestions.length > 0 && (
           <ul
             className={`suggestions-list ${
@@ -102,5 +90,4 @@ function SearchBar() {
     </>
   );
 }
-
 export default SearchBar;

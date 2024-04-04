@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {index: true, element: <Home />},
       {path: "/group/:id", element: <Group />},  // check if need add loader later
       {path: "/list/:id", element: <List />}, // check if need add loader later
-      {path: "/movies/romance", element: <ResultKeywordBar  />, loader: fetchRomanceMovies}, // Render ResultKeywordBar for this route
+      {path: "/movies/romance", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
 
     ],
   },
