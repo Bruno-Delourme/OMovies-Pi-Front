@@ -3,21 +3,33 @@ import OneMovie from "../OneMovie/OneMovie";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import React, { useEffect } from 'react';
-import { fetchRomanceMovies } from "../../store/action/action";
+import { fetchComedieMovies, fetchRomanceMovies } from "../../store/action/action";
 
 import { RomanceMoviesResponse } from "../../../src/@types/movie.d.ts";
 
+import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
+
 function ResultKeywordBar() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
 
   const romanceMovies = useAppSelector((state) => state.movies.romanceMovies) as unknown as RomanceMoviesResponse;
-  
+  const comedyMovies = useAppSelector((state) => state.movies.comedieMovies) as unknown as RomanceMoviesResponse;
+
   const loading = useAppSelector((state) => state.movies.loading);
 
   useEffect(() => {
-    dispatch(fetchRomanceMovies()); // Fetch romance movies on component mount
-  }, [dispatch]); // Include dispatch in the dependency array
+    if (location.pathname === "/movies/romance") {
+      dispatch(fetchRomanceMovies());
+    } else if (location.pathname === "/movies/comedie") {
+      dispatch(fetchComedieMovies());
+    }
+  }, [dispatch, location.pathname]);
+
+  const moviesToDisplay = location.pathname === "/movies/romance" ? romanceMovies : comedyMovies;
+
+
 
   console.log(romanceMovies)
 
@@ -27,9 +39,9 @@ function ResultKeywordBar() {
       <KeywordBar />
       {loading && <p>Loading movies...</p>}
 
-      {romanceMovies?.results && !loading && (
+            {moviesToDisplay?.results && !loading && (
         <div>
-          {romanceMovies.results.map((movie) => (
+          {moviesToDisplay.results.map((movie) => (
             <OneMovie
               key={movie.id}
               id={movie.id}
@@ -43,8 +55,8 @@ function ResultKeywordBar() {
         </div>
       )}
 
-      {!romanceMovies?.results?.length && !loading && (
-        <p>No romance movies found.</p>
+      {!moviesToDisplay?.results?.length && !loading && (
+        <p>No movies found.</p>
       )}
     </>
   );
