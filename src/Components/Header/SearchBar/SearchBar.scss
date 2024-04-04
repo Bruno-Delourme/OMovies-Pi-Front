@@ -1,15 +1,12 @@
 .search-bar-container {
-  position: relative;
   background-color: #424141;
   border-radius: 10px;
-  width: 50vh;
-  max-width: 100%;
+  width: 70vh;
   height: 30px;
   display:inline-flex;
-  justify-content: space-between;
   align-items: center;
   padding: 5px;
-  z-index: 11;
+
 }
 
 .search-input {

@@ -1,23 +1,24 @@
 
 .keywordbar{
-
-    background-color: rgb(27, 27, 27);
     width: 100%;
     height: 6vh;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-evenly; 
 
   &-btn {
+    width: 27vh;
     border-radius: 10px;
-    width: 100em;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    font-size: larger;
+    font-weight: bold;
   }
 
     #romance-btn {
-          background-color: rgb(86, 35, 21);
+          background-color: rgb(86, 35, 21,);
         }
     #comedie-btn {
           color : white;
-          background-color: black;
+          background-color: rgb(13, 13, 13);
         }
     #marvel-btn {
           background-color: rgb(183, 64, 33);
