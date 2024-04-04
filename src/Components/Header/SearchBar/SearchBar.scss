@@ -1,98 +1,91 @@
-.search-bar-container {
+.searchBar-container {
   position: relative;
-  background-color: #424141;
-  border-radius: 10px;
-  width: 70vh;
-  max-width: 100%;
-  height: 30px;
-  display: inline-flex;
-  justify-content: space-between;
+  height: 1.5rem;
+  width: 25rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  padding: 5px;
-  z-index: 11;
+  gap: 0; // pour supprimer l'espacement entre l'icone de validation et la searchBar-input
+  
 }
 
 .search-input {
-  flex-grow: 1;
-  width: 99%;
-  height: 90%;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #fff;
+  border-radius: 0.5rem 0rem 0rem 0.5rem;
   outline: none;
-  font-size: 15px;
-  transition: border-color 0.3s;
 }
+
 
 .search-button {
-  border-radius: 8px;
-  outline: none;
+  margin-bottom: 0.02rem; // ne pas toucher cette valeur qui donne l'illusion d'un même block avec le searchInput
+  margin-left: 0rem;
+  padding-left: 1rem;
+  
+  background-color: #fff;
+  border: none;
+  border-radius: 0rem 0.5rem 0.5rem 0rem;
   cursor: pointer;
-  padding: 1;
-  margin-left: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: onclick;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.search-button:active {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transform: translateY(1px);
+  height: 2.23rem; // ne pas toucher cette valeur qui donne l'illusion d'un même block avec le searchInput
+  width: 3rem;
 }
 
 .suggestions-list {
+  position: absolute;
+  top: calc(100% + 5px); /* Ajustez selon vos besoins */
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
   list-style-type: none;
   padding: 0;
-  position: absolute;
-  top: 20px;
-  left: 5px;
-  right: 48px;
+  margin: 0;
   text-align: left;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  max-height: 0;
-  overflow-y: hidden;
+  display: none; /* Pour cacher initialement les suggestions */
+  overflow: hidden; /* Empêcher le contenu débordant */
+  transition: height 0.9s; /* Animation de transition */
   transition: opacity 0.5s, max-height 0.5s ease;
-  z-index: 10;
-  visibility: hidden; /* Initialement caché */
 }
 
 .suggestions-list.active {
-  opacity: 1;
-  max-height: 250px;
-  visibility: visible; /* visible quand c'est actif */
-  
+  display: block; /* Afficher les suggestions lorsque la classe active est présente */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .suggestions-list li {
-  display: flex;
-  align-items: center;
   
-  padding: 5px 8px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  border-bottom: none;
 }
 
 .suggestions-list li:last-child {
   border-bottom: none;
 }
 
-.suggestions-list li:hover {
-  background-color: #f0f0f0;
-  color: #333;
+.suggestions-list li div {
+  
+  display: flex;
+  align-items: center;
 }
 
-.suggestions-list li img {
-  border-radius: 5px;
-  width: 25px;
-  height: 29px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  margin-right: 10px;
+.suggestions-list li div img {
+  width: 40px; 
+  height: auto;
+  margin-right: 1rem; //pour écarter le texte de l'image
+  box-shadow: 4px 10px 14px 1px #00000083;
 }
 
-.suggestions-list li span {
-  flex-grow: 1;
-   
+.suggestions-list li div span {
+  flex: 1;
+}
+
+/* Style lorsque l'élément est survolé */
+.searchBar-container:hover .suggestions-list {
+  display: block;
 }

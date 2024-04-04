@@ -10,6 +10,7 @@ type Movie = {
 function SearchBar() {
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -33,7 +34,9 @@ function SearchBar() {
         const moviesWithPosterPath = uniqueMovies.map((movie: Movie) => {
           return {
             ...movie,
-            poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path || ''}` // Assurez-vous de remplacer `poster_path` par la clé correcte pour l'URL de la miniature dans vos données
+            poster_path: `https://image.tmdb.org/t/p/w500${
+              movie.poster_path || ""
+            }` // Assurez-vous de remplacer `poster_path` par la clé correcte pour l'URL de la miniature dans vos données
           };
         });
 
@@ -42,8 +45,11 @@ function SearchBar() {
             ? moviesWithPosterPath
             : moviesWithPosterPath.slice(0, 5)
         );
+
+        setShowSuggestions(true); // Afficher les suggestions
       } else {
         setSuggestions([]);
+        setShowSuggestions(false); // Masquer les suggestions si la longueur de la recherche est insuffisante
       }
     };
 
@@ -56,42 +62,36 @@ function SearchBar() {
     return () => clearTimeout(timeoutId);
   }, [query]);
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      // Il faudra ajouter la logique pour exécuter la recherche
-      alert(`Recherche pour: ${query}`); // Exemple de logique de validation
-    }
-  };
-
   return (
     <>
       <div
-        className={`search-bar-container ${
-          suggestions.length > 0 ? "active" : ""
+        className={`searchBar-container ${
+          showSuggestions ? "active" : ""
         }`}
       >
         <input
+          className="search-input"
           type="text"
           placeholder="Rechercher un film..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="search-input"
         />
 
         <button className="search-button">
           <img src={clapperboardIcon} alt="Search" />
         </button>
 
-        {suggestions.length > 0 && (
+        {showSuggestions && (
           <ul
             className={`suggestions-list ${
-              suggestions.length > 0 ? "active" : ""
+              showSuggestions ? "active" : ""
             }`}
           >
             {suggestions.map((movie, index) => (
               <li key={index}>
                 <div>
-                  <img src={movie.poster_path} alt={movie.title} /> {/* Ajoutez la miniature */}
+                  <img src={movie.poster_path} alt={movie.title} />{" "}
+                  {/* Ajoutez la miniature */}
                   <span>{movie.title}</span>
                 </div>
               </li>
