@@ -2,10 +2,6 @@ import LoginForm from "./LoginForm/LoginForm";
 import SearchBar from "./SearchBar/SearchBar";
 import SubscribeForm from "./SubscribeForm/SuscribeForm";
 import Group from "../Group/Group"
-<<<<<<< HEAD
-=======
-
->>>>>>> eba0e53a4d0bfbed83c602bc49ac4ffa1017401c
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { GrUserNew } from "react-icons/gr";
