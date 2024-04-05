@@ -28,7 +28,7 @@ interface MoviesState {
       })
       .addCase(fetchRomanceMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.romanceMovies = action.payload; // Update state with fetched movies
+        state.romanceMovies = action.payload; // Update state with fetched romance movies
       })
       .addCase(fetchRomanceMovies.rejected, (state, action) => {
         state.loading = false;
@@ -40,7 +40,7 @@ interface MoviesState {
       })
       .addCase(fetchComedieMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.comedieMovies = action.payload; // Update state with fetched movies
+        state.comedieMovies = action.payload; // Update state with fetched comedie movies
       })
       .addCase(fetchComedieMovies.rejected, (state, action) => {
         state.loading = false;
