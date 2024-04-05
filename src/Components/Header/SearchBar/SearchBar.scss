@@ -15,6 +15,7 @@
   border: 1px solid #fff;
   border-radius: 0.5rem 0rem 0rem 0.5rem;
   outline: none;
+  box-shadow: 5px 5px 10px 1px #000000;
 }
 
 .search-button {
@@ -51,7 +52,7 @@
 
 .suggestions-list.active {
   display: block;
-  height: 24rem; /* Hauteur max pour la suggestionList à la fin de l'animation */
+  height: 25rem; /* Hauteur max pour la suggestionList à la fin de l'animation */
   visibility: visible;
 }
 

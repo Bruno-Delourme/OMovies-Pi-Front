@@ -1,27 +1,35 @@
-import React, { useState } from "react";
+import  { useState} from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import "./LoginForm.scss";
 
 
 function LoginForm() {
-  
-  const [showLoginForm, setShowLoginForm] = useState(true); // Pas besoin de spécifier <boolean> ici, TypeScript infère le type à partir de la valeur initiale
+  const [showLoginForm, setShowLoginForm] = useState(true);
 
-  // Fonction pour basculer l'affichage du LoginForm
   const toggleLoginForm = () => {
-    setShowLoginForm(!showLoginForm); // Bascule l'état de visibilité
+    setShowLoginForm(!showLoginForm);
   };
 
   return (
     <>
       <div className="logo-container">
+        {/* Modification du onClick pour appeler toggleLoginForm */}
         <button className="acces-button" id="login-btn" onClick={toggleLoginForm}>
-          <FaRegCircleUser size={32}/>
+          <FaRegCircleUser size={32} />
         </button>
       </div>
-      {showLoginForm && ( // Affiche le LoginForm si showLoginForm est true
-        <div className="LoginForm active"></div>
-      )} 
+      {showLoginForm && (
+        <div className="LoginForm active">
+          {/* Ajout d'un formulaire d'inscription simple */}
+          <form className="inscription-form">
+            <label>Nom d'utilisateur</label>
+            <input type="text" />
+            <label>Mot de passe</label>
+            <input type="password" />
+            <button type="submit">S'inscrire</button>
+          </form>
+        </div>
+      )}
     </>
   );
 }

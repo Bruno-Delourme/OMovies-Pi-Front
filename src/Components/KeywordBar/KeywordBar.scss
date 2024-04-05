@@ -4,16 +4,20 @@
     height: 6vh;
     display: flex;
     justify-content: space-evenly; 
-
+    gap: 2rem;
+    
 
   &-btn {
     width: 27vh;
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 10px 1px #000000;
     font-size: larger;
     font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100em;
     padding: 2px;
+    
+    
   }
 
     #romance-btn {
