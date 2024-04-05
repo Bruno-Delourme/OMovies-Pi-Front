@@ -21,12 +21,12 @@ const Header = () => {
         <Link to="/"><img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" /></Link>
         <SearchBar/>
         <div className="acces-buttons">
+        {/* <Group /> */}
         <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
-        
+        {/* <LoginForm /> */}
         <button className="acces-button" id="login-btn" onClick={LoginForm}><FaRegCircleUser size={32}/></button>
-        
+        {/* <SubscribeForm /> */}
         <button className="acces-button" id="newUser-btn" onClick={SubscribeForm}><GrUserNew size={32}/></button>
-        
         </div>
       </div>
   );

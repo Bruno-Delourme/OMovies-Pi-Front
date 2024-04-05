@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Kodaschan';
-  src: url('../assets/fonts/Kodaschan-Medium.ttf') format('truetype');
+  src: url('./assets/fonts/Kodaschan-Medium.ttf') format('truetype');
 }
 
 body {

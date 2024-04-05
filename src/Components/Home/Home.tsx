@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 
 
 
+
 function Home() {
     return (
         <Layout>
@@ -15,6 +16,7 @@ function Home() {
             <KeywordBar />
             <Content />
             <Footer />
+
         </Layout>
     );
 }
