@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
 
-<<<<<<< HEAD
-=======
 const clapperboard = "../../../clapperboard.png"
 
 
->>>>>>> 4b117b6aa7f205101b4077fcbac4eecc1f2c5b85
 type Movie = {
   title: string;
   poster_path?: string;

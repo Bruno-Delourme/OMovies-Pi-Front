@@ -1,12 +1,20 @@
 export interface Movie {
+    vote_average: number;
     id: number;
     genre_ids: number;
-    adult : boolean;
+    adult: boolean;
     title: string;
     original_title: string;
     overview: string;
     poster_path?: string | undefined;
     release_date: string;
-    original_language : string;
+    original_language: string;
     key: number;
-}
+  }
+  
+  export interface RomanceMoviesResponse {
+    page: number;
+    results: Movie[];
+    total_pages: number;
+    total_results: number;
+  }
