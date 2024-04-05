@@ -2,18 +2,23 @@ import LoginForm from "./LoginForm/LoginForm";
 import SearchBar from "./SearchBar/SearchBar";
 import SubscribeForm from "./SubscribeForm/SuscribeForm";
 import Group from "../Group/Group"
-// import LogoPandaRoux from "../../assets/pandaRoux.png";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { GrUserNew } from "react-icons/gr";
 
+
 import "./Header.scss";
+import { Link } from "react-router-dom";
+
+const LogoPandaRoux = "../../../public/pandaRoux2.png"
 
 const Header = () => {
+  
   return (
     
       <div className="black-banner">
-        <img src="src/assets/pandaRoux2.png" className="LogoPandaRoux"  alt="Logo"/>
+        
+        <Link to="/"><img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" /></Link>
         <SearchBar/>
         <div className="acces-buttons">
         {/* <Group /> */}

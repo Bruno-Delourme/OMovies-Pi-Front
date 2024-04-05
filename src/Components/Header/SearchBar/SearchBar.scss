@@ -9,7 +9,7 @@
 }
 
 .search-input {
-  padding: 0.5rem;
+  width: 30rem;
   font-size: 1rem;
   border: 1px solid #fff;
   border-radius: 0.5rem 0rem 0rem 0.5rem;
@@ -17,10 +17,9 @@
 }
 
 .search-button {
-  margin-bottom: 0.02rem; // ne pas toucher cette valeur qui donne l'illusion d'un même block avec le searchInput
+  // margin-bottom: 0.02rem; // ne pas toucher cette valeur qui donne l'illusion d'un même block avec le searchInput
   margin-left: 0rem;
   padding-left: 1rem;
-
   background-color: #fff;
   border: none;
   border-radius: 0rem 0.5rem 0.5rem 0rem;

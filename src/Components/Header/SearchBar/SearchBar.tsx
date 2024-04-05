@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
-import clapperboardIcon from "../../../assets/clapperboard.png";
+
+const clapperboard = "../../../clapperboard.png"
+
 
 type Movie = {
   title: string;
   poster_path?: string;
 };
-
 function SearchBar() {
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-
+ 
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) {
@@ -39,7 +40,6 @@ function SearchBar() {
             }` 
           };
         });
-
         setSuggestions(
           moviesWithPosterPath.length === 1
             ? moviesWithPosterPath
@@ -61,7 +61,6 @@ function SearchBar() {
     // Annule le délai si l'utilisateur continue d'écrire
     return () => clearTimeout(timeoutId);
   }, [query]);
-
   return (
     <>
       <div
@@ -76,9 +75,8 @@ function SearchBar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-
         <button className="search-button">
-          <img src={clapperboardIcon} alt="Search" />
+          <img src={clapperboard} alt="Search" />
         </button>
 
         
@@ -102,5 +100,4 @@ function SearchBar() {
     </>
   );
 }
-
 export default SearchBar;

@@ -1,21 +1,23 @@
 import { Provider } from 'react-redux';
 
 
-// importe ReactDom to inject our application into the DOM
+// import ReactDom to inject our application into the DOM
 import ReactDOM from 'react-dom/client';
 
 //Import  Provider for routes
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from './Components/App/App.tsx';
+import App from './Components/App/App';
 import './index.css';
 
-import store from "./store/index.tsx";
-import Error from "./Components/Error/error.tsx";
-import Home from "./Components/Home/Home.tsx";
-import List from "./Components/List/List.tsx";
-import Group from "./Components/Group/Group.tsx";
-import MemberSpace from "./Components/MemberSpace/MemberSpace.tsx";
+import store from "./store/index";
+import Error from "./Components/Error/error";
+import Home from "./Components/Home/Home";
+import List from "./Components/List/List";
+import Group from "./Components/Group/Group";
+import MemberSpace from "./Components/MemberSpace/MemberSpace";
+import ResultKeywordBar from './Components/ResultKeywordBar/ResultKeywordBar';
+import { fetchRomanceMovies } from './store/action/action';
 
 
 
@@ -29,12 +31,10 @@ const router = createBrowserRouter([
     // loader: moviesLoader,
     children : [
       {index: true, element: <Home />},
-
-
-
-
       {path: "/group/:id", element: <Group />},  // check if need add loader later
       {path: "/list/:id", element: <List />}, // check if need add loader later
+      {path: "/movies/romance", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
+      {path: "/movies/comedie", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
 
     ],
   },
