@@ -1,45 +1,42 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
 
-const clapperboard = "../../../clapperboard.png"
+const clapperboard = "src/assets/clapperboard.png";
 
-
+// Définition du type pour un film
 type Movie = {
   title: string;
   poster_path?: string;
 };
+
 function SearchBar() {
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
- 
+
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) {
         const url = `http://localhost:3000/api/searchBar?query=${query}`;
         const response = await fetch(url);
         const data = await response.json();
-        const uniqueMovies = data.results.reduce(
-          (acc: Movie[], current: Movie) => {
-            const x = acc.find((item: Movie) => item.title === current.title);
-            if (!x) {
-              return [...acc, current]; // Ajoutez l'objet de film unique
-            } else {
-              return acc;
-            }
-          },
-          [] as Movie[]
-        );
 
-        // Pour mettre à jour les films avec l'URL et sa miniature
-        const moviesWithPosterPath = uniqueMovies.map((movie: Movie) => {
-          return {
-            ...movie,
-            poster_path: `https://image.tmdb.org/t/p/w500${
-              movie.poster_path || ""
-            }` 
-          };
+        // Création d'un nouveau tableau pour stocker les titres uniques
+        const titles = new Set();
+        const uniqueMovies = data.results.filter((movie: Movie) => {
+          const duplicate = titles.has(movie.title);
+          titles.add(movie.title);
+          return !duplicate;
         });
+
+        // Mise à jour des films avec l'URL de l'affiche et gestion des affiches manquantes
+        const moviesWithPosterPath = uniqueMovies.map((movie: Movie) => ({
+          ...movie,
+          poster_path: movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            : clapperboard, // Utilisation d'une image par défaut si poster_path est absent
+        }));
+
         setSuggestions(
           moviesWithPosterPath.length === 1
             ? moviesWithPosterPath
@@ -53,21 +50,16 @@ function SearchBar() {
       }
     };
 
-    // Délai pour réduire le nombre de requêtes lors de la frappe
     const timeoutId = setTimeout(() => {
       fetchMovies();
     }, 500);
 
-    // Annule le délai si l'utilisateur continue d'écrire
     return () => clearTimeout(timeoutId);
   }, [query]);
+
   return (
     <>
-      <div
-        className={`searchBar-container ${
-          showSuggestions ? "active" : ""
-        }`}
-      >
+      <div className={`searchBar-container ${showSuggestions ? "active" : ""}`}>
         <input
           className="search-input"
           type="text"
@@ -79,25 +71,19 @@ function SearchBar() {
           <img src={clapperboard} alt="Search" />
         </button>
 
-        
-          <ul
-            className={`suggestions-list ${
-              showSuggestions ? "active" : ""
-            }`}
-          >
-            {suggestions.map((movie, index) => (
-              <li key={index}>
-                <div>
-                  <img src={movie.poster_path} alt={movie.title} />{" "}
-                  {/* ^--Ajoute la miniature */}
-                  <span>{movie.title}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        
+        <ul className={`suggestions-list ${showSuggestions ? "active" : ""}`}>
+          {suggestions.map((movie, index) => (
+            <li key={index}>
+              <div>
+                <img src={movie.poster_path} alt={movie.title} />
+                <span>{movie.title}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
 }
+
 export default SearchBar;

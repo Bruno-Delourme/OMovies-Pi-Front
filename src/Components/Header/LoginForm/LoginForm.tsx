@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { FaRegCircleUser } from "react-icons/fa6";
+import "./LoginForm.scss";
 
-function LoginForm () {
-  /*
-  const [showLoginForm, setShowLoginForm] = useState<boolean>(true); // on initialise à true au début, mais à modifier plus tard
 
-  // Fonction pour basculer l'affichage du LoginForm 
+function LoginForm() {
+  
+  const [showLoginForm, setShowLoginForm] = useState(true); // Pas besoin de spécifier <boolean> ici, TypeScript infère le type à partir de la valeur initiale
+
+  // Fonction pour basculer l'affichage du LoginForm
   const toggleLoginForm = () => {
     setShowLoginForm(!showLoginForm); // Bascule l'état de visibilité
-  };*/
+  };
 
   return (
     <>
-      {/**<div className="logo-container">
-        <button className="search-button" onClick={toggleLoginForm}>
-          <img src={logoAvatar} alt="Login/Subscribe" /> {/* logoAvatar défa défini}
+      <div className="logo-container">
+        <button className="acces-button" id="login-btn" onClick={toggleLoginForm}>
+          <FaRegCircleUser size={32}/>
         </button>
       </div>
-      {showLoginForm && ( // Affiche le LoginForm si showLoginForm est true 
+      {showLoginForm && ( // Affiche le LoginForm si showLoginForm est true
         <div className="LoginForm active"></div>
-      )} */}
+      )} 
     </>
   );
 }

@@ -2,10 +2,10 @@ import Header from "../Header/Header";
 import OneMovie from "../OneMovie/OneMovie";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { fetchComedieMovies, fetchRomanceMovies } from "../../store/action/action";
 
-import { RomanceMoviesResponse } from "../../../src/@types/movie.d.ts";
+import { RomanceMoviesResponse } from "../../../src/@types/movie";
 
 import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 

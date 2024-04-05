@@ -6,7 +6,7 @@
 
 - Ajouter reset CSS
 
-- La suggestion liste doit s'adapter par rapport aux nombres de suggestions
+- La suggestion liste doit s'adapter par rapport aux nombres de suggestions  
 
 - Espacer les Keywords
 
@@ -14,9 +14,4 @@
 
 - ajouter algo pour que les films sans miniature ne soit pas référencé avec un icone "no png"
 
-<<<<<<< HEAD
 - Transition searchbar agrandissement
-
-- 
-=======
->>>>>>> 682d815844015e5805ccbb4e24a43dccf1aab473
