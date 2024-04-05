@@ -9,6 +9,7 @@
 }
 
 .search-input {
+  height: 2rem;
   width: 30rem;
   font-size: 1rem;
   border: 1px solid #fff;
@@ -17,23 +18,23 @@
 }
 
 .search-button {
-  // margin-bottom: 0.02rem; // ne pas toucher cette valeur qui donne l'illusion d'un même block avec le searchInput
+  
   margin-left: 0rem;
   padding-left: 1rem;
   background-color: #fff;
   border: none;
   border-radius: 0rem 0.5rem 0.5rem 0rem;
   cursor: pointer;
-  height: 2.23rem; // ne pas toucher cette valeur qui donne l'illusion d'un même block avec le searchInput
+  height: 2.23rem; // ne pas toucher cette valeur 
   width: 4rem;
 }
 
 .suggestions-list {
   height: 0;
   position: absolute;
-  top: calc(100% + 5px); /* Ajustez selon vos besoins */
+  top: calc(100% + 4px); 
   left: 0;
-  width: 100%;
+  width: 34.35rem; // ne pas toucher cette valeur 
   background-color: #fff;
   
   border-top: none;
@@ -50,7 +51,7 @@
 
 .suggestions-list.active {
   display: block;
-  height: 24rem; /* Hauteur maximale pour le contenu à la fin de l'animation */
+  height: 24rem; /* Hauteur max pour la suggestionList à la fin de l'animation */
   visibility: visible;
 }
 
