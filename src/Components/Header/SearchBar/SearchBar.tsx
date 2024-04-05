@@ -30,13 +30,13 @@ function SearchBar() {
           [] as Movie[]
         );
 
-        // Mettez à jour les films avec l'URL de la miniature
+        // Pour mettre à jour les films avec l'URL et sa miniature
         const moviesWithPosterPath = uniqueMovies.map((movie: Movie) => {
           return {
             ...movie,
             poster_path: `https://image.tmdb.org/t/p/w500${
               movie.poster_path || ""
-            }` // Assurez-vous de remplacer `poster_path` par la clé correcte pour l'URL de la miniature dans vos données
+            }` 
           };
         });
 
@@ -46,19 +46,19 @@ function SearchBar() {
             : moviesWithPosterPath.slice(0, 5)
         );
 
-        setShowSuggestions(true); // Afficher les suggestions
+        setShowSuggestions(true); // Affiche les suggestions
       } else {
         setSuggestions([]);
-        setShowSuggestions(false); // Masquer les suggestions si la longueur de la recherche est insuffisante
+        setShowSuggestions(false); // Masque les suggestions si la longueur de la recherche est insuffisante
       }
     };
 
-    // Afin de définir un délai pour réduire le nombre de requêtes lors de la frappe
+    // Délai pour réduire le nombre de requêtes lors de la frappe
     const timeoutId = setTimeout(() => {
       fetchMovies();
     }, 500);
 
-    // Annuler le délai si l'utilisateur continue d'écrire
+    // Annule le délai si l'utilisateur continue d'écrire
     return () => clearTimeout(timeoutId);
   }, [query]);
 
@@ -81,7 +81,7 @@ function SearchBar() {
           <img src={clapperboardIcon} alt="Search" />
         </button>
 
-        {showSuggestions && (
+        
           <ul
             className={`suggestions-list ${
               showSuggestions ? "active" : ""
@@ -91,13 +91,13 @@ function SearchBar() {
               <li key={index}>
                 <div>
                   <img src={movie.poster_path} alt={movie.title} />{" "}
-                  {/* Ajoutez la miniature */}
+                  {/* ^--Ajoute la miniature */}
                   <span>{movie.title}</span>
                 </div>
               </li>
             ))}
           </ul>
-        )}
+        
       </div>
     </>
   );

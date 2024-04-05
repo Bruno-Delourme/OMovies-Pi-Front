@@ -16,12 +16,12 @@ const Header = () => {
         <img src="src/assets/pandaRoux2.png" className="LogoPandaRoux"  alt="Logo"/>
         <SearchBar/>
         <div className="acces-buttons">
-        <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
         {/* <Group /> */}
-        <button className="acces-button" id="login-btn" onClick={LoginForm}><FaRegCircleUser size={32}/></button>
+        <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
         {/* <LoginForm /> */}
-        <button className="acces-button" id="newUser-btn" onClick={SubscribeForm}><GrUserNew size={32}/></button>
+        <button className="acces-button" id="login-btn" onClick={LoginForm}><FaRegCircleUser size={32}/></button>
         {/* <SubscribeForm /> */}
+        <button className="acces-button" id="newUser-btn" onClick={SubscribeForm}><GrUserNew size={32}/></button>
         </div>
       </div>
   );

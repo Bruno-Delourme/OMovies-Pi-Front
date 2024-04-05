@@ -1,11 +1,18 @@
 # To Do List
 
+- Login form a crée
+
 - Ajouter police Kodaschan
 
 - Ajouter reset CSS
 
 - La suggestion liste doit être centrée par rapport à la miniature
 
-- ajouter algo pour que les films sans miniatures ne soit pas référencé avec un icone "no png"
-
 - Transition searchbar agrandissement
+
+- Espacer les Keywords
+
+## To Do List V_02
+
+- ajouter algo pour que les films sans miniature ne soit pas référencé avec un icone "no png"
+
