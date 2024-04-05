@@ -2,9 +2,7 @@
 import "./KeywordBar.scss";
 import React from "react";
 import { useAppDispatch } from "../../hooks/redux";
-
 import { fetchRomanceMovies } from "../../store/action/action";
-
 import { useNavigate } from "react-router-dom";
 
 function KeywordBar() {
