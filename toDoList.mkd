@@ -6,9 +6,7 @@
 
 - Ajouter reset CSS
 
-- La suggestion liste doit être centrée par rapport à la miniature
-
-- Transition searchbar agrandissement
+- La suggestion liste doit s'adapter par rapport aux nombres de suggestions
 
 - Espacer les Keywords
 
