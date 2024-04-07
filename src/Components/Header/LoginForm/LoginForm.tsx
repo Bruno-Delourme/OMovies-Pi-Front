@@ -16,9 +16,9 @@ function LoginForm() {
           <FaRegCircle size={32} />
         </button>
       </div>
-      {showLoginForm && (
+      
         <div className={`LoginForm ${showLoginForm ? "active" : ""}`}>
-          {/* Bouton de fermeture ajouté ici */}
+          {/* Bouton de fermeture */}
           <button className="close-button" onClick={toggleLoginForm}>
             <FaTimes size={20} />
           </button>
@@ -28,7 +28,7 @@ function LoginForm() {
             <button type="submit">S'inscrire</button>
           </form>
         </div>
-      )}
+      
     </>
   );
 }
