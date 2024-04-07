@@ -1,14 +1,12 @@
 # To Do List
 
+- La suggestion List proposera 3 sous catégories : Titre directement visible, une autre grisée cliquable: filmo, une troisième grisée aussi et cliquable : tags.
+
 - Login form a crée
 
 - Ajouter police Kodaschan
 
 - Ajouter reset CSS
-
-- La suggestion liste doit s'adapter par rapport aux nombres de suggestions  
-
-- Espacer les Keywords
 
 ## To Do List V_02
 
