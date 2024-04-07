@@ -6,6 +6,7 @@
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 0; // pour supprimer l'espacement entre l'icone de validation et la searchBar-input
+  
 }
 
 .search-input {
@@ -15,6 +16,7 @@
   font-size: 1rem;
   border-radius: 0.5rem 0rem 0rem 0.5rem;
   outline: none;
+  font-family: "Kodchasan", sans-serif;
   
 }
 
