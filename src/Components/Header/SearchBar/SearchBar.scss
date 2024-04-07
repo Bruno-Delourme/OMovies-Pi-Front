@@ -33,7 +33,8 @@
 }
 
 .suggestions-list {
-  height: 0;
+  height: auto;
+  max-height: 0;
   position: absolute;
   top: calc(32% + 4px); 
   left: 0;
@@ -41,20 +42,18 @@
   background-color: #fff;
   padding: 0;
   margin-right: 2rem;
-  
   border-top: none;
   border-radius: 0 0 0.5rem 0.5rem;
-  
   z-index: 10;
   list-style-type: none;
   text-align: left;
   overflow: hidden; /* Empêcher le contenu débordant */
-  transition: height 0.5s ease-in-out; 
+  transition: max-height 0.5s ease-in-out;
 }
 
 .suggestions-list.active {
   display: block;
-  height: 25rem; /* Hauteur max pour la suggestionList à la fin de l'animation */
+  max-height: 25rem; /* Hauteur max pour la suggestionList à la fin de l'animation */
   visibility: visible;
 }
 
