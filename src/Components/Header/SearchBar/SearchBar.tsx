@@ -32,7 +32,7 @@ function SearchBar() {
 
         // Création d'un nouveau tableau pour stocker les titres uniques
         const titles = new Set();
-        const uniqueMovies = data.moviesByActor.filter((movie: Movie) => {
+        const uniqueMovies = data.moviesByTitle.filter((movie: Movie) => {
           const duplicate = titles.has(movie.title);
           titles.add(movie.title);
           return !duplicate;

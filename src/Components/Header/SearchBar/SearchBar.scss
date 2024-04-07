@@ -31,9 +31,10 @@
   border-radius: 0rem 0.5rem 0.5rem 0rem;
   cursor: pointer;
   height: 2rem; // ne pas toucher cette valeur 
-  width: 4.1rem;
-  
+  width: 4.1rem; 
+  z-index: 11;
 }
+
 
 
 
@@ -41,7 +42,7 @@
   height: auto;
   max-height: 0;
   position: absolute;
-  top: calc(32% + 4px); 
+  top: calc(20% + 4px); 
   left: 0;
   width: 34.35rem; // ne pas toucher cette valeur 
   background-color: #fff;
