@@ -21,7 +21,7 @@ function SearchBar() {
         const response = await fetch(url);
         const data = await response.json();
 
-        // "data" me renvoi un tableau qui contient 3 objets. (moviesByTitle, moviesByKeyword, moviesByActor )
+        // "data" me renvoie un tableau qui contient 3 objets. (moviesByTitle, moviesByKeyword, moviesByActor )
         // console.log("data", data); ✔
 
         console.log("PAR TITRE", data.moviesByTitle);
@@ -32,7 +32,7 @@ function SearchBar() {
 
         // Création d'un nouveau tableau pour stocker les titres uniques
         const titles = new Set();
-        const uniqueMovies = data.moviesByTitle.filter((movie: Movie) => {
+        const uniqueMovies = data.moviesByActor.filter((movie: Movie) => {
           const duplicate = titles.has(movie.title);
           titles.add(movie.title);
           return !duplicate;
@@ -72,7 +72,7 @@ function SearchBar() {
         <input
           className="search-input"
           type="text"
-          placeholder="Rechercher un film..."
+          placeholder="Rechercher un titre de film..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

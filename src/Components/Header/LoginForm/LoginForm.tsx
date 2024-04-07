@@ -1,10 +1,9 @@
-import  { useState} from "react";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { useState } from "react";
+import { FaRegCircle, FaTimes } from "react-icons/fa";
 import "./LoginForm.scss";
 
-
 function LoginForm() {
-  const [showLoginForm, setShowLoginForm] = useState(true);
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   const toggleLoginForm = () => {
     setShowLoginForm(!showLoginForm);
@@ -13,19 +12,19 @@ function LoginForm() {
   return (
     <>
       <div className="logo-container">
-        {/* Modification du onClick pour appeler toggleLoginForm */}
         <button className="acces-button" id="login-btn" onClick={toggleLoginForm}>
-          <FaRegCircleUser size={32} />
+          <FaRegCircle size={32} />
         </button>
       </div>
       {showLoginForm && (
-        <div className="LoginForm active">
-          {/* Ajout d'un formulaire d'inscription simple */}
+        <div className={`LoginForm ${showLoginForm ? "active" : ""}`}>
+          {/* Bouton de fermeture ajouté ici */}
+          <button className="close-button" onClick={toggleLoginForm}>
+            <FaTimes size={20} />
+          </button>
           <form className="inscription-form">
-            <label>Nom d'utilisateur</label>
-            <input type="text" />
-            <label>Mot de passe</label>
-            <input type="password" />
+            <input type="text" placeholder="Pseudo" />
+            <input type="password" placeholder="Mot de Passe" />
             <button type="submit">S'inscrire</button>
           </form>
         </div>

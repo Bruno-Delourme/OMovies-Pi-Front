@@ -23,7 +23,7 @@ const Header = () => {
         <div className="acces-buttons">
         {/* <Group /> */}
         <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
-        {/* <LoginForm /> */}
+        <LoginForm/>
         
         
         </div>
