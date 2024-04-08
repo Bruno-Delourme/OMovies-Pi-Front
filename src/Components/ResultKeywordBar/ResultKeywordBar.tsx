@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import React, { useEffect } from 'react';
 import { fetchComedieMovies, fetchRomanceMovies } from "../../store/action/action";
 
-import { RomanceMoviesResponse } from "../../../src/@types/movie.d.ts";
+import { RomanceMoviesResponse } from "src/@types/movie.d.ts";
 
 import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 
