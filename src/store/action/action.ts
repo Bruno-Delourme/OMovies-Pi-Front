@@ -35,8 +35,41 @@ export const fetchComedieMovies = createAsyncThunk<Movie[]>(
   }
 );
 
+// marvel movies
+const FETCH_MARVEL_MOVIES = "FETCH_MARVEL_MOVIES";
+export const fetchMarvelMovies = createAsyncThunk<Movie[]>(
+  FETCH_MARVEL_MOVIES ,
+  async () => {
+    const response = await axiosInstance.get("/movies/marvel");
+    const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+    console.log(movies);
+    return movies;
+  }
+);
 
+//sciencefiction movies
+const FETCH_SCIENCEFICTION_MOVIES = "FETCH_SCIENCEFICTION_MOVIES";
+export const fetchScienceFictionMovies = createAsyncThunk<Movie[]>(
+  FETCH_SCIENCEFICTION_MOVIES ,
+  async () => {
+    const response = await axiosInstance.get("/movies/sciencefiction");
+    const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+    console.log(movies);
+    return movies;
+  }
+);
 
+// marvel movies
+const FETCH_ANIME_MOVIES = "FETCH_ANIME_MOVIES";
+export const fetchAnimeMovies = createAsyncThunk<Movie[]>(
+  FETCH_ANIME_MOVIES ,
+  async () => {
+    const response = await axiosInstance.get("/movies/anime");
+    const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+    console.log(movies);
+    return movies;
+  }
+);
 
 
 const SET_ROMANCE_MOVIES="SET_ROMANCE_MOVIES";

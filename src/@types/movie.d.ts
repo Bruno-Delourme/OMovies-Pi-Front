@@ -12,7 +12,7 @@ export interface Movie {
     key: number;
   }
   
-  export interface RomanceMoviesResponse {
+  export interface MoviesResponse {
     page: number;
     results: Movie[];
     total_pages: number;
