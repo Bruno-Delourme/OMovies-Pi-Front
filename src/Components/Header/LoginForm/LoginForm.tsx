@@ -39,7 +39,7 @@ function LoginForm() {
 
       const data = await response.json();
       console.log('Réponse du serveur:', data);
-      // afin de traiter la réponse
+      
 
     } catch (error) {
       console.error(`Erreur lors de l'envoi des données:`, error);
