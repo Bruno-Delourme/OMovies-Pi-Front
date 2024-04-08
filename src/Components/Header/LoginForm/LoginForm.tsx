@@ -24,7 +24,9 @@ function LoginForm() {
           </button>
           <form className="inscription-form">
             <input type="text" placeholder="Pseudo" />
-            <input type="password" placeholder="Mot de Passe" />
+            <input type="email" placeholder="Email"/>
+            <input type="birth" placeholder="Date de naissance"/>
+            <input type="password" placeholder="Mot de Passe"/>
             <button type="submit">S'inscrire</button>
           </form>
         </div>

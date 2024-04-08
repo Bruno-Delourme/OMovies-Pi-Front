@@ -54,13 +54,13 @@
   z-index: 10;
   list-style-type: none;
   text-align: left;
-  overflow: hidden; /* Empêcher le contenu débordant */
+  overflow: hidden; /* pour empêcher le contenu débordant */
   transition: max-height 0.5s ease-in-out;
 }
 
 .suggestions-list.active {
   display: block;
-  max-height: 25rem; /* Hauteur max pour la suggestionList à la fin de l'animation */
+  max-height: 25rem; /* hauteur max pour la suggestionList à la fin de l'animation */
   visibility: visible;
 }
 
