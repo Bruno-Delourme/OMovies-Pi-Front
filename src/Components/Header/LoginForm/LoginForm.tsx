@@ -16,7 +16,7 @@ function LoginForm() {
   const handleSubmit = async (event : any) => {
     event.preventDefault(); // pour empêcher le rechargement de la page
 
-    // L'URL back
+    // L'URL côté back
     const url = "http://localhost:3000/api/user";
 
     try {
