@@ -6,11 +6,10 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { GrUserNew } from "react-icons/gr";
 
-
 import "./Header.scss";
 import { Link } from "react-router-dom";
 
-const LogoPandaRoux = "../../../public/pandaRoux2.png"
+const LogoPandaRoux = "public/pandaRoux2.png"
 
 const Header = () => {
   

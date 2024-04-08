@@ -17,8 +17,6 @@ import List from "./Components/List/List";
 import Group from "./Components/Group/Group";
 import MemberSpace from "./Components/MemberSpace/MemberSpace";
 import ResultKeywordBar from './Components/ResultKeywordBar/ResultKeywordBar';
-import { fetchRomanceMovies } from './store/action/action';
-
 
 
 
@@ -33,9 +31,13 @@ const router = createBrowserRouter([
       {index: true, element: <Home />},
       {path: "/group/:id", element: <Group />},  // check if need add loader later
       {path: "/list/:id", element: <List />}, // check if need add loader later
-      {path: "/movies/romance", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
-      {path: "/movies/comedie", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
 
+      {path: "/movies/romance", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
+      {path: "/movies/familial", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
+      {path: "/movies/action", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
+
+      {path: "/movies/science-fiction", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
+      {path: "/movies/documentaire", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
     ],
   },
 ]);
