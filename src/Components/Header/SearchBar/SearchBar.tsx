@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SearchBar.scss";
 
-const clapperboard = "src/assets/clapperboard.png";
+const clapperboard = "../../../src/assets/clapperboard.png";
 
 // Définition du type pour un film
 type Movie = {

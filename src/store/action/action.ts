@@ -23,48 +23,48 @@ export const fetchRomanceMovies = createAsyncThunk<Movie[]>(
   }
 );
 
-//Comedie movies 
-const FETCH_COMEDIE_MOVIES = "FETCH_COMEDIE_MOVIES";
-export const fetchComedieMovies = createAsyncThunk<Movie[]>(
-  FETCH_COMEDIE_MOVIES ,
+//Familial movies 
+const FETCH_FAMILIAL_MOVIES = "FETCH_FAMILIAL_MOVIES";
+export const fetchFamilialMovies = createAsyncThunk<Movie[]>(
+  FETCH_FAMILIAL_MOVIES ,
   async () => {
-    const response = await axiosInstance.get("/movies/comedie");
-    const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
-    //console.log(movies);
-    return movies;
-  }
-);
-
-// marvel movies
-const FETCH_MARVEL_MOVIES = "FETCH_MARVEL_MOVIES";
-export const fetchMarvelMovies = createAsyncThunk<Movie[]>(
-  FETCH_MARVEL_MOVIES ,
-  async () => {
-    const response = await axiosInstance.get("/movies/marvel");
+    const response = await axiosInstance.get("/movies/familial");
     const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
     console.log(movies);
     return movies;
   }
 );
 
-//sciencefiction movies
+// Action movies
+const FETCH_ACTION_MOVIES = "FETCH_ACTION_MOVIES";
+export const fetchActionMovies = createAsyncThunk<Movie[]>(
+  FETCH_ACTION_MOVIES ,
+  async () => {
+    const response = await axiosInstance.get("/movies/action");
+    const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+    console.log(movies);
+    return movies;
+  }
+);
+
+//science-fiction movies
 const FETCH_SCIENCEFICTION_MOVIES = "FETCH_SCIENCEFICTION_MOVIES";
 export const fetchScienceFictionMovies = createAsyncThunk<Movie[]>(
   FETCH_SCIENCEFICTION_MOVIES ,
   async () => {
-    const response = await axiosInstance.get("/movies/sciencefiction");
+    const response = await axiosInstance.get("/movies/science-fiction");
     const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
     console.log(movies);
     return movies;
   }
 );
 
-// marvel movies
-const FETCH_ANIME_MOVIES = "FETCH_ANIME_MOVIES";
-export const fetchAnimeMovies = createAsyncThunk<Movie[]>(
-  FETCH_ANIME_MOVIES ,
+// Documentaire movies
+const FETCH_DOCUMENTAIRE_MOVIES = "FETCH_DOCUMENTAIRE_MOVIES";
+export const fetchDocumentaireMovies = createAsyncThunk<Movie[]>(
+  FETCH_DOCUMENTAIRE_MOVIES ,
   async () => {
-    const response = await axiosInstance.get("/movies/anime");
+    const response = await axiosInstance.get("/movies/documentaire");
     const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
     console.log(movies);
     return movies;
