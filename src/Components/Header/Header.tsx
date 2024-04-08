@@ -9,10 +9,10 @@ import { GrUserNew } from "react-icons/gr";
 import "./Header.scss";
 import { Link } from "react-router-dom";
 
-const LogoPandaRoux = "public/pandaRoux2.png"
+const LogoPandaRoux = "../../../pandaRoux2.png"
 
 const Header = () => {
-  
+
   return (
     
       <div className="black-banner">

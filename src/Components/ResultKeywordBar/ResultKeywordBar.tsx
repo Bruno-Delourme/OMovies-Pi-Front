@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { fetchActionMovies, fetchFamilialMovies,fetchDocumentaireMovies,fetchRomanceMovies } from "../../store/action/action";
 
 import { MoviesResponse } from "../../../src/@types/movie";
-
+import "./ResultKeywordBar.scss";
 import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 
 function ResultKeywordBar() {
@@ -67,23 +67,22 @@ function ResultKeywordBar() {
   console.log(moviesToDisplay);
 
   return (
-    <>
+    <div>
       <Header />
       <KeywordBar />
       {loading && <p>Loading movies...</p>}
 
       {moviesToDisplay && !loading && (
-        <div>
+        <div className="ResultContainer">
           {moviesToDisplay.map((movie) => (
             <React.Fragment key={movie.id}> {/* React.Fragment used only to regroup or wrap many element child without adding a knot to DOM ( i used it only for key)*/}
               <OneMovie
               
-              id={movie.id}
-              title={movie.title}
-              poster_path={movie.poster_path}
-              overview={movie.overview}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
+                id={movie.id}
+                // title={movie.title}
+                poster_path={movie.poster_path} title={""} overview={""} release_date={""} vote_average={0}              // overview={movie.overview}
+              // release_date={movie.release_date}
+              // vote_average={movie.vote_average}
             />
             </React.Fragment>
             
@@ -94,7 +93,7 @@ function ResultKeywordBar() {
       {!moviesToDisplay?.length && !loading && (
         <p>No movies found.</p>
       )}
-    </>
+    </div>
   );
 }
 
