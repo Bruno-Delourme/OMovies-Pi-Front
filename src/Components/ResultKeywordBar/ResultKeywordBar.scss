@@ -23,3 +23,20 @@
     }
 
 }
+
+@media screen and (max-width: 768px) {
+    .ResultContainer {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+    }}
+
+    @media screen and (max-width: 576px) {
+        .ResultContainer {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: center;
+        }
+    }
