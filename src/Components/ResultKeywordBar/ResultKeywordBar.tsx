@@ -2,12 +2,11 @@ import Header from "../Header/Header";
 import OneMovie from "../OneMovie/OneMovie";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import  { useEffect } from 'react';
-import { fetchComedieMovies, fetchMarvelMovies, fetchRomanceMovies } from "../../store/action/action";
+import React, { useEffect } from 'react';
+import { fetchActionMovies, fetchFamilialMovies,fetchDocumentaireMovies,fetchRomanceMovies } from "../../store/action/action";
 
 import { MoviesResponse } from "../../../src/@types/movie";
-import { RomanceMoviesResponse } from "../../../src/@types/movie";
-
+import "./ResultKeywordBar.scss";
 import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 
 function ResultKeywordBar() {
@@ -16,10 +15,10 @@ function ResultKeywordBar() {
 
 
   const romanceMovies = useAppSelector((state) => state.movies.romanceMovies) 
-  const comedyMovies = useAppSelector((state) => state.movies.comedieMovies) 
-  const marvelMovies = useAppSelector((state) => state.movies.marvelMovies) 
+  const comedyMovies = useAppSelector((state) => state.movies.familialMovies) 
+  const actionMovies = useAppSelector((state) => state.movies.actionMovies) 
   const ScienceFictionMovies = useAppSelector((state) => state.movies.ScienceFictionMovies) 
-  const animeMovies = useAppSelector((state) => state.movies.animeMovies) 
+  const animeMovies = useAppSelector((state) => state.movies.documentaireMovies) 
 
   
     /*
@@ -38,48 +37,52 @@ function ResultKeywordBar() {
     if (location.pathname === "/movies/romance") {
       //send an action to the Redux store, fetch and update the state with movies data based on the current URL path
       dispatch(fetchRomanceMovies());
-    } else if (location.pathname === "/movies/comedie") {
-      dispatch(fetchComedieMovies());
-    } else if (location.pathname === "/movies/marvel") {
-      dispatch(fetchMarvelMovies());
-  }
+    } else if (location.pathname === "/movies/familial") {
+      dispatch(fetchFamilialMovies());
+    } else if (location.pathname === "/movies/action") {
+      dispatch(fetchActionMovies());
+    }else if (location.pathname === "/movies/science-fiction") {
+      dispatch(fetchActionMovies());
+    }
+    else if (location.pathname === "/movies/documentaire") {
+      dispatch(fetchDocumentaireMovies());
+    }
   }, [dispatch, location.pathname]);
 
   const moviesToDisplay =
-    location.pathname === "/movies/romance"
+      location.pathname === "/movies/romance"
       ? romanceMovies
-      : location.pathname === "/movies/comedie"
+      : location.pathname === "/movies/familial"
       ? comedyMovies
-      : location.pathname === "/movies/marvel"
-      ? marvelMovies
-      : location.pathname === "/movies/sciencefiction"
+      : location.pathname === "/movies/action"
+      ? actionMovies
+      : location.pathname === "/movies/science-fiction"
       ? ScienceFictionMovies
-      : location.pathname === "/movies/anime"
+      : location.pathname === "/movies/documentaire"
       ? animeMovies
       : null;
 
 
 
-  console.log(romanceMovies)
+  console.log(moviesToDisplay);
 
   return (
-    <>
+    <div>
       <Header />
       <KeywordBar />
       {loading && <p>Loading movies...</p>}
 
       {moviesToDisplay && !loading && (
-        <div>
+        <div className="ResultContainer">
           {moviesToDisplay.map((movie) => (
             <React.Fragment key={movie.id}> {/* React.Fragment used only to regroup or wrap many element child without adding a knot to DOM ( i used it only for key)*/}
               <OneMovie
               
-              id={movie.id}
-              title={movie.title}
-              poster_path={movie.poster_path}
-              overview={movie.overview}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
+                id={movie.id}
+                // title={movie.title}
+                poster_path={movie.poster_path} title={""} overview={""} release_date={""} vote_average={0}              // overview={movie.overview}
+              // release_date={movie.release_date}
+              // vote_average={movie.vote_average}
             />
             </React.Fragment>
             
@@ -90,7 +93,7 @@ function ResultKeywordBar() {
       {!moviesToDisplay?.length && !loading && (
         <p>No movies found.</p>
       )}
-    </>
+    </div>
   );
 }
 
