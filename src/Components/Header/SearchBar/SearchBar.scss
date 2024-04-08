@@ -18,6 +18,8 @@
   border-radius: 0.5rem 0rem 0rem 0.5rem;
   outline: none;
   font-family: "Kodchasan", sans-serif;
+  font-size: smaller;
+  
   
 }
 
@@ -60,7 +62,7 @@
 
 .suggestions-list.active {
   display: block;
-  max-height: 25rem; /* hauteur max pour la suggestionList à la fin de l'animation */
+  max-height: 60rem; /* hauteur max pour la suggestionList à la fin de l'animation */
   visibility: visible;
 }
 
@@ -95,4 +97,16 @@
 .suggestions-list li:hover {
   background-color: #dfdfdf86;
   cursor: pointer;
+}
+
+.clickable {
+  color: grey;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.details {
+  background-color: #f0f0f0; // Un gris clair pour distinguer les détails
 }
