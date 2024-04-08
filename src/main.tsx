@@ -35,7 +35,9 @@ const router = createBrowserRouter([
       {path: "/list/:id", element: <List />}, // check if need add loader later
       {path: "/movies/romance", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
       {path: "/movies/comedie", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
-
+      {path: "/movies/marvel", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
+      {path: "/movies/sciencefiction", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
+      {path: "/movies/anime", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
     ],
   },
 ]);
