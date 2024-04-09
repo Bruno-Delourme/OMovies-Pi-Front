@@ -15,10 +15,10 @@ const axiosInstance = axios.create({
 //Ajout pour le USER
 interface FormField {
   value: string;
-  name: "email" | "password";
+  name: "pseudo" | "password";
 }
 interface FormData{
-  email:string,
+  pseudo:string,
   password:string
 }
 

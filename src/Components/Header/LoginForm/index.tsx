@@ -6,7 +6,7 @@ import { changeField, login } from "../../../store/action/action";
 
 function LoginForm() {
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state) => state.user.email);
+  const pseudo = useAppSelector((state) => state.user.pseudo);
   const password = useAppSelector((state) => state.user.password);
   const loggedMessage = useAppSelector((state) => state.user.loggedMessage);
 
@@ -16,10 +16,10 @@ function LoginForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(login({ pseudo, password }));
   };
 
-  const handleChangeField = (name: "email" | "password") => (value: string) => {
+  const handleChangeField = (name: "pseudo" | "password") => (value: string) => {
     dispatch(changeField({ value, name }));
   };
 
@@ -48,9 +48,9 @@ function LoginForm() {
           onSubmit={handleSubmit}
         >
           <Field
-            placeholder="Adresse Email"
-            onChange={handleChangeField("email")}
-            value={email}
+            placeholder="Adresse pseudo"
+            onChange={handleChangeField("pseudo")}
+            value={pseudo}
           />
           <Field
             type="password"
@@ -61,7 +61,9 @@ function LoginForm() {
           <button type="submit" className="login-form-button">
             OK
           </button>
+
         </form>
+        
       )}
     </div>
   );
