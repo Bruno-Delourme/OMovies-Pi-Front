@@ -17,7 +17,7 @@ function LoginForm() {
     event.preventDefault(); // pour empêcher le rechargement de la page
 
     // L'URL côté back
-    const url = "http://localhost:3000/api/user";
+    const url = "http://localhost:9000/api/user";
 
     try {
       const response = await fetch(url, {
