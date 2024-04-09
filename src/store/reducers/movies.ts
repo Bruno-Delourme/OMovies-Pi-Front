@@ -1,8 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { Movie } from "../../@types/movie";
+import { Movie, MoviesResponse } from "../../@types/movie";
 
 
-import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies } from "../action/action";
+import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies } from "../action/action";
 
 
 
@@ -12,6 +12,7 @@ interface MoviesState {
     actionMovies: Movie[];
     ScienceFictionMovies: Movie[],
     documentaireMovies: Movie[],
+    newMovies:  Movie[],
     loading: boolean;
     error: string | null;
   }
@@ -22,6 +23,7 @@ interface MoviesState {
     actionMovies: [],
     documentaireMovies: [],
     ScienceFictionMovies: [],
+    newMovies: [],
     loading: false,
     error: null,
   };
@@ -41,6 +43,7 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies"; 
       })
+      
       //Familial movies
       .addCase(fetchFamilialMovies.pending, (state) => {
         state.loading = true;
@@ -83,7 +86,7 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies"; 
       })
-      //anime movies
+      //Documentaire movies
       .addCase(fetchDocumentaireMovies.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -93,6 +96,20 @@ interface MoviesState {
         state.documentaireMovies = action.payload; // Update state with fetched comedie movies
       })
       .addCase(fetchDocumentaireMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies"; 
+      })
+
+      //New movies
+      .addCase(fetchNewMovies.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchNewMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newMovies = action.payload; // Update state with fetched new movies
+      })
+      .addCase(fetchNewMovies.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies"; 
       })
