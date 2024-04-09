@@ -69,13 +69,22 @@ function SearchBar() {
   return (
     <>
       <div className={`searchBar-container ${showSuggestions ? "active" : ""}`}>
-        <input
+        {/* <input
           className="search-input"
           type="text"
           placeholder="Rechercher un titre de film..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+        /> */}
+        
+        <input
+        className="input input-bordered input-error w-full max-md"
+        type="text" 
+        placeholder="Rechercher un titre de film..." 
+        value={query} 
+        onChange={(e) => setQuery(e.target.value)}
         />
+
         <button className="search-button">
           <img src={clapperboard} alt="Search" />
         </button>
