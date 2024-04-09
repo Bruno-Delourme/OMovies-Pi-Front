@@ -7,7 +7,7 @@ import axios from "axios";
 import { Movie } from "../../@types/movie";
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000/api",
+    baseURL: "http://localhost:9000/api",
   });
 
 
@@ -70,6 +70,19 @@ export const fetchDocumentaireMovies = createAsyncThunk<Movie[]>(
     return movies;
   }
 );
+
+// New movies 
+const FETCH_NEW_MOVIES = "FETCH_NEW_MOVIES";
+export const fetchNewMovies = createAsyncThunk<Movie[]>(
+  FETCH_NEW_MOVIES,
+  async () => {
+    const response = await axiosInstance.get("movie/now_playing");
+    const movies = response.data as Movie[];
+    return movies;
+  }
+);
+
+
 
 
 const SET_ROMANCE_MOVIES="SET_ROMANCE_MOVIES";

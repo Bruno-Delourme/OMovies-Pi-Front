@@ -15,11 +15,10 @@ function ResultKeywordBar() {
 
 
   const romanceMovies = useAppSelector((state) => state.movies.romanceMovies) 
-  const comedyMovies = useAppSelector((state) => state.movies.familialMovies) 
+  const familialMovies = useAppSelector((state) => state.movies.familialMovies) 
   const actionMovies = useAppSelector((state) => state.movies.actionMovies) 
   const ScienceFictionMovies = useAppSelector((state) => state.movies.ScienceFictionMovies) 
   const animeMovies = useAppSelector((state) => state.movies.documentaireMovies) 
-
   
     /*
   useAppSelector((state) => state.movies.marvelMovies) : to access the global state of the app.
@@ -53,7 +52,7 @@ function ResultKeywordBar() {
       location.pathname === "/movies/romance"
       ? romanceMovies
       : location.pathname === "/movies/familial"
-      ? comedyMovies
+      ? familialMovies
       : location.pathname === "/movies/action"
       ? actionMovies
       : location.pathname === "/movies/science-fiction"
