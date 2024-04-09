@@ -76,12 +76,43 @@ const FETCH_NEW_MOVIES = "FETCH_NEW_MOVIES";
 export const fetchNewMovies = createAsyncThunk<Movie[]>(
   FETCH_NEW_MOVIES,
   async () => {
-    const response = await axiosInstance.get("movie/now_playing");
+    const response = await axiosInstance.get("/newMovies");
     const movies = response.data as Movie[];
     return movies;
   }
 );
 
+// suggestion movies ( popular )
+const FETCH_SUGGESTION_MOVIES = "FETCH_SUGGESTION__MOVIES";
+export const fetchSuggestionMovies = createAsyncThunk<Movie[]>(
+  FETCH_SUGGESTION_MOVIES,
+  async () => {
+    const response = await axiosInstance.get("/popularMovies");
+    const movies = response.data as Movie[];
+    return movies;
+  }
+);
+
+// Movies By genre 
+const FETCH_BYGENRE_MOVIES = "FETCH_BYGENRE__MOVIES";
+export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
+  FETCH_BYGENRE_MOVIES,
+  async () => {
+    const response = await axiosInstance.get("/popularMovies");
+    const movies = response.data as Movie[];
+    return movies;
+  }
+);
+// Movies By actor 
+const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR__MOVIES";
+export const fetchByActorMovies = createAsyncThunk<Movie[]>(
+  FETCH_BYACTOR_MOVIES,
+  async () => {
+    const response = await axiosInstance.get("/popularMovies");
+    const movies = response.data as Movie[];
+    return movies;
+  }
+);
 
 
 
