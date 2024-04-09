@@ -1,4 +1,7 @@
-import LoginForm from "./LoginForm/LoginForm";
+import { useState } from 'react';
+import { FaRegCircle } from "react-icons/fa";
+
+import LoginForm from "./LoginForm/index";
 import SearchBar from "./SearchBar/SearchBar";
 import SubscribeForm from "./SubscribeForm/SuscribeForm";
 import Group from "../Group/Group"
@@ -12,7 +15,9 @@ import { Link } from "react-router-dom";
 const LogoPandaRoux = "../../../src/assets/pandaRoux2.png"
 
 const Header = () => {
+  const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
 
+  const toggleLoginForm = () => setIsLoginFormVisible(!isLoginFormVisible);
   return (
     
       <div className="black-banner">
@@ -22,7 +27,11 @@ const Header = () => {
         <div className="acces-buttons">
         {/* <Group /> */}
         <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
-        <LoginForm/>
+        {/* LoginForm/> */}
+        <button onClick={toggleLoginForm}>
+        <FaRegCircle size={20} /> {/* Adjust size as needed */}
+      </button>
+      {isLoginFormVisible && <LoginForm />}
         
         
         </div>
