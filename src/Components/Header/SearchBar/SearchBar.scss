@@ -1,62 +1,75 @@
 .searchBar-container {
   position: relative;
-  height: 1.5rem;
+  height: 1.6rem;
   width: 25rem;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 0; // pour supprimer l'espacement entre l'icone de validation et la searchBar-input
+  
 }
 
 .search-input {
+  border-width: 0rem;
+  height: 1.89rem;
   width: 30rem;
   font-size: 1rem;
-  border: 1px solid #fff;
+  
   border-radius: 0.5rem 0rem 0rem 0.5rem;
   outline: none;
+  font-family: "Kodchasan", sans-serif;
+  font-size: smaller;
+  
+  
+}
+
+.search-input::placeholder{
+  color: rgba(168, 168, 168, 0.676);
 }
 
 .search-button {
-  // margin-bottom: 0.02rem; // ne pas toucher cette valeur qui donne l'illusion d'un même block avec le searchInput
-  margin-left: 0rem;
   padding-left: 1rem;
   background-color: #fff;
   border: none;
   border-radius: 0rem 0.5rem 0.5rem 0rem;
   cursor: pointer;
-  height: 2.23rem; // ne pas toucher cette valeur qui donne l'illusion d'un même block avec le searchInput
-  width: 4rem;
+  height: 2rem; // ne pas toucher cette valeur 
+  width: 4.1rem; 
+  z-index: 11;
 }
 
+
+
+
 .suggestions-list {
-  height: 0;
+  height: auto;
+  max-height: 0;
   position: absolute;
-  top: calc(100% + 5px); /* Ajustez selon vos besoins */
+  top: calc(20% + 4px); 
   left: 0;
-  width: 100%;
+  width: 34.35rem; // ne pas toucher cette valeur 
   background-color: #fff;
-  
+  padding: 0;
+  margin-right: 2rem;
   border-top: none;
   border-radius: 0 0 0.5rem 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 10;
   list-style-type: none;
-  padding: 0;
-  margin: 0;
   text-align: left;
-  overflow: hidden; /* Empêcher le contenu débordant */
-  transition: height 0.5s ease-in-out; 
+  overflow: hidden; /* pour empêcher le contenu débordant */
+  transition: max-height 0.5s ease-in-out;
 }
 
 .suggestions-list.active {
   display: block;
-  height: 24rem; /* Hauteur maximale pour le contenu à la fin de l'animation */
+  max-height: 60rem; /* hauteur max pour la suggestionList à la fin de l'animation */
   visibility: visible;
 }
 
 .suggestions-list li {
   padding: 0.5rem;
   padding-left: 1rem;
+  
   border-bottom: none;
 }
 
@@ -73,6 +86,7 @@
   width: 40px;
   height: auto;
   margin-right: 1rem; //pour écarter le texte de l'image
+  
   box-shadow: 4px 10px 14px 1px #00000083;
 }
 
@@ -83,4 +97,16 @@
 .suggestions-list li:hover {
   background-color: #dfdfdf86;
   cursor: pointer;
+}
+
+.clickable {
+  color: grey;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.details {
+  background-color: #f0f0f0; // Un gris clair pour distinguer les détails
 }
