@@ -16,6 +16,30 @@ body {
   background: -o-linear-gradient(top, #0b0b0b, #3b3b3b);
   background: -ms-linear-gradient(top, #0b0b0b, #3b3b3b);
   overflow-y: hidden;
+
+  .black-banner {
+    @apply text-white p-4 flex items-center justify-between
+  }
+
+  .LogoPandaRoux {
+    @apply h-32
+  }
+
+  .acces-buttons {
+    @apply h-10 w-10 bg-white text-black flex items-center justify-center rounded my-1
+  }
+
+  .search-bar {
+    @apply w-full h-full border border-gray-300 px-20 py-2 text-black rounded-l
+  }
+
+  .button-searchBar {
+    @apply h-full bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded-r
+  }
+
+  .suggestions-list {
+    @apply absolute top-full left-0 bg-white border border-gray-300 rounded-b shadow-md;
+  }
 }
 
 /* .className {

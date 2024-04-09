@@ -77,33 +77,26 @@ function SearchBar() {
 
   return (
     <>
-      <div className={`searchBar-container ${showSuggestions ? "active" : ""}`}>
-        {/* <input
-          className="search-input"
-          type="text"
-          placeholder="Rechercher un titre de film..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        /> */}
+      <div className={`flex items-center relative ${showSuggestions ? "active" : ""}`}>
         
         <input
-        className="input input-bordered input-error w-full max-md"
+        className="search-bar"
         type="text" 
         placeholder="Rechercher un titre de film..." 
         value={query} 
         onChange={(e) => setQuery(e.target.value)}
         />
 
-        <button className="search-button">
+        <button className="button-searchBar">
           <img src={clapperboard} alt="Search" />
         </button>
         
-        <ul className={`suggestions-list ${showSuggestions ? "active" : ""}`}>
+        <ul className={`.suggestions-list ${showSuggestions ? "" : "hidden"}`}>
           {/* Films suggérés par titre */}
           {suggestions.map((movie, index) => (
-            <li key={index}>
+            <li  key={index} className="flex items-center px-4 py-2 hover:bg-gray-100">
               <div>
-                <img src={movie.poster_path} alt={movie.title} />
+                <img src={movie.poster_path} alt={movie.title} className="w-12 h-auto mr-2"/>
                 <span>{movie.title}</span>
               </div>
             </li>

@@ -51,7 +51,7 @@ function LoginForm() {
   return (
     <>
       <div className="logo-container">
-        <button className="acces-button" id="login-btn" onClick={toggleLoginForm}>
+        <button className="acces-buttons" id="login-btn" onClick={toggleLoginForm}>
           <FaRegCircle size={32} />
         </button>
       </div>

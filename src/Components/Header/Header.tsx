@@ -19,11 +19,10 @@ const Header = () => {
         
         <Link to="/"><img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" /></Link>
         <SearchBar/>
-        <div className="acces-buttons">
+        <div className="flex flex-col gap-1vh">
         {/* <Group /> */}
-        <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
-        <LoginForm/>
-        
+        <button className="acces-buttons" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
+        <LoginForm />
         
         </div>
       </div>

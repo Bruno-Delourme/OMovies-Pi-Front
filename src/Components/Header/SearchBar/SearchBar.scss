@@ -1,112 +1,126 @@
-.searchBar-container {
-  position: relative;
-  height: 1.6rem;
-  width: 25rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 0; // pour supprimer l'espacement entre l'icone de validation et la searchBar-input
+// .searchBar-container {
+//   position: relative;
+//   height: 1.6rem;
+//   width: 25rem;
+//   display: grid;
+//   grid-template-columns: 1fr auto;
+//   align-items: center;
+//   gap: 0; // pour supprimer l'espacement entre l'icone de validation et la searchBar-input
   
-}
+// }
 
-.search-input {
-  border-width: 0rem;
-  height: 1.89rem;
-  width: 30rem;
-  font-size: 1rem;
+// .searchBar-container {
+//   position: relative;
+//   height: 1.6rem;
+//   width: 25rem;
+//   display: grid;
+//   grid-template-columns: 1fr auto;
+//   align-items: center;
+//   gap: 0; // pour supprimer l'espacement entre l'icone de validation et la searchBar-input
   
-  border-radius: 0.5rem 0rem 0rem 0.5rem;
-  outline: none;
-  font-family: "Kodchasan", sans-serif;
-  font-size: smaller;
+// }
+
+// .search-input {
+//   border-width: 0rem;
+//   height: 1.89rem;
+//   width: 30rem;
+//   font-size: 1rem;
+  
+//   border-radius: 0.5rem 0rem 0rem 0.5rem;
+//   outline: none;
+//   font-family: "Kodchasan", sans-serif;
+//   font-size: smaller;
   
   
-}
+// }
 
-.search-input::placeholder{
-  color: rgba(168, 168, 168, 0.676);
-}
+// .search-input::placeholder{
+//   color: rgba(168, 168, 168, 0.676);
+// }
 
-.search-button {
-  padding-left: 1rem;
-  background-color: #fff;
-  border: none;
-  border-radius: 0rem 0.5rem 0.5rem 0rem;
-  cursor: pointer;
-  height: 2rem; // ne pas toucher cette valeur 
-  width: 4.1rem; 
-  z-index: 11;
-}
-
-
+// .search-button {
+//   padding-left: 1rem;
+//   background-color: #fff;
+//   border: none;
+//   border-radius: 0rem 0.5rem 0.5rem 0rem;
+//   cursor: pointer;
+//   height: 2rem; // ne pas toucher cette valeur 
+//   width: 4.1rem; 
+//   z-index: 11;
+// }
 
 
-.suggestions-list {
-  height: auto;
-  max-height: 0;
-  position: absolute;
-  top: calc(20% + 4px); 
-  left: 0;
-  width: 34.35rem; // ne pas toucher cette valeur 
-  background-color: #fff;
-  padding: 0;
-  margin-right: 2rem;
-  border-top: none;
-  border-radius: 0 0 0.5rem 0.5rem;
-  z-index: 10;
-  list-style-type: none;
-  text-align: left;
-  overflow: hidden; /* pour empêcher le contenu débordant */
-  transition: max-height 0.5s ease-in-out;
-}
 
-.suggestions-list.active {
-  display: block;
-  max-height: 60rem; /* hauteur max pour la suggestionList à la fin de l'animation */
-  visibility: visible;
-}
 
-.suggestions-list li {
-  padding: 0.5rem;
-  padding-left: 1rem;
+
+
+// .suggestions-list {
+//   height: auto;
+//   max-height: 0;
+//   position: absolute;
+//   top: calc(20% + 4px); 
+//   left: 0;
+//   width: 34.35rem; // ne pas toucher cette valeur 
+//   background-color: #fff;
+//   padding: 0;
+//   margin-right: 2rem;
+//   border-top: none;
+//   border-radius: 0 0 0.5rem 0.5rem;
+//   z-index: 10;
+//   list-style-type: none;
+//   text-align: left;
+//   overflow: hidden; /* pour empêcher le contenu débordant */
+//   transition: max-height 0.5s ease-in-out;
+// }
+
+// .suggestions-list.active {
+//   display: block;
+//   max-height: 60rem; /* hauteur max pour la suggestionList à la fin de l'animation */
+//   visibility: visible;
+// }
+
+// .suggestions-list li {
+//   padding: 0.5rem;
+//   padding-left: 1rem;
   
-  border-bottom: none;
-}
+//   border-bottom: none;
+// }
 
-.suggestions-list li:last-child {
-  border-bottom: none;
-}
+// .suggestions-list li:last-child {
+//   border-bottom: none;
+// }
 
-.suggestions-list li div {
-  display: flex;
-  align-items: center;
-}
+// .suggestions-list li div {
+//   display: flex;
+//   align-items: center;
+// }
 
-.suggestions-list li div img {
-  width: 40px;
-  height: auto;
-  margin-right: 1rem; //pour écarter le texte de l'image
+// .suggestions-list li div img {
+//   width: 40px;
+//   height: auto;
+//   margin-right: 1rem; //pour écarter le texte de l'image
   
-  box-shadow: 4px 10px 14px 1px #00000083;
-}
+//   box-shadow: 4px 10px 14px 1px #00000083;
+// }
 
-.suggestions-list li div span {
-  flex: 1;
-}
+// .suggestions-list li div span {
+//   flex: 1;
+// }
 
-.suggestions-list li:hover {
-  background-color: #dfdfdf86;
-  cursor: pointer;
-}
+// .suggestions-list li:hover {
+//   background-color: #dfdfdf86;
+//   cursor: pointer;
+// }
 
-.clickable {
-  color: grey;
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-}
+// .clickable {
+//   color: grey;
+//   cursor: pointer;
+//   &:hover {
+//     text-decoration: underline;
+//   }
+// }
 
-.details {
-  background-color: #f0f0f0; // Un gris clair pour distinguer les détails
-}
+// .details {
+//   background-color: #f0f0f0; // Un gris clair pour distinguer les détails
+// }
+
