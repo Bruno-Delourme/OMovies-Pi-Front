@@ -1,33 +1,9 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
 import { Movie } from "../../@types/movie";
-
-//Ajout pour le USER
-const CHANGE_FIELD = "CHANGE_FIELD";
-const LOGIN = "LOGIN";
-
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
-});
-
-//Ajout pour le USER
-interface FormField {
-  value: string;
-  name: "pseudo" | "password";
-}
-interface FormData{
-  pseudo:string,
-  password:string
-}
-
-export const login = createAsyncThunk<
-  { pseudo: string; logged: boolean; token: string },
-  FormData
->(LOGIN, async (formData) => {
-  const response = await axiosInstance.post("/login", formData);
-  return response.data;
 });
 
 //Romance movies
@@ -91,7 +67,77 @@ export const fetchDocumentaireMovies = createAsyncThunk<Movie[]>(
 );
 
 const SET_ROMANCE_MOVIES = "SET_ROMANCE_MOVIES";
+export const setRomanceMovies = createAction<Movie[]>(SET_ROMANCE_MOVIES);
+
+// Home content
+// New movies 
+const FETCH_NEW_MOVIES = "FETCH_NEW_MOVIES";
+export const fetchNewMovies = createAsyncThunk<Movie[]>(
+  FETCH_NEW_MOVIES,
+  async () => {
+    const response = await axiosInstance.get("/newMovies");
+    const movies = response.data as Movie[];
+    return movies;
+  }
+);
+
+// suggestion movies ( popular )
+const FETCH_SUGGESTION_MOVIES = "FETCH_SUGGESTION__MOVIES";
+export const fetchSuggestionMovies = createAsyncThunk<Movie[]>(
+  FETCH_SUGGESTION_MOVIES,
+  async () => {
+    const response = await axiosInstance.get("/popularMovies");
+    const movies = response.data as Movie[];
+    return movies;
+  }
+);
+
+// Movies By genre 
+const FETCH_BYGENRE_MOVIES = "FETCH_BYGENRE__MOVIES";
+export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
+  FETCH_BYGENRE_MOVIES,
+  async () => {
+    const response = await axiosInstance.get("/popularMovies");
+    const movies = response.data as Movie[];
+    return movies;
+  }
+);
+
+// Movies By actor 
+const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR__MOVIES";
+export const fetchByActorMovies = createAsyncThunk<Movie[]>(
+  FETCH_BYACTOR_MOVIES,
+  async () => {
+    const response = await axiosInstance.get("/popularMovies");
+    const movies = response.data as Movie[];
+    return movies;
+  }
+);
+
+// USER
+// structure du champ du formulaire
+interface FormField {
+  value: string;
+  name: "pseudo" | "password";
+}
+// données soumises lors de la connexion
+interface FormData{
+  pseudo:string,
+  password:string
+}
 
 //Ajout pour le USER
-export const changeField = createAction<FormField>(CHANGE_FIELD);
-export const setRomanceMovies = createAction<Movie[]>(SET_ROMANCE_MOVIES);
+const CHANGE_FIELD = "CHANGE_FIELD";
+//FormField comme payload, fonction de Redux Toolkit qui simplifie la création d'actions en générant automatiquement le type d'action et le payload
+export const changeField = createAction<FormField>(CHANGE_FIELD);// pour créer des actions qui mettent à jour l'état du formulaire
+
+// Login user 
+const LOGIN = "LOGIN";
+//reateAsyncThunk prend trois paramètres génériques : le type de retour de l'action asynchrone, le type du premier argument passé à la fonction payload creator, et en option, le type de thunkAPI 
+export const login = createAsyncThunk<
+  { pseudo: string; logged: boolean; token: string },
+  FormData
+>(LOGIN, async (formData) => {
+  const response = await axiosInstance.post("/login", formData);
+  return response.data;
+});//La fonction payload creator elle-même prend formData comme argument et exécute une requête POST asynchrone à /login en utilisant axiosInstance

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
-import Field from "./Field";
-import "./styles.scss";
+import Field from "./Field/Field";
+import "./LoginForm.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { changeField, login } from "../../../store/action/action";
 
@@ -48,7 +48,7 @@ function LoginForm() {
           onSubmit={handleSubmit}
         >
           <Field
-            placeholder="Adresse pseudo"
+            placeholder="pseudo"
             onChange={handleChangeField("pseudo")}
             value={pseudo}
           />
