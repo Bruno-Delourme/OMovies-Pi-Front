@@ -34,6 +34,8 @@ function LoginForm() {
       });
 
       if (!response.ok) {
+        const errorBody = await response.text(); 
+        console.error(`Erreur lors de la requête: ${response.status} - ${errorBody}`);
         throw new Error(`Erreur: ${response.status}`);
       }
 

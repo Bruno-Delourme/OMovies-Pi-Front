@@ -10,61 +10,70 @@ type Movie = {
 };
 
 function SearchBar() {
+  // État pour la requête de recherche entrée par l'utilisateur
   const [query, setQuery] = useState<string>("");
+  // État pour stocker les suggestions de films basées sur la requête
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
+  // Booléen pour contrôler l'affichage de la liste de suggestions
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+  // Contrôle l'affichage des suggestions de films par acteur
+  const [showMoviesByActor, setShowMoviesByActor] = useState<boolean>(false);
+  // Contrôle l'affichage des suggestions de films par mot-clé
+  const [showMoviesByKeyword, setShowMoviesByKeyword] = useState<boolean>(false);
+  // Stocke les films suggérés par acteur
+  const [moviesByActor, setMoviesByActor] = useState<Movie[]>([]);
+  // Stocke les films suggérés par mot-clé
+  const [moviesByKeyword, setMoviesByKeyword] = useState<Movie[]>([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      if (query.length > 2) {
+      if (query.length > 2) { // On ne lance la recherche que si la requête fait plus de 2 caractères
         const url = `http://localhost:3000/api/searchBar?query=${query}`;
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await fetch(url); // Appel API
+        const data = await response.json(); // Conversion de la réponse en JSON pour Gwendo
 
-        // "data" me renvoie un tableau qui contient 3 objets. (moviesByTitle, moviesByKeyword, moviesByActor )
-        // console.log("data", data); ✔
-
-        console.log("PAR TITRE", data.moviesByTitle);
-
-        console.log("PAR MOT CLEF", data.moviesByKeyword);
-
-        console.log("PAR ACTEUR", data.moviesByActor);
-
-        // Création d'un nouveau tableau pour stocker les titres uniques
-        const titles = new Set();
-        const uniqueMovies = data.moviesByTitle.filter((movie: Movie) => {
-          const duplicate = titles.has(movie.title);
-          titles.add(movie.title);
-          return !duplicate;
-        });
-
-        // Mise à jour des films avec l'URL de l'affiche et gestion des affiches manquantes
-        const moviesWithPosterPath = uniqueMovies.map((movie: Movie) => ({
+        // Traitement et mise à jour de moviesByTitle
+        const moviesWithPosterPath = data.moviesByTitle.map((movie: Movie) => ({
           ...movie,
-          poster_path: movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : clapperboard, // Utilisation d'une image par défaut si poster_path est absent
+          poster_path: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : clapperboard,
         }));
 
-        setSuggestions(
-          moviesWithPosterPath.length === 1
-            ? moviesWithPosterPath
-            : moviesWithPosterPath.slice(0, 5)
-        );
+        setSuggestions(moviesWithPosterPath.slice(0, 5));// Limite à 5 suggestions
+        
+        // Traitement et mise à jour de moviesByActor
+        const actorMoviesWithPoster = extractMovies(data.moviesByActor).map((movie: Movie) => ({
+          ...movie,
+          poster_path: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : clapperboard,
+        }));
+        setMoviesByActor(actorMoviesWithPoster.slice(0, 5));
 
-        setShowSuggestions(true); // Affiche les suggestions
+        // Traitement et mise à jour de par mot-clés
+        const keywordMoviesWithPoster = extractMovies(data.moviesByKeyword).map((movie: Movie) => ({
+          ...movie,
+          poster_path: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : clapperboard,
+        }));
+        setMoviesByKeyword(keywordMoviesWithPoster.slice(0, 5));
+
+        setShowSuggestions(true);// Affiche les suggestions
       } else {
         setSuggestions([]);
-        setShowSuggestions(false); // Masque les suggestions si la longueur de la recherche est insuffisante
+        setShowSuggestions(false);// Cache les suggestions si la requête est trop courte
       }
     };
 
     const timeoutId = setTimeout(() => {
       fetchMovies();
-    }, 500);
+    }, 500); // Lance la récupération des films après un délai pour limiter les appels API lors de la saisie
 
     return () => clearTimeout(timeoutId);
-  }, [query]);
+  }, [query]);// L'effet se relance à chaque modification de la requête
+
+  // Fonction pour extraire les films
+  const extractMovies = (moviesArray: any[]) => {
+    return Array.isArray(moviesArray) ? moviesArray.flatMap(category =>
+      Array.isArray(category) ? Object.values(category).flat() : []
+    ) : [];
+  };
 
   return (
     <>
@@ -88,10 +97,31 @@ function SearchBar() {
         <button className="search-button">
           <img src={clapperboard} alt="Search" />
         </button>
-
+        
         <ul className={`suggestions-list ${showSuggestions ? "active" : ""}`}>
+          {/* Films suggérés par titre */}
           {suggestions.map((movie, index) => (
             <li key={index}>
+              <div>
+                <img src={movie.poster_path} alt={movie.title} />
+                <span>{movie.title}</span>
+              </div>
+            </li>
+          ))}
+          {/* Option pour afficher les films suggérés par acteur */}
+          <li className="clickable" onClick={() => setShowMoviesByActor(!showMoviesByActor)}>Movies By Actor</li>
+          {showMoviesByActor && moviesByActor.map((movie, index) => (
+            <li key={index} className="details">
+              <div>
+                <img src={movie.poster_path} alt={movie.title} />
+                <span>{movie.title}</span>
+              </div>
+            </li>
+          ))}
+          {/* Option pour afficher les films suggérés par mot-clé */}
+          <li className="clickable" onClick={() => setShowMoviesByKeyword(!showMoviesByKeyword)}>Movies By Keyword</li>
+          {showMoviesByKeyword && moviesByKeyword.map((movie, index) => (
+            <li key={index} className="details">
               <div>
                 <img src={movie.poster_path} alt={movie.title} />
                 <span>{movie.title}</span>
