@@ -1,11 +1,11 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
   font-family: "Kodchasan", sans-serif;
-
-  height: 100vh;
+  height: auto;
   /* Dégradé linéaire */
   background: linear-gradient(to bottom, #0b0b0b, #3b3b3b);
 
@@ -15,34 +15,62 @@ body {
   background: -moz-linear-gradient(top, #0b0b0b, #3b3b3b);
   background: -o-linear-gradient(top, #0b0b0b, #3b3b3b);
   background: -ms-linear-gradient(top, #0b0b0b, #3b3b3b);
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 
+  /* Tailwind CSS HEADER + KEYWORDBAR */
+  /* .block-Header-KeywordBar {
+    @apply fixed  p-4
+  } */
+  /* Tailwind CSS BODY + FOOTER */
+  /* .block-Body-Footer {
+    @apply mt-16
+  } */
+  /* Tailwind CSS du HEADER */
   .black-banner {
-    @apply text-white p-4 flex items-center justify-between
+    @apply flex items-center justify-between fixed top-0 w-full p-4 ;
+    z-index: 8;
   }
-
+  /* Tailwind CSS du Logo PandaRoux */
   .LogoPandaRoux {
-    @apply h-32
+    @apply h-32;
   }
-
+  /* Tailwind CSS des boutons login/groupe etc */
   .acces-buttons {
-    @apply h-10 w-10 bg-white text-black flex items-center justify-center rounded my-1
+    @apply h-10 w-10 bg-white text-black flex items-center justify-center rounded my-1;
   }
-
+  /* Tailwind CSS de la search-bar */
   .search-bar {
-    @apply w-full h-full border border-gray-300 px-20 py-2 text-black rounded-l
+    @apply w-full h-full focus:outline-none px-2 py-2.5 text-black rounded-l;
   }
-
+  /* Tailwind CSS du bouton recherche de la search-bar */
   .button-searchBar {
-    @apply h-full bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded-r
+    @apply h-full bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded-r;
   }
-
+  /* Tailwind CSS de la liste déroulante des suggestions */
   .suggestions-list {
-    @apply absolute top-full left-0 bg-white border border-gray-300 rounded-b shadow-md;
+    @apply absolute top-full left-0 w-full bg-white border border-gray-300 rounded-b shadow-md ;
+    z-index: 10;
   }
+  .film-choice {
+    @apply flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer duration-300 transform hover:scale-105
+  }
+  /* Tailwind CSS du KEYWORDBAR + des boutons individuellement*/
+  .keywordbar {
+    @apply flex flex-wrap justify-center gap-2 mb-10 mt-40;
+    z-index: 9;
+  }
+  .genre-btn {
+  @apply rounded-lg shadow-md font-bold whitespace-nowrap mb-2 sm:mb-0 sm:mr-2 duration-300 transform hover:scale-110;
+  @apply px-8 py-2;
+  @apply min-w-[33vh] min-h-[6vh]; 
+  }
+  /* Tailwind CSS du RESULTKEYWORDBAR */
+  .resultKeywordBar-container {
+    @apply flex flex-wrap justify-center grid-cols-5 gap-4
+  }
+  .one-movie {
+    @apply w-full h-full rounded-md transition-transform duration-300 transform hover:scale-105;
+  }
+  
 }
 
-/* .className {
-  @apply 
-} */
-/*  */

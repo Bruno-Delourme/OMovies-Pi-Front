@@ -37,13 +37,13 @@ function KeywordBar() {
       };
 
     return (
-        <div className="keywordbar">
-            <button className="keywordbar-btn" id="romance-btn" onClick={handleRomanceClick} >Romance</button>
-            <button className="keywordbar-btn" id="comedie-btn" onClick={handleFamilialClick} >Familial</button>
-            <button className="keywordbar-btn" id="action-btn" onClick={handleActionClick}>Action</button>
-            <button className="keywordbar-btn" id="sciencefiction-btn" onClick={handleScienceFictionClick} >science fiction</button>
-            <button className="keywordbar-btn" id="documentaire-btn" onClick={handleDocumentaireClick}  >Documentaire</button>
-        </div>
+      <div className="keywordbar ">
+      <button className="genre-btn text-white bg-red-400" onClick={handleRomanceClick}>Romance</button>
+      <button className="genre-btn text-white bg-stone-950" onClick={handleFamilialClick}>Familial</button>
+      <button className="genre-btn text-white bg-orange-700" onClick={handleActionClick}>Action</button>
+      <button className="genre-btn text-white bg-yellow-950" onClick={handleScienceFictionClick}>Science Fiction</button>
+      <button className="genre-btn text-black bg-white" onClick={handleDocumentaireClick}>Documentaire</button>
+      </div>
     );
 }
 

@@ -77,8 +77,7 @@ function SearchBar() {
 
   return (
     <>
-      <div className={`flex items-center relative ${showSuggestions ? "active" : ""}`}>
-        
+      <div className={`flex items-center relative w-2/4 ${showSuggestions ? "active" : ""}`}>        
         <input
         className="search-bar"
         type="text" 
@@ -91,33 +90,33 @@ function SearchBar() {
           <img src={clapperboard} alt="Search" />
         </button>
         
-        <ul className={`.suggestions-list ${showSuggestions ? "" : "hidden"}`}>
+        <ul className={`suggestions-list ${showSuggestions ? "" : "hidden"}`}>
           {/* Films suggérés par titre */}
           {suggestions.map((movie, index) => (
-            <li  key={index} className="flex items-center px-4 py-2 hover:bg-gray-100">
-              <div>
-                <img src={movie.poster_path} alt={movie.title} className="w-12 h-auto mr-2"/>
-                <span>{movie.title}</span>
+            <li  key={index} className="film-choice">
+              <div className="flex items-center">
+                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
+                <span className="text-black ">{movie.title}</span>
               </div>
             </li>
           ))}
           {/* Option pour afficher les films suggérés par acteur */}
-          <li className="clickable" onClick={() => setShowMoviesByActor(!showMoviesByActor)}>Movies By Actor</li>
+          <li className="clickable text-black cursor-pointer" onClick={() => setShowMoviesByActor(!showMoviesByActor)}>Movies By Actor</li>
           {showMoviesByActor && moviesByActor.map((movie, index) => (
-            <li key={index} className="details">
-              <div>
-                <img src={movie.poster_path} alt={movie.title} />
-                <span>{movie.title}</span>
+            <li key={index} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <div className="flex items-center">
+                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
+                <span className="text-black">{movie.title}</span>
               </div>
             </li>
           ))}
           {/* Option pour afficher les films suggérés par mot-clé */}
-          <li className="clickable" onClick={() => setShowMoviesByKeyword(!showMoviesByKeyword)}>Movies By Keyword</li>
+          <li className="clickable text-black cursor-pointer" onClick={() => setShowMoviesByKeyword(!showMoviesByKeyword)}>Movies By Keyword</li>
           {showMoviesByKeyword && moviesByKeyword.map((movie, index) => (
-            <li key={index} className="details">
-              <div>
-                <img src={movie.poster_path} alt={movie.title} />
-                <span>{movie.title}</span>
+            <li key={index} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <div className="flex items-center">
+                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
+                <span className="text-black">{movie.title}</span>
               </div>
             </li>
           ))}
