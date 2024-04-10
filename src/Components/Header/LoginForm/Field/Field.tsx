@@ -38,13 +38,6 @@ function Field({
         {placeholder} 
       </label>
 
-      <label
-        htmlFor={inputId} // Liaison du label avec l'input correspondant
-        className="field-label" // Classe CSS pour le label
-      >
-        {placeholder} 
-      </label>
-
       <input
         value={value} // Liaison de la valeur du champ avec l'état contrôlé par le parent
         onChange={handleChange} // Gestion du changement de valeur
