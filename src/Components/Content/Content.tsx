@@ -6,7 +6,6 @@ import {useAppSelector } from "../../hooks/redux";
 import NewMovie from "./NewMovies/NewMovies";
 import Suggestion from "./Suggestions/Suggestions";
 import SuggestionForYou from "./SuggestionsForYou/SuggestionsForYou";
-import ByMood from "./ByMood/ByMood";
 import ByGenre from "./ByGenre/ByGenre";
 import ByActor from "./ByActor/ByActor";
 import { Outlet, useLocation } from "react-router-dom";
@@ -34,7 +33,7 @@ function Content() {
 
     return (
         <>
-            <NewMovie /><Suggestion /><SuggestionForYou /><ByMood /><ByGenre /><ByActor />
+            <NewMovie /><Suggestion /><SuggestionForYou /><ByGenre /><ByActor />
              <Outlet /> {/* Render ResultKeywordBar when movies are available */}
 
         </>

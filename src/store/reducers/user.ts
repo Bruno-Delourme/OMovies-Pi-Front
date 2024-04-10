@@ -20,14 +20,40 @@ export const initialState: UserState = {
   token: null,
 };
 
+// Function to check if a token exists in local storage and return user information
+const checkToken = () => {
+  const token = localStorage.getItem("token"); // Get token from local storage
+  if (token) {
+    return {// Return user information if token exist
+      logged: true,
+      pseudo: localStorage.getItem("pseudo") || "",// Get pseudo from local storage or set to empty string if not found
+      token,
+    };
+  }
+  return {// If token does not exist
+    logged: false,
+    pseudo: "",
+    token: null,
+  };
+};
+
+
 const userReducer = createReducer(initialState, (builder) => {
     builder
     .addCase(changeField,(state,action)=>{
       state[action.payload.name]=action.payload.value
     })
+    .addCase(CheckToken, (state) => { // When CheckToken action is dispatched
+      const { logged, pseudo, token } = checkToken(); // Get user information from checkToken function
+      state.logged = logged; // Set logged state to true or false
+      state.pseudo = pseudo; // Set pseudo state to username or empty string
+      state.token = token; // Set token state to token or null
+    })
     .addCase(login.fulfilled,(state,action)=>{
+      const { logged, pseudo, token } = checkToken();
       state.logged=true;
       state.pseudo=action.payload.pseudo;
+      state.pseudo= pseudo;
       state.token=action.payload.token;
       //store pseudo and token in localStorage
       localStorage.setItem("token", action.payload.token);
@@ -36,10 +62,6 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(login.rejected,()=>{
       console.log("une erreur est survenue lors de la connexion")
     })
-    .addCase(CheckToken,(state)=>{
-      state.token=localStorage.getItem("token");
-      state.logged=true
-      })
       .addCase(logout,(state)=>{
         state.logged=false;
         state.token=null

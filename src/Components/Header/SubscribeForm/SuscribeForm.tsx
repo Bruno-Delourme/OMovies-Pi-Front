@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaRegCircle, FaTimes } from "react-icons/fa";
-import "./LoginForm.scss";
+
 
 function SubscribeForm() {
   const [showLoginForm, setShowLoginForm] = useState(false);
