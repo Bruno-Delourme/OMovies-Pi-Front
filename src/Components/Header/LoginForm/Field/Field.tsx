@@ -12,8 +12,8 @@ interface FieldProps {
 }
 
 function Field({
-  value = '',
-  type = 'text', 
+  value,
+  type, 
   placeholder,
   onChange,
 }: FieldProps) {
@@ -31,6 +31,12 @@ function Field({
 
     // Application d'une classe CSS conditionnelle en fonction de la présence de contenu dans le champ
     <div className={value.length > 0 ? 'field field--has-content' : 'field'}>
+      <label
+        htmlFor={inputId} // Liaison du label avec l'input correspondant
+        className="field-label" // Classe CSS pour le label
+      >
+        {placeholder} 
+      </label>
 
       <label
         htmlFor={inputId} // Liaison du label avec l'input correspondant
@@ -48,9 +54,15 @@ function Field({
         placeholder={placeholder} // Texte d'indication dans le champ vide
       />
 
+
     </div>
   );
 }
+
+// Valeurs par défaut pour les props
+Field.defaultProps = {
+  type: 'text',
+};
 
 // Exportation du composant pour utilisation dans d'autres parties de l'application
 export default Field;

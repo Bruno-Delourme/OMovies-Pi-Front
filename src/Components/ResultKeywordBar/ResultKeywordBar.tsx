@@ -23,7 +23,7 @@ function ResultKeywordBar() {
   
   /*
 useAppSelector((state) => state.movies.marvelMovies) : to access the global state of the app.
-The function passed as a parameter (state) allows accessing a specific part of the state marvelMovies, comedieMovies ..
+The function passed as a parameter (state) allows accessing a specific part of the state romanceMovies, familialMovies ..
 
 as unknown : TypeScript cannot directly convert one type to another without an intermediate step. 
 Here, as unknown is used to tell TypeScript to temporarily consider the type as unknown.
