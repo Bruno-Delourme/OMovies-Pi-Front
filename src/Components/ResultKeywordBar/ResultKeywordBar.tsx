@@ -6,6 +6,7 @@ import React, { useEffect } from 'react';
 import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies } from "../../store/action/action";
 
 import { MoviesResponse } from "../../../src/@types/movie";
+import "./ResultKeywordBar.scss";
 
 import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 
@@ -68,7 +69,7 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
       {loading && <p>Loading movies...</p>}
 
             {moviesToDisplay?.movies && !loading && (
-        <div>
+        <div className="resultKeywordBar-container">
           {moviesToDisplay.movies.map((movie) => (
             <OneMovie
               key={movie.id}

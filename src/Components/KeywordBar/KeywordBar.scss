@@ -1,61 +1,43 @@
 
-.keywordbar{
-    width: 100%;
-    height: 6vh;
-    display: flex;
-    justify-content: space-evenly; 
-    gap: 2rem;
-    z-index: 10;
+// .keywordbar{
+//     width: 100%;
+//     height: 6vh;
+//     display: flex;
+//     justify-content: space-evenly; 
+//     gap: 2rem;
+//     z-index: 10;
     
     
 
-  &-btn {
-    width: 27vh;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px 1px #000000;
-    font-size: larger;
-    font-weight: bold;
-    font-family: "Kodchasan", sans-serif;
-    width: 100em;
-    padding: 2px;
+//   &-btn {
+//     width: 27vh;
+//     border-radius: 10px;
+//     box-shadow: 5px 5px 10px 1px #000000;
+//     font-size: larger;
+//     font-weight: bold;
+//     font-family: "Kodchasan", sans-serif;
+//     width: 100em;
+//     padding: 2px;
     
     
-  }
+//   }
 
-    #romance-btn {
-          background-color: rgb(86, 35, 21,);
-        }
-    #comedie-btn {
-          color : white;
-          background-color: rgb(13, 13, 13);
-        }
-    #action-btn {
-          background-color: rgb(183, 64, 33);
-        }
+    // #romance-btn {
+    //       background-color: #562315;
+    //     }
+    // #comedie-btn {
+    //       color : white;
+    //       background-color: #0d0d0d;
+    //     }
+    // #action-btn {
+    //       background-color: #b74021;
+    //     }
       
-    #sciencefiction-btn{
-          background-color: rgb(203, 116, 101);  
-        }
-    #anime-btn{
-          background-color: white;
-        }
+    // #sciencefiction-btn{
+    //       background-color: #cb7465;  
+    //     }
+    // #anime-btn{
+    //       background-color: #ffffff;
+    //     }
       
-}
-
-  #romance-btn {
-        background-color: rgb(86, 35, 21,);
-      }
-  #comedie-btn {
-        color : white;
-        background-color: rgb(13, 13, 13);
-      }
-  #action-btn {
-        background-color: rgb(183, 64, 33);
-      }
-
-  #sciencefiction-btn{
-        background-color: rgb(203, 116, 101);
-      }
-  #documentaire-btn{
-        background-color: white;
-      }
+// }

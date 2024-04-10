@@ -24,12 +24,12 @@ const Header = () => {
         
         <Link to="/"><img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" /></Link>
         <SearchBar/>
-        <div className="acces-buttons">
+        <div className="flex flex-col gap-1vh">
         {/* <Group /> */}
-        <button className="acces-button" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
+        <button className="acces-buttons" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
         {/* LoginForm/> */}
-        <button onClick={toggleLoginForm}>
-        <FaRegCircle size={20} /> {/* Adjust size as needed */}
+        <button className="acces-buttons" onClick={toggleLoginForm}>
+        <FaRegCircle size={32} /> {/* Adjust size as needed */}
       </button>
       {isLoginFormVisible && <LoginForm />}
         

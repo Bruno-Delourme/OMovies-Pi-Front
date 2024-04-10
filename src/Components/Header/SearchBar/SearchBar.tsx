@@ -28,7 +28,7 @@ function SearchBar() {
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) { // On ne lance la recherche que si la requête fait plus de 2 caractères
-        const url = `http://localhost:9000/api/searchBar?query=${query}`;
+        const url = `http://localhost:3000/api/searchBar?query=${query}`;
         const response = await fetch(url); // Appel API
         const data = await response.json(); // Conversion de la réponse en JSON pour Gwendo
 
@@ -77,45 +77,46 @@ function SearchBar() {
 
   return (
     <>
-      <div className={`searchBar-container ${showSuggestions ? "active" : ""}`}>
+      <div className={`flex items-center relative w-2/4 ${showSuggestions ? "active" : ""}`}>        
         <input
-          className="search-input"
-          type="text"
-          placeholder="Rechercher un titre de film..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+        className="search-bar"
+        type="text" 
+        placeholder="Rechercher un titre de film..." 
+        value={query} 
+        onChange={(e) => setQuery(e.target.value)}
         />
-        <button className="search-button">
+
+        <button className="button-searchBar">
           <img src={clapperboard} alt="Search" />
         </button>
         
-        <ul className={`suggestions-list ${showSuggestions ? "active" : ""}`}>
+        <ul className={`suggestions-list ${showSuggestions ? "" : "hidden"}`}>
           {/* Films suggérés par titre */}
           {suggestions.map((movie, index) => (
-            <li key={index}>
-              <div>
-                <img src={movie.poster_path} alt={movie.title} />
-                <span>{movie.title}</span>
+            <li  key={index} className="film-choice">
+              <div className="flex items-center">
+                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
+                <span className="text-black ">{movie.title}</span>
               </div>
             </li>
           ))}
           {/* Option pour afficher les films suggérés par acteur */}
-          <li className="clickable" onClick={() => setShowMoviesByActor(!showMoviesByActor)}>Movies By Actor</li>
+          <li className="clickable text-black cursor-pointer" onClick={() => setShowMoviesByActor(!showMoviesByActor)}>Movies By Actor</li>
           {showMoviesByActor && moviesByActor.map((movie, index) => (
-            <li key={index} className="details">
-              <div>
-                <img src={movie.poster_path} alt={movie.title} />
-                <span>{movie.title}</span>
+            <li key={index} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <div className="flex items-center">
+                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
+                <span className="text-black">{movie.title}</span>
               </div>
             </li>
           ))}
           {/* Option pour afficher les films suggérés par mot-clé */}
-          <li className="clickable" onClick={() => setShowMoviesByKeyword(!showMoviesByKeyword)}>Movies By Keyword</li>
+          <li className="clickable text-black cursor-pointer" onClick={() => setShowMoviesByKeyword(!showMoviesByKeyword)}>Movies By Keyword</li>
           {showMoviesByKeyword && moviesByKeyword.map((movie, index) => (
-            <li key={index} className="details">
-              <div>
-                <img src={movie.poster_path} alt={movie.title} />
-                <span>{movie.title}</span>
+            <li key={index} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <div className="flex items-center">
+                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
+                <span className="text-black">{movie.title}</span>
               </div>
             </li>
           ))}
