@@ -1,6 +1,7 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Movie } from "../../@types/movie";
+import { Cast } from "../../@types/movie";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -70,7 +71,7 @@ const SET_ROMANCE_MOVIES = "SET_ROMANCE_MOVIES";
 export const setRomanceMovies = createAction<Movie[]>(SET_ROMANCE_MOVIES);
 
 // Home content
-// New movies 
+// New movies
 const FETCH_NEW_MOVIES = "FETCH_NEW_MOVIES";
 export const fetchNewMovies = createAsyncThunk<Movie[]>(
   FETCH_NEW_MOVIES,
@@ -92,7 +93,7 @@ export const fetchSuggestionMovies = createAsyncThunk<Movie[]>(
   }
 );
 
-// Movies By genre 
+// Movies By genre
 const FETCH_BYGENRE_MOVIES = "FETCH_BYGENRE__MOVIES";
 export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
   FETCH_BYGENRE_MOVIES,
@@ -103,7 +104,7 @@ export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
   }
 );
 
-// Movies By actor 
+// Movies By actor
 const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR__MOVIES";
 export const fetchByActorMovies = createAsyncThunk<Movie[]>(
   FETCH_BYACTOR_MOVIES,
@@ -121,23 +122,40 @@ interface FormField {
   name: "pseudo" | "password";
 }
 // données soumises lors de la connexion
-interface FormData{
-  pseudo:string,
-  password:string
+interface FormData {
+  pseudo: string;
+  password: string;
 }
 
 //Ajout pour le USER
 const CHANGE_FIELD = "CHANGE_FIELD";
 //FormField comme payload, fonction de Redux Toolkit qui simplifie la création d'actions en générant automatiquement le type d'action et le payload
-export const changeField = createAction<FormField>(CHANGE_FIELD);// pour créer des actions qui mettent à jour l'état du formulaire
+export const changeField = createAction<FormField>(CHANGE_FIELD); // pour créer des actions qui mettent à jour l'état du formulaire
 
-// Login user 
+// Login user
 const LOGIN = "LOGIN";
-//reateAsyncThunk prend trois paramètres génériques : le type de retour de l'action asynchrone, le type du premier argument passé à la fonction payload creator, et en option, le type de thunkAPI 
+//reateAsyncThunk prend trois paramètres génériques : le type de retour de l'action asynchrone, le type du premier argument passé à la fonction payload creator, et en option, le type de thunkAPI
 export const login = createAsyncThunk<
   { pseudo: string; logged: boolean; token: string },
   FormData
 >(LOGIN, async (formData) => {
   const response = await axiosInstance.post("/login", formData);
   return response.data;
-});//La fonction payload creator elle-même prend formData comme argument et exécute une requête POST asynchrone à /login en utilisant axiosInstance
+}); //La fonction payload creator elle-même prend formData comme argument et exécute une requête POST asynchrone à /login en utilisant axiosInstance
+
+//Selection pour un film
+const SELECT_MOVIE = "SELECT_MOVIE";
+export const selectMovie = createAction<Movie | null>(SELECT_MOVIE);
+
+// Casting pour sélection d'un film
+const FETCH_MOVIE_CASTING = "FETCH_MOVIE_CASTING";
+export const fetchMovieCasting = createAsyncThunk<string[]>(
+  FETCH_MOVIE_CASTING,
+  async (cast_id) => {
+    const response = await axiosInstance.get(`/movie/${cast_id}/credits`);
+    const castNames = response.data.cast.map(
+      (member: { name: string }) => member.name
+    );
+    return castNames;
+  }
+);
