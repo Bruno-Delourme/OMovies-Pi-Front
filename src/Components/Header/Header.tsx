@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaRegCircle } from "react-icons/fa";
 
-import LoginForm from "./LoginForm/index";
+import LoginForm from "./LoginForm/LoginForm";
 import SearchBar from "./SearchBar/SearchBar";
 import SubscribeForm from "./SubscribeForm/SuscribeForm";
 import Group from "../Group/Group"

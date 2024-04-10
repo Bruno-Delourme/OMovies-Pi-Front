@@ -1,7 +1,7 @@
 // Importations nécessaires de React pour utiliser les hooks et gérer les événements
 import { ChangeEvent, useId } from 'react';
 // Importation des styles spécifiques au composant
-import './styles.scss';
+import './Field.scss';
 
 // Définition des props attendues par le composant Field avec TypeScript
 interface FieldProps {
@@ -12,7 +12,7 @@ interface FieldProps {
 }
 
 function Field({
-  value,
+  value = '',
   type = 'text', 
   placeholder,
   onChange,
@@ -32,6 +32,13 @@ function Field({
     // Application d'une classe CSS conditionnelle en fonction de la présence de contenu dans le champ
     <div className={value.length > 0 ? 'field field--has-content' : 'field'}>
 
+      <label
+        htmlFor={inputId} // Liaison du label avec l'input correspondant
+        className="field-label" // Classe CSS pour le label
+      >
+        {placeholder} 
+      </label>
+
       <input
         value={value} // Liaison de la valeur du champ avec l'état contrôlé par le parent
         onChange={handleChange} // Gestion du changement de valeur
@@ -41,12 +48,6 @@ function Field({
         placeholder={placeholder} // Texte d'indication dans le champ vide
       />
 
-      <label
-        htmlFor={inputId} // Liaison du label avec l'input correspondant
-        className="field-label" // Classe CSS pour le label
-      >
-        {placeholder} 
-      </label>
     </div>
   );
 }
