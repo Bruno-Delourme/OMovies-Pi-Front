@@ -1,75 +1,77 @@
-import { useState } from "react";
-import { FaRegCircle, FaTimes } from "react-icons/fa";
-import "./LoginForm.scss";
+import { FormEvent} from "react";
+import Field from "./Field/Field";
+import './LoginForm.scss';
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { changeField, login, logout } from "../../../store/action/action";
 
 function LoginForm() {
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [pseudo, setPseudo] = useState("");
-  const [email, setEmail] = useState("");
-  const [date_of_birth, setdate_of_birth] = useState("");
-  const [password, setPassword] = useState("");
 
-  const toggleLoginForm = () => {
-    setShowLoginForm(!showLoginForm);
+  const dispatch = useAppDispatch();
+
+  const pseudo = useAppSelector((state) => state.user.pseudo);
+  const password = useAppSelector((state) => state.user.password); 
+  const email = useAppSelector((state) => state.user.email);
+  const isLogged = useAppSelector((state) => state.user.logged);
+  
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(pseudo);
+    dispatch(login({ pseudo, password }));
   };
 
-  const handleSubmit = async (event : any) => {
-    event.preventDefault(); // pour empêcher le rechargement de la page
+  const handleChangeField = (name: "pseudo" | "password") => (value: string) => {
+    console.log(name, value);
+    dispatch(changeField({ value, name }))
+  };
 
-    // L'URL côté back
-    const url = "http://localhost:3000/api/user";
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          pseudo,
-          email,
-          date_of_birth,
-          password,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorBody = await response.text(); 
-        console.error(`Erreur lors de la requête: ${response.status} - ${errorBody}`);
-        throw new Error(`Erreur: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Réponse du serveur:', data);
-      
-
-    } catch (error) {
-      console.error(`Erreur lors de l'envoi des données:`, error);
-    }
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   return (
-    <>
-      <div className="logo-container">
-        <button className="acces-buttons" id="login-btn" onClick={toggleLoginForm}>
-          <FaRegCircle size={32} />
-        </button>
-      </div>
-      
-      <div className={`LoginForm ${showLoginForm ? "active" : ""}`}>
-        <button className="close-button" onClick={toggleLoginForm}>
-          <FaTimes size={20} />
-        </button>
-        <form className="inscription-form" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Pseudo" value={pseudo} onChange={(e) => setPseudo(e.target.value)} />
-          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type="date" placeholder="Date de naissance" value={date_of_birth} onChange={(e) => setdate_of_birth(e.target.value)} />
-          <input type="password" placeholder="Mot de Passe" value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button type="submit">S'inscrire</button>
-          
+    <div className="login-form">
+
+      {isLogged && (
+              <div className="login-form-logged">
+                <p className="login-form-message">
+                  Bienvenue {pseudo}
+                </p>
+                <button
+                  type="button"
+                  className="login-form-button"
+                  onClick={handleLogout}
+                >
+                  Déconnexion
+                </button>
+              </div>
+            )}
+
+
+      {!isLogged && (
+        <form
+          autoComplete="off"
+          className="login-form-element"
+          onSubmit={handleSubmit}
+        >
+          <Field
+            placeholder="Pseudo"
+            onChange={handleChangeField("pseudo")}
+            value={pseudo}
+          />
+          <Field
+            type="password"
+            placeholder="Mot de passe"
+            onChange={handleChangeField("password")}
+            value={password}
+          />
+          <button type="submit" className="login-form-button">
+            OK
+          </button>
+
         </form>
-      </div>
-    </>
+        
+      )}
+    </div>
   );
 }
 

@@ -17,6 +17,7 @@ import List from "./Components/List/List";
 import Group from "./Components/Group/Group";
 import MemberSpace from "./Components/MemberSpace/MemberSpace";
 import ResultKeywordBar from './Components/ResultKeywordBar/ResultKeywordBar';
+import OneMovie from './Components/OneMovie/OneMovie';
 
 
 
@@ -35,9 +36,10 @@ const router = createBrowserRouter([
       {path: "/movies/romance", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
       {path: "/movies/familial", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
       {path: "/movies/action", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
-
       {path: "/movies/science-fiction", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
       {path: "/movies/documentaire", element: <ResultKeywordBar  />}, // Render ResultKeywordBar for this route
+
+      {path: "/movie/:id", element: <OneMovie id={0} title={''} overview={''} release_date={''} vote_average={0}  />}, 
     ],
   },
 ]);
