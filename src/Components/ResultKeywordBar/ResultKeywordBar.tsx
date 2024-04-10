@@ -75,15 +75,7 @@ function ResultKeywordBar() {
       {moviesToDisplay && !loading && (
         <div className="ResultContainer">
           {moviesToDisplay.map((movie) => (
-            <React.Fragment key={movie.id}> {/* React.Fragment used only to regroup or wrap many element child without adding a knot to DOM ( i used it only for key)*/}
-              <OneMovie
-              
-                id={movie.id}
-                // title={movie.title}
-                poster_path={movie.poster_path} title={""} overview={""} release_date={""} vote_average={0}              // overview={movie.overview}
-              // release_date={movie.release_date}
-              // vote_average={movie.vote_average}
-            />
+            <React.Fragment key={movie.id}> 
             </React.Fragment>
             
           ))}

@@ -1,7 +1,7 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Movie } from "../../@types/movie";
-import { Cast } from "../../@types/movie";
+
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -143,7 +143,7 @@ export const login = createAsyncThunk<
   return response.data;
 }); //La fonction payload creator elle-même prend formData comme argument et exécute une requête POST asynchrone à /login en utilisant axiosInstance
 
-//Selection pour un film
+/*Selection pour un film
 const SELECT_MOVIE = "SELECT_MOVIE";
 export const selectMovie = createAction<Movie | null>(SELECT_MOVIE);
 
@@ -159,3 +159,4 @@ export const fetchMovieCasting = createAsyncThunk<string[]>(
     return castNames;
   }
 );
+*/

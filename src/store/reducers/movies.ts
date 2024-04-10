@@ -2,7 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { Movie } from "../../@types/movie";
 
 
-import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, selectMovie, fetchMovieCasting } from "../action/action";
+import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies } from "../action/action";
 
 
 
@@ -14,9 +14,7 @@ interface MoviesState {
     documentaireMovies: Movie[],
     loading: boolean;
     error: string | null;
-    selectedMovie: Movie | null; // Ajout pour stocker le film sélectionné
-    currentMovieCasting: string[];
-    castingLoading: boolean;
+    
   }
   
   export const initialState: MoviesState = {
@@ -27,9 +25,7 @@ interface MoviesState {
     ScienceFictionMovies: [],
     loading: false,
     error: null,
-    selectedMovie: null, // Initialiser selectedMovie à null
-    currentMovieCasting: [], // Initialisez à un tableau vide
-    castingLoading: false, 
+    
   };
   
   const moviesReducer = createReducer(initialState, (builder) => {
@@ -108,22 +104,7 @@ interface MoviesState {
         state.romanceMovies = action.payload; // Update state for other movie categories 
       })
 
-      // Selection pour un film
-      .addCase(selectMovie, (state, action) => {
-        state.selectedMovie = action.payload; // Mettre à jour l'état avec le film sélectionné
-      })
-
-      .addCase(fetchMovieCasting.pending, (state) => {
-        state.castingLoading = true; 
-      })
-      .addCase(fetchMovieCasting.fulfilled, (state, action) => {
-        state.castingLoading = false; // Fin du chargement
-        state.currentMovieCasting = action.payload; 
-      })
-      .addCase(fetchMovieCasting.rejected, (state, action) => {
-        state.castingLoading = false; 
-        console.error(action.payload); 
-      });
+      
     }); 
   
 export default moviesReducer;
