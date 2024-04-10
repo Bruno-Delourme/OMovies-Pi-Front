@@ -28,7 +28,7 @@ function SearchBar() {
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) { // On ne lance la recherche que si la requête fait plus de 2 caractères
-        const url = `http://localhost:3000/api/searchBar?query=${query}`;
+        const url = `http://localhost:9000/api/searchBar?query=${query}`;
         const response = await fetch(url); // Appel API
         const data = await response.json(); // Conversion de la réponse en JSON pour Gwendo
 
