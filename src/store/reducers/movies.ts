@@ -127,7 +127,7 @@ interface MoviesState {
       })
       .addCase(fetchSuggestionMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.newMovies = action.payload; // Update state with fetched new movies
+        state.suggestionMovies = action.payload; // Update state with fetched suggestion Movies
       })
       .addCase(fetchSuggestionMovies.rejected, (state, action) => {
         state.loading = false;
@@ -141,7 +141,7 @@ interface MoviesState {
       })
       .addCase(fetchByGenreMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.moviesByGenre = action.payload; // Update state with fetched new movies
+        state.moviesByGenre = action.payload; // Update state with fetched movies ByGenre
       })
       .addCase(fetchByGenreMovies.rejected, (state, action) => {
         state.loading = false;

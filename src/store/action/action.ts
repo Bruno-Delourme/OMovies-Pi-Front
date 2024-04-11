@@ -88,6 +88,7 @@ export const fetchSuggestionMovies = createAsyncThunk<Movie[]>(
   async () => {
     const response = await axiosInstance.get("/popularMovies");
     const movies = response.data as Movie[];
+    //console.log(movies);
     return movies;
   }
 );
@@ -99,6 +100,7 @@ export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
   async () => {
     const response = await axiosInstance.get("/movies/action");
     const movies = response.data as Movie[];
+    // console.log(movies);
     return movies;
   }
 );
