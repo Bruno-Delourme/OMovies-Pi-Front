@@ -6,8 +6,9 @@ import SearchBar from "./SearchBar/SearchBar";
 import SubscribeForm from "./SubscribeForm/SuscribeForm";
 import Group from "../Group/Group"
 
-import { FaPeopleGroup } from "react-icons/fa6";
-import { GrUserNew } from "react-icons/gr";
+const logoGroup = "../../assets/users-round.png";
+
+
 
 import "./Header.scss";
 import { Link } from "react-router-dom";
@@ -34,10 +35,13 @@ const Header = () => {
         <button onClick={scrollToTop} style={{ all: 'unset' }}>
           <img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" />
         </button>
+        {/* GROUP/> */}
+        <Link to="/group" className="LogoGroupLink">
+        <img src={logoGroup} alt="Groupe" style={{ width: 32, height: 32 }} />
+      </Link>
         <SearchBar/>
         <div className="flex flex-col gap-1vh">
-        {/* <Group /> */}
-        <button className="acces-buttons" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
+        
         {/* LoginForm/> */}
         <button className="acces-buttons" onClick={toggleLoginForm}>
         <FaRegCircle size={32} /> {/* Adjust size as needed */}
