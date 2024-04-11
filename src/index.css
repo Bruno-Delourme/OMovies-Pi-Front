@@ -6,6 +6,8 @@
 body {
   font-family: "Kodchasan", sans-serif;
   height: auto;
+  width: auto;
+
   /* Dégradé linéaire */
   background: linear-gradient(to bottom, #0b0b0b, #3b3b3b);
 
@@ -17,17 +19,24 @@ body {
   background: -ms-linear-gradient(top, #0b0b0b, #3b3b3b);
   /* overflow-y: hidden; */
 
-  /* Tailwind CSS HEADER + KEYWORDBAR */
-  /* .block-Header-KeywordBar {
-    @apply fixed  p-4
+/* reglage body general */
+/* .BodyAllProject {
+  @apply max-w-screen-xl
+} */
+
+
+  /* body-params dans le HTML */
+  /* .body-Params {
+    @apply flex
   } */
-  /* Tailwind CSS BODY + FOOTER */
-  /* .block-Body-Footer {
-    @apply mt-16
+
+  /* .layout {
+    @apply max-w-full
   } */
+
   /* Tailwind CSS du HEADER */
   .black-banner {
-    @apply flex items-center justify-between fixed top-0 w-full p-4 ;
+    @apply bg-black flex items-center justify-between fixed top-0 w-full p-4 ;
     z-index: 8;
   }
   /* Tailwind CSS du Logo PandaRoux */
@@ -68,9 +77,15 @@ body {
   .resultKeywordBar-container {
     @apply flex flex-wrap justify-center grid-cols-5 gap-4
   }
-  .one-movie {
-    @apply w-full h-full rounded-md transition-transform duration-300 transform hover:scale-105;
+  /* .vignette-movie {
+    @apply pb-5 rounded-md transition-transform duration-300 transform hover:scale-105
+  } */
+  /* Tailwind CSS page acceuil */
+  /* Titre de sections */
+  .title-configuration {
+    @apply text-white text-6xl
   }
-  
+
+
 }
 

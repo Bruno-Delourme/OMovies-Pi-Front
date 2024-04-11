@@ -4,24 +4,19 @@ import KeywordBar from "../KeywordBar/KeywordBar";
 import Content from "../Content/Content";
 import Footer from "../Footer/Footer";
 
-
-
-
-
+import "./Home.scss";
 
 function Home() {
     return (
+        <div className="BodyAllProject">
         <Layout>
-            <div className="block-Header-KeywordBar">
             <Header />
             <KeywordBar />
-            </div>
-            <div className="block-Body-Footer">
             <Content />
             <Footer />
-            </div>
 
         </Layout>
+        </div>
     );
 }
 
