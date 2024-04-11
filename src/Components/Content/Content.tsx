@@ -32,11 +32,11 @@ function Content() {
 
 
     return (
-        <>
+        <div className="">
             <NewMovie /><Suggestion /><SuggestionForYou /><ByGenre /><ByActor />
              <Outlet /> {/* Render ResultKeywordBar when movies are available */}
 
-        </>
+        </div>
         
     );
 }
