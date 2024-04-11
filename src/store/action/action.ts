@@ -3,7 +3,7 @@ import axios from "axios";
 import { Movie } from "../../@types/movie";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:9000/api",
+  baseURL: "http://localhost:3000/api",
 });
 
 //Romance movies
