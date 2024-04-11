@@ -20,7 +20,7 @@ function SearchBar() {
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) {
-        const url = `http://localhost:9000/api/searchBar?query=${query}`;
+        const url = `http://localhost:3000/api/searchBar?query=${query}`;
         const response = await fetch(url);
         const data = await response.json();
 

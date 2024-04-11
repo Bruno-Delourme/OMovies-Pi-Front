@@ -1,10 +1,6 @@
-
-import "./NewMovies.scss"
-
 import { fetchNewMovies } from "../../../store/action/action";
-
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import OneMovie from "../../OneMovie/OneMovie";
 import { MoviesResponse } from "../../../@types/movie";
 
@@ -26,65 +22,70 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
 const loading = useAppSelector((state) => state.movies.loading);
 
 
+
 useEffect(() => {
   dispatch(fetchNewMovies());
 }, [dispatch]);
 
+
 return (
   <div className="">
     <p className="title-configuration">Nouveautés</p>
-    <div className="o">
+    <div className="relative">
+      
       {loading ? (
       <p>Chargement...</p>
       ) : newMovies.movies ? (
-        <div className=" carousel carousel-center max-w-full rounded-box overflow-x-auto">
-          {/* <button className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
-        <ChevronLeftIcon className="h-12 w-12" />
-        </button> */}
-        <div className="carousel-item">
-          {newMovies.movies.map((movie) => (
-            <OneMovie
-              poster_path={movie.poster_path}
-              key={movie.id}
-              id={movie.id}
-              title={movie.title}
-              overview={movie.overview}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
-            />   
-          ))}
-        </div>  
-          {/* <button className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
-        <ChevronRightIcon className="h-12 w-12" />
-          </button> */}
+        <div className="">
+          <div className="scroll-container carousel-item carousel overflow-x-auto">
+            {<button className="scroll-left-configuration"
+            onClick={() => {
+              const scrollContainer = document.querySelector('.scroll-container');
+              if (scrollContainer) {
+                scrollContainer.scrollLeft -= 1200;
+              }
+            }}
+            >
+              <ChevronLeftIcon className="chevron-design"/>
+            </button>}
+            <span className="movie-picture-container">
+            {newMovies.movies.map((movie) => (
+              <OneMovie
+                poster_path={movie.poster_path}
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                overview={movie.overview}
+                release_date={movie.release_date}
+                vote_average={movie.vote_average}
+              />   
+            ))}
+            </span>
+            <button className="scroll-right-configuration"
+            onClick={() => {
+              const scrollContainer = document.querySelector('.scroll-container');
+              if (scrollContainer) {
+                scrollContainer.scrollLeft += 1200;
+              }
+            }}
+            >
+              <ChevronRightIcon className="chevron-design"/>
+            </button>
+          </div>  
+
         </div>
     
         ) : (
           <p>Aucun film trouvé</p>
       )}
+      
     </div>
+    
   </div>
+  
 );
 }
 
 
 export default NewMovies;
-
-//   return (
-//     <>
-//       <div className="relative flex items-center"> 
-//         <div id="slider"className="w-full h-full overflow-x-scroll scroll whitespace-nonwrap scroll-smooth">
-//           {newMovies.movies.map((movie) => (
-//           <img
-//           className="w-[200px] inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300" 
-//           src="src/assets/pandaRoux2.png"
-//           alt="/" 
-//           />  
-//         ))}
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
 
