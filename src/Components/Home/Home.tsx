@@ -12,10 +12,14 @@ import Footer from "../Footer/Footer";
 function Home() {
     return (
         <Layout>
+            <div className="block-Header-KeywordBar">
             <Header />
             <KeywordBar />
+            </div>
+            <div className="block-Body-Footer">
             <Content />
             <Footer />
+            </div>
 
         </Layout>
     );

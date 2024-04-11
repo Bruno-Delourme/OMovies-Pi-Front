@@ -1,26 +1,27 @@
-.ResultContainer {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
+// .ResultContainer {
+//     display: flex;
+//     flex-wrap: wrap;
+//     width: 100%;
+//     height: 100%;
+//     justify-content: center;
 
-    .movie-card {
-        width: 11%; 
-        overflow: hidden;
-        padding: 1vh;
-    }
+//     .movie-card {
+//         width: 11%; 
+//         overflow: hidden;
+//         padding: 1vh;
+//     }
 
-    img {
-        width: 100%; 
-        height: 100%;
-        border-radius: 2vh;
-        align-items: stretch;
-        transition: transform 0.3s ease;      
-    }
+//     img {
+//         width: 100%; 
+//         height: 100%;
+//         border-radius: 2vh;
+//         align-items: stretch;
+//         transition: transform 0.3s ease;      
+//     }
 
-    img:hover {
-        transform: scale(1.1);
-    }
+//     img:hover {
+//         transform: scale(1.1);
+//     }
 
-}
+// }
 

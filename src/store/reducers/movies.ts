@@ -1,8 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { Movie } from "../../@types/movie";
+import { Movie, MoviesResponse } from "../../@types/movie";
 
 
-import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies } from "../action/action";
+import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies } from "../action/action";
 
 
 
@@ -12,6 +12,10 @@ interface MoviesState {
     actionMovies: Movie[];
     ScienceFictionMovies: Movie[],
     documentaireMovies: Movie[],
+    newMovies:  Movie[],
+    suggestionMovies: Movie[],
+    moviesByGenre: Movie[],
+    moviesByActor: Movie[],
     loading: boolean;
     error: string | null;
     
@@ -23,6 +27,10 @@ interface MoviesState {
     actionMovies: [],
     documentaireMovies: [],
     ScienceFictionMovies: [],
+    newMovies: [],
+    suggestionMovies: [],
+    moviesByGenre: [],
+    moviesByActor: [],
     loading: false,
     error: null,
     
@@ -43,6 +51,7 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies"; 
       })
+      
       //Familial movies
       .addCase(fetchFamilialMovies.pending, (state) => {
         state.loading = true;
@@ -85,7 +94,7 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies"; 
       })
-      //anime movies
+      //Documentaire movies
       .addCase(fetchDocumentaireMovies.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -99,6 +108,60 @@ interface MoviesState {
         state.error = action.error.message || "Failed to fetch movies"; 
       })
 
+      //New movies
+      .addCase(fetchNewMovies.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchNewMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newMovies = action.payload; // Update state with fetched new movies
+      })
+      .addCase(fetchNewMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies"; 
+      })
+
+      //suggestion movies ( popular )
+      .addCase(fetchSuggestionMovies.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSuggestionMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newMovies = action.payload; // Update state with fetched new movies
+      })
+      .addCase(fetchSuggestionMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies"; 
+      })
+
+      // Movies By genre 
+      .addCase(fetchByGenreMovies.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchByGenreMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.moviesByGenre = action.payload; // Update state with fetched new movies
+      })
+      .addCase(fetchByGenreMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies"; 
+      })
+      // Movies By actor 
+      .addCase(fetchByActorMovies.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchByActorMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.moviesByGenre = action.payload; // Update state with fetched new movies
+      })
+      .addCase(fetchByActorMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies"; 
+      })
 
       .addCase(setRomanceMovies, (state, action) => {
         state.romanceMovies = action.payload; // Update state for other movie categories 
@@ -107,4 +170,7 @@ interface MoviesState {
       
     }); 
   
-export default moviesReducer;
+  export default moviesReducer;
+
+
+  

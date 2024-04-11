@@ -2,7 +2,6 @@ import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Movie } from "../../@types/movie";
 
-
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
 });
@@ -98,65 +97,71 @@ const FETCH_BYGENRE_MOVIES = "FETCH_BYGENRE__MOVIES";
 export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
   FETCH_BYGENRE_MOVIES,
   async () => {
-    const response = await axiosInstance.get("/popularMovies");
+    const response = await axiosInstance.get("/movies/action");
     const movies = response.data as Movie[];
     return movies;
   }
 );
 
 // Movies By actor
-const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR__MOVIES";
+const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR_MOVIES";
 export const fetchByActorMovies = createAsyncThunk<Movie[]>(
   FETCH_BYACTOR_MOVIES,
   async () => {
-    const response = await axiosInstance.get("/popularMovies");
+    const response = await axiosInstance.get("/moviesByActor/Cillian%20Murphy");
     const movies = response.data as Movie[];
     return movies;
   }
 );
 
-// USER
-// structure du champ du formulaire
+//Interface USER
 interface FormField {
   value: string;
   name: "pseudo" | "password";
 }
-// données soumises lors de la connexion
 interface FormData {
   pseudo: string;
+  email: string;
+  date_of_birth: string;
   password: string;
 }
 
-//Ajout pour le USER
+// USER
 const CHANGE_FIELD = "CHANGE_FIELD";
-//FormField comme payload, fonction de Redux Toolkit qui simplifie la création d'actions en générant automatiquement le type d'action et le payload
-export const changeField = createAction<FormField>(CHANGE_FIELD); // pour créer des actions qui mettent à jour l'état du formulaire
+export const changeField = createAction<FormField>(CHANGE_FIELD);
+
+// Subscribe user
+
+const REGISTER = "REGISTER"; // Ajout pour l'enregistrement de l'utilisateur
+export const register = createAsyncThunk<
+  {
+    email: string;
+    datedenaissance: string;
+    pseudo: string;
+    logged: boolean;
+    token: string;
+  },
+  FormData
+>(REGISTER, async (FormData) => {
+  const response = await axiosInstance.post("/user", FormData);
+  return response.data;
+});
 
 // Login user
 const LOGIN = "LOGIN";
-//reateAsyncThunk prend trois paramètres génériques : le type de retour de l'action asynchrone, le type du premier argument passé à la fonction payload creator, et en option, le type de thunkAPI
 export const login = createAsyncThunk<
   { pseudo: string; logged: boolean; token: string },
   FormData
 >(LOGIN, async (formData) => {
   const response = await axiosInstance.post("/login", formData);
   return response.data;
-}); //La fonction payload creator elle-même prend formData comme argument et exécute une requête POST asynchrone à /login en utilisant axiosInstance
+  console.log(response);
+});
 
-/*Selection pour un film
-const SELECT_MOVIE = "SELECT_MOVIE";
-export const selectMovie = createAction<Movie | null>(SELECT_MOVIE);
+// Check token
+const CHECK_TOKEN = "CHECK_TOKEN";
+export const CheckToken = createAction(CHECK_TOKEN);
 
-// Casting pour sélection d'un film
-const FETCH_MOVIE_CASTING = "FETCH_MOVIE_CASTING";
-export const fetchMovieCasting = createAsyncThunk<string[]>(
-  FETCH_MOVIE_CASTING,
-  async (cast_id) => {
-    const response = await axiosInstance.get(`/movie/${cast_id}/credits`);
-    const castNames = response.data.cast.map(
-      (member: { name: string }) => member.name
-    );
-    return castNames;
-  }
-);
-*/
+// Logout
+const LOGOUT = "LOGOUT";
+export const logout = createAction(LOGOUT);
