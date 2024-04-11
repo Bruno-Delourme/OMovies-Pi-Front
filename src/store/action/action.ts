@@ -3,7 +3,7 @@ import axios from "axios";
 import { Movie } from "../../@types/movie";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "http://localhost:9000/api",
 });
 
 //Romance movies
@@ -97,18 +97,18 @@ const FETCH_BYGENRE_MOVIES = "FETCH_BYGENRE__MOVIES";
 export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
   FETCH_BYGENRE_MOVIES,
   async () => {
-    const response = await axiosInstance.get("/popularMovies");
+    const response = await axiosInstance.get("/movies/action");
     const movies = response.data as Movie[];
     return movies;
   }
 );
 
 // Movies By actor 
-const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR__MOVIES";
+const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR_MOVIES";
 export const fetchByActorMovies = createAsyncThunk<Movie[]>(
   FETCH_BYACTOR_MOVIES,
   async () => {
-    const response = await axiosInstance.get("/popularMovies");
+    const response = await axiosInstance.get("/moviesByActor/Cillian%20Murphy");
     const movies = response.data as Movie[];
     return movies;
   }
@@ -121,12 +121,31 @@ interface FormField {
 }
 interface FormData{
   pseudo: string;
-  password:string
+  email: string;
+  date_of_birth: string;
+  password: string;
 }
 
-//Ajout pour le USER
+
+// USER
 const CHANGE_FIELD = "CHANGE_FIELD";
 export const changeField = createAction<FormField>(CHANGE_FIELD);
+
+
+// Subscribe user 
+
+const REGISTER = "REGISTER";// Ajout pour l'enregistrement de l'utilisateur
+export const register = createAsyncThunk<
+  {
+    email: string;
+    datedenaissance: string; pseudo: string; logged: boolean; token: string 
+},
+  FormData
+>(REGISTER, async (FormData) => {
+  const response = await axiosInstance.post("/user", FormData);
+  return response.data;
+});
+
 
 // Login user 
 const LOGIN = "LOGIN";
@@ -146,3 +165,6 @@ export const CheckToken = createAction(CHECK_TOKEN);
 // Logout 
 const LOGOUT = "LOGOUT";
 export const logout = createAction(LOGOUT);
+
+
+

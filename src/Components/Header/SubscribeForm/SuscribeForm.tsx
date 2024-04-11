@@ -1,77 +1,63 @@
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { register } from "../../../store/action/action";
 
-
-import { useState } from "react";
-import { FaRegCircle, FaTimes } from "react-icons/fa";
-import "./LoginForm.scss";
 
 function SubscribeForm() {
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [pseudo, setPseudo] = useState("");
-  const [email, setEmail] = useState("");
-  const [date_of_birth, setdate_of_birth] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    pseudo: "",
+    email: "",
+    date_of_birth: "",
+    password: "",
+  });
 
-  const toggleLoginForm = () => {
-    setShowLoginForm(!showLoginForm);
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (event : any) => {
-    event.preventDefault(); // pour empêcher le rechargement de la page
-
-    // L'URL côté back
-    const url = "http://localhost:3000/api/user";
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          pseudo,
-          email,
-          date_of_birth,
-          password,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorBody = await response.text(); 
-        console.error(`Erreur lors de la requête: ${response.status} - ${errorBody}`);
-        throw new Error(`Erreur: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Réponse du serveur:', data);
-      
-
-    } catch (error) {
-      console.error(`Erreur lors de l'envoi des données:`, error);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(register(formData));
   };
 
   return (
-    <>
-      <div className="logo-container">
-        <button className="acces-button" id="login-btn" onClick={toggleLoginForm}>
-          <FaRegCircle size={32} />
+    <div>
+      <form className="inscription-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Pseudo"
+          name="pseudo"
+          value={formData.pseudo}
+          onChange={handleChange}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <input
+          type="date"
+          placeholder="Date de naissance"
+          name="date_of_birth"
+          value={formData.date_of_birth}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          placeholder="Mot de Passe"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        <button type="submit" className="acces-buttons">
+          S'inscrire
         </button>
-      </div>
-      
-      <div className={`LoginForm ${showLoginForm ? "active" : ""}`}>
-        <button className="close-button" onClick={toggleLoginForm}>
-          <FaTimes size={20} />
-        </button>
-        <form className="inscription-form" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Pseudo" value={pseudo} onChange={(e) => setPseudo(e.target.value)} />
-          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type="date" placeholder="Date de naissance" value={date_of_birth} onChange={(e) => setdate_of_birth(e.target.value)} />
-          <input type="password" placeholder="Mot de Passe" value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button type="submit">S'inscrire</button>
-          
-        </form>
-      </div>
-    </>
+      </form>
+    </div>
   );
 }
 
