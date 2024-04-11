@@ -18,11 +18,22 @@ const Header = () => {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
 
   const toggleLoginForm = () => setIsLoginFormVisible(!isLoginFormVisible);
+
+//pour remonter en cliquant sur le logo
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', 
+    });
+  };
+
   return (
     
       <div className="black-banner">
         
-        <Link to="/"><img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" /></Link>
+        <button onClick={scrollToTop} style={{ all: 'unset' }}>
+          <img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" />
+        </button>
         <SearchBar/>
         <div className="flex flex-col gap-1vh">
         {/* <Group /> */}
