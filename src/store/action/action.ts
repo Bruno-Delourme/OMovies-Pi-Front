@@ -97,18 +97,18 @@ const FETCH_BYGENRE_MOVIES = "FETCH_BYGENRE__MOVIES";
 export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
   FETCH_BYGENRE_MOVIES,
   async () => {
-    const response = await axiosInstance.get("/popularMovies");
+    const response = await axiosInstance.get("/movies/action");
     const movies = response.data as Movie[];
     return movies;
   }
 );
 
 // Movies By actor 
-const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR__MOVIES";
+const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR_MOVIES";
 export const fetchByActorMovies = createAsyncThunk<Movie[]>(
   FETCH_BYACTOR_MOVIES,
   async () => {
-    const response = await axiosInstance.get("/popularMovies");
+    const response = await axiosInstance.get("/moviesByActor/Cillian%20Murphy");
     const movies = response.data as Movie[];
     return movies;
   }
@@ -126,13 +126,13 @@ interface FormData{
   password: string;
 }
 
+
 // USER
 const CHANGE_FIELD = "CHANGE_FIELD";
 export const changeField = createAction<FormField>(CHANGE_FIELD);
 
+
 // Subscribe user 
-
-
 
 const REGISTER = "REGISTER";// Ajout pour l'enregistrement de l'utilisateur
 export const register = createAsyncThunk<
