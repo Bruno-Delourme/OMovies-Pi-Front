@@ -36,9 +36,10 @@ const Header = () => {
           <img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" />
         </button>
         {/* GROUP/> */}
-        <Link to="/group" className="LogoGroupLink">
-        <img src={logoGroup} alt="Groupe" style={{ width: 32, height: 32 }} />
-      </Link>
+        <Link to="/group">
+          <img src={logoGroup} alt="Groupe" className="logo-group" />
+        </Link>
+        
         <SearchBar/>
         <div className="flex flex-col gap-1vh">
         

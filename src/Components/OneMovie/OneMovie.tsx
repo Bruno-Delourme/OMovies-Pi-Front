@@ -3,6 +3,16 @@ import { Movie } from "../../../src/@types/movie";
 import '../../index.css'; 
 
 function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {
+    const [animate, setAnimate] = React.useState(false);
+
+    const toggleAnimation = () => {
+        setAnimate(!animate);
+        console.log("Animation toggled:", animate);
+      };
+    const onAnimationEnd = () => {
+        setAnimate(false);
+    };
+    
     return (
         <div className="group movie-details-container">
             <div className="movie-details">
@@ -20,10 +30,10 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
                     </div>
                 </div>
             </div>
-            <div className="button-movieDetails opacity-0 group-hover:opacity-100 flex justify-around" style={{ transition: 'opacity .3s ease' }}>
-                <button><img src="/thumbs-up.svg" alt="Like" /></button>
-                <button><img src="/circle-plus.svg" alt="Add" /></button>
-                <button><img src="/presentation.svg" alt="Present" /></button>
+            <div className="button-movieDetails opacity-0 group-hover:opacity-100 flex justify-around" style={{ transition: 'opacity .5s ease' }}>
+                <button className={`${animate ? "animate-myAnim" : ""}`} onClick={toggleAnimation}><img src="/thumbs-up.svg" alt="Like" /></button>
+                <button className="circle-animation"><img src="/circle-plus.svg" alt="Add" /></button>
+                <button className="plateform-animation"><img src="/presentation.svg" alt="Present" /></button>
             </div>
         </div>
     );
