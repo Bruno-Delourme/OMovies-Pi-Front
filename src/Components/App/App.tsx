@@ -19,7 +19,7 @@ function App() {
 
 
   return (
-
+    
     /* Elements sent by children will replace the Outlet */
     <Outlet />
   );

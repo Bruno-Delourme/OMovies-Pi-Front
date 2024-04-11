@@ -31,7 +31,7 @@ useEffect(() => {
 }, [dispatch]);
 
 return (
-  <div className="">
+  <div className="newMovies">
     <p className="title-configuration">Nouveautés</p>
     <div className="o">
       {loading ? (

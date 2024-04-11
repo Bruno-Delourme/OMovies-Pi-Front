@@ -18,3 +18,8 @@ export interface Movie {
     total_pages: number;
     total_results: number;
   }
+
+  export interface ActorResponse {
+    title: string;
+    poster_path?: string | undefined;
+  }

@@ -147,6 +147,7 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies"; 
       })
+
       // Movies By actor 
       .addCase(fetchByActorMovies.pending, (state) => {
         state.loading = true;
@@ -154,7 +155,8 @@ interface MoviesState {
       })
       .addCase(fetchByActorMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.moviesByGenre = action.payload; // Update state with fetched new movies
+        state.moviesByActor = action.payload; // Update state with fetched Movies By actor 
+        console.log(action.payload);
       })
       .addCase(fetchByActorMovies.rejected, (state, action) => {
         state.loading = false;
