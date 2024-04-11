@@ -82,6 +82,7 @@ body {
     @apply absolute bottom-0 left-0 w-full flex justify-around opacity-0;
     transition: opacity .3s ease;
     height: 10%; 
+    
   }
   
   .details {
@@ -89,18 +90,39 @@ body {
     background: rgba(0, 0, 0, 0.5);
     top: 60%; /* Ajusté pour ne pas chevaucher avec les boutons */
     height: 50%; /* Hauteur ajustée pour les détails */
-    font-size: smaller
+    font-size: smaller;
+    padding-bottom: 1rem;
   }
   
   .details-background {
     @apply text-white p-4;
   }
+
+  .details-background h2 {
+    font-size: larger;
+    font-weight: bold;
+  margin-bottom: 1rem;  
+  }
+  
+
   .details-background p, .details-background h2 {
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* Limite le texte à 5 lignes */
+    -webkit-line-clamp: 6; /* Limite le texte à 5 lignes */
     -webkit-box-orient: vertical;  
     overflow: hidden;
     text-overflow: ellipsis;
+    
+    
   }
+  .details-background::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
+  }
+  
 }
 

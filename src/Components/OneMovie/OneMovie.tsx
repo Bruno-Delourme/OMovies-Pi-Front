@@ -12,11 +12,11 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
                 <div className="details group-hover:block hidden">
                     <div className="details-background">
                         <h2>{title}</h2>
-                        <p>Release Date: {release_date}</p>
+                        <p><strong>Release Date:</strong> {release_date}</p>
                         <p>{genre_ids}</p>
-                        <p>Cast: {name}</p>
+                        <p><strong>Cast:</strong> {name}</p>
                         <p>{overview}</p>
-                        <p>Vote Average: {vote_average}</p>
+                        <p><strong>Vote Average:</strong> {vote_average}</p>
                     </div>
                 </div>
             </div>
