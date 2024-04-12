@@ -70,7 +70,8 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
 
             {moviesToDisplay?.movies && !loading && (
         <div className="resultKeywordBar-container">
-          {moviesToDisplay.movies.map((movie ) => (
+
+          {moviesToDisplay.movies.map((movie) => (
             <OneMovie
               key={movie.id}
               id={movie.id}
@@ -78,8 +79,7 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
               poster_path={movie.poster_path}
               overview={movie.overview}
               release_date={movie.release_date}
-              vote_average={movie.vote_average}
-            />
+              vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0}            />
           ))}
         </div>
       )}
