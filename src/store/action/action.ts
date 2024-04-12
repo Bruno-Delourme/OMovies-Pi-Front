@@ -119,6 +119,12 @@ const axiosInstance = axios.create({
       }
     );
 
+    // user List movies 
+
+
+
+
+
 
 
 // ACTION USER
@@ -145,6 +151,7 @@ const axiosInstance = axios.create({
     const REGISTER = "REGISTER";// Ajout pour l'enregistrement de l'utilisateur
     export const register = createAsyncThunk<
       {
+        date_of_birth: string;
         email: string;
         datedenaissance: string; pseudo: string; logged: boolean; token: string 
     },
@@ -155,16 +162,19 @@ const axiosInstance = axios.create({
     });
 
 
-    // Login user 
+
+    // Login user
     const LOGIN = "LOGIN";
     export const login = createAsyncThunk<
       { pseudo: string; logged: boolean; token: string},
       FormData
     >(LOGIN, async (formData) => {
       const response = await axiosInstance.post("/login", formData);
-      return response.data;
-      console.log(response);
+      console.log(response.data.data.utilisateur);
+      return response.data.data;
+    
     });
+
 
     // Check token 
     const CHECK_TOKEN = "CHECK_TOKEN";
@@ -173,6 +183,8 @@ const axiosInstance = axios.create({
     // Logout 
     const LOGOUT = "LOGOUT";
     export const logout = createAction(LOGOUT);
+
+
 
 
 

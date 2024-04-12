@@ -4,23 +4,37 @@ import {  changeField, login, CheckToken, logout, register } from '../../store/a
 //import movies ( from @types )
 //import needed actions created
 
+// id: string; // id stored on localStorage as string
+
+
 interface UserState {
   logged: boolean;
   pseudo: string;
-  id: number;
-  password: string;
+  id: number; 
   email: string;
-  datedenaissance: string;
-  token: null | string;
+  password: string;
+  date_of_birth: string;
+  token: string | null;
+  created_at: string; 
+  group_id: number | null; 
+  list: null; 
+  to_review: null; 
+  updated_at: null; 
 }
+
 export const initialState: UserState = {
   logged: false,
   pseudo: "",
-  id:0,
-  password: "",
+  id: 0,
   email: "",
-  datedenaissance: "",
+  password: "",
+  date_of_birth: "",
   token: null,
+  created_at: "",
+  group_id: null,
+  list: null,
+  to_review: null,
+  updated_at: null,
 };
 
 // Function to check if a token exists in local storage and return user information
@@ -59,35 +73,39 @@ const userReducer = createReducer(initialState, (builder) => {
       state.logged = true;
       state.pseudo = action.payload.pseudo;
       state.email = action.payload.email;
-      state.datedenaissance = action.payload.datedenaissance;
+      state.date_of_birth = action.payload.date_of_birth;
       state.token = action.payload.token;
   
       localStorage.setItem("token", action.payload.token); // store pseudo and token on localStorage
       localStorage.setItem("pseudo", action.payload.pseudo);
       localStorage.setItem("email", action.payload.email);
-      localStorage.setItem("datedenaissance", action.payload.datedenaissance);
+      localStorage.setItem("date_of_birth", action.payload.date_of_birth);
     })
     .addCase(register.rejected, () => {
       console.log("Une erreur est survenue lors de l'inscription");
     })
     // login
-    .addCase(login.fulfilled,(state,action)=>{
-      const { logged, pseudo, token } = checkToken();
-      state.logged=true;
-      state.pseudo=action.payload.pseudo;
-      state.pseudo= pseudo;
-      state.token=action.payload.token;
+    .addCase(login.fulfilled, (state, action) => {
       
-      localStorage.setItem("token", action.payload.token); //store pseudo and token in localStorage
-      localStorage.setItem("pseudo", action.payload.pseudo);
-    })
-    .addCase(login.rejected,()=>{
-      console.log("une erreur est survenue lors de la connexion")
+      state.id = action.payload.utilisateur.id; //update id state
+      state.pseudo = action.payload.utilisateur.pseudo;  //update pseudo state
+      state.token  = action.payload.token;  //update token state
+
+      state.logged = true;
+
+
+      localStorage.setItem("pseudo", state.pseudo); //store pseudo and token in localStorage
+      localStorage.setItem("token", state.token); //store token and token in localStorage
+      localStorage.setItem("id", String(state.id)); //store id and token in localStorage
+
+      console.log("ID stocké dans localStorage :", localStorage.getItem("id")); // log user ID to console
+     console.log(action);
     })
     // logout
       .addCase(logout,(state)=>{
         state.logged=false;
-        state.token=null
+        state.token=null;
+        state.id = 0; // Reset state of id to 0 when user sign out
         localStorage.clear()
       })
   });

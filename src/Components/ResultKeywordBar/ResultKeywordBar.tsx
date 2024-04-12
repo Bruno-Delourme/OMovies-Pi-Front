@@ -70,6 +70,7 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
 
             {moviesToDisplay?.movies && !loading && (
         <div className="resultKeywordBar-container">
+
           {moviesToDisplay.movies.map((movie) => (
             <OneMovie
               key={movie.id}
