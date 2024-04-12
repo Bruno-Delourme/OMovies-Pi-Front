@@ -30,7 +30,7 @@ body {
   }
   /* Tailwind CSS des boutons login/groupe etc */
   .acces-buttons {
-    @apply h-10 w-10 bg-white text-black flex items-center justify-center rounded my-1;
+    @apply h-10 w-10 bg-white text-black flex items-center justify-center rounded my-1 m-2;
   }
   /* Tailwind CSS de la search-bar */
   .search-bar {

@@ -147,16 +147,17 @@ export const register = createAsyncThunk<
   return response.data;
 });
 
-// Login user
-const LOGIN = "LOGIN";
-export const login = createAsyncThunk<
-  { pseudo: string; logged: boolean; token: string },
-  FormData
->(LOGIN, async (formData) => {
-  const response = await axiosInstance.post("/login", formData);
-  return response.data;
-  console.log(response);
-});
+
+    // Login user 
+    const LOGIN = "LOGIN";
+    export const login = createAsyncThunk<
+      { pseudo: string; logged: boolean; token: string},
+      FormData
+    >(LOGIN, async (formData) => {
+      const response = await axiosInstance.post("/login", formData);
+      return response.data;
+      console.log(response);
+    });
 
 // Check token
 const CHECK_TOKEN = "CHECK_TOKEN";

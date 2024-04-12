@@ -7,6 +7,7 @@ import {  changeField, login, CheckToken, logout, register } from '../../store/a
 interface UserState {
   logged: boolean;
   pseudo: string;
+  id: number;
   password: string;
   email: string;
   datedenaissance: string;
@@ -15,6 +16,7 @@ interface UserState {
 export const initialState: UserState = {
   logged: false,
   pseudo: "",
+  id:0,
   password: "",
   email: "",
   datedenaissance: "",

@@ -9,16 +9,20 @@ import SubscribeForm from "../SubscribeForm/SuscribeForm";
 function LoginForm() {
   const dispatch = useAppDispatch();
 
+  const id = useAppSelector((state) => state.user.id);
   const pseudo = useAppSelector((state) => state.user.pseudo);
   const password = useAppSelector((state) => state.user.password); 
   const email = useAppSelector((state) => state.user.email);
   const isLogged = useAppSelector((state) => state.user.logged);
+
   console.log(pseudo);
-  
+  console.log(id);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     dispatch(login({ pseudo, password }));
+  
   };
 
   const handleChangeField = (name: "pseudo" | "password") => (value: string) => {
