@@ -108,7 +108,7 @@ body {
 
   .details-background p, .details-background h2 {
     display: -webkit-box;
-    -webkit-line-clamp: 6; /* Limite le texte à 5 lignes */
+    -webkit-line-clamp: 5; /* Limite le texte à 5 lignes */
     -webkit-box-orient: vertical;  
     overflow: hidden;
     text-overflow: ellipsis;

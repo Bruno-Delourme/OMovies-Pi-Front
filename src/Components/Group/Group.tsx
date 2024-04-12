@@ -22,7 +22,7 @@ function Group() {
                 <img src="path/to/your/image.jpg" alt="Description" />
               </div>
               <div className="checkmark-container">
-                <FaCheck size={24} /> {/* Exemple d'ajout d'un icône de checkmark */}
+                <FaCheck size={24} /> 
               </div>
             </div>
           </main>
