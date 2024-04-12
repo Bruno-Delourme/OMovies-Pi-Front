@@ -1,11 +1,11 @@
 import "./Suggestions.scss";
 
 import { fetchSuggestionMovies } from "../../../store/action/action";
-
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { useEffect } from "react";
 import OneMovie from "../../OneMovie/OneMovie";
 import { MoviesResponse } from "../../../@types/movie";
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 function Suggestion() {
 
@@ -27,15 +27,26 @@ useEffect(() => {
     dispatch(fetchSuggestionMovies());
   }, [dispatch]);
 
-
-
   return (
     <div className="suggestionMovies">
-        <h1 className="titleSuggestion">Suggestion : films populaire </h1>
+        <h1 className="title-configuration">Suggestion : films populaire </h1>
+        <div className="relative">
       {loading ? (
         <p>Chargement...</p>
       ) : suggestionMovies.movies ? (
-        <div>
+        <div className="">
+          <div className="scroll-container carousel-item carousel overflow-x-auto">
+          {<button className="p-2 absolute top-1/2 transform -translate-y-1/2 left-0 "
+            onClick={() => {
+              const scrollContainer = document.querySelector('.scroll-container');
+              if (scrollContainer) {
+                scrollContainer.scrollLeft -= 1200;
+              }
+            }}
+            >
+              <ChevronLeftIcon className="h-96 w-12 bg-gray-100 bg-opacity-10 hover:bg-gray-300 hover:bg-opacity-20 rounded-full"/>
+            </button>}
+            <span className="flex gap-8 m-8 rounded-full">
           {suggestionMovies.movies.map((movie) => (
             <OneMovie
               key={movie.id}
@@ -47,16 +58,30 @@ useEffect(() => {
               vote_average={movie.vote_average}
             />
           ))}
+          </span>
+          <button className="p-2 absolute top-1/2 transform -translate-y-1/2 right-0"
+            onClick={() => {
+              const scrollContainerSuggestion = document.querySelector('.scroll-container');
+              if (scrollContainerSuggestion) {
+                scrollContainerSuggestion.scrollLeft += 1200;
+              }
+            }}
+            >
+              <ChevronRightIcon className="h-96 w-12 bg-gray-100 bg-opacity-10 hover:bg-gray-300 hover:bg-opacity-20 rounded-full"/>
+            </button>
+          </div>
         </div>
       ) : (
         <p>Aucun film trouvé</p>
       )}
+      </div>
     </div>
-  );
-  
+  ); 
 }
 
 export default Suggestion;
+
+ 
 
 
 

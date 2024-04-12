@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { useEffect, useRef } from "react";
 import OneMovie from "../../OneMovie/OneMovie";
 import { MoviesResponse } from "../../../@types/movie";
-
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 function NewMovies() {
@@ -38,17 +37,17 @@ return (
       ) : newMovies.movies ? (
         <div className="">
           <div className="scroll-container carousel-item carousel overflow-x-auto">
-            {<button className="scroll-left-configuration"
+            {<button className="p-2 absolute top-1/2 transform -translate-y-1/2 left-0 "
             onClick={() => {
-              const scrollContainer = document.querySelector('.scroll-container');
-              if (scrollContainer) {
-                scrollContainer.scrollLeft -= 1200;
+              const scrollContainerNouveaute = document.querySelector('.scroll-container');
+              if (scrollContainerNouveaute) {
+                scrollContainerNouveaute.scrollLeft -= 1200;
               }
             }}
             >
               <ChevronLeftIcon className="chevron-design"/>
             </button>}
-            <span className="movie-picture-container">
+            <span className="flex gap-8 m-8 rounded-full">
             {newMovies.movies.map((movie) => (
               <OneMovie
                 poster_path={movie.poster_path}
@@ -61,7 +60,7 @@ return (
               />   
             ))}
             </span>
-            <button className="scroll-right-configuration"
+            <button className="p-2 absolute top-1/2 transform -translate-y-1/2 right-0"
             onClick={() => {
               const scrollContainer = document.querySelector('.scroll-container');
               if (scrollContainer) {

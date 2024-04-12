@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import OneMovie from "../../OneMovie/OneMovie";
 import { MoviesResponse } from "../../../@types/movie";
 
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+
 function ByGenre() {
   const dispatch = useAppDispatch();
 
@@ -43,7 +45,10 @@ function ByGenre() {
       )}
     </div>
   );
-  
 }
 
 export default ByGenre;
+
+ 
+
+    

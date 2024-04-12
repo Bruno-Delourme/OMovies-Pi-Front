@@ -76,21 +76,21 @@ body {
     @apply carousel-item carousel overflow-x-auto
   } */
   /* Button scroll carousel left*/
-  .scroll-left-configuration {
+  /* .scroll-left-configuration {
     @apply p-2 absolute top-1/2 transform -translate-y-1/2 left-0 
-  }
+  } */
   /* Button scroll carousel right*/
-  .scroll-right-configuration {
+  /* .scroll-right-configuration {
     @apply p-2 absolute top-1/2 transform -translate-y-1/2 right-0
-  }
+  } */
   /* Chevron left and right SCSS */
   .chevron-design {
     @apply h-96 w-12 bg-gray-100 bg-opacity-10 hover:bg-gray-300 hover:bg-opacity-20 rounded-full
   }
   /* Movie picture container */
-  .movie-picture-container {
+  /* .movie-picture-container {
     @apply flex gap-8 m-8 rounded-full 
-  }
+  } */
 
 
 }
