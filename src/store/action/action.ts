@@ -158,7 +158,7 @@ const axiosInstance = axios.create({
     // Login user 
     const LOGIN = "LOGIN";
     export const login = createAsyncThunk<
-      { pseudo: string; logged: boolean; token: string },
+      { pseudo: string; logged: boolean; token: string},
       FormData
     >(LOGIN, async (formData) => {
       const response = await axiosInstance.post("/login", formData);

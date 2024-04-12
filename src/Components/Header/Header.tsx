@@ -11,6 +11,7 @@ import { GrUserNew } from "react-icons/gr";
 
 import "./Header.scss";
 import { Link } from "react-router-dom";
+import { useAppSelector } from '../../hooks/redux';
  
 const LogoPandaRoux = "../../../src/assets/pandaRoux2.png"
 
@@ -18,6 +19,10 @@ const Header = () => {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
 
   const toggleLoginForm = () => setIsLoginFormVisible(!isLoginFormVisible);
+
+  const userId = useAppSelector((state) => state.user.id);
+  //console.log(userId);
+  
   return (
     
       <div className="black-banner">
@@ -25,14 +30,22 @@ const Header = () => {
         <Link to="/"><img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" /></Link>
         <SearchBar/>
         <div className="flex flex-col gap-1vh">
-        {/* <Group /> */}
-        <button className="acces-buttons" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
-        {/* LoginForm/> */}
-        <button className="acces-buttons" onClick={toggleLoginForm}>
-        <FaRegCircle size={32} /> {/* Adjust size as needed */}
-      </button>
-      {isLoginFormVisible && <LoginForm />}
-        
+          {/* <Group /> */}
+          <Link to={`/list/${userId}`}>
+            <button className="acces-buttons" id="group-btn" onClick={Group}><FaPeopleGroup size={32}/></button>
+          </Link>
+          {/* <List /> */}
+          <Link to={`/list/${userId}`}>
+            <button className="acces-buttons" id="list-btn">
+            btn list
+            </button>
+          </Link>
+          {/* LoginForm/> */}
+          <button className="acces-buttons" onClick={toggleLoginForm}>
+            <FaRegCircle size={32} /> {/* Adjust size as needed */}Login
+          </button>
+        {isLoginFormVisible && <LoginForm />}
+          
         
         </div>
       </div>
