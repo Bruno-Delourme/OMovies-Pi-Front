@@ -13,7 +13,8 @@ function SearchBar() {
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [showMoviesByActor, setShowMoviesByActor] = useState<boolean>(false);
-  const [showMoviesByKeyword, setShowMoviesByKeyword] = useState<boolean>(false);
+  const [showMoviesByKeyword, setShowMoviesByKeyword] =
+    useState<boolean>(false);
   const [moviesByActor, setMoviesByActor] = useState<Movie[]>([]);
   const [moviesByKeyword, setMoviesByKeyword] = useState<Movie[]>([]);
 
@@ -26,10 +27,14 @@ function SearchBar() {
 
         // Vérifiez si data.moviesByTitle existe avant de faire le mapping
         if (data.moviesByTitle) {
-          const moviesWithPosterPath = data.moviesByTitle.map((movie: Movie) => ({
-            ...movie,
-            poster_path: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : clapperboard,
-          }));
+          const moviesWithPosterPath = data.moviesByTitle.map(
+            (movie: Movie) => ({
+              ...movie,
+              poster_path: movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : clapperboard,
+            })
+          );
 
           setSuggestions(moviesWithPosterPath.slice(0, 5));
         } else {
@@ -38,10 +43,14 @@ function SearchBar() {
 
         // Traitement et mise à jour de moviesByActor
         if (data.moviesByActor) {
-          const actorMoviesWithPoster = extractMovies(data.moviesByActor).map((movie: Movie) => ({
-            ...movie,
-            poster_path: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : clapperboard,
-          }));
+          const actorMoviesWithPoster = extractMovies(data.moviesByActor).map(
+            (movie: Movie) => ({
+              ...movie,
+              poster_path: movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : clapperboard,
+            })
+          );
           setMoviesByActor(actorMoviesWithPoster.slice(0, 5));
         } else {
           setMoviesByActor([]);
@@ -49,9 +58,13 @@ function SearchBar() {
 
         // Traitement et mise à jour de par mot-clés
         if (data.moviesByKeyword) {
-          const keywordMoviesWithPoster = extractMovies(data.moviesByKeyword).map((movie: Movie) => ({
+          const keywordMoviesWithPoster = extractMovies(
+            data.moviesByKeyword
+          ).map((movie: Movie) => ({
             ...movie,
-            poster_path: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : clapperboard,
+            poster_path: movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : clapperboard,
           }));
           setMoviesByKeyword(keywordMoviesWithPoster.slice(0, 5));
         } else {
@@ -73,14 +86,20 @@ function SearchBar() {
   }, [query]);
 
   const extractMovies = (moviesArray: any[]) => {
-    return Array.isArray(moviesArray) ? moviesArray.flatMap(category =>
-      Array.isArray(category) ? Object.values(category).flat() : []
-    ) : [];
+    return Array.isArray(moviesArray)
+      ? moviesArray.flatMap((category) =>
+          Array.isArray(category) ? Object.values(category).flat() : []
+        )
+      : [];
   };
 
   return (
     <>
-      <div className={`flex items-center relative w-2/4 ${showSuggestions ? "active" : ""}`}>
+      <div
+        className={`flex items-center relative w-2/4 ${
+          showSuggestions ? "active" : ""
+        }`}
+      >
         <input
           className="search-bar"
           type="text"
@@ -98,31 +117,61 @@ function SearchBar() {
           {suggestions.map((movie, index) => (
             <li key={index} className="film-choice">
               <div className="flex items-center">
-                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
+                <img
+                  src={movie.poster_path}
+                  alt={movie.title}
+                  className="w-16 h-auto mr-2"
+                />
                 <span className="text-black ">{movie.title}</span>
               </div>
             </li>
           ))}
           {/* Option pour afficher les films suggérés par acteur */}
-          <li className="clickable text-black cursor-pointer" onClick={() => setShowMoviesByActor(!showMoviesByActor)}>Movies By Actor</li>
-          {showMoviesByActor && moviesByActor.map((movie, index) => (
-            <li key={index} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              <div className="flex items-center">
-                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
-                <span className="text-black">{movie.title}</span>
-              </div>
-            </li>
-          ))}
+          <li
+            className="clickable text-black cursor-pointer"
+            onClick={() => setShowMoviesByActor(!showMoviesByActor)}
+          >
+            Movies By Actor
+          </li>
+          {showMoviesByActor &&
+            moviesByActor.map((movie, index) => (
+              <li
+                key={index}
+                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                <div className="flex items-center">
+                  <img
+                    src={movie.poster_path}
+                    alt={movie.title}
+                    className="w-16 h-auto mr-2"
+                  />
+                  <span className="text-black">{movie.title}</span>
+                </div>
+              </li>
+            ))}
           {/* Option pour afficher les films suggérés par mot-clé */}
-          <li className="clickable text-black cursor-pointer" onClick={() => setShowMoviesByKeyword(!showMoviesByKeyword)}>Movies By Keyword</li>
-          {showMoviesByKeyword && moviesByKeyword.map((movie, index) => (
-            <li key={index} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              <div className="flex items-center">
-                <img src={movie.poster_path} alt={movie.title} className="w-16 h-auto mr-2"/>
-                <span className="text-black">{movie.title}</span>
-              </div>
-            </li>
-          ))}
+          <li
+            className="clickable text-black cursor-pointer"
+            onClick={() => setShowMoviesByKeyword(!showMoviesByKeyword)}
+          >
+            Movies By Keyword
+          </li>
+          {showMoviesByKeyword &&
+            moviesByKeyword.map((movie, index) => (
+              <li
+                key={index}
+                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                <div className="flex items-center">
+                  <img
+                    src={movie.poster_path}
+                    alt={movie.title}
+                    className="w-16 h-auto mr-2"
+                  />
+                  <span className="text-black">{movie.title}</span>
+                </div>
+              </li>
+            ))}
         </ul>
       </div>
     </>

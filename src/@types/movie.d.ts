@@ -1,7 +1,7 @@
 export interface Movie {
     vote_average: number;
     id: number;
-    genre_ids: number;
+    
     adult: boolean;
     title: string;
     original_title: string;
@@ -10,6 +10,11 @@ export interface Movie {
     release_date: string;
     original_language: string;
     key: number;
+    //casting
+    cast_id:              number;
+    character:            string;
+    name:                 string;
+    genre_ids: number;
   }
   
   export interface MoviesResponse {

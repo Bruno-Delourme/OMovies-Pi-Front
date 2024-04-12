@@ -18,6 +18,7 @@ interface MoviesState {
     moviesByActor: Movie[],
     loading: boolean;
     error: string | null;
+    
   }
   
   export const initialState: MoviesState = {
@@ -32,6 +33,7 @@ interface MoviesState {
     moviesByActor: [],
     loading: false,
     error: null,
+    
   };
   
   const moviesReducer = createReducer(initialState, (builder) => {
@@ -165,8 +167,10 @@ interface MoviesState {
 
       .addCase(setRomanceMovies, (state, action) => {
         state.romanceMovies = action.payload; // Update state for other movie categories 
-      });
-  });
+      })
+
+      
+    }); 
   
   export default moviesReducer;
 

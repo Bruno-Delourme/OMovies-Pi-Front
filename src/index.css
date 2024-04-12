@@ -1,7 +1,7 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 body {
   font-family: "Kodchasan", sans-serif;
@@ -42,11 +42,11 @@ body {
   }
   /* Tailwind CSS de la liste déroulante des suggestions */
   .suggestions-list {
-    @apply absolute top-full left-0 w-full bg-white border border-gray-300 rounded-b shadow-md ;
+    @apply absolute top-full left-0 w-full bg-white border border-gray-300 rounded-b shadow-md;
     z-index: 10;
   }
   .film-choice {
-    @apply flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer duration-300 transform hover:scale-105
+    @apply flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer duration-300 transform hover:scale-105;
   }
   /* Tailwind CSS du KEYWORDBAR + des boutons individuellement*/
   .keywordbar {
@@ -54,13 +54,15 @@ body {
     z-index: 9;
   }
   .genre-btn {
-  @apply rounded-lg shadow-md font-bold whitespace-nowrap mb-2 sm:mb-0 sm:mr-2 duration-300 transform hover:scale-110;
-  @apply px-8 py-2;
-  @apply min-w-[33vh] min-h-[6vh]; 
+    @apply rounded-lg shadow-md font-bold whitespace-nowrap mb-2 sm:mb-0 sm:mr-2 duration-300 transform hover:scale-110;
+    @apply px-8 py-2;
+    @apply min-w-[33vh] min-h-[6vh];
   }
+
+
   /* Tailwind CSS du RESULTKEYWORDBAR */
   .resultKeywordBar-container {
-    @apply flex flex-wrap justify-center grid-cols-5 gap-4
+    @apply flex flex-wrap justify-center grid-cols-5 gap-4;
   }
   /* .vignette-movie {
     @apply pb-5 rounded-md transition-transform duration-300 transform hover:scale-105
@@ -92,6 +94,4 @@ body {
     @apply flex gap-8 m-8 rounded-full 
   } */
 
-
 }
-
