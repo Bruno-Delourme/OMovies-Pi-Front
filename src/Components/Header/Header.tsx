@@ -40,7 +40,7 @@ const Header = () => {
             </Link>
 
             <Link to={`/list/${userId}`}>
-              <button className="acces-buttons" id="list-btn">
+              <button className="acces-buttons" id="list-btn" >
                 btn list
               </button>
             </Link>
