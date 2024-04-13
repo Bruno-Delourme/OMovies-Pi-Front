@@ -59,7 +59,7 @@ const Header = () => {
           </>
         )}
 
-        <button className="acces-buttons" onClick={toggleLoginForm}>
+        <button id="login-button" className="acces-buttons" onClick={toggleLoginForm}>
           <FaRegCircle size={32} /> {/* Adjust size as needed */}
         </button>
         {isLoginFormVisible && <LoginForm />}

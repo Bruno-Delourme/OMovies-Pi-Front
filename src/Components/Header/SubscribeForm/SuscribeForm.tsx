@@ -11,6 +11,9 @@ function SubscribeForm() {
     password: "",
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [prevModalId, setPrevModalId] = useState(null);
+
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -20,43 +23,98 @@ function SubscribeForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(register(formData));
+    setIsModalOpen(false);
+  };
+
+  const handleOpenModal = (modalId) => {
+    if (prevModalId) {
+      document.getElementById(prevModalId).close();
+    }
+    setIsModalOpen(true);
+    setPrevModalId(modalId);
+  };
+
+  const handleInputClick = (e) => {
+    // Stop propagation of click event to prevent modal closing
+    e.stopPropagation();
+  };
+
+  const handleCloseModal = (e) => {
+    setIsModalOpen(false);
+    e.stopPropagation();
   };
 
   return (
-    <div>
-      <form className="inscription-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Pseudo"
-          name="pseudo"
-          value={formData.pseudo}
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <input
-          type="date"
-          placeholder="Date de naissance"
-          name="date_of_birth"
-          value={formData.date_of_birth}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Mot de Passe"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <button type="submit" className="acces-buttons">
-          S'inscrire
-        </button>
-      </form>
+    <div className="">
+      <button
+        className="btn"
+        onClick={() => handleOpenModal("modal_inscription")}
+      >
+        Inscription
+      </button>
+      {isModalOpen && (
+        <dialog
+          id="modal_inscription"
+          className="fixed inset-0 flex items-center justify-center"
+          open
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div className="bg-white p-5 rounded-lg" onClick={handleInputClick}>
+            <div className="flex justify-end">
+              <button
+                className="close-btn"
+                onClick={handleCloseModal}
+              >
+                X
+              </button>
+            </div>
+            <form className="inline-flex" onSubmit={handleSubmit}>
+              <input
+                className="input-field mr-4"
+                type="text"
+                placeholder="Pseudo"
+                name="pseudo"
+                value={formData.pseudo}
+                onChange={handleChange}
+                onClick={handleInputClick}
+              />
+              <input
+                className="input-field mr-4"
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                onClick={handleInputClick}
+              />
+              <input
+                className="mr-4"
+                type="date"
+                placeholder="Date de naissance"
+                name="date_of_birth"
+                value={formData.date_of_birth}
+                onChange={handleChange}
+                onClick={handleInputClick}
+              />
+              <input
+                className="input-field mr-4"
+                type="password"
+                placeholder="Mot de Passe"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                onClick={handleInputClick}
+              />
+              <button
+                type="submit"
+                className="flex items-center justify-center pl-4 pr-4 rounded-lg border"
+              >
+                S'inscrire
+              </button>
+            </form>
+          </div>
+        </dialog>
+      )}
     </div>
   );
 }

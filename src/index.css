@@ -94,4 +94,12 @@ body {
     @apply flex gap-8 m-8 rounded-full 
   } */
 
+  /* Formulaire connexion */
+
+
+  /* Formulaire inscription */
+
+  .input-filed {
+    @apply border-gray-300 px-4 py-2 focus:outline-none focus:border-black
+  }
 }
