@@ -20,6 +20,7 @@ interface UserState {
   list: null; 
   to_review: null; 
   updated_at: null; 
+  message: string; 
 }
 
 export const initialState: UserState = {
@@ -35,6 +36,7 @@ export const initialState: UserState = {
   list: null,
   to_review: null,
   updated_at: null,
+  message: "",
 };
 
 // Function to check if a token exists in local storage and return user information
@@ -70,29 +72,30 @@ const userReducer = createReducer(initialState, (builder) => {
     })
     // register
     .addCase(register.fulfilled, (state, action) => {
-      state.logged = true;
+      //state.logged = true;
       state.pseudo = action.payload.pseudo;
       state.email = action.payload.email;
+      state.password = action.payload.password;
       state.date_of_birth = action.payload.date_of_birth;
       state.token = action.payload.token;
   
-      localStorage.setItem("token", action.payload.token); // store pseudo and token on localStorage
-      localStorage.setItem("pseudo", action.payload.pseudo);
-      localStorage.setItem("email", action.payload.email);
-      localStorage.setItem("date_of_birth", action.payload.date_of_birth);
+      state.message = "Compte ajouté avec succès ! Veuillez vous connecter.";
+      
+      localStorage.setItem("token", state.token); // store pseudo and token on localStorage
+      localStorage.setItem("pseudo", state.pseudo);
+      localStorage.setItem("email", state.email);
+      localStorage.setItem("password", state.password);
+      localStorage.setItem("date_of_birth", state.date_of_birth);
     })
     .addCase(register.rejected, () => {
       console.log("Une erreur est survenue lors de l'inscription");
     })
     // login
     .addCase(login.fulfilled, (state, action) => {
-      
+      state.logged = true;
       state.id = action.payload.utilisateur.id; //update id state
       state.pseudo = action.payload.utilisateur.pseudo;  //update pseudo state
       state.token  = action.payload.token;  //update token state
-
-      state.logged = true;
-
 
       localStorage.setItem("pseudo", state.pseudo); //store pseudo and token in localStorage
       localStorage.setItem("token", state.token); //store token and token in localStorage
@@ -108,6 +111,8 @@ const userReducer = createReducer(initialState, (builder) => {
         state.id = 0; // Reset state of id to 0 when user sign out
         localStorage.clear()
       })
+    // user List movies 
+
   });
 
 export default userReducer;

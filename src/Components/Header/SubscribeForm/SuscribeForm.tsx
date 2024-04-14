@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { Dispatch, useState } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../../store/action/action";
 
+import { RootState } from "../../../store";
+import { ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
+
+import { AnyAction, Action } from 'redux';
+import { useAppSelector } from "../../../hooks/redux";
 
 function SubscribeForm() {
   const [formData, setFormData] = useState({
@@ -11,19 +16,27 @@ function SubscribeForm() {
     password: "",
   });
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
+  type AppThunkAction = ThunkAction<void, RootState, unknown, Action<string>>;
+  type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+  
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const message = useAppSelector((state: RootState) => state.user.message); // access to message using redux state
 
-  const handleSubmit = (e) => {
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const target = e.target as HTMLInputElement;
+  setFormData({ ...formData, [target.name]: target.value });
+};
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(register(formData));
   };
 
   return (
     <div>
+      {message && <p>{message}</p>} 
       <form className="inscription-form" onSubmit={handleSubmit}>
         <input
           type="text"

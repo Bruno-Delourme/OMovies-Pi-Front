@@ -7,44 +7,42 @@ import SubscribeForm from "../../Header/SubscribeForm/SuscribeForm";
 import Group from "../../Group/Group";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { GrUserNew } from "react-icons/gr";
-import "./HeaderList.scss";
+import "./HeaderProfil.scss";
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../../../hooks/redux';
 
 const LogoPandaRoux = "../../../src/assets/pandaRoux2.png";
 
-const HeaderList = () => {
+const HeaderProfil = () => {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const toggleLoginForm = () => setIsLoginFormVisible(!isLoginFormVisible);
 
   const userId = useAppSelector((state) => state.user.id);
   console.log(userId);
 
+
+  
   return (
         <div className="black-banner">
         <Link to="/"><img src={LogoPandaRoux} className="LogoPandaRoux" alt="Logo" /></Link>
-        <h1>Ma liste de film</h1>
+        <h1>Mon profil</h1>
         <SearchBar />
 
         <div className="flex flex-col gap-1vh">
             {userId !== 0 && (
             <>
-            <Link to={`/group/${userId}`}>
-              <button className="acces-buttons" id="group-btn" onClick={Group}>
-                <FaPeopleGroup size={32} />
-              </button>
-            </Link>
+                <Link to={`/group/${userId}`}>
+                <button className="acces-buttons" id="group-btn" onClick={Group}>
+                    <FaPeopleGroup size={32} />
+                </button>
+                </Link>
 
                 <Link to={`/list/${userId}`}>
                 <button className="acces-buttons" id="list-btn">
                     btn list
                 </button>
                 </Link>
-                <Link to={`/profil/${userId}`}>
-                <button className="acces-buttons" id="list-btn">
-                    Mon Profil
-                </button>
-                </Link>
+
                 <div>
   
                 </div>
@@ -60,6 +58,11 @@ const HeaderList = () => {
                 <button className="acces-buttons-disabled" id="list-btn-disabled">
                     btn list
                 </button>
+                <Link to={`/profil/${userId}`}>
+                <button className="acces-buttons" id="list-btn">
+                    Mon Profil
+                </button>
+                </Link>
             </>
             )}
 
@@ -73,5 +76,5 @@ const HeaderList = () => {
   );
 };
 
-export default HeaderList;
+export default HeaderProfil;
 

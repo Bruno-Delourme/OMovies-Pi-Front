@@ -165,7 +165,6 @@ interface MoviesState {
         state.error = action.error.message || "Failed to fetch movies"; 
       })
 
-      // user List movies 
 
       
       .addCase(setRomanceMovies, (state, action) => {

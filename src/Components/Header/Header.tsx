@@ -33,7 +33,7 @@ const Header = () => {
       <div className="flex flex-col gap-1vh">
         {userId !== 0 && (
           <>
-            <Link to={`/list/${userId}`}>
+            <Link to={`/group/${userId}`}>
               <button className="acces-buttons" id="group-btn" onClick={Group}>
                 <FaPeopleGroup size={32} />
               </button>

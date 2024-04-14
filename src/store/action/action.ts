@@ -119,12 +119,6 @@ const axiosInstance = axios.create({
       }
     );
 
-    // user List movies 
-
-
-
-
-
 
 
 // ACTION USER
@@ -136,8 +130,6 @@ const axiosInstance = axios.create({
     }
     interface FormData{
       pseudo: string;
-      email: string;
-      date_of_birth: string;
       password: string;
     }
 
@@ -145,31 +137,35 @@ const axiosInstance = axios.create({
     const CHANGE_FIELD = "CHANGE_FIELD";
     export const changeField = createAction<FormField>(CHANGE_FIELD);
 
+    // Check token 
+    const CHECK_TOKEN = "CHECK_TOKEN";
+    export const CheckToken = createAction(CHECK_TOKEN);
 
     // Subscribe user 
-
-const REGISTER = "REGISTER"; // Ajout pour l'enregistrement de l'utilisateur
-export const register = createAsyncThunk<
-  {
+    const REGISTER = "REGISTER"; // Ajout pour l'enregistrement de l'utilisateur
+    export const register = createAsyncThunk<
+      {
         date_of_birth: string;
-    email: string;
-    datedenaissance: string;
-    pseudo: string;
-    logged: boolean;
-    token: string;
-  },
-  FormData
->(REGISTER, async (FormData) => {
-  const response = await axiosInstance.post("/user", FormData);
-  return response.data;
-});
+        email: string;
+        pseudo: string;
+        password:string;
+        logged: boolean;
+        token: string;
+      },
+      FormData
+    >(REGISTER, async (FormData) => {
+      const response = await axiosInstance.post("/user", FormData);
+      return response.data;
+    });
 
 
 
     // Login user
     const LOGIN = "LOGIN";
     export const login = createAsyncThunk<
-      { pseudo: string; logged: boolean; token: string},
+      {
+        utilisateur: any; pseudo: string; logged: boolean; token: string
+},
       FormData
     >(LOGIN, async (formData) => {
       const response = await axiosInstance.post("/login", formData);
@@ -178,16 +174,9 @@ export const register = createAsyncThunk<
     
     });
 
-
-    // Check token 
-    const CHECK_TOKEN = "CHECK_TOKEN";
-    export const CheckToken = createAction(CHECK_TOKEN);
-
     // Logout 
     const LOGOUT = "LOGOUT";
     export const logout = createAction(LOGOUT);
-
-
 
 
 

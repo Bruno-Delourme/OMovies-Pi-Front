@@ -4,6 +4,7 @@ import './LoginForm.scss';
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { changeField, login, logout } from "../../../store/action/action";
 import SubscribeForm from "../SubscribeForm/SuscribeForm";
+import { Link } from "react-router-dom";
 
 
 function LoginForm() {
@@ -11,8 +12,8 @@ function LoginForm() {
 
   //const id = useAppSelector((state) => state.user.id);
   
-  const pseudo = useAppSelector((state) => state.user.pseudo);
-  const password = useAppSelector((state) => state.user.password); 
+  const pseudo = useAppSelector((state) => state.user.pseudo || '');
+  const password = useAppSelector((state) => state.user.password || ''); 
   const email = useAppSelector((state) => state.user.email);
   const isLogged = useAppSelector((state) => state.user.logged);
 
@@ -24,7 +25,6 @@ function LoginForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     dispatch(login({ pseudo, password }));
   
   };
@@ -52,6 +52,11 @@ function LoginForm() {
                 >
                   Déconnexion
                 </button>
+                <Link to={`/profil/${userId}`}>
+                <button className="acces-buttons" id="list-btn">
+                    Mon Profil
+                </button>
+                </Link>
               </div>
             )}
 

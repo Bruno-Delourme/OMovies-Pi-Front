@@ -11,19 +11,11 @@ function Group() {
 
     return (
         <div className="group-page">
-          {/* Utilisation de l'image au lieu de l'icône FaPeopleGroup */}
-          <button className="acces-buttons" id="group-btn" onClick={handleClick}>
-            <img src={logoGroup} alt="Group Icon" style={{ width: 32, height: 32 }}/>
-          </button>
+
           <HeaderGroup />
           <main className="content-grid">
             <div className="grid-item">
-              <div className="image-container">
-                <img src="path/to/your/image.jpg" alt="Description" />
-              </div>
-              <div className="checkmark-container">
-                <FaCheck size={24} /> 
-              </div>
+
             </div>
           </main>
         </div>
