@@ -20,7 +20,7 @@ function SubscribeForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     dispatch(register(formData));
     setIsModalOpen(false);
@@ -34,12 +34,12 @@ function SubscribeForm() {
     setPrevModalId(modalId);
   };
 
-  const handleInputClick = (e) => {
+  const handleInputClick = (e: { stopPropagation: () => void; }) => {
     // Stop propagation of click event to prevent modal closing
     e.stopPropagation();
   };
 
-  const handleCloseModal = (e) => {
+  const handleCloseModal = (e: { stopPropagation: () => void; }) => {
     setIsModalOpen(false);
     e.stopPropagation();
   };

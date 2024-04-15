@@ -66,6 +66,7 @@ function LoginForm() {
         <div className="">
                              
               <dialog className="flex flex-col items-center p-5 rounded-lg">
+                
                 <form className="inline-flex pb-6"
                   onSubmit={handleSubmit}
                   autoComplete="off">
