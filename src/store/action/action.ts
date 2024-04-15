@@ -147,7 +147,7 @@ const axiosInstance = axios.create({
     const REGISTER = "REGISTER"; // Ajout pour l'enregistrement de l'utilisateur
     export const register = createAsyncThunk<
       {
-        date_of_birth: string;
+        birthday: string;
         email: string;
         pseudo: string;
         password:string;
@@ -156,7 +156,7 @@ const axiosInstance = axios.create({
       },
       FormData
     >(REGISTER, async (FormData) => {
-      const response = await axiosInstance.post("/user", FormData);
+      const response = await axiosInstance.post("/createUser", FormData);
       return response.data;
     });
 
@@ -204,7 +204,7 @@ const axiosInstance = axios.create({
     async (formData: FormData, thunkAPI) => {
     const state = thunkAPI.getState() as RootState; // RootState's interface of 2 properties user and movie witch a state genered by  userReducer and movieReducer 
     const id = state.user.id;
-    const response = await axiosInstance.put(`/user/${id}`, formData); // use Put of axios to sent request http to url `/user/${id}`, Data of Form sent to request as FormData
+    const response = await axiosInstance.put(`/updateUser/${id}`, formData); // use Put of axios to sent request http to url `/user/${id}`, Data of Form sent to request as FormData
     const user = response.data as UserState; // convert and return response as instance of interface UserState
     return user;
     }

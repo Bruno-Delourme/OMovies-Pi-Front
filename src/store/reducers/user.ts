@@ -13,11 +13,11 @@ interface UserState {
   id: number; 
   email: string;
   password: string;
-  date_of_birth: string;
+  birthday: string;
   token: string | null;
   created_at: string; 
   group_id: number | null; 
-  list: number | null; 
+  // list: number | null; 
   to_review: null; 
   updated_at: string; 
   message: string; 
@@ -29,11 +29,11 @@ export const initialState: UserState = {
   id: 0,
   email: "",
   password: "",
-  date_of_birth: "",
+  birthday: "",
   token: null,
   created_at: "",
   group_id: null,
-  list: null,
+  // list: null,
   to_review: null,
   updated_at: "",
   message: "",
@@ -76,7 +76,7 @@ const userReducer = createReducer(initialState, (builder) => {
       state.pseudo = action.payload.pseudo;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      state.date_of_birth = action.payload.date_of_birth;
+      state.birthday = action.payload.birthday;
       state.token = action.payload.token;
   
       state.message = "Compte ajouté avec succès ! Veuillez vous connecter.";
@@ -85,7 +85,7 @@ const userReducer = createReducer(initialState, (builder) => {
       localStorage.setItem("pseudo", state.pseudo);
       localStorage.setItem("email", state.email);
       localStorage.setItem("password", state.password);
-      localStorage.setItem("date_of_birth", state.date_of_birth);
+      localStorage.setItem("birthday", state.birthday);
     })
     .addCase(register.rejected, () => {
       console.log("Une erreur est survenue lors de l'inscription");
@@ -118,15 +118,15 @@ const userReducer = createReducer(initialState, (builder) => {
       state.pseudo = action.payload.pseudo;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      state.date_of_birth = action.payload.date_of_birth;
-      state.list = action.payload.list;
+      state.birthday = action.payload.birthday;
+      // state.list = action.payload.list;
     })
     // Update user 
     .addCase(updateUser.fulfilled, (state, action) => {
       state.pseudo = action.payload.pseudo;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      state.date_of_birth = action.payload.date_of_birth;
+      state.birthday = action.payload.birthday;
       state.updated_at = action.payload.updated_at;
     })
     

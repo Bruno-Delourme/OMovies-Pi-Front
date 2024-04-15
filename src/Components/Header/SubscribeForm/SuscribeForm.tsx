@@ -12,7 +12,7 @@ function SubscribeForm() {
   const [formData, setFormData] = useState({
     pseudo: "",
     email: "",
-    date_of_birth: "",
+    birthday: "",
     password: "",
   });
 
@@ -55,8 +55,8 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         <input
           type="date"
           placeholder="Date de naissance"
-          name="date_of_birth"
-          value={formData.date_of_birth}
+          name="birthday"
+          value={formData.birthday}
           onChange={handleChange}
         />
         <input
