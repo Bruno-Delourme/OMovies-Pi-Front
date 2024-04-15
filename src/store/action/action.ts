@@ -1,6 +1,8 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Movie } from "../../@types/movie";
+import { RootState } from "../../@types/RooteState";
+import { UserFormData, UserState } from "../../@types/user";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -180,3 +182,30 @@ const axiosInstance = axios.create({
 
 
 
+    // Get user by ID
+    const FETCH_USER_BY_ID = "FETCH_USER_BY_ID";
+    export const fetchUserById = createAsyncThunk<UserState, number>(
+    FETCH_USER_BY_ID,
+    async (id: number) => {
+    const response = await axiosInstance.get(`/user/${id}`); // use Get of axios to sent request http to url `/user/${id}` 
+    const user = response.data as UserState; // convert and return response as instance of interface UserState
+    return user;
+    }
+    );
+
+    // Update user
+
+    const UPDATE_USER = "UPDATE_USER";
+    // Create async function using createAsyncThunk of Redux Toolkit. 
+    // The first generic type parameter specifies the data type that the action will return ( UserState), 
+    // the second generic type parameter specifies the type of the action's argument ( FormData).
+    export const updateUser = createAsyncThunk<UserState, UserFormData>(
+    UPDATE_USER,
+    async (formData: FormData, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState; // RootState's interface of 2 properties user and movie witch a state genered by  userReducer and movieReducer 
+    const id = state.user.id;
+    const response = await axiosInstance.put(`/user/${id}`, formData); // use Put of axios to sent request http to url `/user/${id}`, Data of Form sent to request as FormData
+    const user = response.data as UserState; // convert and return response as instance of interface UserState
+    return user;
+    }
+    );

@@ -1,6 +1,6 @@
 
 import { createReducer } from "@reduxjs/toolkit";
-import {  changeField, login, CheckToken, logout, register } from '../../store/action/action';
+import {  changeField, login, CheckToken, logout, register, fetchUserById, updateUser } from '../../store/action/action';
 //import movies ( from @types )
 //import needed actions created
 
@@ -17,9 +17,9 @@ interface UserState {
   token: string | null;
   created_at: string; 
   group_id: number | null; 
-  list: null; 
+  list: number | null; 
   to_review: null; 
-  updated_at: null; 
+  updated_at: string; 
   message: string; 
 }
 
@@ -35,7 +35,7 @@ export const initialState: UserState = {
   group_id: null,
   list: null,
   to_review: null,
-  updated_at: null,
+  updated_at: "",
   message: "",
 };
 
@@ -111,7 +111,25 @@ const userReducer = createReducer(initialState, (builder) => {
         state.id = 0; // Reset state of id to 0 when user sign out
         localStorage.clear()
       })
-    // user List movies 
+    
+          // Find user by ID
+    .addCase(fetchUserById.fulfilled, (state, action) => {
+      state.id = action.payload.id;
+      state.pseudo = action.payload.pseudo;
+      state.email = action.payload.email;
+      state.password = action.payload.password;
+      state.date_of_birth = action.payload.date_of_birth;
+      state.list = action.payload.list;
+    })
+    // Update user 
+    .addCase(updateUser.fulfilled, (state, action) => {
+      state.pseudo = action.payload.pseudo;
+      state.email = action.payload.email;
+      state.password = action.payload.password;
+      state.date_of_birth = action.payload.date_of_birth;
+      state.updated_at = action.payload.updated_at;
+    })
+    
 
   });
 
