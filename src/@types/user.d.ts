@@ -1,4 +1,5 @@
 export interface UserState {
+    token: string | null;
     id: number;
     pseudo: string;
     email: string;
@@ -13,4 +14,5 @@ export interface UserState {
     email: string;
     birthday: string;
     password: string;
+    token: string | null;
   }

@@ -1,11 +1,6 @@
 
 import { createReducer } from "@reduxjs/toolkit";
-import {  changeField, login, CheckToken, logout, register, fetchUserById, updateUser } from '../../store/action/action';
-//import movies ( from @types )
-//import needed actions created
-
-// id: string; // id stored on localStorage as string
-
+import {  changeField, login, CheckToken, logout, register, updateUser } from '../../store/action/action';
 
 interface UserState {
   logged: boolean;
@@ -17,7 +12,6 @@ interface UserState {
   token: string | null;
   created_at: string; 
   group_id: number | null; 
-  // list: number | null; 
   to_review: null; 
   updated_at: string; 
   message: string; 
@@ -33,7 +27,6 @@ export const initialState: UserState = {
   token: null,
   created_at: "",
   group_id: null,
-  // list: null,
   to_review: null,
   updated_at: "",
   message: "",
@@ -96,6 +89,9 @@ const userReducer = createReducer(initialState, (builder) => {
       state.id = action.payload.user.id; //update id state
       state.pseudo = action.payload.user.pseudo;  //update pseudo state
       state.token  = action.payload.token;  //update token state
+      state.email = action.payload.user.email;  //update email state
+      state.password = action.payload.user.password;  //update password state
+      state.birthday = action.payload.user.birthday;  //update birthday state
 
       localStorage.setItem("pseudo", state.pseudo); //store pseudo and token in localStorage
       localStorage.setItem("token", state.token); //store token and token in localStorage
@@ -112,15 +108,7 @@ const userReducer = createReducer(initialState, (builder) => {
         localStorage.clear()
       })
     
-          // Find user by ID
-    .addCase(fetchUserById.fulfilled, (state, action) => {
-      state.id = action.payload.id;
-      state.pseudo = action.payload.pseudo;
-      state.email = action.payload.email;
-      state.password = action.payload.password;
-      state.birthday = action.payload.birthday;
-      // state.list = action.payload.list;
-    })
+
     // Update user 
     .addCase(updateUser.fulfilled, (state, action) => {
       state.pseudo = action.payload.pseudo;
@@ -128,8 +116,12 @@ const userReducer = createReducer(initialState, (builder) => {
       state.password = action.payload.password;
       state.birthday = action.payload.birthday;
       state.updated_at = action.payload.updated_at;
+      state.token  = action.payload.token;  //update token state
+      // localStorage.setItem("token", state.token); //store token and token in localStorage
     })
-    
+   
+    // Delete user 
+
 
   });
 

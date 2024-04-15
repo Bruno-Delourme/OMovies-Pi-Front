@@ -15,6 +15,7 @@ function LoginForm() {
   const pseudo = useAppSelector((state) => state.user.pseudo || '');
   const password = useAppSelector((state) => state.user.password || ''); 
   const email = useAppSelector((state) => state.user.email);
+  const birthday = useAppSelector((state) => state.user.birthday);
   const isLogged = useAppSelector((state) => state.user.logged);
 
   const userId = useAppSelector((state) => state.user.id);

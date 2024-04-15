@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUserById, updateUser } from '../../store/action/action';
+import {  updateUser } from '../../store/action/action';
 import HeaderProfil from './HeaderProfil/HeaderProfil';
 import { UserFormData } from '../../@types/user';
 
@@ -15,18 +15,22 @@ interface Props {
 //React.FC mean React.FunctionComponent and when we use it, TypeScript understand that MemberSpace is a functional component that accept props ( id in this case )
 
 const MemberSpace: React.FC<Props> = ({ id }) => { 
+
   const dispatch = useAppDispatch();
+
   const user = useAppSelector((state) => state.user);
+
   const [formData, setFormData] = useState<UserFormData>({
     pseudo: user.pseudo,
     email: user.email,
     birthday: user.birthday,
     password: user.password,
+    token: user.token,
   });
+console.log(formData);
+console.log(user.token);
 
-  useEffect(() => {
-    dispatch(fetchUserById(id));
-  }, [dispatch, id]);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,9 +44,7 @@ const MemberSpace: React.FC<Props> = ({ id }) => {
   return (
     <>
       <HeaderProfil />
-      <h1>MemberSpace
-
-{user.pseudo}</h1>
+      <h1>{user.pseudo}</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Pseudo
@@ -53,10 +55,6 @@ const MemberSpace: React.FC<Props> = ({ id }) => {
           <input type="email" name="email" value={formData.email} onChange={handleChange} />
         </label>
         <label>
-          Télephone
-          <input type="tel" name="phone" disabled />
-        </label>
-        <label>
           Mot de passe
           <input type="password" name="password" value={formData.password} onChange={handleChange} />
         </label>
@@ -64,12 +62,8 @@ const MemberSpace: React.FC<Props> = ({ id }) => {
           Date de naissance
           <input type="date" name="birthday" value={formData.birthday} onChange={handleChange} />
         </label>
-        <label>
-          Photo de profil
-          <input type="file" accept="image/*" />
-        </label>
         <button type="submit">Enregistrer</button>
-        <button type="submit">Supprimer mon compte</button>
+        <button type="button" onClick={() => {}}>Supprimer mon compte</button>
       </form>
     </>
   );
