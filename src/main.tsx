@@ -22,6 +22,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/group/:id", element: <Group /> },
       { path: "/list/:id", element: <List /> },
+      { path: "/profil/:id", element: <MemberSpace /> },
+
       { path: "/movies/romance", element: <ResultKeywordBar /> },
       { path: "/movies/familial", element: <ResultKeywordBar /> },
       { path: "/movies/action", element: <ResultKeywordBar /> },

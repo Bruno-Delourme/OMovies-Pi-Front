@@ -30,7 +30,7 @@ function Field({
   return (
 
     // Application d'une classe CSS conditionnelle en fonction de la présence de contenu dans le champ
-    <div className={value.length > 0 ? 'field field--has-content' : 'field'}>
+    <div className={value !== undefined && value.length > 0 ? 'field field--has-content' : 'field'}>
       <label
         htmlFor={inputId} // Liaison du label avec l'input correspondant
         className="field-label" // Classe CSS pour le label

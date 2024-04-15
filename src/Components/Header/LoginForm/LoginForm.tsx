@@ -1,18 +1,19 @@
 import { FormEvent} from "react";
 import Field from "./Field/Field";
-// import './LoginForm.scss';
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { changeField, login, logout } from "../../../store/action/action";
 import SubscribeForm from "../SubscribeForm/SuscribeForm";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 function LoginForm() {
   const dispatch = useAppDispatch();
 
   //const id = useAppSelector((state) => state.user.id);
   
-  const pseudo = useAppSelector((state) => state.user.pseudo);
-  const password = useAppSelector((state) => state.user.password); 
+  const pseudo = useAppSelector((state) => state.user.pseudo || '');
+  const password = useAppSelector((state) => state.user.password || ''); 
   const email = useAppSelector((state) => state.user.email);
   const isLogged = useAppSelector((state) => state.user.logged);
 
@@ -30,6 +31,7 @@ function LoginForm() {
       email: "",
       date_of_birth: ""
     }));
+    dispatch(login({ pseudo, password }));
   
   };
 
@@ -45,7 +47,6 @@ function LoginForm() {
   return (
     <div className="login-form">
       
-
       {isLogged && (
               <div className="login-form-logged">
                 <p className="login-form-message">
@@ -58,6 +59,11 @@ function LoginForm() {
                 >
                   Déconnexion
                 </button>
+                <Link to={`/profil/${userId}`}>
+                <button className="acces-buttons" id="list-btn">
+                    Mon Profil
+                </button>
+                </Link>
               </div>
             )}
 
@@ -65,8 +71,8 @@ function LoginForm() {
       {!isLogged && (
         <div className="">
                              
-              <dialog className="flex flex-col items-center p-5 rounded-lg">
-                
+              <dialog id="my_modal_1" className="modal">
+              <div className="modal-box">
                 <form className="inline-flex pb-6"
                   onSubmit={handleSubmit}
                   autoComplete="off">
@@ -85,6 +91,7 @@ function LoginForm() {
                   
                 </form>
                 <SubscribeForm/>
+              </div>
               </dialog>
                 
         </div>
