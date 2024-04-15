@@ -70,7 +70,7 @@ function LoginForm() {
 
       {!isLogged && (
         <div className="">
-                             
+                            
               <dialog id="my_modal_1" className="modal">
               <div className="modal-box">
                 <form className="inline-flex pb-6"
