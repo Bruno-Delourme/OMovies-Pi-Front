@@ -93,8 +93,8 @@ const userReducer = createReducer(initialState, (builder) => {
     // login
     .addCase(login.fulfilled, (state, action) => {
       state.logged = true;
-      state.id = action.payload.utilisateur.id; //update id state
-      state.pseudo = action.payload.utilisateur.pseudo;  //update pseudo state
+      state.id = action.payload.user.id; //update id state
+      state.pseudo = action.payload.user.pseudo;  //update pseudo state
       state.token  = action.payload.token;  //update token state
 
       localStorage.setItem("pseudo", state.pseudo); //store pseudo and token in localStorage

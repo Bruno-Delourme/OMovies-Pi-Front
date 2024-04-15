@@ -166,12 +166,13 @@ const axiosInstance = axios.create({
     const LOGIN = "LOGIN";
     export const login = createAsyncThunk<
       {
-        utilisateur: any; pseudo: string; logged: boolean; token: string
+        user: any; pseudo: string; logged: boolean; token: string
 },
       FormData
     >(LOGIN, async (formData) => {
       const response = await axiosInstance.post("/login", formData);
-      console.log(response.data.data.utilisateur);
+      console.log(response.data.data.user);
+      console.log("response.data.data :", response.data.data);
       return response.data.data;
     
     });

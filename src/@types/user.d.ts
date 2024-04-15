@@ -5,7 +5,7 @@ export interface UserState {
     password: string;
     birthday: string;
     updated_at: string;
-    list: number;
+    //list: number;
   }
 
   interface UserFormData {
