@@ -58,14 +58,13 @@ const Header = () => {
           </>
         )}
 
-
         <div className="pt-4">
-        <label htmlFor="loggin_modal" onClick={() => document.getElementById('loggin_modal').showModal().toggleLoginForm()} className="btn">
+        <label htmlFor="loggin_modal" className="btn">
         <FaRegCircle size={32} />
         </label>
         <input type="checkbox" id="loggin_modal" className="modal-toggle" />
         <div id="loggin_modal" className="modal" role="dialog">       
-          <div className="modal-box ">
+          <div className="modal-box">
             <div className="">
               <LoginForm /> 
             </div>

@@ -79,12 +79,12 @@ body {
   } */
   /* Button scroll carousel left*/
   .scroll-left-configuration {
-    @apply fixed p-2 absolute top-1/2 transform -translate-y-1/2;
+    @apply p-2 absolute top-1/2 transform -translate-y-1/2;
     z-index: 8; 
   }
   /* Button scroll carousel right*/
   .scroll-right-configuration {
-    @apply fixed p-2 absolute top-1/2 transform -translate-y-1/2 right-0;
+    @apply p-2 absolute top-1/2 transform -translate-y-1/2 right-0;
     z-index: 8;
   }
   /* Chevron left and right SCSS */

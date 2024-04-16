@@ -60,8 +60,8 @@ function LoginForm() {
               </div>
             )}
       {!isLogged && (
-        <div className="relative">
-            <div className="relative"> 
+        <div className="">
+            <div className=""> 
                 <form 
                   autoComplete="off"
                   className="inline-flex "
@@ -72,7 +72,6 @@ function LoginForm() {
                   onChange={handleChangeField("pseudo")}
                   value={pseudo} />
                 <Field
-                  
                   type="password"
                   placeholder="Mot de passe"
                   onChange={handleChangeField("password")}
@@ -89,10 +88,10 @@ function LoginForm() {
             </div>
 {/* Suscribe button */}
               <div className="pt-4">
-                <button onClick={()=>document.getElementById('my_modal_2').showModal()}>S'inscrire</button>
-                  <dialog id="my_modal_2" className="modal">
+                <button onClick={()=>document.getElementById('inscription_modal').showModal()}>S'inscrire</button>
+                  <dialog id="inscription_modal" className="modal">
                     <div className="modal-box flex flex-col">
-                      <button className="close-button absolute top-0 right-0 mt-2 mr-2 w-5 h-7.5 border border-gray-300 text-gray-500 rounded-md hover:bg-gray-100" onClick={() => document.getElementById('my_modal_2').close()}>
+                      <button className="close-button absolute top-0 right-0 mt-2 mr-2 w-5 h-7.5 border border-gray-300 text-gray-500 rounded-md hover:bg-gray-100" onClick={() => document.getElementById('inscription_modal').close()}>
                         X
                       </button>
                       <div className="">
