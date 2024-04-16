@@ -22,9 +22,8 @@ const scrollToTop = () => {
 const Header = () => {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const toggleLoginForm = () => setIsLoginFormVisible(!isLoginFormVisible);
-
   const userId = useAppSelector((state) => state.user.id);
-  console.log(userId);
+  
 
   return (
     <div className="black-banner">
@@ -32,7 +31,7 @@ const Header = () => {
       <SearchBar />
       <div className="flex flex-col gap-1vh">
         {userId !== 0 && (
-          <>
+          <div>
             <Link to={`/group/${userId}`}>
               <button className="acces-buttons" id="group-btn" onClick={Group}>
                 <FaPeopleGroup size={32} />
@@ -44,7 +43,7 @@ const Header = () => {
                 btn list
               </button>
             </Link>
-          </>
+          </div>
         )}
 
         {userId === 0 && (
@@ -58,6 +57,7 @@ const Header = () => {
               </button>
           </>
         )}
+
 
         <div className="pt-4">
         <label htmlFor="loggin_modal" onClick={() => document.getElementById('loggin_modal').showModal().toggleLoginForm()} className="btn">
