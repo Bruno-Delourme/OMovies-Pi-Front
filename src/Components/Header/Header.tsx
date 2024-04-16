@@ -59,16 +59,37 @@ const Header = () => {
           </>
         )}
         
-        <label htmlFor="my_modal_1" onClick={() => document.getElementById('my_modal_1').showModal().toggleLoginForm()} className="btn">
+        {/* <div className="pt-4">
+            <label htmlFor="loggin_modal" onClick={() => document.getElementById('loggin_modal').showModal().toggleLoginForm()} className="btn">
+              <FaRegCircle size={32} />
+            </label>
+            <dialog id="loggin_modal" className="modal">
+                <div className="modal-box flex flex-col">
+                    <button className="close-button absolute top-0 right-0 mt-2 mr-2 w-5 h-7.5 border border-gray-300 text-gray-500 rounded-md hover:bg-gray-100" onClick={() => document.getElementById('loggin_modal').close()}>
+                      X
+                    </button>
+                  <div className="">
+                    <LoginForm />
+                  </div> 
+                </div>
+            </dialog>
+            <label className="modal-backdrop" htmlFor="loggin_modal">Close</label>
+          </div> */}
+
+        <div className="pt-4">
+        <label htmlFor="loggin_modal" onClick={() => document.getElementById('loggin_modal').showModal().toggleLoginForm()} className="btn">
         <FaRegCircle size={32} />
         </label>
-        <input type="checkbox" id="my_modal_1" className="modal-toggle" />
-        <div id="my_modal_1" className="modal" role="dialog">       
+        <input type="checkbox" id="loggin_modal" className="modal-toggle" />
+        <div id="loggin_modal" className="modal" role="dialog">       
           <div className="modal-box ">
-            <LoginForm />
+            <div className="">
+              <LoginForm /> 
+            </div>
           </div>
-          <label className="modal-backdrop" htmlFor="my_modal_1">Close</label>
+          <label className="modal-backdrop" htmlFor="loggin_modal">Close</label>
         </div>
+      </div> 
       </div>
     </div>
   );

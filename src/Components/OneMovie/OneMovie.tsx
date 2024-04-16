@@ -22,7 +22,7 @@ const containerClass = animate ? "onemoviecontainer animate" : "onemoviecontaine
   return (
     <div className={containerClass} onPointerEnter={toggleAnimation} onPointerLeave={handlePointerLeave}> 
     
-      {poster_path && <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="max-w-xs rounded-md"/>} 
+      {poster_path && <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />} 
       <h2>{title}</h2>
       <p>{overview}</p>
       <p>Release Date: {release_date}</p>

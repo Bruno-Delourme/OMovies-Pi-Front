@@ -1,7 +1,4 @@
-import "./ByGenre.scss";
-
 import { fetchByGenreMovies } from "../../../store/action/action";
-
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { useEffect } from "react";
 import OneMovie from "../../OneMovie/OneMovie";
@@ -22,12 +19,25 @@ function ByGenre() {
   }, [dispatch]);
 
   return (
-    <div className="genreMovies">
-        <h1 className="titleSuggestion">By genre : action</h1>
+    <div className="byGenreMovies">
+        <p className="title-configuration">By genre : action</p>
+        <div className="relative">
       {loading ? (
         <p>Chargement...</p>
       ) : moviesByGenre.movies ? (
-        <div>
+        <div className="ByGenre">
+          <div className="ByGenreScroll carousel-item carousel overflow-x-auto">
+          {<button className="scroll-left-configuration"
+            onClick={() => {
+              const scrollContainerByGenre = document.querySelector('.ByGenreScroll');
+              if (scrollContainerByGenre) {
+                scrollContainerByGenre.scrollLeft -= 1200;
+              }
+            }}
+            >
+              <ChevronLeftIcon className="chevron-design"/>
+            </button>}
+            <span className="flex gap-8 m-8 rounded-full">
           {moviesByGenre.movies.map((movie) => (
             <OneMovie
               key={movie.id}
@@ -38,11 +48,24 @@ function ByGenre() {
               release_date={movie.release_date}
               vote_average={movie.vote_average}
             />
-          ))}
+            ))}
+            </span>
+            <button className="scroll-right-configuration"
+            onClick={() => {
+              const scrollContainerByGenre = document.querySelector('.ByGenreScroll');
+              if (scrollContainerByGenre) {
+                scrollContainerByGenre.scrollLeft += 1200;
+              }
+            }}
+            >
+              <ChevronRightIcon className="chevron-design"/>
+            </button>
+          </div> 
         </div>
       ) : (
         <p>Aucun film trouvé</p>
       )}
+      </div>
     </div>
   );
 }

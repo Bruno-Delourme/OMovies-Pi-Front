@@ -28,20 +28,20 @@ useEffect(() => {
 
 
 return (
-  <div className="newMovies">
+  <div id="newMovies">
     <p className="title-configuration">Nouveautés</p>
     <div className="relative">
       
       {loading ? (
       <p>Chargement...</p>
       ) : newMovies.movies ? (
-        <div className="">
-          <div className="scroll-container carousel-item carousel overflow-x-auto">
-            {<button className="p-2 absolute top-1/2 transform -translate-y-1/2 left-0 "
+        <div className="NewMovie">
+          <div className="NewMovieScroll carousel-item carousel overflow-x-auto">
+            {<button className="scroll-left-configuration"
             onClick={() => {
-              const scrollContainerNouveaute = document.querySelector('.scroll-container');
-              if (scrollContainerNouveaute) {
-                scrollContainerNouveaute.scrollLeft -= 1200;
+              const scrollContainerNew = document.querySelector('.NewMovieScroll');
+              if (scrollContainerNew) {
+                scrollContainerNew.scrollLeft -= 1200;
               }
             }}
             >
@@ -60,11 +60,11 @@ return (
               />   
             ))}
             </span>
-            <button className="p-2 absolute top-1/2 transform -translate-y-1/2 right-0"
+            <button className="scroll-right-configuration"
             onClick={() => {
-              const scrollContainer = document.querySelector('.scroll-container');
-              if (scrollContainer) {
-                scrollContainer.scrollLeft += 1200;
+              const scrollContainerNew = document.querySelector('.NewMovieScroll');
+              if (scrollContainerNew) {
+                scrollContainerNew.scrollLeft += 1200;
               }
             }}
             >

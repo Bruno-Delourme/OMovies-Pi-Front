@@ -1,5 +1,3 @@
-import "./Suggestions.scss";
-
 import { fetchSuggestionMovies } from "../../../store/action/action";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { useEffect } from "react";
@@ -28,51 +26,51 @@ useEffect(() => {
   }, [dispatch]);
 
   return (
-    <div className="suggestionMovies">
+    <div id="suggestionMovies">
         <h1 className="title-configuration">Suggestion : films populaire </h1>
-        <div className="relative">
-      {loading ? (
+      <div className="relative">
+        {loading ? (
         <p>Chargement...</p>
-      ) : suggestionMovies.movies ? (
-        <div className="">
-          <div className="scroll-container carousel-item carousel overflow-x-auto">
-          {<button className="p-2 absolute top-1/2 transform -translate-y-1/2 left-0 "
-            onClick={() => {
-              const scrollContainer = document.querySelector('.scroll-container');
-              if (scrollContainer) {
-                scrollContainer.scrollLeft -= 1200;
-              }
-            }}
-            >
-              <ChevronLeftIcon className="h-96 w-12 bg-gray-100 bg-opacity-10 hover:bg-gray-300 hover:bg-opacity-20 rounded-full"/>
+        ) : suggestionMovies.movies ? (
+        <div className="suggestionContainer">
+          <div className="suggestionScroll carousel-item carousel overflow-x-auto">
+            {<button className="scroll-left-configuration"
+              onClick={() => {
+                const scrollContainerSuggestion = document.querySelector('.suggestionScroll');
+                if (scrollContainerSuggestion) {
+                  scrollContainerSuggestion.scrollLeft -= 1200;
+                }
+              }}
+              >
+              <ChevronLeftIcon className="chevron-design"/>
             </button>}
-            <span className="flex gap-8 m-8 rounded-full">
-          {suggestionMovies.movies.map((movie) => (
-            <OneMovie
-              key={movie.id}
-              id={movie.id}
-              title={movie.title}
-              poster_path={movie.poster_path}
-              overview={movie.overview}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0}            />
-          ))}
-          </span>
-          <button className="p-2 absolute top-1/2 transform -translate-y-1/2 right-0"
-            onClick={() => {
-              const scrollContainerSuggestion = document.querySelector('.scroll-container');
-              if (scrollContainerSuggestion) {
-                scrollContainerSuggestion.scrollLeft += 1200;
-              }
-            }}
-            >
-              <ChevronRightIcon className="h-96 w-12 bg-gray-100 bg-opacity-10 hover:bg-gray-300 hover:bg-opacity-20 rounded-full"/>
+              <span className="flex gap-8 m-8 rounded-full">
+                {suggestionMovies.movies.map((movie) => (
+                  <OneMovie
+                  key={movie.id}
+                  id={movie.id}
+                  title={movie.title}
+                  poster_path={movie.poster_path}
+                  overview={movie.overview}
+                  release_date={movie.release_date}
+                  vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0}            />
+                ))}
+              </span>
+            <button className="scroll-right-configuration"
+              onClick={() => {
+                const scrollContainerSuggestion = document.querySelector('.suggestionScroll');
+                if (scrollContainerSuggestion) {
+                  scrollContainerSuggestion.scrollLeft += 1200;
+                }
+              }}
+              >
+              <ChevronRightIcon className="chevron-design"/>
             </button>
           </div>
         </div>
-      ) : (
-        <p>Aucun film trouvé</p>
-      )}
+        ) : (
+          <p>Aucun film trouvé</p>
+        )}
       </div>
     </div>
   ); 

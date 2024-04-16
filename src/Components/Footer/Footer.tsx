@@ -2,7 +2,7 @@ import "./Footer.scss";
 
 function Footer() {
     return (
-        <h1 className="titleFooter">footer</h1>
+        <h1 className="title-configuration bg-black p-32">Ceci est un footer</h1>
     );
 }
 
