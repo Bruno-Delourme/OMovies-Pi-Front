@@ -17,12 +17,10 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
     setAnimate(false);
 };
 
-
 const containerClass = animate ? "onemoviecontainer animate" : "onemoviecontainer";
 
   return (
     <div className={containerClass} onPointerEnter={toggleAnimation} onPointerLeave={handlePointerLeave}> 
-    
     {poster_path && <Link to={`/movie/${id}`}>
         <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="max-w-xs rounded-md" />
       </Link>} 
