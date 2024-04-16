@@ -1,6 +1,6 @@
 
 import { createReducer } from "@reduxjs/toolkit";
-import {  changeField, login, CheckToken, logout, register, updateUser } from '../../store/action/action';
+import {  changeField, login, CheckToken, logout, register, updateUser, deleteUser } from '../../store/action/action';
 
 interface UserState {
   logged: boolean;
@@ -117,11 +117,30 @@ const userReducer = createReducer(initialState, (builder) => {
       state.birthday = action.payload.birthday;
       state.updated_at = action.payload.updated_at;
       state.token  = action.payload.token;  //update token state
+      state.message = "Compte mis à jour avec succès !";
       // localStorage.setItem("token", state.token); //store token and token in localStorage
     })
    
-    // Delete user 
-
+    // Delete user
+    .addCase(deleteUser.fulfilled, (state) => {
+      state.logged = false;
+      state.pseudo = "";
+      state.id = 0;
+      state.email = "";
+      state.password = "";
+      state.birthday = "";
+      state.token = null;
+      state.created_at = "";
+      state.group_id = null;
+      state.to_review = null;
+      state.updated_at = "";
+      state.message = "Compte supprimé avec succès !";
+      localStorage.clear(); // Clear local storage
+    })
+    .addCase(deleteUser.rejected, (state) => {
+      state.logged = true;
+      state.message = "Le compte n'a pas pu être supprimé !";
+    });
 
   });
 

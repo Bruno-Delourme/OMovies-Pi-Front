@@ -182,7 +182,6 @@ const axiosInstance = axios.create({
 
 
     // Update user
-
     const UPDATE_USER = "UPDATE_USER";
     // Create async function using createAsyncThunk of Redux Toolkit. 
     // The first generic type parameter specifies the data type that the action will return ( UserState), 
@@ -208,3 +207,17 @@ const axiosInstance = axios.create({
 
     // Delete user
     const DELETE_USER = "DELETE_USER";
+    export const deleteUser = createAsyncThunk<void, number>(
+      DELETE_USER,
+      async (id, thunkAPI) => {
+        const state = thunkAPI.getState() as RootState;
+        const token = state.user.token;
+        await axiosInstance.delete(`/deleteUser/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+    );
+
+    
