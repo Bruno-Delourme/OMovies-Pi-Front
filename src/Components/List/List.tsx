@@ -17,7 +17,12 @@ function List() {
                 Filtrer par genre :
                 <input type="text" name="filterByGenre"  />
             </label>
-
+            <label>
+                Filtrer par acteur :
+                <input type="text" name="filterByActor"  />
+            </label>
+            <button>Afficher ma liste de films favoris</button>
+            <button>Afficher ma liste de films à revoir</button>
         </>
     );
 }

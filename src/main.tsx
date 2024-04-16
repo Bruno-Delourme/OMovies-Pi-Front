@@ -11,7 +11,7 @@ import List from "./Components/List/List";
 import Group from "./Components/Group/Group";
 import MemberSpace from "./Components/MemberSpace/MemberSpace";
 import ResultKeywordBar from "./Components/ResultKeywordBar/ResultKeywordBar";
-import OneMovie from "./Components/OneMovie/OneMovie";
+import MovieDetails from "./Components/MovieDetails/MovieDetails";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       { path: "/movies/action", element: <ResultKeywordBar /> },
       { path: "/movies/science-fiction", element: <ResultKeywordBar /> },
       { path: "/movies/documentaire", element: <ResultKeywordBar /> },
-      { path: "/movie/:id", element: <OneMovie id={0} title={""} overview={""} release_date={""} vote_average={0} key={0} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0} /> },
+      { path: "/movie/:id", element: <MovieDetails /> },
     ],
   },
 ]);
