@@ -49,7 +49,7 @@ console.log(user.token);
   return (
     <>
       <HeaderProfil />
-      <h1>{user.pseudo}</h1>
+      <h1>Bonjour dans ton espace profil {user.pseudo}</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Pseudo
