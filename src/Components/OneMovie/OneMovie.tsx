@@ -26,8 +26,6 @@ const containerClass = animate ? "onemoviecontainer animate" : "onemoviecontaine
       </Link>} 
       <h2>{title}</h2>
       <p>{overview}</p>
-      <p>Release Date: {release_date}</p>
-      <p>Vote Average: {vote_average}</p> 
     </div>
   );
 }
