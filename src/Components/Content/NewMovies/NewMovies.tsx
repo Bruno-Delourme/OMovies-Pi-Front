@@ -20,8 +20,6 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
   */
 const loading = useAppSelector((state) => state.movies.loading);
 
-
-
 useEffect(() => {
   dispatch(fetchNewMovies());
 }, [dispatch]);
