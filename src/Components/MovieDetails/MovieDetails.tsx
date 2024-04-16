@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../src/hooks/redux';
 import { Movie } from '../../../src/@types/movie';
 import OneMovie from '../../Components/OneMovie/OneMovie';
 
-function MovieDetails() {
+function MovieDetails({ title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {
 
     //Get id from URL using useParams
     //convert string id (get from url) to number using parseInt().
@@ -16,19 +16,21 @@ function MovieDetails() {
     const movie = movies.find((movie: Movie) => movie.id === movieId);
 
     return (
-        <div>
-          {movie && (
-            <OneMovie
-              id={movie.id}
-              title={movie.title}
-              original_title={movie.original_title}
-              poster_path={movie.poster_path}
-              overview={movie.overview}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
-            />
-          )}
-        </div>
+        <>
+          <div>
+            {movie && (
+              <OneMovie poster_path={movie.poster_path} />
+            )}
+            <div>
+              <h2>{movie.title}</h2>
+              <p>{movie.overview}</p>
+             <p>Release Date: {movie.release_date}</p>
+              <p>Vote Average: {movie.vote_average}</p>
+            </div>
+
+          </div>
+          
+      </>
       );
 }
 export default MovieDetails;
