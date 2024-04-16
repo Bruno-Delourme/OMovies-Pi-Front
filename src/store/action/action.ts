@@ -121,6 +121,25 @@ const axiosInstance = axios.create({
       }
     );
 
+/*
+    // List favorite movies 
+    const FETCH_LIST_FAVORITE = "FETCH_LIST_FAVORITE";
+    export const fetchListFavorite =  createAsyncThunk<Movie[]>(
+      FETCH_LIST_FAVORITE,
+      async () => {
+        const state = thunkAPI.getState() as RootState; // RootState's interface of 2 properties user and movie witch a state genered by  userReducer and movieReducer 
+        const id = state.user.id;
+        const response = await axiosInstance.get("/showFavorite/${id}");
+        const movies = response.data as Movie[];
+        console.log(movies);
+        return movies;
+      }
+    );
+*/
+
+
+
+
 
 
 // ACTION USER

@@ -60,7 +60,7 @@ const Header = () => {
         )}
 
         <div className="pt-4">
-        <label htmlFor="loggin_modal" onClick={() => document.getElementById('loggin_modal').showModal().toggleLoginForm()} className="btn">
+        <label htmlFor="loggin_modal"  className="btn">
         <FaRegCircle size={32} />
         </label>
         <input type="checkbox" id="loggin_modal" className="modal-toggle" />

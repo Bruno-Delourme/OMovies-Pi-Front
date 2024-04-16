@@ -11,12 +11,12 @@ import ByActor from "./ByActor/ByActor";
 import { Outlet, useLocation } from "react-router-dom";
 
 function Content() {
-
-
     
     const romanceMovies = useAppSelector((state) => state.movies.romanceMovies);
     const loading = useAppSelector((state) => state.movies.loading);
     const error = useAppSelector((state) => state.movies.error);
+
+    const logged= useAppSelector((state) => state.user.logged);
 
     /* check if need add this part of code ???
     const { pathname } = useLocation();
@@ -33,7 +33,7 @@ function Content() {
 
     return (
         <div className="">
-            <NewMovie /><Suggestion /><SuggestionForYou /><ByGenre /><ByActor />
+            <NewMovie /><Suggestion />{logged && <SuggestionForYou />}<ByGenre /><ByActor />
              <Outlet /> {/* Render ResultKeywordBar when movies are available */}
 
         </div>

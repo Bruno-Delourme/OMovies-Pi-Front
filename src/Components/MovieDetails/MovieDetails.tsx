@@ -18,6 +18,7 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
     return (
         <>
           <div>
+            <button>retour</button>
             {movie && (
               <OneMovie poster_path={movie.poster_path} />
             )}

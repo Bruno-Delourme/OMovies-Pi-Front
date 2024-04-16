@@ -171,6 +171,7 @@ interface MoviesState {
         state.romanceMovies = action.payload; // Update state for other movie categories 
       })
 
+      // List favorite movies 
       
     }); 
   
