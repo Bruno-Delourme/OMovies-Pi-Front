@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import {  updateUser } from '../../store/action/action';
+import {  deleteUser, updateUser } from '../../store/action/action';
 import HeaderProfil from './HeaderProfil/HeaderProfil';
 import { UserFormData } from '../../@types/user';
 
@@ -26,6 +26,7 @@ const MemberSpace: React.FC<Props> = ({ id }) => {
     birthday: user.birthday,
     password: user.password,
     token: user.token,
+    id: user.id
   });
 console.log(formData);
 console.log(user.token);
@@ -39,6 +40,10 @@ console.log(user.token);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(updateUser(formData));
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteUser(user.id)); // Pass user.id to deleteUser
   };
 
   return (
@@ -63,7 +68,7 @@ console.log(user.token);
           <input type="date" name="birthday" value={formData.birthday} onChange={handleChange} />
         </label>
         <button type="submit">Enregistrer</button>
-        <button type="button" onClick={() => {}}>Supprimer mon compte</button>
+        <button type="button" onClick={handleDelete}>Supprimer mon compte</button>
       </form>
     </>
   );
