@@ -3,14 +3,14 @@ export interface UserState {
     pseudo: string;
     email: string;
     password: string;
-    date_of_birth: string;
+    birthday: string;
     updated_at: string;
-    list: number;
+    //list: number;
   }
 
   interface UserFormData {
     pseudo: string;
     email: string;
-    date_of_birth: string;
+    birthday: string;
     password: string;
   }

@@ -58,11 +58,17 @@ const Header = () => {
               </button>
           </>
         )}
-
-        <button id="login-button" className="acces-buttons" onClick={toggleLoginForm}>
-          <FaRegCircle size={32} /> {/* Adjust size as needed */}
-        </button>
-        {isLoginFormVisible && <LoginForm />}
+        
+        <label htmlFor="my_modal_1" onClick={() => document.getElementById('my_modal_1').showModal().toggleLoginForm()} className="btn">
+        <FaRegCircle size={32} />
+        </label>
+        <input type="checkbox" id="my_modal_1" className="modal-toggle" />
+        <div id="my_modal_1" className="modal" role="dialog">       
+          <div className="modal-box ">
+            <LoginForm />
+          </div>
+          <label className="modal-backdrop" htmlFor="my_modal_1">Close</label>
+        </div>
       </div>
     </div>
   );

@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../../store/action/action";
 import { useAppSelector } from "../../../hooks/redux";
+import { Action, AnyAction } from "redux";
+import { RootState } from "../../../store";
+import { ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
 
 function SubscribeForm() {
   const [formData, setFormData] = useState({
     pseudo: "",
     email: "",
-    date_of_birth: "",
+    birthday: "",
     password: "",
   });
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
+  type AppThunkAction = ThunkAction<void, RootState, unknown, Action<string>>;
+  type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+  
+  const dispatch = useDispatch<AppDispatch>();
 
   const message = useAppSelector((state) => state.user.message); // access to message using redux state
 
@@ -20,7 +27,7 @@ function SubscribeForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(register(formData));
   };
@@ -28,8 +35,9 @@ function SubscribeForm() {
   return (
     <div>
       {message && <p>{message}</p>}
-      <form className="inscription-form" onSubmit={handleSubmit}>
+      <form className="inscription-form " onSubmit={handleSubmit}>
         <input
+          className="m-5"
           type="text"
           placeholder="Pseudo"
           name="pseudo"
@@ -37,6 +45,7 @@ function SubscribeForm() {
           onChange={handleChange}
         />
         <input
+          className="m-5 mr-20"
           type="email"
           placeholder="Email"
           name="email"
@@ -44,20 +53,22 @@ function SubscribeForm() {
           onChange={handleChange}
         />
         <input
+          className="m-5 mr-20"
           type="date"
           placeholder="Date de naissance"
-          name="date_of_birth"
-          value={formData.date_of_birth}
+          name="birthday"
+          value={formData.birthday}
           onChange={handleChange}
         />
         <input
+          className="m-5 mr-36"
           type="password"
           placeholder="Mot de Passe"
           name="password"
           value={formData.password}
           onChange={handleChange}
         />
-        <button type="submit" className="acces-buttons">
+        <button type="submit" className="btn m-4">
           S'inscrire
         </button>
       </form>

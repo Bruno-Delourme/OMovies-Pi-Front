@@ -20,7 +20,7 @@ const MemberSpace: React.FC<Props> = ({ id }) => {
   const [formData, setFormData] = useState<UserFormData>({
     pseudo: user.pseudo,
     email: user.email,
-    date_of_birth: user.date_of_birth,
+    birthday: user.birthday,
     password: user.password,
   });
 
@@ -62,13 +62,14 @@ const MemberSpace: React.FC<Props> = ({ id }) => {
         </label>
         <label>
           Date de naissance
-          <input type="date" name="date_of_birth" value={formData.date_of_birth} onChange={handleChange} />
+          <input type="date" name="birthday" value={formData.birthday} onChange={handleChange} />
         </label>
         <label>
           Photo de profil
           <input type="file" accept="image/*" />
         </label>
         <button type="submit">Enregistrer</button>
+        <button type="submit">Supprimer mon compte</button>
       </form>
     </>
   );

@@ -1,10 +1,11 @@
 import { FormEvent} from "react";
 import Field from "./Field/Field";
+import './LoginForm.scss';
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { changeField, login, logout } from "../../../store/action/action";
 import SubscribeForm from "../SubscribeForm/SuscribeForm";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+
 
 
 function LoginForm() {
@@ -25,12 +26,6 @@ function LoginForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    dispatch(login({
-      pseudo, password,
-      email: "",
-      date_of_birth: ""
-    }));
     dispatch(login({ pseudo, password }));
   
   };
@@ -43,10 +38,8 @@ function LoginForm() {
     dispatch(logout());
   };
 
-    
   return (
     <div className="login-form">
-      
       {isLogged && (
               <div className="login-form-logged">
                 <p className="login-form-message">
@@ -66,37 +59,59 @@ function LoginForm() {
                 </Link>
               </div>
             )}
-
-
       {!isLogged && (
-        <div className="">
-                            
-              <dialog id="my_modal_1" className="modal">
-              <div className="modal-box">
-                <form className="inline-flex pb-6"
+        <div className="relative">
+            <div className="relative"> 
+                <form 
+                  autoComplete="off"
+                  className="inline-flex "
                   onSubmit={handleSubmit}
-                  autoComplete="off">
-                  <Field
-                    placeholder="Pseudo"
-                    onChange={handleChangeField("pseudo")}
-                    value={pseudo} />
-                  <Field
-                    type="password"
-                    placeholder="Mot de passe"
-                    onChange={handleChangeField("password")}
-                    value={password} />
-                  <button type="submit" className="flex items-center justify-center pl-4 pr-4 rounded-lg border">
-                    OK
-                  </button>
+                >
+                <Field
+                  placeholder="Pseudo"
+                  onChange={handleChangeField("pseudo")}
+                  value={pseudo} />
+                <Field
                   
-                </form>
-                <SubscribeForm/>
+                  type="password"
+                  placeholder="Mot de passe"
+                  onChange={handleChangeField("password")}
+                  value={password} />
+              <div className="inline-flex ">
+                <button type="submit" className="btn p-4 mr-1">
+                  OK
+                </button>
+                <button className="btn" onClick={() => document.getElementById('my_modal_1').close()}>
+                  Annuler
+                </button>
+              </div>     
+              </form>
+            </div>
+{/* Suscribe button */}
+              <div className="pt-4">
+                <button className="btn" onClick={()=>document.getElementById('my_modal_2').showModal()}>S'inscrire</button>
+                  <dialog id="my_modal_2" className="modal">
+                    <div className="modal-box flex flex-col">
+                      <button className="close-button absolute top-0 right-0 mt-2 mr-2 w-5 h-7.5 border border-gray-300 text-gray-500 rounded-md hover:bg-gray-100" onClick={() => document.getElementById('my_modal_2').close()}>
+                        X
+                      </button>
+                      <div className="">
+                        <SubscribeForm />
+                      </div>
+                      <div className="">
+                        <form method="dialog">
+                          <button className="btn ml-5">Annuler</button>
+                        </form>
+                      </div>
+                    </div>
+                    
+                  </dialog>
               </div>
-              </dialog>
-                
         </div>
+            
       )}
     </div>
-  );}
+  );
+}
 
 export default LoginForm;
