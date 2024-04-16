@@ -1,4 +1,5 @@
 .onemoviecontainer {
+    
     position: relative;
     transition: all 0.3s ease;
     &.animate, &:hover {
@@ -8,13 +9,13 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.5); // Semi-transparent black background
+            background-color: rgba(0, 0, 0, 0.5); // Semi-transparent background
             padding: 10px 0;
         }
     }
     
     .action-buttons {
-        display: none; // Hide buttons by default
+        display: none; // Cache le bouton par défault
         .like-button, .platform-button {
             margin: 0 5px;
             background-color: transparent;
@@ -31,9 +32,9 @@
             }
         }
         .liked {
-            background-color: green; // Stay green when liked
+            background-color: green; // Vert si liké
             &:hover {
-                background-color: green; // Override hover effect when liked
+                background-color: green; // Et override hover après like 
             }
         }
     }

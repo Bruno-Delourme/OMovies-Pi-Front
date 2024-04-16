@@ -12,25 +12,25 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
     const [animate, setAnimate] = useState(false);
     const [liked, setLiked] = useState(false);
 
-    // Toggle animation on pointer
+    // Animation au survol
     const toggleAnimation = () => {
         setAnimate(true);
     };
 
-    // Deactivate the animation on pointer leave
+    // Desactivation de l'animation au survol
     const handlePointerLeave = () => {
-        if (!liked) {  // Keep the animation active if the item is liked
+        if (!liked) {  // Conserve l'animation si liké
             setAnimate(false);
         }
     };
 
-    // Toggle like status
+    // Statut toggle du like
     const toggleLike = () => {
         setLiked(!liked);
-        setAnimate(true);  // Ensure container remains highlighted when liked
+        setAnimate(true);  // Conserve le bouton vert si liké
     };
 
-    const containerClass = animate || liked ? "onemoviecontainer animate" : "onemoviecontainer";  // Keep the container animated if liked
+    const containerClass = animate || liked ? "onemoviecontainer animate" : "onemoviecontainer";  // Conserve le bouton vert si liké
     const likeButtonClass = liked ? "like-button liked" : "like-button";
 
     return (
@@ -38,6 +38,7 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
         {poster_path && <Link to={`/movie/${id}`}>
             <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster max-w-xs rounded-md" />
           </Link>}
+          {/*<h2 className="movie-title">{title}</h2>NE PASSE PAS*/}
           <div className="action-buttons">
             <Button className={likeButtonClass} onClick={toggleLike}>
               <img src={LogoLike} alt="Like" />
