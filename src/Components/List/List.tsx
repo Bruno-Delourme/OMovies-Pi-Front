@@ -32,12 +32,19 @@ function List() {
     setShowFavoriteList(false);
   };
 
+  const handleShowFavoriteList = () => {
+    setShowReviewList(false);
+    setShowFavoriteList(true);
+  };
+
+  const buttonText = showReviewList ? "Afficher ma liste de films favoris" : "Afficher ma liste de films à revoir";
+
   return (
     <>
       <HeaderList />
       <h1>{user.pseudo}, Bienvenue dans ton espace liste</h1>
 
-      <button onClick={handleShowReviewList}>Afficher ma liste de films à revoir</button>
+      <button onClick={showReviewList ? handleShowFavoriteList : handleShowReviewList}>{buttonText}</button>
 
       {showFavoriteList && (
         <ul>
