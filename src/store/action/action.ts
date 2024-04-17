@@ -104,7 +104,7 @@ const axiosInstance = axios.create({
       async () => {
         const response = await axiosInstance.get("/movies/action");
         const movies = response.data as Movie[];
-        //console.log(movies);
+        console.log(movies);
         return movies;
       }
     );
@@ -118,6 +118,115 @@ const axiosInstance = axios.create({
         const movies = response.data as Movie[];
         console.log(movies);
         return movies;
+      }
+    );
+
+
+   
+
+    // Add movie to favoris
+    const ADD_TO_FAVORITE="ADD_TO_FAVORITE";
+    export const addToFavorite = createAsyncThunk<Movie, { userId: number, movie: Movie, token: string }>(
+      "ADD_TO_FAVORITE",
+      async ({ userId, movie, token }) => {
+        const response = await axiosInstance.post(
+          `/addToFavorite/${userId}`,
+          {
+            id: movie.id,
+            title: movie.title,
+            poster_path: movie.poster_path,
+            overview: movie.overview,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const addedMovie = response.data as Movie;
+        console.log(addedMovie);
+        return addedMovie;
+      }
+    );
+     
+
+    // delete movie from favoris 
+    const DELETE_FROM_FAVORITE="DELETE_FROM_FAVORITE";
+    export const deleteFromFavorite = createAsyncThunk<void, { userId: number, movieId: number }>(
+      "DELETE_FROM_FAVORITE",
+      async ({ userId, movieId }) => {
+        await axiosInstance.delete(`/deleteFromFavorite/${userId}`, { data: { movieId } });
+      }
+    );
+
+    // List favorite movies 
+    const FETCH_FAVORITE_MOVIES = "FETCH_FAVORITE_MOVIES";
+    export const fetchFavoriteMovies = createAsyncThunk<Movie[], { userId: number, token: string }>(
+      "FETCH_FAVORITE_MOVIES",
+      async ({ userId, token }) => {
+        const response = await axios.get(`/api/favorites/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const favoriteMovies = response.data.data as Movie[];
+        console.log(favoriteMovies);
+        return favoriteMovies;
+      }
+    );
+
+    // Add movie to review 
+
+    const ADD_TO_REVIEW="ADD_TO_REVIEW";
+    export const addToReview = createAsyncThunk<Movie, { userId: number, movie: Movie, token: string }>(
+      "ADD_TO_REVIEW",
+      async ({ userId, movie, token }) => {
+        const response = await axiosInstance.post(
+          `/addToFavorite/${userId}`,
+          {
+            id: movie.id,
+            title: movie.title,
+            poster_path: movie.poster_path,
+            overview: movie.overview,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const addedMovie = response.data as Movie;
+        console.log(addedMovie);
+        return addedMovie;
+      }
+    );
+
+
+
+    // delete movie from to review 
+    const DELETE_FROM_REVIEW="DELETE_FROM_REVIEW";
+    export const deleteFromReview = createAsyncThunk<void, { userId: number, movieId: number }>(
+      "DELETE_FROM_REVIEW",
+      async ({ userId, movieId }) => {
+        await axiosInstance.delete(`/deleteFromToReview/${userId}`, { data: { movieId } }); // a corriger dand le back, faut ajouter l'id en params
+      }
+    );
+
+    // show movies to review 
+
+
+    const FETCH_MOVIES_TO_REVIEW = "FETCH_MOVIES_TO_REVIEW";
+    export const fetchMoviesToReview = createAsyncThunk<Movie[], { userId: number, token: string }>(
+      "FETCH_MOVIES_TO_REVIEW",
+      async ({ userId, token }) => {
+        const response = await axios.get(`/api/favorites/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const favoriteMovies = response.data.data as Movie[];
+        console.log(favoriteMovies);
+        return favoriteMovies;
       }
     );
 
@@ -204,6 +313,7 @@ const axiosInstance = axios.create({
         return user;
       }
     );
+
 
     // Delete user
     const DELETE_USER = "DELETE_USER";
