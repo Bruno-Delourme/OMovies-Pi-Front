@@ -210,12 +210,19 @@ const axiosInstance = axios.create({
     
     // delete movie from to review 
     const DELETE_FROM_REVIEW="DELETE_FROM_REVIEW";
-    export const deleteFromReview = createAsyncThunk<void, { userId: number, movieId: number }>(
+    export const deleteFromReview = createAsyncThunk<void, { userId: number, movieId: number, token: string }>(
       "DELETE_FROM_REVIEW",
-      async ({ userId, movieId }) => {
-        await axiosInstance.delete(`/deleteFromToReview/${userId}`, { data: { movieId } }); // a corriger dand le back, faut ajouter l'id en params
+      async ({ userId, movieId, token }) => {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+    
+        await axiosInstance.delete(`/deleteFromFavorite/${userId}`, { data: { id: movieId }, ...config });
       }
     );
+    
 
     // show movies to review 
       const FETCH_MOVIES_TO_REVIEW = "FETCH_MOVIES_TO_REVIEW";
