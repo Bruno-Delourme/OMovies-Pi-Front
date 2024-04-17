@@ -8,6 +8,7 @@ import "./OneMovie.scss";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 const LogoPlus = "../../../public/circle-plus.svg";
+const LogoMinus = "../../../public/circle-minus.svg";
 const LogoLike = "../../../public/thumbs-up.svg";
 const LogoPlateform = "../../../public/presentation.svg";
 
@@ -23,7 +24,8 @@ function OneMovie({
 }: Partial<Movie>) {// utilise partiellement les propriéts de OneMovie pour éviter les bugs
   const [animate, setAnimate] = useState(false);// État pour contrôler l'animation au survol de l'élément
   const [liked, setLiked] = useState(false);// État pour contrôler si un film est liké
-
+  const [plusActivated, setPlusActivated] = useState(false);
+  const [plusAnimation, setPlusAnimation] = useState(false);
   // Récupération de l'ID utilisateur depuis l'état Redux
   const user = useAppSelector((state) => state.user);
 
@@ -44,27 +46,24 @@ function OneMovie({
   const toggleLike = async () => {
     const newLikedStatus = !liked;
     setLiked(newLikedStatus);
-    setAnimate(true);
+    setAnimate(true);  
+  };
 
-    if (newLikedStatus) { // Effectue l'action uniquement si le film est liké
-      try {
-        const response = await axios.post(`/addToFavorite/${id}`, {
-          userId: user.id  // Utilise l'ID utilisateur récupéré depuis Redux
-        }, {
-          headers: {
-            Authorization: `Bearer ${user.token}`  // Supposons que l'authentification est nécessaire
-          }
-        });
-        console.log('Film added to favorites!');
-      } catch (error) {
-        console.error('Failed to add film to favorites:', error);
-      }
+  const handlePlusClick = () => {
+    if (plusActivated) {
+      setPlusActivated(false);
+      setPlusAnimation(true);
+      setTimeout(() => setPlusAnimation(false), 900); // Animation dure 300ms
+    } else {
+      setPlusActivated(true);
+      setPlusAnimation(true);
+      setTimeout(() => setPlusAnimation(false), 900);
     }
   };
 
   const containerClass = animate || liked ? "onemoviecontainer animate" : "onemoviecontainer";
   const likeButtonClass = liked ? "like-button liked" : "like-button";
-
+  const plusButtonClass = plusAnimation ? "plus-button animated" : "plus-button";
   // Rendu du composant avec la logique conditionnelle pour afficher les boutons et les images
   return (
     <div
@@ -86,8 +85,8 @@ function OneMovie({
         <Button className={likeButtonClass} onClick={toggleLike}>
           <img src={LogoLike} alt="Like" />
         </Button>
-        <Button className="plus-button">
-          <img src={LogoPlus} alt="Plus" />
+        <Button className={plusButtonClass} onClick={handlePlusClick}>
+          <img src={plusActivated ? LogoMinus : LogoPlus} alt={plusActivated ? "Minus" : "Plus"} />
         </Button>
         <Button className="platform-button">
           <img src={LogoPlateform} alt="Platform" />
