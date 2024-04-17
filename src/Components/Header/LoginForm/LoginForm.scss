@@ -2,8 +2,6 @@
 
 // .login-form {
    
-
-
 //   &-element {
 //     display: flex;
 //     align-items: center;
@@ -30,4 +28,16 @@
 //     padding: .7em;
 //     height: 2.5em;
 //   }
+// }
+
+// .modal {
+//     width: auto; /* Définit la largeur de la modal sur auto pour qu'elle s'adapte à la taille du contenu */
+//     max-width: 100%; /* Limite la largeur maximale de la modal pour éviter qu'elle ne devienne trop large */
+//     height: auto; /* Définit la hauteur de la modal sur auto pour qu'elle s'adapte à la taille du contenu */
+//     max-height: 100%; /* Limite la hauteur maximale de la modal pour éviter qu'elle ne devienne trop haute */
+//   }
+
+// .modal-box {
+//     width: 2000px;
+//     height: max-content;
 // }

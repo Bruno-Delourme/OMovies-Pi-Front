@@ -5,9 +5,6 @@ import HeaderProfil from './HeaderProfil/HeaderProfil';
 import { UserFormData } from '../../@types/user';
 
 
-
-  
-
 interface Props {
   id: number;
 }
@@ -47,30 +44,46 @@ console.log(user.token);
   };
 
   return (
-    <>
-      <HeaderProfil />
-      <h1>Bienvenue dans ton espace profil {user.pseudo}</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Pseudo
-          <input type="text" name="pseudo" value={formData.pseudo} onChange={handleChange} />
-        </label>
-        <label>
-          Mail
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
-        </label>
-        <label>
-          Mot de passe
-          <input type="password" name="password" value={formData.password} onChange={handleChange} />
-        </label>
-        <label>
-          Date de naissance
-          <input type="date" name="birthday" value={formData.birthday} onChange={handleChange} />
-        </label>
-        <button type="submit">Enregistrer</button>
-        <button type="button" onClick={handleDelete}>Supprimer mon compte</button>
-      </form>
-    </>
+    <div className="p-5">
+      {/* <HeaderProfil /> */}
+      
+      <div className="pb-4">
+      <h1 className="">Bienvenue dans ton espace profil, {user.pseudo}</h1>
+      </div>
+      
+      <div className="max-w-full flexitem">
+        <form onSubmit={handleSubmit} className="flex-row w-full">
+          <div className="p-2">
+          <label className="flex justify-between">
+            Pseudo
+            <input type="text" name="pseudo" value={formData.pseudo} onChange={handleChange} className=""/>
+          </label>
+          </div>
+          <div className="p-2">
+          <label className="flex justify-between">
+            Mail
+            <input type="email" name="email" value={formData.email} onChange={handleChange} className=""/>
+          </label>
+          </div>
+          <div className="p-2">
+          <label className="flex justify-between">
+            Nouveau mot de passe
+            <input type="password" name="password" value={formData.password} onChange={handleChange} className="ml-2"/>
+          </label>
+          </div>
+          <div className="p-2">
+          <label className="flex justify-between">
+            Date de naissance
+          <input type="date" name="birthday" value={formData.birthday} onChange={handleChange} className=""/>
+          </label>
+          </div>
+          <div className="flex justify-evenly pt-4">
+            <button type="submit" className="btn">Enregistrer</button>
+            <button type="button" className="btn" onClick={handleDelete}>Supprimer mon compte</button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
