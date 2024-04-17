@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import {  useAppSelector } from '../../hooks/redux';
-import { UserFormData } from '../../@types/user';
-import axios from "axios";
 import { Movie } from "../../../src/@types/movie";
+import { UserFormData } from '../../@types/user';
 import "../../index.css";
 import "./OneMovie.scss";
 import { Link } from "react-router-dom";
+//import { addToFavorite, addToReview, deleteFromFavorite, deleteFromReview } from '../../store/action/action';
+import { AsyncThunkAction } from '@reduxjs/toolkit';
+import { AsyncThunkConfig } from '@reduxjs/toolkit/dist/createAsyncThunk';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+
 import { Button } from "@mui/material";
+import axios from "axios";
+
 const LogoPlus = "../../../public/circle-plus.svg";
 const LogoMinus = "../../../public/circle-minus.svg";
 const LogoLike = "../../../public/thumbs-up.svg";
@@ -22,12 +27,17 @@ function OneMovie({
   release_date,
   vote_average,
 }: Partial<Movie>) {// utilise partiellement les propriéts de OneMovie pour éviter les bugs
+
+  const dispatch = useAppDispatch();
+
   const [animate, setAnimate] = useState(false);// État pour contrôler l'animation au survol de l'élément
   const [liked, setLiked] = useState(false);// État pour contrôler si un film est liké
+
   const [plusActivated, setPlusActivated] = useState(false);
   const [plusAnimation, setPlusAnimation] = useState(false);
   // Récupération de l'ID utilisateur depuis l'état Redux
   const user = useAppSelector((state) => state.user);
+  const token = useAppSelector((state) => state.user.token);
 
   // Gère l'activation de l'animation lors du survol de la souris
   const toggleAnimation = () => {
@@ -60,6 +70,38 @@ function OneMovie({
       setTimeout(() => setPlusAnimation(false), 900);
     }
   };
+/* 
+  const handleAddToFavorite = () => {
+    if (user.id) {
+      dispatch(addToFavorite({ userId: user.id, movie: {
+        id: id as number,
+        title: title as string,
+        poster_path: poster_path as string,
+        overview: overview as string,
+      }, token }));
+    }
+  };
+  const handleDeleteFromFavorite = () => {
+    if (user.id && id) {
+      dispatch(deleteFromFavorite({ userId: user.id, movieId: id, token }));
+    }
+  };
+  const handleAddToReview = () => {
+    if (user.id) {
+      dispatch(addToReview({ userId: user.id, movie: {
+        id, title, poster_path, overview, name, genre_ids, release_date, vote_average,
+        adult: false,
+        original_language: '',
+        key: 0
+      }, token }));
+    }
+  };
+  const handleDeleteFromReview = () => {
+    if (user.id && id) {
+      dispatch(deleteFromReview({ userId: user.id, movieId: id, token }));
+    }
+  };*/
+
 
   const containerClass = animate || liked ? "onemoviecontainer animate" : "onemoviecontainer";
   const likeButtonClass = liked ? "like-button liked" : "like-button";
