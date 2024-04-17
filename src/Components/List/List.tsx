@@ -13,6 +13,7 @@ function List() {
   const moviesToReview = useAppSelector((state) => state.movies.moviesToReview);
 
   const [showReviewList, setShowReviewList] = useState(false);
+  const [showFavoriteList, setShowFavoriteList] = useState(true);
 
   useEffect(() => {
     if (user.id && user.token) {
@@ -28,6 +29,7 @@ function List() {
 
   const handleShowReviewList = () => {
     setShowReviewList(true);
+    setShowFavoriteList(false);
   };
 
   return (
@@ -37,14 +39,15 @@ function List() {
 
       <button onClick={handleShowReviewList}>Afficher ma liste de films à revoir</button>
 
-      {/* Afficher la liste des films favoris */}
-      <ul>
-        {favoriteMovies.map((movie) => (
-          <li key={movie.id}>
-            <OneMovie {...movie} />
-          </li>
-        ))}
-      </ul>
+      {showFavoriteList && (
+        <ul>
+          {favoriteMovies.map((movie) => (
+            <li key={movie.id}>
+              <OneMovie {...movie} />
+            </li>
+          ))}
+        </ul>
+      )}
 
       {showReviewList && (
         <ul>
