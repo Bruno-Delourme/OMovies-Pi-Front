@@ -149,7 +149,6 @@ const axiosInstance = axios.create({
       }
     );
      
-
     // delete movie from favoris 
     const DELETE_FROM_FAVORITE="DELETE_FROM_FAVORITE";
     export const deleteFromFavorite = createAsyncThunk<void, { userId: number, movieId: number }>(
@@ -164,25 +163,26 @@ const axiosInstance = axios.create({
     export const fetchFavoriteMovies = createAsyncThunk<Movie[], { userId: number, token: string }>(
       "FETCH_FAVORITE_MOVIES",
       async ({ userId, token }) => {
-        const response = await axios.get(`/api/favorites/${userId}`, {
+        const response = await axios.get(`http://localhost:3000/api/showFavorite/${userId}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         });
-        const favoriteMovies = response.data.data as Movie[];
+        const favoriteMovies = response.data.data as Movie[]; // Accédez au tableau de films à l'intérieur de la propriété "data" de la réponse
         console.log(favoriteMovies);
         return favoriteMovies;
       }
     );
 
-    // Add movie to review 
 
+
+    // Add movie to review 
     const ADD_TO_REVIEW="ADD_TO_REVIEW";
     export const addToReview = createAsyncThunk<Movie, { userId: number, movie: Movie, token: string }>(
       "ADD_TO_REVIEW",
       async ({ userId, movie, token }) => {
         const response = await axiosInstance.post(
-          `/addToFavorite/${userId}`,
+          `/addToToReview/${userId}`,
           {
             id: movie.id,
             title: movie.title,
@@ -201,8 +201,7 @@ const axiosInstance = axios.create({
       }
     );
 
-
-
+    
     // delete movie from to review 
     const DELETE_FROM_REVIEW="DELETE_FROM_REVIEW";
     export const deleteFromReview = createAsyncThunk<void, { userId: number, movieId: number }>(
@@ -213,22 +212,21 @@ const axiosInstance = axios.create({
     );
 
     // show movies to review 
+      const FETCH_MOVIES_TO_REVIEW = "FETCH_MOVIES_TO_REVIEW";
+      export const fetchMoviesToReview = createAsyncThunk<Movie[], { userId: number, token: string }>(
+        "FETCH_MOVIES_TO_REVIEW",
+        async ({ userId, token }) => {
+          const response = await axios.get(`http://localhost:3000/api/showToReview/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          const MoviesToReview = response.data.data as Movie[]; // Accédez au tableau de films à l'intérieur de la propriété "data" de la réponse
+          console.log(MoviesToReview);
+          return MoviesToReview;
+        }
+      );
 
-
-    const FETCH_MOVIES_TO_REVIEW = "FETCH_MOVIES_TO_REVIEW";
-    export const fetchMoviesToReview = createAsyncThunk<Movie[], { userId: number, token: string }>(
-      "FETCH_MOVIES_TO_REVIEW",
-      async ({ userId, token }) => {
-        const response = await axios.get(`/api/favorites/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const favoriteMovies = response.data.data as Movie[];
-        console.log(favoriteMovies);
-        return favoriteMovies;
-      }
-    );
 
 
 
