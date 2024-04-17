@@ -151,10 +151,16 @@ const axiosInstance = axios.create({
      
     // delete movie from favoris 
     const DELETE_FROM_FAVORITE="DELETE_FROM_FAVORITE";
-    export const deleteFromFavorite = createAsyncThunk<void, { userId: number, movieId: number }>(
+    export const deleteFromFavorite = createAsyncThunk<void, { userId: number, movieId: number, token: string }>(
       "DELETE_FROM_FAVORITE",
-      async ({ userId, movieId }) => {
-        await axiosInstance.delete(`/deleteFromFavorite/${userId}`, { data: { movieId } });
+      async ({ userId, movieId, token }) => {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+    
+        await axiosInstance.delete(`/deleteFromFavorite/${userId}`, { data: { id: movieId }, ...config });
       }
     );
 

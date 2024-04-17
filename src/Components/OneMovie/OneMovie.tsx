@@ -66,7 +66,7 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
   };
 
   const handleDeleteFromFavorite = () => {
-    if (user.id && id) {
+    if (user.id && id && token) {
       dispatch(deleteFromFavorite({ userId: user.id, movieId: id, token }));
     }
   };
