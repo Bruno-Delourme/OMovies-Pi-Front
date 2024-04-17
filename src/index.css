@@ -71,7 +71,10 @@ body {
   /* Tailwind CSS page acceuil */
   /* Titre de sections */
   .title-configuration {
-    @apply text-white text-6xl
+    @apply text-white;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    margin-left: 2rem;
   }
   /* Container de section (bouton + scroll + carousel) */
   /* .scroll-configuration {
@@ -91,6 +94,7 @@ body {
   .chevron-design {
     @apply h-96 w-12 bg-gray-100 bg-opacity-10 hover:bg-gray-300 hover:bg-opacity-20 rounded-full
   }
+
   /* Movie picture container */
   /* .movie-picture-container {
     @apply flex gap-8 m-8 rounded-full 
