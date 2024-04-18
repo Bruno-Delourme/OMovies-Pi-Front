@@ -1,6 +1,22 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { useAppSelector } from '../../hooks/redux';
+import { RootState } from '../index';
+
+import { createReducer, createSelector } from "@reduxjs/toolkit";
 import { Movie, MoviesResponse } from "../../@types/movie";
 import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchFavoriteMovies, addToFavorite, deleteFromFavorite, addToReview, deleteFromReview, fetchMoviesToReview } from "../action/action";
+
+
+export const selectFavoriteMovies = createSelector(
+  (state: RootState) => state.movies,
+  (movies) => movies.favoriteMovies
+);
+
+export const selectMoviesToReview = createSelector(
+  (state: RootState) => state.movies,
+  (movies) => movies.moviesToReview
+);
+
+
 interface MoviesState {
     romanceMovies: Movie[];
     familialMovies: Movie[];
@@ -31,6 +47,9 @@ interface MoviesState {
     loading: false,
     error: null,
   };
+
+
+  
   const moviesReducer = createReducer(initialState, (builder) => {
     builder
     //Romance movies

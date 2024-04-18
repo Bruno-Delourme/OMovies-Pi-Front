@@ -1,7 +1,11 @@
+import { RootState } from '../index';
+
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Movie } from "../../@types/movie";
-import { RootState } from "../../@types/RooteState";
+//import { RootState } from "../../@types/RooteState";
+
+
 import { UserFormData, UserState } from "../../@types/user";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
