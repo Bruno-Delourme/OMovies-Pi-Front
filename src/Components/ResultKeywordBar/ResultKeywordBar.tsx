@@ -84,8 +84,10 @@ const handleGenreClick = (genre: string) => {
 
 //ici on met à jour la variable selectedGenre avec le genre sélectionné
 const handleAwardClick = () => {
-  if (selectedGenre) {
+  if (typeof fetchMoviesByRating === 'function' && selectedGenre) {
     dispatch(fetchMoviesByRating(selectedGenre));
+  } else {
+    console.error(`La fonction fetchMoviesByRating ou la variable selectedGenre n\'est pas définie.`);
   }
 };
 
