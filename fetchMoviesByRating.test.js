@@ -1,8 +1,8 @@
-import { fetchMoviesByRating } from "./fetchMoviesByRating";
+import { fetchMoviesByRating } from './fetchMoviesByRating';
 
 describe("fetchMoviesByRating", () => {
-  it(`doit retourner une liste de films pour le genre "romance"`, async () => {
-    const movies = await fetchMoviesByRating('romance');
+  it(`doit retourner une liste de films pour le genre "action"`, async () => {
+    const movies = await fetchMoviesByRating('action');
     expect(movies).toBeInstanceOf(Array);
     expect(movies.length).toBeGreaterThan(0);
   });
