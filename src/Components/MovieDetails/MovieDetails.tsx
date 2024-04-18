@@ -16,7 +16,7 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
     const movie = movies.find((movie: Movie) => movie.id === movieId);
 
     return (
-        <>
+        <div className="">
           <div>
             <button>retour</button>
             {movie && (
@@ -31,7 +31,7 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
 
           </div>
           
-      </>
+      </div>
       );
 }
 export default MovieDetails;

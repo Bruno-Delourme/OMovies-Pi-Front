@@ -62,7 +62,7 @@ body {
 
   /* Tailwind CSS du RESULTKEYWORDBAR */
   .resultKeywordBar-container {
-    @apply flex flex-wrap justify-center grid-cols-5 gap-4;
+    @apply flex-wrap;
   }
   /* .vignette-movie {
     @apply pb-5 rounded-md transition-transform duration-300 transform hover:scale-105
@@ -77,6 +77,13 @@ body {
     margin-left: 2rem;
   }
   /* Container de section (bouton + scroll + carousel) */
+  /* Container movie */
+  .movies-container-design {
+    @apply inline-flex 
+  }
+  .movies-path-design {
+    @apply min-w-60 m-4
+  }
   /* .scroll-configuration {
     @apply carousel-item carousel overflow-x-auto
   } */

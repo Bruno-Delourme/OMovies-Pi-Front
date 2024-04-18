@@ -58,8 +58,6 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
     ? documentaireMovies
     : null;
 
-
-
   console.log(romanceMovies)
 
   return (
@@ -69,9 +67,9 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
       {loading && <p>Loading movies...</p>}
 
             {moviesToDisplay?.movies && !loading && (
-        <div className="resultKeywordBar-container">
-
+        <div className="flex flex-wrap w-full justify-evenly">
           {moviesToDisplay.movies.map((movie) => (
+            <div className="p-1 max-w-72">
             <OneMovie
               key={movie.id}
               id={movie.id}
@@ -79,7 +77,16 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
               poster_path={movie.poster_path}
               overview={movie.overview}
               release_date={movie.release_date}
-              vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0}            />
+              vote_average={movie.vote_average} 
+              adult={false} 
+              original_title={""} 
+              original_language={""} 
+              cast_id={0} 
+              character={""} 
+              name={""} 
+              genre_ids={0}
+              />
+              </div>
           ))}
         </div>
       )}

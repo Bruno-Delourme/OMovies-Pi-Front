@@ -44,18 +44,21 @@ useEffect(() => {
               >
               <ChevronLeftIcon className="chevron-design"/>
             </button>}
-              <span className="flex gap-8 m-8 rounded-full">
-                {suggestionMovies.movies.map((movie) => (
-                  <OneMovie
-                  key={movie.id}
-                  id={movie.id}
-                  title={movie.title}
-                  poster_path={movie.poster_path}
-                  overview={movie.overview}
-                  release_date={movie.release_date}
-                  vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0}            />
-                ))}
-              </span>
+            <div className="movies-container-design">
+            {suggestionMovies.movies.map((movie) => (
+              <div key={movie.id} className="movies-path-design">
+                <OneMovie {...movie} 
+                poster_path={movie.poster_path}
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                overview={movie.overview}
+                release_date={movie.release_date}
+                vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0}
+                />   
+              </div>  
+            ))}
+            </div>
             <button className="scroll-right-configuration"
               onClick={() => {
                 const scrollContainerSuggestion = document.querySelector('.suggestionScroll');

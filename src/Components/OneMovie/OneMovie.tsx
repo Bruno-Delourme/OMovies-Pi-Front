@@ -109,17 +109,17 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
   const plusButtonClass = plusAnimation ? "plus-button animated" : "plus-button";
   
   return (
-    <>
+    <div className="">
       <div className={containerClass} onPointerEnter={toggleAnimation} onPointerLeave={handlePointerLeave}>
-
-        {poster_path && (
+        <div className="">
+          <div className="">
+            {poster_path && (
                <Link to={`/movie/${id}`}>
-                <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster max-w-xs rounded-md" />
+                <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster rounded-xl" />
                </Link>
-        )}
-        
-
-        <div className="action-buttons">
+            )}
+          </div>
+          <div className="action-buttons min-full">
             <Button className={likeButtonClass} onClick={toggleLike} >
               <img src={LogoLike} alt="Like" />
             </Button>
@@ -129,16 +129,16 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
             <Button className="platform-button">
               <img src={LogoPlateform} alt="Platform" />
             </Button>
+          </div>
         </div>
-
-
       </div>
 
-
-      <button onClick={handleDeleteFromFavorite}>Remove from Favorite</button>
-      <button onClick={handleAddToReview}>Add to Review</button>
-      <button onClick={handleDeleteFromReview}>Remove from To Review</button>
-    </>
+      <div className="text-white flex flex-wrap">
+        <button className="p-1" onClick={handleDeleteFromFavorite}>Remove from Favorite</button>
+        <button className="p-1" onClick={handleAddToReview}>Add to Review</button>
+        <button className="p-1" onClick={handleDeleteFromReview}>Remove from To Review</button>
+      </div>
+    </div>
   );
 }
 

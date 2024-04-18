@@ -1,13 +1,15 @@
+import { RootState } from '../index';
+
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Movie } from "../../@types/movie";
-import { RootState } from "../../@types/RooteState";
-import { UserFormData, UserState } from "../../@types/user";
+//import { RootState } from "../../@types/RooteState";
 
+
+import { UserFormData, UserState } from "../../@types/user";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
 });
-
 //ACTION MOVIES
     //Romance movies
     const FETCH_ROMANCE_MOVIES = "FETCH_ROMANCE_MOVIES";
@@ -20,7 +22,6 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
     //Familial movies
     const FETCH_FAMILIAL_MOVIES = "FETCH_FAMILIAL_MOVIES";
     export const fetchFamilialMovies = createAsyncThunk<Movie[]>(
@@ -32,7 +33,6 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
     // Action movies
     const FETCH_ACTION_MOVIES = "FETCH_ACTION_MOVIES";
     export const fetchActionMovies = createAsyncThunk<Movie[]>(
@@ -44,7 +44,6 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
     //science-fiction movies
     const FETCH_SCIENCEFICTION_MOVIES = "FETCH_SCIENCEFICTION_MOVIES";
     export const fetchScienceFictionMovies = createAsyncThunk<Movie[]>(
@@ -56,7 +55,6 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
     // Documentaire movies
     const FETCH_DOCUMENTAIRE_MOVIES = "FETCH_DOCUMENTAIRE_MOVIES";
     export const fetchDocumentaireMovies = createAsyncThunk<Movie[]>(
@@ -68,13 +66,10 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
     const SET_ROMANCE_MOVIES = "SET_ROMANCE_MOVIES";
     export const setRomanceMovies = createAction<Movie[]>(SET_ROMANCE_MOVIES);
-
-
     // Home content
-    // New movies 
+    // New movies
     const FETCH_NEW_MOVIES = "FETCH_NEW_MOVIES";
     export const fetchNewMovies = createAsyncThunk<Movie[]>(
       FETCH_NEW_MOVIES,
@@ -84,7 +79,6 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
     // suggestion movies ( popular )
     const FETCH_SUGGESTION_MOVIES = "FETCH_SUGGESTION_MOVIES";
     export const fetchSuggestionMovies = createAsyncThunk<Movie[]>(
@@ -96,8 +90,7 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
-    // Movies By genre 
+    // Movies By genre
     const FETCH_BYGENRE_MOVIES = "FETCH_BYGENRE_MOVIES";
     export const fetchByGenreMovies = createAsyncThunk<Movie[]>(
       FETCH_BYGENRE_MOVIES,
@@ -108,8 +101,7 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
-    // Movies By actor 
+    // Movies By actor
     const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR_MOVIES";
     export const fetchByActorMovies = createAsyncThunk<Movie[]>(
       FETCH_BYACTOR_MOVIES,
@@ -120,10 +112,6 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
-
-
-   
-
     // Add movie to favoris
     const ADD_TO_FAVORITE="ADD_TO_FAVORITE";
     export const addToFavorite = createAsyncThunk<Movie, { userId: number, movie: Movie, token: string }>(
@@ -148,8 +136,7 @@ const axiosInstance = axios.create({
         return addedMovie;
       }
     );
-     
-    // delete movie from favoris 
+    // delete movie from favoris
     const DELETE_FROM_FAVORITE="DELETE_FROM_FAVORITE";
     export const deleteFromFavorite = createAsyncThunk<void, { userId: number, movieId: number, token: string }>(
       "DELETE_FROM_FAVORITE",
@@ -159,12 +146,10 @@ const axiosInstance = axios.create({
             Authorization: `Bearer ${token}`,
           },
         };
-    
         await axiosInstance.delete(`/deleteFromFavorite/${userId}`, { data: { id: movieId }, ...config });
       }
     );
-
-    // List favorite movies 
+    // List favorite movies
     const FETCH_FAVORITE_MOVIES = "FETCH_FAVORITE_MOVIES";
     export const fetchFavoriteMovies = createAsyncThunk<Movie[], { userId: number, token: string }>(
       "FETCH_FAVORITE_MOVIES",
@@ -179,10 +164,7 @@ const axiosInstance = axios.create({
         return favoriteMovies;
       }
     );
-
-
-
-    // Add movie to review 
+    // Add movie to review
     const ADD_TO_REVIEW="ADD_TO_REVIEW";
     export const addToReview = createAsyncThunk<Movie, { userId: number, movie: Movie, token: string }>(
       "ADD_TO_REVIEW",
@@ -206,9 +188,7 @@ const axiosInstance = axios.create({
         return addedMovie;
       }
     );
-
-    
-    // delete movie from to review 
+    // delete movie from to review
     const DELETE_FROM_REVIEW="DELETE_FROM_REVIEW";
     export const deleteFromReview = createAsyncThunk<void, { userId: number, movieId: number, token: string }>(
       "DELETE_FROM_REVIEW",
@@ -218,13 +198,10 @@ const axiosInstance = axios.create({
             Authorization: `Bearer ${token}`,
           },
         };
-    
-        await axiosInstance.delete(`/deleteFromFavorite/${userId}`, { data: { id: movieId }, ...config });
+        await axiosInstance.delete(`/deleteFromToReview/${userId}`, { data: { id: movieId }, ...config });
       }
     );
-    
-
-    // show movies to review 
+    // show movies to review
       const FETCH_MOVIES_TO_REVIEW = "FETCH_MOVIES_TO_REVIEW";
       export const fetchMoviesToReview = createAsyncThunk<Movie[], { userId: number, token: string }>(
         "FETCH_MOVIES_TO_REVIEW",
@@ -239,12 +216,7 @@ const axiosInstance = axios.create({
           return MoviesToReview;
         }
       );
-
-
-
-
 // ACTION USER
-
     //Interface USER
     interface FormField {
       value: string;
@@ -254,16 +226,13 @@ const axiosInstance = axios.create({
       pseudo: string;
       password: string;
     }
-
     // USER
     const CHANGE_FIELD = "CHANGE_FIELD";
     export const changeField = createAction<FormField>(CHANGE_FIELD);
-
-    // Check token 
+    // Check token
     const CHECK_TOKEN = "CHECK_TOKEN";
     export const CheckToken = createAction(CHECK_TOKEN);
-
-    // Subscribe user 
+    // Subscribe user
     const REGISTER = "REGISTER"; // Ajout pour l'enregistrement de l'utilisateur
     export const register = createAsyncThunk<
       {
@@ -279,9 +248,6 @@ const axiosInstance = axios.create({
       const response = await axiosInstance.post("/createUser", FormData);
       return response.data;
     });
-
-
-
     // Login user
     const LOGIN = "LOGIN";
     export const login = createAsyncThunk<
@@ -293,23 +259,19 @@ const axiosInstance = axios.create({
       const response = await axiosInstance.post("/login", formData);
       console.log(response.data.data.user);
       return response.data.data;
-    
     });
-
-    // Logout 
+    // Logout
     const LOGOUT = "LOGOUT";
     export const logout = createAction(LOGOUT);
-
-
     // Update user
     const UPDATE_USER = "UPDATE_USER";
-    // Create async function using createAsyncThunk of Redux Toolkit. 
-    // The first generic type parameter specifies the data type that the action will return ( UserState), 
+    // Create async function using createAsyncThunk of Redux Toolkit.
+    // The first generic type parameter specifies the data type that the action will return ( UserState),
     // the second generic type parameter specifies the type of the action's argument ( FormData).
     export const updateUser = createAsyncThunk<UserState, UserFormData>(
       UPDATE_USER,
       async (formData: UserFormData, thunkAPI) => {
-        const state = thunkAPI.getState() as RootState; // RootState's interface of 2 properties user and movie witch a state genered by  userReducer and movieReducer 
+        const state = thunkAPI.getState() as RootState; // RootState's interface of 2 properties user and movie witch a state genered by  userReducer and movieReducer
         const id = state.user.id;
         const response = await axiosInstance.patch<UserState>(
           `/updateUser/${id}`,
@@ -324,8 +286,6 @@ const axiosInstance = axios.create({
         return user;
       }
     );
-
-
     // Delete user
     const DELETE_USER = "DELETE_USER";
     export const deleteUser = createAsyncThunk<void, number>(
@@ -340,5 +300,3 @@ const axiosInstance = axios.create({
         });
       }
     );
-
-    
