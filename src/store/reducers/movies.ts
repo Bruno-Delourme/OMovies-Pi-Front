@@ -2,7 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { Movie, MoviesResponse } from "../../@types/movie";
 
 
-import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies } from "../action/action";
+import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchMoviesByRating } from "../action/action";
 
 
 
@@ -16,6 +16,7 @@ interface MoviesState {
     suggestionMovies: Movie[],
     moviesByGenre: Movie[],
     moviesByActor: Movie[],
+    moviesByRating: Movie[];
     loading: boolean;
     error: string | null;
     
@@ -31,6 +32,7 @@ interface MoviesState {
     suggestionMovies: [],
     moviesByGenre: [],
     moviesByActor: [],
+    moviesByRating: [],
     loading: false,
     error: null,
     
@@ -169,6 +171,20 @@ interface MoviesState {
       
       .addCase(setRomanceMovies, (state, action) => {
         state.romanceMovies = action.payload; // Update state for other movie categories 
+      })
+
+      //MOVIES BY RATING
+      .addCase(fetchMoviesByRating.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchMoviesByRating.fulfilled, (state, action) => {
+        state.loading = false;
+        state.moviesByRating = action.payload; // 
+      })
+      .addCase(fetchMoviesByRating.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies";
       })
 
       

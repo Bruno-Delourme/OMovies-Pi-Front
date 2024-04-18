@@ -121,6 +121,47 @@ const axiosInstance = axios.create({
       }
     );
 
+   // MOVIES BY RATING
+   const FETCH_MOVIES_BY_RATING = "FETCH_MOVIES_BY_RATING"; 
+   export const fetchMoviesByRating = createAsyncThunk<Movie[], string>(
+     FETCH_MOVIES_BY_RATING,
+     async (genre: string, thunkAPI) => {
+       try {
+         let response;
+         switch (genre) {
+           case 'romance':
+             response = await axiosInstance.get("/moviesRating/romance");
+  
+             break;
+           case 'familial':
+             response = await axiosInstance.get("/moviesRating/familial");
+             break;
+
+           case 'action':
+             response = await axiosInstance.get("/moviesRating/action");
+
+             break;
+           case 'science-fiction':
+             response = await axiosInstance.get("/moviesRating/science-fiction");
+
+             break;
+           case 'documentaire':
+             response = await axiosInstance.get("/moviesRating/documentaire");
+
+             break;
+           default:
+             throw new Error(`Genre "${genre}" non pris en charge.`);
+         }
+         const movies = response.data as Movie[]; 
+         console.log(movies);
+         return movies;
+   
+       } catch (error) {
+         throw error;
+       }
+     }
+   );
+
 
 
 // ACTION USER

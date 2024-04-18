@@ -6,17 +6,17 @@
 //     justify-content: center;
 
 //     .movie-card {
-//         width: 11%; 
+//         width: 11%;
 //         overflow: hidden;
 //         padding: 1vh;
 //     }
 
 //     img {
-//         width: 100%; 
+//         width: 100%;
 //         height: 100%;
 //         border-radius: 2vh;
 //         align-items: stretch;
-//         transition: transform 0.3s ease;      
+//         transition: transform 0.3s ease;
 //     }
 
 //     img:hover {
@@ -25,3 +25,19 @@
 
 // }
 
+.award-button {
+  margin-left: 6rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.award-button:hover {
+  color: rgb(165, 168, 170);
+}
+
+.award-button:active {
+  color: rgb(211, 161, 67);
+  filter: brightness(1.2);
+  transform: scale(0.7);
+}

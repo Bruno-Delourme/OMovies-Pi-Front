@@ -2,18 +2,26 @@ import Header from "../Header/Header";
 import OneMovie from "../OneMovie/OneMovie";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import React, { useEffect } from 'react';
-import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies } from "../../store/action/action";
+import React, { useEffect, useState } from 'react';
+import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchMoviesByRating } from "../../store/action/action";
+
+
 
 import { MoviesResponse, Movie } from "../../../src/@types/movie";
 import "./ResultKeywordBar.scss";
 
-import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
+
+
+const LogoAward = "../../../public/award.svg";
+
+
+
 
 function ResultKeywordBar() {
   const dispatch = useAppDispatch();
-  const location = useLocation();
 
+  const [showAwardButton, setShowAwardButton] = useState(false);
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const romanceMovies = useAppSelector((state) => state.movies.romanceMovies) as unknown as MoviesResponse;
   const familialMovies = useAppSelector((state) => state.movies.familialMovies) as unknown as MoviesResponse;
@@ -21,7 +29,10 @@ function ResultKeywordBar() {
   const ScienceFictionMovies = useAppSelector((state) => state.movies.ScienceFictionMovies) as unknown as MoviesResponse;
   const documentaireMovies = useAppSelector((state) => state.movies.documentaireMovies) as unknown as MoviesResponse;
 
-  
+
+  const moviesByRating = useAppSelector((state) => state.movies.moviesByRating) as unknown as MoviesResponse;
+
+ 
   /*
 useAppSelector((state) => state.movies.marvelMovies) : to access the global state of the app.
 The function passed as a parameter (state) allows accessing a specific part of the state romanceMovies, familialMovies ..
@@ -38,10 +49,13 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
     if (location.pathname === "/movies/romance") {
       //send an action to the Redux store, fetch and update the state with movies data based on the current URL path
       dispatch(fetchRomanceMovies());
+      setShowAwardButton(true);
     } else if (location.pathname === "/movies/comedie") {
       dispatch(fetchFamilialMovies());
+      setShowAwardButton(true);
     } else if (location.pathname === "/movies/marvel") {
       dispatch(fetchActionMovies());
+      setShowAwardButton(true);
   }
   }, [dispatch, location.pathname]);
 
@@ -59,14 +73,39 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
     : null;
 
 
+  console.log(romanceMovies);
 
-  console.log(romanceMovies)
+
+/***************  PARTIE RATING PAR GENRE ***********************************************************/
+//est appelée lorsque l'utilisateur clique sur un genre
+const handleGenreClick = (genre: string) => {
+  setSelectedGenre(genre);
+};
+
+//ici on met à jour la variable selectedGenre avec le genre sélectionné
+const handleAwardClick = () => {
+  if (selectedGenre) {
+    dispatch(fetchMoviesByRating(selectedGenre));
+  }
+};
+
 
   return (
     <>
       <Header />
       <KeywordBar />
       {loading && <p>Loading movies...</p>}
+
+      {showAwardButton && (
+        <img
+        src={LogoAward}
+        alt="Award Button"
+        onClick={() => handleAwardClick()} 
+        className="award-button"
+      />
+      )}
+
+
 
             {moviesToDisplay?.movies && !loading && (
         <div className="resultKeywordBar-container">
@@ -84,9 +123,25 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
         </div>
       )}
 
+      {moviesByRating?.movies &&!loading && (
+        <div className="resultKeywordBar-container">
+        {moviesByRating.movies.map((movie) => (
+          <OneMovie
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            poster_path={movie.poster_path}
+            overview={movie.overview}
+            release_date={movie.release_date}
+            vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0} />
+        ))}
+      </div>
+      )}
+
       {!moviesToDisplay?.movies?.length && !loading && (
         <p>No movies found.</p>
       )}
+
     </>
   );
 }
