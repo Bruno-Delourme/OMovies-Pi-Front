@@ -3,7 +3,7 @@ import OneMovie from "../OneMovie/OneMovie";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import React, { useEffect } from 'react';
-import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies } from "../../store/action/action";
+import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchDocumentaireMovies } from "../../store/action/action";
 
 import { MoviesResponse, Movie } from "../../../src/@types/movie";
 import "./ResultKeywordBar.scss";
@@ -38,11 +38,18 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
     if (location.pathname === "/movies/romance") {
       //send an action to the Redux store, fetch and update the state with movies data based on the current URL path
       dispatch(fetchRomanceMovies());
-    } else if (location.pathname === "/movies/comedie") {
+    } else if (location.pathname === "/movies/familial") {
       dispatch(fetchFamilialMovies());
-    } else if (location.pathname === "/movies/marvel") {
+    } else if (location.pathname === "/movies/action") {
       dispatch(fetchActionMovies());
-  }
+    }
+    else if (location.pathname === "/movies/science-fiction") {
+      dispatch(fetchScienceFictionMovies());
+    }
+    else if (location.pathname === "/movies/documentaire") {
+      dispatch(fetchDocumentaireMovies());
+    }
+
   }, [dispatch, location.pathname]);
 
   const moviesToDisplay =
