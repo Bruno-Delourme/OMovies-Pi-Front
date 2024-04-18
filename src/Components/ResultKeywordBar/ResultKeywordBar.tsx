@@ -80,14 +80,30 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
 //est appelée lorsque l'utilisateur clique sur un genre
 const handleGenreClick = (genre: string) => {
   setSelectedGenre(genre);
+  setShowAwardButton(true);
 };
 
 //ici on met à jour la variable selectedGenre avec le genre sélectionné
+/*
+ handleAwardClick ne sera appelée que si selectedGenre n'est pas vide. Si selectedGenre est vide, un message d'erreur sera affiché dans la console.
+
 const handleAwardClick = () => {
-  if (typeof fetchMoviesByRating === 'function' && selectedGenre) {
+  if (typeof selectedGenre!== 'undefined' && selectedGenre.length > 0 && typeof fetchMoviesByRating === 'function') {
     dispatch(fetchMoviesByRating(selectedGenre));
+    setShowAwardButton(false); // Set showAwardButton to false after dispatching the fetchMoviesByRating action
   } else {
-    console.error(`La fonction fetchMoviesByRating ou la variable selectedGenre n\'est pas définie.`);
+    console.error(`La variable selectedGenre n'est pas définie ou ne contient pas de valeur.`);
+  }
+};*/
+
+//selectedGenre aura toujours une valeur par défaut, qui est une chaîne vide.
+// handleAwardClick ne sera appelée que si selectedGenre n'est pas vide. Si selectedGenre est vide, un message d'erreur sera affiché dans la console.
+const handleAwardClick = () => {
+  if (typeof selectedGenre!== 'undefined' && selectedGenre.length > 0 && typeof fetchMoviesByRating === 'function') {
+    dispatch(fetchMoviesByRating(selectedGenre));
+    setShowAwardButton(false); // Set showAwardButton to false after dispatching the fetchMoviesByRating action
+  } else {
+    console.error('La variable selectedGenre n\'est pas définie ou ne contient pas de valeur.');
   }
 };
 
