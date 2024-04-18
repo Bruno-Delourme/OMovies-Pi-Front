@@ -103,7 +103,7 @@ const handleAwardClick = () => {
     dispatch(fetchMoviesByRating(selectedGenre));
     setShowAwardButton(false); // Set showAwardButton to false after dispatching the fetchMoviesByRating action
   } else {
-    console.error('La variable selectedGenre n\'est pas définie ou ne contient pas de valeur.');
+    console.error(`La variable selectedGenre n'est pas définie ou ne contient pas de valeur.`);
   }
 };
 
