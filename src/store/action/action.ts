@@ -22,6 +22,19 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
+
+                  //Romance movies By rating
+                  const FETCH_ROMANCE_RATING_MOVIES = "FETCH_ROMANCE_RATING_MOVIES";
+                  export const fetchRomanceRatingMovies = createAsyncThunk<Movie[]>(
+                    FETCH_ROMANCE_RATING_MOVIES,
+                    async () => {
+                      const response = await axiosInstance.get("/moviesRating/romance");
+                      const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+                      console.log(movies);
+                      return movies;
+                    }
+                  );
+
     //Familial movies
     const FETCH_FAMILIAL_MOVIES = "FETCH_FAMILIAL_MOVIES";
     export const fetchFamilialMovies = createAsyncThunk<Movie[]>(
@@ -33,6 +46,18 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
+                  //Familial movies By rating
+                  const FETCH_FAMILIAL_RATING_MOVIES = "FETCH_FAMILIAL_RATING_MOVIES";
+                  export const fetchFamilialRatingMovies = createAsyncThunk<Movie[]>(
+                    FETCH_FAMILIAL_RATING_MOVIES,
+                    async () => {
+                      const response = await axiosInstance.get("/moviesRating/familial");
+                      const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+                      //console.log(movies);
+                      return movies;
+                      }
+                  );
+
     // Action movies
     const FETCH_ACTION_MOVIES = "FETCH_ACTION_MOVIES";
     export const fetchActionMovies = createAsyncThunk<Movie[]>(
@@ -44,6 +69,19 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
+                  //Action movies By rating
+                  const FETCH_ACTION_RATING_MOVIES = "FETCH_ACTION_RATING_MOVIES";
+                  export const fetchActionRatingMovies = createAsyncThunk<Movie[]>(
+                    FETCH_ACTION_RATING_MOVIES,
+                    async () => {
+                      const response = await axiosInstance.get("/moviesRating/action");
+                      const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+                      //console.log(movies);
+                      return movies;
+                    }
+                  );
+
+
     //science-fiction movies
     const FETCH_SCIENCEFICTION_MOVIES = "FETCH_SCIENCEFICTION_MOVIES";
     export const fetchScienceFictionMovies = createAsyncThunk<Movie[]>(
@@ -55,6 +93,17 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
+                      //Science-fiction movies By rating
+                      const FETCH_SCIENCEFICTION_RATING_MOVIES = "FETCH_SCIENCEFICTION_RATING_MOVIES";
+                      export const fetchScienceFictionRatingMovies = createAsyncThunk<Movie[]>(
+                        FETCH_SCIENCEFICTION_RATING_MOVIES,
+                        async () => {
+                          const response = await axiosInstance.get("/moviesRating/science-fiction");
+                          const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+                          //console.log(movies);
+                          return movies;
+                        }
+                      );
     // Documentaire movies
     const FETCH_DOCUMENTAIRE_MOVIES = "FETCH_DOCUMENTAIRE_MOVIES";
     export const fetchDocumentaireMovies = createAsyncThunk<Movie[]>(
@@ -66,11 +115,24 @@ const axiosInstance = axios.create({
         return movies;
       }
     );
+                  //Documentaire movies By rating
+                  const FETCH_DOCUMENTAIRE_RATING_MOVIES = "FETCH_DOCUMENTAIRE_RATING_MOVIES";
+                  export const fetchDocumentaireRatingMovies = createAsyncThunk<Movie[]>(
+                    FETCH_DOCUMENTAIRE_RATING_MOVIES,
+                    async () => {
+                      const response = await axiosInstance.get("/moviesRating/documentaire");
+                      const movies = response.data as Movie[]; // Cast response data to Movie[] for type safety
+                      //console.log(movies);
+                      return movies;
+                    }
+                  );
+
+
     const SET_ROMANCE_MOVIES = "SET_ROMANCE_MOVIES";
     export const setRomanceMovies = createAction<Movie[]>(SET_ROMANCE_MOVIES);
 
 
-    
+
     // Home content
     // New movies
     const FETCH_NEW_MOVIES = "FETCH_NEW_MOVIES";
@@ -116,51 +178,6 @@ const axiosInstance = axios.create({
       }
     );
 
-
-    /*
-   // MOVIES BY RATING
-   const FETCH_MOVIES_BY_RATING = "FETCH_MOVIES_BY_RATING"; 
-   export const fetchMoviesByRating = createAsyncThunk<Movie[], string>(
-     FETCH_MOVIES_BY_RATING,
-     async (genre: string, thunkAPI) => {
-       try {
-         let response;
-         switch (genre) {
-           case 'romance':
-             response = await axiosInstance.get("/moviesRating/romance");
-  
-             break;
-           case 'familial':
-             response = await axiosInstance.get("/moviesRating/familial");
-             break;
-
-           case 'action':
-             response = await axiosInstance.get("/moviesRating/action");
-
-             break;
-           case 'science-fiction':
-             response = await axiosInstance.get("/moviesRating/science-fiction");
-
-             break;
-           case 'documentaire':
-             response = await axiosInstance.get("/moviesRating/documentaire");
-
-             break;
-           default:
-             throw new Error(`Genre "${genre}" non pris en charge.`);
-         }
-         const movies = response.data as Movie[]; 
-         console.log(movies);
-         return movies;
-   
-       } catch (error) {
-         throw error;
-       }
-     }
-   );
-
-
-   */
 
 
 

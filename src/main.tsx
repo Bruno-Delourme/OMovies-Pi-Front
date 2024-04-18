@@ -25,10 +25,20 @@ const router = createBrowserRouter([
       { path: "/profil/:id", element: <MemberSpace /> },
 
       { path: "/movies/romance", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/romance", element: <ResultKeywordBar /> },
+
       { path: "/movies/familial", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/familial", element: <ResultKeywordBar /> },
+
       { path: "/movies/action", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/action", element: <ResultKeywordBar /> },
+
       { path: "/movies/science-fiction", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/science-fiction", element: <ResultKeywordBar /> },
+
       { path: "/movies/documentaire", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/documentaire", element: <ResultKeywordBar /> },
+
       { path: "/movie/:id", element: <MovieDetails /> },
     ],
   },
