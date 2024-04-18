@@ -1,56 +1,72 @@
-
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchFavoriteMovies, fetchMoviesToReview } from "../../store/action/action";
 import HeaderList from "./HeaderList/HeaderList";
+import OneMovie from "../OneMovie/OneMovie";
 
 function List() {
+  const dispatch = useAppDispatch();
 
-    const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
 
-    const user = useAppSelector((state) => state.user);
+  const favoriteMovies = useAppSelector((state) => state.movies.favoriteMovies);
+  const moviesToReview = useAppSelector((state) => state.movies.moviesToReview);
 
-    const favoriteMovies = useAppSelector((state) => state.movies.favoriteMovies);
-    const moviesToReview = useAppSelector((state) => state.movies.moviesToReview);
-    
-    const [showReviewList, setShowReviewList] = useState(false);
+  const [showReviewList, setShowReviewList] = useState(false);
+  const [showFavoriteList, setShowFavoriteList] = useState(true);
 
-  
-    useEffect(() => {
-        if (user.id) {
-          dispatch(fetchFavoriteMovies(user.id));
-          dispatch(fetchMoviesToReview(user.id));
-        }
-      }, [dispatch, user.id]);
-    
-      const handleShowReviewList = () => {
-        setShowReviewList(!showReviewList);
-      };
-  
-      return (
-        <>
-          <HeaderList />
-          <h1>  {user.pseudo}, Bienvenue dans ton espace liste</h1>
-    
-          <label>
-            Filtrer par genre :
-            <input type="text" name="filterByGenre"  />
-          </label>
-          <label>
-            Filtrer par acteur :
-            <input type="text" name="filterByActor"  />
-          </label>
-          <button onClick={handleShowReviewList}>Afficher ma liste de films à revoir</button>
-    
-          {showReviewList && (
-            <ul>
-              {moviesToReview.map((movie) => (
-                <li key={movie.id}>{movie.title}</li>
-              ))}
-            </ul>
-          )}
-        </>
-      );
-  }
-  
-  export default List;
+  useEffect(() => {
+    if (user.id && user.token) {
+      dispatch(fetchFavoriteMovies({ userId: user.id, token: user.token }));
+    }
+  }, [dispatch, user.id, user.token]);
+
+  useEffect(() => {
+    if (showReviewList && user.id && user.token) {
+      dispatch(fetchMoviesToReview({ userId: user.id, token: user.token }));
+    }
+  }, [dispatch, showReviewList, user.id, user.token]);
+
+  const handleShowReviewList = () => {
+    setShowReviewList(true);
+    setShowFavoriteList(false);
+  };
+
+  const handleShowFavoriteList = () => {
+    setShowReviewList(false);
+    setShowFavoriteList(true);
+  };
+
+  const buttonText = showReviewList ? "Afficher ma liste de films favoris" : "Afficher ma liste de films à revoir";
+
+  return (
+    <>
+      <HeaderList />
+      <h1>{user.pseudo}, Bienvenue dans ton espace liste</h1>
+
+      <button onClick={showReviewList ? handleShowFavoriteList : handleShowReviewList}>{buttonText}</button>
+
+      {showFavoriteList && (
+        <ul>
+          {favoriteMovies.map((movie) => (
+            <li key={movie.id}>
+              <OneMovie {...movie} />
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {showReviewList && (
+        <ul>
+          {moviesToReview.map((movie) => (
+            <li key={movie.id}>
+              <OneMovie {...movie} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
+export default List;
