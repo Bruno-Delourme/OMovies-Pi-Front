@@ -6,14 +6,10 @@ import { Movie, MoviesResponse } from "../../@types/movie";
 import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchFavoriteMovies, addToFavorite, deleteFromFavorite, addToReview, deleteFromReview, fetchMoviesToReview, fetchRomanceRatingMovies, fetchFamilialRatingMovies, fetchActionRatingMovies, fetchScienceFictionRatingMovies, fetchDocumentaireRatingMovies } from "../action/action";
 
 
-<<<<<<< HEAD
-import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchMoviesByRating } from "../action/action";
-=======
 export const selectFavoriteMovies = createSelector(
   (state: RootState) => state.movies,
   (movies) => movies.favoriteMovies
 );
->>>>>>> d386a469628ed83f73f49f8de58451bf02b3501a
 
 export const selectMoviesToReview = createSelector(
   (state: RootState) => state.movies,
