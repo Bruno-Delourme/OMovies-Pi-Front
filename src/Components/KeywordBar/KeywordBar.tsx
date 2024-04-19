@@ -1,6 +1,4 @@
 
-import "./KeywordBar.scss";
-import React from "react";
 import { useAppDispatch } from "../../hooks/redux";
 import { fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchDocumentaireMovies, fetchFamilialMovies } from "../../store/action/action";
 

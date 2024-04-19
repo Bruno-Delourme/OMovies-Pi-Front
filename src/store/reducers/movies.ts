@@ -1,9 +1,24 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { useAppSelector } from '../../hooks/redux';
+import { RootState } from '../index';
+
+import { createReducer, createSelector } from "@reduxjs/toolkit";
 import { Movie, MoviesResponse } from "../../@types/movie";
+import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchFavoriteMovies, addToFavorite, deleteFromFavorite, addToReview, deleteFromReview, fetchMoviesToReview } from "../action/action";
 
 
+<<<<<<< HEAD
 import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchMoviesByRating } from "../action/action";
+=======
+export const selectFavoriteMovies = createSelector(
+  (state: RootState) => state.movies,
+  (movies) => movies.favoriteMovies
+);
+>>>>>>> d386a469628ed83f73f49f8de58451bf02b3501a
 
+export const selectMoviesToReview = createSelector(
+  (state: RootState) => state.movies,
+  (movies) => movies.moviesToReview
+);
 
 
 interface MoviesState {
@@ -16,12 +31,15 @@ interface MoviesState {
     suggestionMovies: Movie[],
     moviesByGenre: Movie[],
     moviesByActor: Movie[],
+<<<<<<< HEAD
     moviesByRating: Movie[];
+=======
+    favoriteMovies: Movie[]
+    moviesToReview: Movie[],
+>>>>>>> d386a469628ed83f73f49f8de58451bf02b3501a
     loading: boolean;
     error: string | null;
-    
   }
-  
   export const initialState: MoviesState = {
     romanceMovies: [],
     familialMovies: [],
@@ -32,11 +50,17 @@ interface MoviesState {
     suggestionMovies: [],
     moviesByGenre: [],
     moviesByActor: [],
+<<<<<<< HEAD
     moviesByRating: [],
+=======
+    favoriteMovies: [],
+    moviesToReview: [],
+>>>>>>> d386a469628ed83f73f49f8de58451bf02b3501a
     loading: false,
     error: null,
-    
   };
+
+
   
   const moviesReducer = createReducer(initialState, (builder) => {
     builder
@@ -51,9 +75,8 @@ interface MoviesState {
       })
       .addCase(fetchRomanceMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
-      
       //Familial movies
       .addCase(fetchFamilialMovies.pending, (state) => {
         state.loading = true;
@@ -65,9 +88,8 @@ interface MoviesState {
       })
       .addCase(fetchFamilialMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
-
       //Action movies
       .addCase(fetchActionMovies.pending, (state) => {
         state.loading = true;
@@ -79,10 +101,8 @@ interface MoviesState {
       })
       .addCase(fetchActionMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
-
-
       //science-fiction movies
       .addCase(fetchScienceFictionMovies.pending, (state) => {
         state.loading = true;
@@ -94,7 +114,7 @@ interface MoviesState {
       })
       .addCase(fetchScienceFictionMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
       //Documentaire movies
       .addCase(fetchDocumentaireMovies.pending, (state) => {
@@ -107,9 +127,8 @@ interface MoviesState {
       })
       .addCase(fetchDocumentaireMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
-
       //New movies
       .addCase(fetchNewMovies.pending, (state) => {
         state.loading = true;
@@ -121,9 +140,8 @@ interface MoviesState {
       })
       .addCase(fetchNewMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
-
       //suggestion movies ( popular )
       .addCase(fetchSuggestionMovies.pending, (state) => {
         state.loading = true;
@@ -135,10 +153,9 @@ interface MoviesState {
       })
       .addCase(fetchSuggestionMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
-
-      // Movies By genre 
+      // Movies By genre
       .addCase(fetchByGenreMovies.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -149,29 +166,26 @@ interface MoviesState {
       })
       .addCase(fetchByGenreMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
-
-      // Movies By actor 
+      // Movies By actor
       .addCase(fetchByActorMovies.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchByActorMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.moviesByActor = action.payload; // Update state with fetched Movies By actor 
+        state.moviesByActor = action.payload; // Update state with fetched Movies By actor
         console.log(action.payload);
       })
       .addCase(fetchByActorMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies"; 
+        state.error = action.error.message || "Failed to fetch movies";
       })
-
-
-      
       .addCase(setRomanceMovies, (state, action) => {
-        state.romanceMovies = action.payload; // Update state for other movie categories 
+        state.romanceMovies = action.payload; // Update state for other movie categories
       })
+<<<<<<< HEAD
 
       //MOVIES BY RATING
       .addCase(fetchMoviesByRating.pending, (state) => {
@@ -194,3 +208,64 @@ interface MoviesState {
 
 
   
+=======
+      // FAVORITE MOVIES
+      // Add movie to favorite List
+      .addCase(addToFavorite.fulfilled, (state, action) => {
+        const addedMovieToFavorite = action.payload;
+        state.favoriteMovies.push(addedMovieToFavorite);
+        console.log(state.favoriteMovies);
+      })
+      // Remove movie from favorite list
+      .addCase(deleteFromFavorite.fulfilled, (state, action) => {
+        //déstructure values userId et movieId from argument arg of action. this values are sent to action deleteFromFavorite when it called
+        const { userId, movieId } = action.meta.arg;
+        //update favoriteMovies on state slice Redux, filter used to create new array with all movies expect the movie where id = movieId
+        state.favoriteMovies = state.favoriteMovies.filter((movie) => movie.id !== movieId);
+      })
+      // List favorite movies
+      .addCase(fetchFavoriteMovies.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchFavoriteMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.favoriteMovies = action.payload; // Update state with fetched favorite movies
+        console.log(action.payload);
+        console.log(state.favoriteMovies);
+      })
+      .addCase(fetchFavoriteMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies";
+      })
+      // TO REVIEW MOVIES
+      // Add movie to review
+      .addCase(addToReview.fulfilled, (state, action) => {
+      const addedMovieToReview = action.payload;
+      state.moviesToReview.push(addedMovieToReview);
+      })
+      // Remove movie from to review
+      .addCase(deleteFromReview.fulfilled, (state, action) => {
+      //déstructure values userId et movieId from argument arg of action. this values are sent to action deleteFromFavorite when it called
+      const { userId, movieId } = action.meta.arg;
+      //update favoriteMovies on state slice Redux, filter used to create new array with all movies expect the movie where id = movieId
+      state.moviesToReview = state.moviesToReview.filter((movie) => movie.id !== movieId);
+      })
+      //show To review movies
+      .addCase(fetchMoviesToReview.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchMoviesToReview.fulfilled, (state, action) => {
+        state.loading = false;
+        state.moviesToReview = action.payload; // Update state with fetched favorite movies
+        console.log(action.payload);
+        console.log(state.moviesToReview);
+      })
+      .addCase(fetchMoviesToReview.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies";
+      })
+    });
+  export default moviesReducer;
+>>>>>>> d386a469628ed83f73f49f8de58451bf02b3501a

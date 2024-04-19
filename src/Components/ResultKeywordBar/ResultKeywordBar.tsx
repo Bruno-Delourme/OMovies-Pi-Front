@@ -1,38 +1,38 @@
+
+import { useNavigate } from "react-router-dom";   
+
 import Header from "../Header/Header";
 import OneMovie from "../OneMovie/OneMovie";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import React, { useEffect, useState } from 'react';
-import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchMoviesByRating } from "../../store/action/action";
-
-
+import React, { useEffect } from 'react';
+import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchDocumentaireMovies, fetchRomanceRatingMovies, fetchFamilialRatingMovies, fetchActionRatingMovies, fetchScienceFictionRatingMovies, fetchDocumentaireRatingMovies } from "../../store/action/action";
 
 import { MoviesResponse, Movie } from "../../../src/@types/movie";
 import "./ResultKeywordBar.scss";
 
-
-
-const LogoAward = "../../../public/award.svg";
-
-
-
+import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 
 function ResultKeywordBar() {
   const dispatch = useAppDispatch();
-
-  const [showAwardButton, setShowAwardButton] = useState(false);
-  const [selectedGenre, setSelectedGenre] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate(); // use AP history of react to update URL on click on Rating buttons 
 
   const romanceMovies = useAppSelector((state) => state.movies.romanceMovies) as unknown as MoviesResponse;
+  const romanceMoviesRating = useAppSelector((state) => state.movies.romanceMoviesRating) as unknown as MoviesResponse;
+
   const familialMovies = useAppSelector((state) => state.movies.familialMovies) as unknown as MoviesResponse;
+  const familialMoviesRating = useAppSelector((state) => state.movies.familialMoviesRating) as unknown as MoviesResponse;
+
   const actionMovies = useAppSelector((state) => state.movies.actionMovies) as unknown as MoviesResponse;
+  const actionMoviesRating = useAppSelector((state) => state.movies.actionMoviesRating) as unknown as MoviesResponse;
+
   const ScienceFictionMovies = useAppSelector((state) => state.movies.ScienceFictionMovies) as unknown as MoviesResponse;
+  const ScienceFictionMoviesRating = useAppSelector((state) => state.movies.ScienceFictionMoviesRating) as unknown as MoviesResponse;
+
   const documentaireMovies = useAppSelector((state) => state.movies.documentaireMovies) as unknown as MoviesResponse;
-
-
-  const moviesByRating = useAppSelector((state) => state.movies.moviesByRating) as unknown as MoviesResponse;
-
- 
+  const documentaireMoviesRating = useAppSelector((state) => state.movies.documentaireMoviesRating) as unknown as MoviesResponse;
+  
   /*
 useAppSelector((state) => state.movies.marvelMovies) : to access the global state of the app.
 The function passed as a parameter (state) allows accessing a specific part of the state romanceMovies, familialMovies ..
@@ -49,85 +49,125 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
     if (location.pathname === "/movies/romance") {
       //send an action to the Redux store, fetch and update the state with movies data based on the current URL path
       dispatch(fetchRomanceMovies());
-      setShowAwardButton(true);
-    } else if (location.pathname === "/movies/comedie") {
+    } 
+    if (location.pathname === "/moviesRating/romance") {
+      //send an action to the Redux store, fetch and update the state with movies data based on the current URL path
+      dispatch(fetchRomanceRatingMovies());  
+    } 
+
+    else if (location.pathname === "/movies/familial") {
       dispatch(fetchFamilialMovies());
-      setShowAwardButton(true);
-    } else if (location.pathname === "/movies/marvel") {
+    }
+    else if (location.pathname === "/moviesRating/familial") {
+      dispatch(fetchFamilialRatingMovies());
+    }
+    
+    else if (location.pathname === "/movies/action") {
       dispatch(fetchActionMovies());
-      setShowAwardButton(true);
-  }
+    }
+    else if (location.pathname === "/moviesRating/action") {
+      dispatch(fetchActionRatingMovies());
+    }
+
+    else if (location.pathname === "/movies/science-fiction") {
+      dispatch(fetchScienceFictionMovies());
+    }
+    else if (location.pathname === "/moviesRating/science-fiction") {
+      dispatch(fetchScienceFictionRatingMovies());
+    }
+
+    else if (location.pathname === "/movies/documentaire") {
+      dispatch(fetchDocumentaireMovies());
+    }
+    else if (location.pathname === "/moviesRating/documentaire") {
+      dispatch(fetchDocumentaireRatingMovies());
+    }
+
   }, [dispatch, location.pathname]);
 
+
+  const handleRomanceRatingClick = () => {
+    dispatch(fetchRomanceRatingMovies()); // Fetch data
+    navigate("/moviesRating/romance"); // Update URL
+  };
+
+  const handleFamilialRatingClick = () => {
+    dispatch(fetchFamilialRatingMovies()); 
+    navigate("/moviesRating/familial"); 
+  };
+
+  const handleActionRatingClick = () => {
+    dispatch(fetchActionRatingMovies());
+    navigate("/moviesRating/action"); 
+  };
+
+  const handleScienceFictionRatingClick = () => {
+    dispatch(fetchScienceFictionRatingMovies()); 
+    navigate("/moviesRating/science-fiction"); 
+  };
+
+  const handleDocumentaireRatingClick = () => {
+    dispatch(fetchDocumentaireRatingMovies()); 
+    navigate("/moviesRating/documentaire"); 
+  };
+
+  
   const moviesToDisplay =
-  location.pathname === "/movies/romance"
+    location.pathname === "/movies/romance"
     ? romanceMovies
+    : location.pathname === "/moviesRating/romance"
+    ? romanceMoviesRating
+
     : location.pathname === "/movies/familial"
     ? familialMovies
+    : location.pathname === "/moviesRating/familial"
+    ? familialMoviesRating
+
     : location.pathname === "/movies/action"
     ? actionMovies
+    : location.pathname === "/moviesRating/action"
+    ? actionMoviesRating
+
     : location.pathname === "/movies/science-fiction"
     ? ScienceFictionMovies
+    : location.pathname === "/moviesRating/science-fiction"
+    ? ScienceFictionMoviesRating
+
     : location.pathname === "/movies/documentaire"
     ? documentaireMovies
+    : location.pathname === "/moviesRating/documentaire"
+    ? documentaireMoviesRating
     : null;
 
 
-  console.log(romanceMovies);
 
 
-/***************  PARTIE RATING PAR GENRE ***********************************************************/
-//est appelée lorsque l'utilisateur clique sur un genre
-const handleGenreClick = (genre: string) => {
-  setSelectedGenre(genre);
-  setShowAwardButton(true);
-};
-
-//ici on met à jour la variable selectedGenre avec le genre sélectionné
-/*
- handleAwardClick ne sera appelée que si selectedGenre n'est pas vide. Si selectedGenre est vide, un message d'erreur sera affiché dans la console.
-
-const handleAwardClick = () => {
-  if (typeof selectedGenre!== 'undefined' && selectedGenre.length > 0 && typeof fetchMoviesByRating === 'function') {
-    dispatch(fetchMoviesByRating(selectedGenre));
-    setShowAwardButton(false); // Set showAwardButton to false after dispatching the fetchMoviesByRating action
-  } else {
-    console.error(`La variable selectedGenre n'est pas définie ou ne contient pas de valeur.`);
-  }
-};*/
-
-//selectedGenre aura toujours une valeur par défaut, qui est une chaîne vide.
-// handleAwardClick ne sera appelée que si selectedGenre n'est pas vide. Si selectedGenre est vide, un message d'erreur sera affiché dans la console.
-const handleAwardClick = () => {
-  if (typeof selectedGenre!== 'undefined' && selectedGenre.length > 0 && typeof fetchMoviesByRating === 'function') {
-    dispatch(fetchMoviesByRating(selectedGenre));
-    setShowAwardButton(false); // Set showAwardButton to false after dispatching the fetchMoviesByRating action
-  } else {
-    console.error(`La variable selectedGenre n'est pas définie ou ne contient pas de valeur.`);
-  }
-};
-
+  console.log(romanceMovies)
 
   return (
     <>
       <Header />
       <KeywordBar />
-      {loading && <p>Loading movies...</p>}
-
-      {showAwardButton && (
-        <img
-        src={LogoAward}
-        alt="Award Button"
-        onClick={() => handleAwardClick()} 
-        className="award-button"
-      />
+      {location.pathname === "/movies/romance" && (
+        <button className="genre-btn text-white bg-red-400" onClick={handleRomanceRatingClick}>Romance Rating</button>
+      )}
+      {location.pathname === "/movies/familial" && (
+        <button className="genre-btn text-white bg-stone-950" onClick={handleFamilialRatingClick} >Familial Rating</button>
+      )}
+      {location.pathname === "/movies/action" && (
+        <button className="genre-btn text-white bg-orange-700" onClick={handleActionRatingClick} >Action Rating</button>
+      )}
+      {location.pathname === "/movies/science-fiction" && (
+        <button className="genre-btn text-white bg-yellow-950" onClick={handleScienceFictionRatingClick}>Science Fiction Rating</button>
+      )}
+      {location.pathname === "/movies/documentaire" && (
+        <button className="genre-btn text-black bg-white" onClick={handleDocumentaireRatingClick}>Documentaire Rating</button>
       )}
 
+      {loading && <p>Loading movies...</p>}
 
-
-            {moviesToDisplay?.movies && !loading && (
+      {moviesToDisplay?.movies && !loading && (
         <div className="resultKeywordBar-container">
-
           {moviesToDisplay.movies.map((movie) => (
             <OneMovie
               key={movie.id}
@@ -136,30 +176,22 @@ const handleAwardClick = () => {
               poster_path={movie.poster_path}
               overview={movie.overview}
               release_date={movie.release_date}
-              vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0}            />
+              vote_average={movie.vote_average}
+              adult={false}
+              original_title={""}
+              original_language={""}
+              cast_id={0}
+              character={""}
+              name={""}
+              genre_ids={0}
+            />
           ))}
         </div>
-      )}
-
-      {moviesByRating?.movies &&!loading && (
-        <div className="resultKeywordBar-container">
-        {moviesByRating.movies.map((movie) => (
-          <OneMovie
-            key={movie.id}
-            id={movie.id}
-            title={movie.title}
-            poster_path={movie.poster_path}
-            overview={movie.overview}
-            release_date={movie.release_date}
-            vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0} />
-        ))}
-      </div>
       )}
 
       {!moviesToDisplay?.movies?.length && !loading && (
         <p>No movies found.</p>
       )}
-
     </>
   );
 }
