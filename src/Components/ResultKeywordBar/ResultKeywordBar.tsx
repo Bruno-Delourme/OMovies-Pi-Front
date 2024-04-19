@@ -16,11 +16,7 @@ import { useLocation } from "react-router-dom"; // to get actual location and sh
 function ResultKeywordBar() {
   const dispatch = useAppDispatch();
   const location = useLocation();
-<<<<<<< HEAD
   const navigate = useNavigate(); // use AP history of react to update URL on click on Rating buttons 
-=======
-  const navigate = useNavigate();; // use AP history of react to update URL on click on Rating buttons 
->>>>>>> e069655e0b7d49186fb5c3dc9cc12dfcc1788376
 
   const romanceMovies = useAppSelector((state) => state.movies.romanceMovies) as unknown as MoviesResponse;
   const romanceMoviesRating = useAppSelector((state) => state.movies.romanceMoviesRating) as unknown as MoviesResponse;
@@ -171,26 +167,6 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
       {loading && <p>Loading movies...</p>}
 
       {moviesToDisplay?.movies && !loading && (
-<<<<<<< HEAD
-        <div className="resultKeywordBar-container">
-          {moviesToDisplay.movies.map((movie) => (
-            <OneMovie
-              key={movie.id}
-              id={movie.id}
-              title={movie.title}
-              poster_path={movie.poster_path}
-              overview={movie.overview}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
-              adult={false}
-              original_title={""}
-              original_language={""}
-              cast_id={0}
-              character={""}
-              name={""}
-              genre_ids={0}
-            />
-=======
         <div className="flex flex-wrap w-full justify-evenly">
           {moviesToDisplay.movies.map((movie) => (
             <div className="p-1 max-w-72">
@@ -211,7 +187,6 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
                 name={""}             
               />
             </div>
->>>>>>> e069655e0b7d49186fb5c3dc9cc12dfcc1788376
           ))}
         </div>
       )},

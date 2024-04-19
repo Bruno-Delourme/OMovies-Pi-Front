@@ -1,41 +1,45 @@
 .onemoviecontainer {
-    
   position: relative;
   transition: all 0.3s ease;
-  &.animate, &:hover {
-      .action-buttons {
-          display: flex;
-          justify-content: center;
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          background-color: rgba(0, 0, 0, 0.5); // Semi-transparent background
-          padding: 10px 0;
-      }
+  overflow: hidden;
+  &.animate,
+  &:hover {
+    .action-buttons {
+      
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5); // Semi-transparent background
+      padding: 10px 0;
+    }
   }
-  
+
   .action-buttons {
-      display: none; // Cache le bouton par défault
-      .like-button, .platform-button {
-          margin: 0 5px;
-          background-color: transparent;
-          &:hover {
-              background-color: darkgray; // Hover effect
-          }
-          img {
-              transition: transform 0.2s ease;
-          }
-          &:active {
-              img {
-                  transform: scale(0.9);
-              }
-          }
+    display: none; // Cache le bouton par défault
+    .like-button,
+    .platform-button {
+      margin: 0 5px;
+      background-color: transparent;
+      width: 50%;
+      &:hover {
+        background-color: darkgray; // Hover effect
       }
-      .liked {
-          background-color: green; // Vert si liké
-          &:hover {
-              background-color: green; // Et override hover après like 
-          }
+      img {
+        transition: transform 0.2s ease;
       }
+      &:active {
+        img {
+          transform: scale(0.9);
+        }
+      }
+    }
+    .liked {
+      background-color: green; // Vert si liké
+      &:hover {
+        background-color: green; // Et override hover après like
+      }
+    }
   }
 }

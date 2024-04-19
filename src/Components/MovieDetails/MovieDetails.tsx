@@ -24,6 +24,7 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
             )}
             <div>
               <h2>{movie.title}</h2>
+              <p>Casting :{movie.name}</p>
               <p>{movie.overview}</p>
              <p>Release Date: {movie.release_date}</p>
               <p>Vote Average: {movie.vote_average}</p>

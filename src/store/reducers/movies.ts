@@ -32,12 +32,8 @@ interface MoviesState {
     suggestionMovies: Movie[],
     moviesByGenre: Movie[],
     moviesByActor: Movie[],
-<<<<<<< HEAD
-    moviesByRating: Movie[];
-=======
     favoriteMovies: Movie[]
     moviesToReview: Movie[],
->>>>>>> d386a469628ed83f73f49f8de58451bf02b3501a
     loading: boolean;
     error: string | null;
   }
@@ -56,12 +52,8 @@ interface MoviesState {
     suggestionMovies: [],
     moviesByGenre: [],
     moviesByActor: [],
-<<<<<<< HEAD
-    moviesByRating: [],
-=======
     favoriteMovies: [],
     moviesToReview: [],
->>>>>>> d386a469628ed83f73f49f8de58451bf02b3501a
     loading: false,
     error: null,
   };
@@ -263,30 +255,6 @@ interface MoviesState {
       .addCase(setRomanceMovies, (state, action) => {
         state.romanceMovies = action.payload; // Update state for other movie categories
       })
-<<<<<<< HEAD
-
-      //MOVIES BY RATING
-      .addCase(fetchMoviesByRating.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchMoviesByRating.fulfilled, (state, action) => {
-        state.loading = false;
-        state.moviesByRating = action.payload; // 
-      })
-      .addCase(fetchMoviesByRating.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed to fetch movies";
-      })
-
-      
-    }); 
-  
-  export default moviesReducer;
-
-
-  
-=======
       // FAVORITE MOVIES
       // Add movie to favorite List
       .addCase(addToFavorite.fulfilled, (state, action) => {
@@ -346,4 +314,3 @@ interface MoviesState {
       })
     });
   export default moviesReducer;
->>>>>>> d386a469628ed83f73f49f8de58451bf02b3501a
