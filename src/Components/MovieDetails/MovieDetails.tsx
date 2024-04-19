@@ -1,5 +1,5 @@
 
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import { useAppSelector } from '../../../src/hooks/redux';
 import { Movie } from '../../../src/@types/movie';
 import OneMovie from '../../Components/OneMovie/OneMovie';
@@ -17,9 +17,8 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
 
     return (
         <div className="">
-          <h1>coucou c'est moi</h1>
-          <div>
-            <button>retour</button>
+          <div className="">
+            <Link to={`/`}>
             {movie && (
               <OneMovie poster_path={movie.poster_path} />
             )}
@@ -29,7 +28,7 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
              <p>Release Date: {movie.release_date}</p>
               <p>Vote Average: {movie.vote_average}</p>
             </div>
-
+            </Link>
           </div>
           
       </div>

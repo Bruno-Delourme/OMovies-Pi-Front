@@ -3,7 +3,7 @@ import { RootState } from '../index';
 
 import { createReducer, createSelector } from "@reduxjs/toolkit";
 import { Movie, MoviesResponse } from "../../@types/movie";
-import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchFavoriteMovies, addToFavorite, deleteFromFavorite, addToReview, deleteFromReview, fetchMoviesToReview } from "../action/action";
+import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchFavoriteMovies, addToFavorite, deleteFromFavorite, addToReview, deleteFromReview, fetchMoviesToReview, fetchRomanceRatingMovies, fetchFamilialRatingMovies, fetchActionRatingMovies, fetchScienceFictionRatingMovies, fetchDocumentaireRatingMovies } from "../action/action";
 
 
 <<<<<<< HEAD
@@ -23,10 +23,15 @@ export const selectMoviesToReview = createSelector(
 
 interface MoviesState {
     romanceMovies: Movie[];
+    romanceMoviesRating : Movie[],
     familialMovies: Movie[];
+    familialMoviesRating : Movie[],
     actionMovies: Movie[];
+    actionMoviesRating : Movie[],
     ScienceFictionMovies: Movie[],
+    ScienceFictionMoviesRating : Movie[],
     documentaireMovies: Movie[],
+    documentaireMoviesRating : Movie[],
     newMovies:  Movie[],
     suggestionMovies: Movie[],
     moviesByGenre: Movie[],
@@ -42,10 +47,15 @@ interface MoviesState {
   }
   export const initialState: MoviesState = {
     romanceMovies: [],
+    romanceMoviesRating : [],
+    familialMoviesRating : [],
     familialMovies: [],
     actionMovies: [],
+    actionMoviesRating : [],
     documentaireMovies: [],
+    documentaireMoviesRating : [],
     ScienceFictionMovies: [],
+    ScienceFictionMoviesRating :[],
     newMovies: [],
     suggestionMovies: [],
     moviesByGenre: [],
@@ -77,6 +87,21 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies";
       })
+          //Romance movies Rating 
+          .addCase(fetchRomanceRatingMovies.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+          })
+          .addCase(fetchRomanceRatingMovies.fulfilled, (state, action) => {
+            state.loading = false;
+            state.romanceMoviesRating = action.payload; // Update state with fetched romance movies
+            console.log(state.romanceMoviesRating);
+          })
+          .addCase(fetchRomanceRatingMovies.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || "Failed to fetch movies";
+          })
+
       //Familial movies
       .addCase(fetchFamilialMovies.pending, (state) => {
         state.loading = true;
@@ -90,6 +115,20 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies";
       })
+            //Familial movies Rating 
+            .addCase(fetchFamilialRatingMovies.pending, (state) => {
+              state.loading = true;
+              state.error = null;
+            })
+            .addCase(fetchFamilialRatingMovies.fulfilled, (state, action) => {
+              state.loading = false;
+              state.familialMoviesRating = action.payload; // Update state with fetched Familial movies
+            })
+            .addCase(fetchFamilialRatingMovies.rejected, (state, action) => {
+              state.loading = false;
+              state.error = action.error.message || "Failed to fetch movies";
+            })
+
       //Action movies
       .addCase(fetchActionMovies.pending, (state) => {
         state.loading = true;
@@ -103,6 +142,20 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies";
       })
+            //Action movies Rating fetchActionRatingMovies actionMoviesRating
+            .addCase(fetchActionRatingMovies.pending, (state) => {
+              state.loading = true;
+              state.error = null;
+            })
+            .addCase(fetchActionRatingMovies.fulfilled, (state, action) => {
+              state.loading = false;
+              state.actionMoviesRating = action.payload; // Update state with fetched marvel movies
+            })
+            .addCase(fetchActionRatingMovies.rejected, (state, action) => {
+              state.loading = false;
+              state.error = action.error.message || "Failed to fetch movies";
+            })
+
       //science-fiction movies
       .addCase(fetchScienceFictionMovies.pending, (state) => {
         state.loading = true;
@@ -116,6 +169,21 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies";
       })
+            //science-fiction movies 
+            .addCase(fetchScienceFictionRatingMovies.pending, (state) => {
+              state.loading = true;
+              state.error = null;
+            })
+            .addCase(fetchScienceFictionRatingMovies.fulfilled, (state, action) => {
+              state.loading = false;
+              state.ScienceFictionMoviesRating = action.payload; // Update state with fetched comedie movies
+            })
+            .addCase(fetchScienceFictionRatingMovies.rejected, (state, action) => {
+              state.loading = false;
+              state.error = action.error.message || "Failed to fetch movies";
+            })
+
+
       //Documentaire movies
       .addCase(fetchDocumentaireMovies.pending, (state) => {
         state.loading = true;
@@ -129,6 +197,20 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies";
       })
+            //Documentaire movies fetchDocumentaireRatingMovies  documentaireMoviesRating
+            .addCase(fetchDocumentaireRatingMovies.pending, (state) => {
+              state.loading = true;
+              state.error = null;
+            })
+            .addCase(fetchDocumentaireRatingMovies.fulfilled, (state, action) => {
+              state.loading = false;
+              state.documentaireMoviesRating = action.payload; // Update state with fetched comedie movies
+            })
+            .addCase(fetchDocumentaireRatingMovies.rejected, (state, action) => {
+              state.loading = false;
+              state.error = action.error.message || "Failed to fetch movies";
+            })
+
       //New movies
       .addCase(fetchNewMovies.pending, (state) => {
         state.loading = true;
