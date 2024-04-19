@@ -374,15 +374,40 @@ const axiosInstance = axios.create({
     //COMMENTS
     //Show comments 
     const FETCHCOMMENTS ="FETCHCOMMENTS"
-    export const fetchComments = createAsyncThunk(FETCHCOMMENTS, async () => {
+    export const fetchComments = createAsyncThunk<Comment[]>("FETCHCOMMENTS", async () => {
       const response = await axiosInstance.get("/showComment");
-      const comments = response.data as Comment[];
-      return response.data;
+      const AllComments = response.data as Comment[];
+      return AllComments;
     });
-    
+
+
+
     //Add comment 
+    //need token and userId using params { userId: number, token: string }
+    interface AddCommentParams {
+      userId: number;
+      token: string;
+      comment: string;
+    }
     const ADDCOMMENT= "ADDCOMMENT"
-    export const addComment = createAsyncThunk(ADDCOMMENT, async (comment) => {
-      const response = await axiosInstance.post("/createComment/${id}", comment);
-      return response.data;
-    });
+    export const addComment = createAsyncThunk<Comment, AddCommentParams>(
+      ADDCOMMENT,
+      async ({ userId, token, comment }) => {
+        const state = thunkAPI.getState() as RootState; // get pseudo user via state Redux using thunkAPI.getState()
+        const pseudo = state.user.pseudo;
+        const response = await axiosInstance.post<Comment>(
+          `/createComment/${userId}`,
+          {
+            pseudo,
+            comment,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const newComment = response.data;
+        return newComment;
+      }
+    );

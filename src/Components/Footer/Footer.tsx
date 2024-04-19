@@ -5,7 +5,7 @@ import axios from "axios";
 
 function Footer() {
     const user = useAppSelector((state) => state.user);
-    const userEmail = user.email;
+    const email ='omovies@outlook.fr'
     const userPseudo = user.pseudo;
     const token = user.token; 
   
@@ -24,7 +24,7 @@ function Footer() {
   
       try {
         const response = await axios.post(`http://localhost:3000/api/send-mail`, {
-          email: userEmail,
+          email: email,
           pseudo: userPseudo,
           subject: e.target.subject.value,
           message: e.target.message.value,
@@ -90,10 +90,9 @@ function Footer() {
                     Nous contacter
                   </Dialog.Title>
                   <form className="mt-2" onSubmit={sendEmail}>
-                    <input type="email" name="email" placeholder="Email" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" defaultValue={userEmail} disabled />
-                    <input type="text" name="pseudo" placeholder="Pseudo" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" defaultValue={userPseudo} disabled />
+                    <input type="email" name="email" placeholder="Email" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" defaultValue={email} disabled />
                     <input type="text" name="subject" placeholder="Objet" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                    <textarea name="message" placeholder="Message" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    <textarea name="message" placeholder="Veuillez écrire votre message en indiquant vos coordonnées" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                     <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">Envoyer</button>
             </form>
           </Dialog.Panel>
