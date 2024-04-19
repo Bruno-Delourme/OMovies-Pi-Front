@@ -4,7 +4,6 @@ import KeywordBar from "../KeywordBar/KeywordBar";
 import Content from "../Content/Content";
 import Footer from "../Footer/Footer";
 
-import "./Home.scss";
 
 function Home() {
     return (

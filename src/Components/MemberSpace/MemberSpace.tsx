@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {  deleteUser, updateUser } from '../../store/action/action';
-import HeaderProfil from './HeaderProfil/HeaderProfil';
 import { UserFormData } from '../../@types/user';
 
 
@@ -45,7 +44,6 @@ console.log(user.token);
 
   return (
     <div className="p-5">
-      {/* <HeaderProfil /> */}
       
       <div className="pb-4">
       <h1 className="">Bienvenue dans ton espace profil, {user.pseudo}</h1>

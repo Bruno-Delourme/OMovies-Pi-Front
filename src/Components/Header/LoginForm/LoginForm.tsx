@@ -8,10 +8,6 @@ import { FaListCheck } from "react-icons/fa6";
 
 import MemberSpace from '../../MemberSpace/MemberSpace';
 
-// import List from "../../List/List";
-// import './LoginForm.scss';
-// import UserProfileModal from '../../MemberSpace/MemberSpaceModal';
-
 function LoginForm() {
   const dispatch = useAppDispatch();
 
@@ -67,7 +63,7 @@ function LoginForm() {
                     <div className="bg-white absolute rounded-lg">
                       <div className="">
                       <Routes>
-                        <Route path="/" element={<MemberSpace userId={userId} />} />
+                        <Route path="/" element={<MemberSpace id={0}/>} />
                       </Routes>
                       </div>
                     </div>

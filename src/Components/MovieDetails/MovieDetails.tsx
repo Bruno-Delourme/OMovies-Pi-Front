@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../src/hooks/redux';
 import { Movie } from '../../../src/@types/movie';
@@ -17,6 +17,7 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
 
     return (
         <div className="">
+          <h1>coucou c'est moi</h1>
           <div>
             <button>retour</button>
             {movie && (

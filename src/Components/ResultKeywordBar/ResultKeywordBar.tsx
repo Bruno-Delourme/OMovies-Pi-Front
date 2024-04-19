@@ -6,7 +6,6 @@ import React, { useEffect } from 'react';
 import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies } from "../../store/action/action";
 
 import { MoviesResponse, Movie } from "../../../src/@types/movie";
-import "./ResultKeywordBar.scss";
 
 import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 

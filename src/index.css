@@ -99,7 +99,7 @@ body {
   }
   /* Chevron left and right SCSS */
   .chevron-design {
-    @apply h-96 w-12 bg-gray-100 bg-opacity-10 hover:bg-gray-300 hover:bg-opacity-20 rounded-full
+    @apply h-80 w-12 bg-gray-100 bg-opacity-30 hover:bg-gray-300 hover:bg-opacity-20 rounded-full
   }
 
   /* Movie picture container */

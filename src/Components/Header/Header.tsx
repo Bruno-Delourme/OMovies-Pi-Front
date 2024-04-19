@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { FaRegCircleUser } from "react-icons/fa6";
-import { FaListCheck } from "react-icons/fa6";
 import LoginForm from "./LoginForm/LoginForm";
 import SearchBar from "./SearchBar/SearchBar";
-
-// Import du composant group + icon group :
-// import Group from "../Group/Group";
-// import { FaPeopleGroup } from "react-icons/fa6";
-
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../../hooks/redux';
 

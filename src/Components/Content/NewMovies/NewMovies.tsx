@@ -55,7 +55,13 @@ return (
                 title={movie.title}
                 overview={movie.overview}
                 release_date={movie.release_date}
-                vote_average={movie.vote_average} adult={false} original_title={""} original_language={""} cast_id={0} character={""} name={""} genre_ids={0}
+                vote_average={movie.vote_average} 
+                adult={false} 
+                original_title={""} 
+                original_language={""} 
+                cast_id={0} 
+                character={""} 
+                name={""} 
                 />   
               </div>  
             ))}
