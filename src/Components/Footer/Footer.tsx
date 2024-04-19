@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useAppSelector } from "../../hooks/redux";
 import axios from "axios";
-
 function Footer() {
     const user = useAppSelector((state) => state.user);
     const email ='omovies@outlook.fr'
