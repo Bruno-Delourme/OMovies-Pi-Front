@@ -369,3 +369,20 @@ const axiosInstance = axios.create({
         });
       }
     );
+
+
+    //COMMENTS
+    //Show comments 
+    const FETCHCOMMENTS ="FETCHCOMMENTS"
+    export const fetchComments = createAsyncThunk(FETCHCOMMENTS, async () => {
+      const response = await axiosInstance.get("/showComment");
+      const comments = response.data as Comment[];
+      return response.data;
+    });
+    
+    //Add comment 
+    const ADDCOMMENT= "ADDCOMMENT"
+    export const addComment = createAsyncThunk(ADDCOMMENT, async (comment) => {
+      const response = await axiosInstance.post("/createComment/${id}", comment);
+      return response.data;
+    });
