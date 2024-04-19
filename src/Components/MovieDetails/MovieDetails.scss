@@ -1,0 +1,59 @@
+.movie-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333; /* Couleur de texte foncée pour une meilleure lisibilité */
+    background-color: #f4f4f4; /* Couleur de fond claire */
+  }
+  
+  .movie-details-header {
+    margin-bottom: 20px;
+  }
+  
+  .movie-poster {
+    max-width: 300px; /* Limiter la taille de l'affiche */
+    border-radius: 8px; /* Bordures arrondies */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Ombre subtile pour le poster */
+  }
+  
+  .movie-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px; /* Limite la largeur pour la lisibilité */
+  }
+  
+  .movie-title {
+    font-size: 24px; /* Taille de police pour le titre */
+    font-weight: bold; /* Police en gras */
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .movie-overview {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6; /* Espacement des lignes pour une meilleure lecture */
+  }
+  
+  .movie-details {
+    font-size: 14px;
+    color: #444;
+    margin-top: 5px;
+  }
+  
+  /* Styles adaptés aux différents points de rupture pour le responsive design */
+  @media (min-width: 768px) {
+    .movie-details-container {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  
+    .movie-info {
+      margin-left: 20px;
+    }
+  }

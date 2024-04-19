@@ -9,7 +9,6 @@ import React, { useEffect } from 'react';
 import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchDocumentaireMovies, fetchRomanceRatingMovies, fetchFamilialRatingMovies, fetchActionRatingMovies, fetchScienceFictionRatingMovies, fetchDocumentaireRatingMovies } from "../../store/action/action";
 
 import { MoviesResponse, Movie } from "../../../src/@types/movie";
-import "./ResultKeywordBar.scss";
 
 import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 
@@ -145,7 +144,7 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
   console.log(romanceMovies)
 
   return (
-    <>
+    <div>
       <Header />
       <KeywordBar />
       {location.pathname === "/movies/romance" && (
@@ -167,33 +166,37 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
       {loading && <p>Loading movies...</p>}
 
       {moviesToDisplay?.movies && !loading && (
-        <div className="resultKeywordBar-container">
+        <div className="flex flex-wrap w-full justify-evenly">
           {moviesToDisplay.movies.map((movie) => (
-            <OneMovie
-              key={movie.id}
-              id={movie.id}
-              title={movie.title}
-              poster_path={movie.poster_path}
-              overview={movie.overview}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
-              adult={false}
-              original_title={""}
-              original_language={""}
-              cast_id={0}
-              character={""}
-              name={""}
-              genre_ids={0}
-            />
+            <div className="p-1 max-w-72">
+              {/* resultKeywordBar-container ou flex flex-wrap w-full justify-evenly */}
+              <OneMovie
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                poster_path={movie.poster_path}
+                overview={movie.overview}
+                release_date={movie.release_date}
+                vote_average={movie.vote_average}
+                adult={false}
+                original_title={""}
+                original_language={""}
+                cast_id={0}
+                character={""}
+                name={""}             
+              />
+            </div>
           ))}
         </div>
-      )}
+      )},
 
       {!moviesToDisplay?.movies?.length && !loading && (
         <p>No movies found.</p>
       )}
-    </>
+    </div>
+    
   );
-}
+  
+};
 
 export default ResultKeywordBar;

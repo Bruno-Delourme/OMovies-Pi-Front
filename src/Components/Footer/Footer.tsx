@@ -14,7 +14,7 @@ function Footer() {
     const closeModal = () => {
       setIsOpen(false);
     };
-    const sendEmail = async (e) => {
+    const sendEmail = async (e: { preventDefault: () => void; target: { subject: { value: any; }; message: { value: any; }; }; }) => {
       e.preventDefault();
       try {
         const response = await axios.post(`http://localhost:3000/api/send-mail`, {
@@ -57,6 +57,7 @@ function Footer() {
           </div>
         </div>
       </div>
+
       <p className="team">Team O'MOVIES : Bruno, Gwendoline, Fadwa, Mathias</p>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>

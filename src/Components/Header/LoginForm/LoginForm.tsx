@@ -1,11 +1,12 @@
 import { FormEvent} from "react";
 import Field from "./Field/Field";
-import './LoginForm.scss';
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { changeField, login, logout } from "../../../store/action/action";
 import SubscribeForm from "../SubscribeForm/SuscribeForm";
-import { Link } from "react-router-dom";
+import { Link, useMatch, Route, Routes, Navigate } from "react-router-dom";
+import { FaListCheck } from "react-icons/fa6";
 
+import MemberSpace from '../../MemberSpace/MemberSpace';
 
 function LoginForm() {
   const dispatch = useAppDispatch();
@@ -38,30 +39,47 @@ function LoginForm() {
     dispatch(logout());
   };
 
+  const match = useMatch(`/profil/${userId}`);
+
+
   return (
     <div className="login-form">
       {isLogged && (
-              <div className="login-form-logged">
-                <p className="login-form-message">
+              <div className="inline-flex items-center justify-evenly p-6">
+                <p className="login-form-message pr-4 pl-4">
                   Bienvenue {pseudo}
                 </p>
+                <div className="mr-4">
+                  <Link to={`/list/${userId}`} className="btn">
+                    <FaListCheck size={32} />
+                    <span className="ml-1">Ma liste</span>
+                  </Link>
+                </div>
+                <label htmlFor="userProfil_modal" className="btn mr-4">
+                  Mon Profil
+                </label>
+                <input type="checkbox" id="userProfil_modal" className="modal-toggle" />
+                  <div id="userProfil_modal" className="modal" role="dialog">       
+                    <div className="bg-white absolute rounded-lg">
+                      <div className="">
+                      <Routes>
+                        <Route path="/" element={<MemberSpace id={0}/>} />
+                      </Routes>
+                      </div>
+                    </div>
+                    <label className="modal-backdrop" htmlFor="userProfil_modal">Close</label>
+                  </div>
                 <button
                   type="button"
-                  className="login-form-button"
+                  className="login-form-button btn mr-4"
                   onClick={handleLogout}
-                >
-                  Déconnexion
+                  >Déconnexion
                 </button>
-                <Link to={`/profil/${userId}`}>
-                <button className="acces-buttons" id="list-btn">
-                    Mon Profil
-                </button>
-                </Link>
               </div>
             )}
       {!isLogged && (
-        <div className="relative">
-            <div className="relative"> 
+        <div className="">
+            <div className=""> 
                 <form 
                   autoComplete="off"
                   className="inline-flex "
@@ -72,7 +90,6 @@ function LoginForm() {
                   onChange={handleChangeField("pseudo")}
                   value={pseudo} />
                 <Field
-                  
                   type="password"
                   placeholder="Mot de passe"
                   onChange={handleChangeField("password")}
@@ -81,30 +98,21 @@ function LoginForm() {
                 <button type="submit" className="btn p-4 mr-1">
                   OK
                 </button>
-                {/* <button className="btn close-button" onClick={() => document.getElementById('loggin_modal').close()}>
-                  Annuler
-                </button> */}
               </div>     
               </form>
             </div>
 {/* Suscribe button */}
               <div className="pt-4">
-                <button onClick={()=>document.getElementById('my_modal_2').showModal()}>S'inscrire</button>
-                  <dialog id="my_modal_2" className="modal">
-                    <div className="modal-box flex flex-col">
-                      <button className="close-button absolute top-0 right-0 mt-2 mr-2 w-5 h-7.5 border border-gray-300 text-gray-500 rounded-md hover:bg-gray-100" onClick={() => document.getElementById('my_modal_2').close()}>
+                <button className="btn" onClick={()=>document.getElementById('inscription_modal').showModal()}>S'inscrire</button>
+                  <dialog id="inscription_modal" className="modal">
+                    <div className="bg-white rounded-lg absolute">
+                      <button className="close-button absolute top-0 right-0 mt-2 mr-2 w-5 h-7.5 border border-gray-300 text-gray-500 rounded-md hover:bg-gray-100" onClick={() => document.getElementById('inscription_modal').close()}>
                         X
                       </button>
-                      <div className="">
+                      <div className="p-4">
                         <SubscribeForm />
-                      </div>
-                      <div className="">
-                        <form method="dialog">
-                          <button className="btn ml-5">Annuler</button>
-                        </form>
-                      </div>
+                      </div> 
                     </div>
-                    
                   </dialog>
               </div>
         </div>

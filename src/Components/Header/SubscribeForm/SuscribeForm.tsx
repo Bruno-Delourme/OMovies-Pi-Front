@@ -35,7 +35,9 @@ function SubscribeForm() {
   return (
     <div>
       {message && <p>{message}</p>}
-      <form className="inscription-form " onSubmit={handleSubmit}>
+      <form className="inscription-form" onSubmit={handleSubmit}>
+        <div className="items-baseline justify-between">
+        <p>Pseudo</p>
         <input
           className="m-5"
           type="text"
@@ -44,6 +46,9 @@ function SubscribeForm() {
           value={formData.pseudo}
           onChange={handleChange}
         />
+        </div>
+        <div className="items-baseline justify-between">
+        <p>Email</p>
         <input
           className="m-5 mr-20"
           type="email"
@@ -52,6 +57,9 @@ function SubscribeForm() {
           value={formData.email}
           onChange={handleChange}
         />
+        </div>
+        <div className="items-baseline justify-between">
+        <p>Date de naissance</p>
         <input
           className="m-5 mr-20"
           type="date"
@@ -60,6 +68,9 @@ function SubscribeForm() {
           value={formData.birthday}
           onChange={handleChange}
         />
+        </div>
+        <div className="items-baseline justify-between">
+        <p>Mot de passe</p>
         <input
           className="m-5 mr-36"
           type="password"
@@ -68,9 +79,15 @@ function SubscribeForm() {
           value={formData.password}
           onChange={handleChange}
         />
-        <button type="submit" className="btn m-4">
-          S'inscrire
-        </button>
+        </div>
+        <div className="inline-flex">
+          <button type="submit" className="btn mr-4">
+            S'inscrire
+          </button>
+          <form method="dialog">
+            <button className="btn">Annuler</button>
+          </form>
+        </div>
       </form>
     </div>
   );

@@ -1,20 +1,21 @@
 
 import { selectFavoriteMovies, selectMoviesToReview } from '../../store/reducers/movies';
-
 import { UserFormData } from '../../@types/user';
 
 import React, { useState } from 'react';
 import { Movie } from "../../../src/@types/movie";
 import '../../index.css'; 
 import './OneMovie.scss';
-import { Link } from 'react-router-dom';
+import { Link, Outlet, Route, Routes, useMatch, useNavigate } from 'react-router-dom';
 import { addToFavorite, addToReview, deleteFromFavorite, deleteFromReview } from '../../store/action/action';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
 import { AsyncThunkConfig } from '@reduxjs/toolkit/dist/createAsyncThunk';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-
+import MovieDetails from '../MovieDetails/MovieDetails';
 import { Button } from "@mui/material";
 import axios from 'axios';
+import MemberSpace from '../MemberSpace/MemberSpace';
+import movieDetailsModal from '../MovieDetails/MovieDetailsModal'
 
 const LogoPlus = "../../../public/circle-plus.svg";
 const LogoMinus = "../../../public/circle-minus.svg";
@@ -22,7 +23,6 @@ const LogoLike = "../../../public/thumbs-up.svg";
 const LogoPlateform = "../../../public/presentation.svg";
 const repeat = "../../../public/repeat.svg";
 const repeat1 = "../../../public/repeat1.svg";
-
 
 
 function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {
@@ -67,7 +67,6 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
     const newLikedStatus = !liked;
     setLiked(newLikedStatus);
     setAnimate(true);
-
   };
 
 
@@ -117,17 +116,37 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
   const plusButtonClass = plusAnimation ? "plus-button animated" : "plus-button";
   
   return (
-    <>
+    <div className="">
       <div className={containerClass} onPointerEnter={toggleAnimation} onPointerLeave={handlePointerLeave}>
-
-        {poster_path && (
-               <Link to={`/movie/${id}`}>
-                <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster max-w-xs rounded-md" />
-               </Link>
+      
+        <div className="">
+          {poster_path && (
+               <Link to={`/movie/${id}`} htmlFor="movieDetails_modal" className="">
+               {poster_path && (
+                 <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster rounded-xl" />
+               )}
+             </Link>
         )}
-        
+          {/* <div className="">
+          <label htmlFor="movieDetails_modal" className="">
+            {poster_path && ( 
+              <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster rounded-xl" />
+            )}   
+          </label>
+            <input type="checkbox" id="movieDetails_modal" className="modal-toggle" />
+              <div id="movieDetails_modal" className="modal" role="dialog">       
+                  <div className="modal-box bg-black">
+                      <div className="">
+                        <Routes>
+                        <Route path="/" element={<MovieDetails/>} />
+                      </Routes>
+                      </div>
+                    </div>
+                    <label className="modal-backdrop" htmlFor="movieDetails_modal">Close</label>
+                  </div>  
 
-        <div className="action-buttons">
+          </div> */}
+          <div className="action-buttons min-full">
             <Button className={likeButtonClass} onClick={toggleLike} >
               <img src={LogoLike} alt="Like" />
             </Button>
@@ -156,15 +175,11 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
             <Button className="platform-button">
               <img src={LogoPlateform} alt="Platform" />
             </Button>
+          </div>
         </div>
-
-
       </div>
 
-
-
-
-    </>
+    </div>
   );
 }
 
