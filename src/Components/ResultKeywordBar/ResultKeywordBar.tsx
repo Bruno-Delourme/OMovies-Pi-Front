@@ -83,7 +83,6 @@ as MoviesResponse : the unknown type is converted to MoviesResponse, which is th
               cast_id={0} 
               character={""} 
               name={""} 
-              genre_ids={0}
               />
               </div>
           ))}
