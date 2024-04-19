@@ -3,6 +3,9 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 import { useAppSelector } from '../../../src/hooks/redux';
 import { Movie } from '../../../src/@types/movie';
 import OneMovie from '../../Components/OneMovie/OneMovie';
+import Header from '../Header/Header';
+import KeywordBar from '../KeywordBar/KeywordBar';
+import Footer from '../Footer/Footer';
 
 function MovieDetails({ title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {
 
@@ -16,21 +19,27 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
     const movie = movies.find((movie: Movie) => movie.id === movieId);
 
     return (
-        <div className="">
-          <div className="">
-            <Link to={`/`}>
+      <div className="">
+      <Header />
+      <KeywordBar />
+        <div className="max-h-full max-w-full flex flex-wrap justify-center pb-4">
+          <div className="flex">
+
+            {/* <Link to={`/`}> */}
             {movie && (
               <OneMovie poster_path={movie.poster_path} />
             )}
-            <div>
-              <h2>{movie.title}</h2>
-              <p>{movie.overview}</p>
-             <p>Release Date: {movie.release_date}</p>
-              <p>Vote Average: {movie.vote_average}</p>
-            </div>
-            </Link>
           </div>
-          
+          <div className="text-white space-y-2 pt-4 max-w-screen-lg">
+              <h1 className="font-bold text-4xl pl-20 pb-12">{movie.title}</h1>
+              <p className="font-semibold underline pl-4 text-xl">Résumé :</p>
+              <p className="pt-4 pl-10 text-lg">{movie.overview}</p>
+              <p className="font-extralight pt-4 pl-4">Release Date: {movie.release_date}</p>
+              <p className="pt-4 font-bold text-xl pl-4">Vote Average: {movie.vote_average}</p>
+              {/* </Link> */}
+          </div>
+        </div>
+        <Footer />
       </div>
       );
 }
