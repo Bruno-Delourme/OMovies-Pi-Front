@@ -53,7 +53,7 @@ function Footer() {
             <button className="font-bold">Liker</button>
           </div>
           <div className="underline">
-
+          <p className="">Team O'MOVIES : Bruno, Gwendoline, Fadwa, Mathias</p>
           </div>
         </div>
       </div>

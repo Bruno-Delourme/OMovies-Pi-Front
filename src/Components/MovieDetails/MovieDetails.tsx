@@ -1,4 +1,4 @@
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 import { useAppSelector } from '../../../src/hooks/redux';
 import { Movie } from '../../../src/@types/movie';
 import OneMovie from '../../Components/OneMovie/OneMovie';
@@ -13,6 +13,7 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
     //Get info movie from store Redux id of movie
     const movies = useAppSelector((state) => state.movies.newMovies.movies);
     const movie = movies.find((movie: Movie) => movie.id === movieId);
+    
     return (
       <div className="">
       <Header />
