@@ -2,26 +2,20 @@ import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useAppSelector } from "../../hooks/redux";
 import axios from "axios";
-
 function Footer() {
     const user = useAppSelector((state) => state.user);
     const email ='omovies@outlook.fr'
     const userPseudo = user.pseudo;
-    const token = user.token; 
-  
+    const token = user.token;
     const [isOpen, setIsOpen] = useState(false);
-  
     const openModal = () => {
       setIsOpen(true);
     };
-  
     const closeModal = () => {
       setIsOpen(false);
     };
-  
     const sendEmail = async (e) => {
       e.preventDefault();
-  
       try {
         const response = await axios.post(`http://localhost:3000/api/send-mail`, {
           email: email,
@@ -30,36 +24,40 @@ function Footer() {
           message: e.target.message.value,
         }, {
           headers: {
-            Authorization: `Bearer ${token}` 
+            Authorization: `Bearer ${token}`
           }
         });
-  
         console.log(response);
-  
       } catch (error) {
         console.error(error);
-  
       }
     };
-
-
   return (
-    <>
-      <h1 className="title-configuration bg-black p-32">Ceci est un footer</h1>
-      <div>
-        <p>Besoin d'informations ?</p>
-        <button onClick={openModal}>Nous contacter</button>
-      </div>
-      <div className="comment">
-        <button>Laisser nous un commentaire</button>
-        <p>Liste des commentaires</p>
-      </div>
-      <div className="like">
-        <p>Liker si vous aimer notre site</p>
-        <button>Liker</button>
+    <div className="">
+      <div className="bg-black text-white p-5 justify-center flex flex-grow">
+        <div className="space-y-2 ">
+          <div className="">
+            <h1 className="text-3xl">Besoin d'informations ?</h1>
+          </div>
+          <div className="font-bold">
+          <button onClick={openModal}>Nous contacter</button>
+          </div>
+          <div className="font-bold">
+            <button>Laisser nous un commentaire</button>
+          </div>
+          <div className="font-bold">
+            <p>Liste des commentaires</p>
+          </div>
+          <div className="inline-flex like space-x-3">
+            <p>Liker si vous aimer notre site :</p>
+            <button className="font-bold">Liker</button>
+          </div>
+          <div className="underline">
+
+          </div>
+        </div>
       </div>
       <p className="team">Team O'MOVIES : Bruno, Gwendoline, Fadwa, Mathias</p>
-
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -73,7 +71,6 @@ function Footer() {
           >
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
-
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
@@ -99,10 +96,9 @@ function Footer() {
         </Transition.Child>
       </div>
     </div>
-  </Dialog>
-</Transition>
-    </>
+    </Dialog>
+    </Transition>
+    </div>
   );
 }
-
 export default Footer;

@@ -48,6 +48,7 @@ const checkToken = () => {
         state.pseudo = pseudo; // Set pseudo state to username or empty string
         state.token = token; // Set token state to token or null
       })
+      // Show comments
       .addCase(fetchComments.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -60,6 +61,8 @@ const checkToken = () => {
         state.loading = false;
         state.error = action.error.message || null;
       })
+      
+      // Add comment 
       .addCase(addComment.pending, (state) => {
         state.loading = true;
         state.error = null;
