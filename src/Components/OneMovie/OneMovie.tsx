@@ -119,11 +119,12 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
       <div className={containerClass} onPointerEnter={toggleAnimation} onPointerLeave={handlePointerLeave}>
       
         <div className="">
-        <Outlet/>
           {poster_path && (
-               <Link to={`/movie/${id}`}>
-                <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster max-w-xs rounded-md" />
-               </Link>
+               <Link to={`/movie/${id}`} htmlFor="movieDetails_modal" className="">
+               {poster_path && (
+                 <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster rounded-xl" />
+               )}
+             </Link>
         )}
           {/* <div className="">
           <label htmlFor="movieDetails_modal" className="">
