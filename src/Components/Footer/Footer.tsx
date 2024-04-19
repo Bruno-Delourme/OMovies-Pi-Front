@@ -14,7 +14,7 @@ function Footer() {
     const closeModal = () => {
       setIsOpen(false);
     };
-    const sendEmail = async (e) => {
+    const sendEmail = async (e: { preventDefault: () => void; target: { subject: { value: any; }; message: { value: any; }; }; }) => {
       e.preventDefault();
       try {
         const response = await axios.post(`http://localhost:3000/api/send-mail`, {
