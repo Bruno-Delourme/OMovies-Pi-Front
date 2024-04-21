@@ -1,9 +1,13 @@
 import { Movie } from "../../../@types/movie";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-{
-  /* <div>{movie.title}</div> : <div>isLoading</div>; */
-}
+import OneMovie from "../../../Components/OneMovie/OneMovie";
+import Header from "../../../Components/Header/Header";
+import KeywordBar from "../../../Components/KeywordBar/KeywordBar";
+import Footer from "../../../Components/Footer/Footer";
+
+
+
 export const MovieDetailSearch = () => {
   const [movie, setMovie] = useState<Movie>({});
 
@@ -48,16 +52,15 @@ export const MovieDetailSearch = () => {
   //     fetchMovie();
   //   }, [movieId]);
 
-  // ici il faut fetch (sans redux) by id comme ça quand tu arrives sur cette page tu peux fetch LE movie que tu veux afficher
-  // le return de l'api admettons data.movie
+  // ici il faut fetch (sans redux) by id comme ça quand on arrive sur cette page on peut fetch LE movie que l'on veut afficher
+  
   return movie ? (
     <div className="">
-      {/* <Header />
-      <KeywordBar /> */}
+      <Header />
+      <KeywordBar /> 
       <div className="max-h-full max-w-full flex flex-wrap justify-center pb-4">
         <div className="flex">
-          {/* <Link to={`/`}> */}
-          {/* {movie && <OneMovie poster_path={movie.poster_path} />} */}
+          {movie && <OneMovie poster_path={movie.poster_path} />} 
         </div>
         <div className="text-white space-y-2 pt-4 max-w-screen-lg">
           <h1 className="font-bold text-4xl pl-20 pb-12">{movie.title}</h1>
@@ -68,11 +71,10 @@ export const MovieDetailSearch = () => {
           </p>
           <p className="pt-4 font-bold text-xl pl-4">
             Vote Average: {movie.vote_average}
-          </p>
-          {/* </Link> */}
+          </p> 
         </div>
       </div>
-      {/* <Footer /> */}
+      { <Footer /> }
     </div>
   ) : (
     "loading movie"
