@@ -1,44 +1,39 @@
 export interface Movie {
   vote_average?: number;
   id?: number;
-  adult: boolean;
+  adult?: boolean;
   title?: string;
   original_title?: string;
   overview?: string;
   poster_path?: string;
   release_date?: string;
-  original_language: string;
-  key: number;
+  original_language?: string;
+  key?: number;
 
   //casting
   cast_id?: number;
   character?: string;
   name?: string;
 
-  
   // genres?: string[];
-genre_ids?: number[];
+  genre_ids?: number[];
 
-  credits: Credits;
- 
-  genres: Genre[]
+  credits?: Credits;
 
-
+  genres?: Genre[];
 }
 
 export interface Genre {
-  id: number
-  name: string
+  id: number;
+  name: string;
 }
 
 // actor info
 export interface Credits {
-  id: number
-  cast: Cast[]
-  crew: Crew[]
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
 }
-
-
 
 export interface Cast {
   adult: boolean;
@@ -55,8 +50,6 @@ export interface Cast {
   order: number;
 }
 
-
-
 export interface MoviesResponse {
   page: number;
   movies: Movie[];
@@ -68,4 +61,3 @@ export interface ActorResponse {
   title: string;
   poster_path?: string | undefined;
 }
-

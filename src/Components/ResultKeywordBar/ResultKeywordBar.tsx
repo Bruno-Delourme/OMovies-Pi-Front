@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 
 import { useNavigate } from "react-router-dom";   
 
@@ -5,11 +6,10 @@ import Header from "../Header/Header";
 import OneMovie from "../OneMovie/OneMovie";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, fetchDocumentaireMovies, fetchRomanceRatingMovies, fetchFamilialRatingMovies, fetchActionRatingMovies, fetchScienceFictionRatingMovies, fetchDocumentaireRatingMovies } from "../../store/action/action";
 
 import { MoviesResponse, Movie } from "../../../src/@types/movie";
-import "./ResultKeywordBar.scss";
 
 import { useLocation } from "react-router-dom"; // to get actual location and show movies needed
 

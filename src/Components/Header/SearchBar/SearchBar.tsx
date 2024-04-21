@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const clapperboard = "../../../src/assets/clapperboard.png";
 
 type Movie = {
+  id: number;
   title: string;
   poster_path?: string;
 };
@@ -17,13 +19,14 @@ function SearchBar() {
   const [moviesByActor, setMoviesByActor] = useState<Movie[]>([]);
   const [moviesByKeyword, setMoviesByKeyword] = useState<Movie[]>([]);
 
+ 
   useEffect(() => {
     const fetchMovies = async () => {
       if (query.length > 2) {
         const url = `http://localhost:3000/api/searchBar?query=${query}`;
         const response = await fetch(url);
         const data = await response.json();
-
+        console.log("DATA MOVIE SEARCH should have id ", data.moviesByTitle);
         // Vérifiez si data.moviesByTitle existe avant de faire le mapping
         if (data.moviesByTitle) {
           const moviesWithPosterPath = data.moviesByTitle.map(
@@ -91,7 +94,7 @@ function SearchBar() {
         )
       : [];
   };
-
+  console.log(suggestions);
   return (
     <>
       <div
@@ -114,16 +117,31 @@ function SearchBar() {
         <ul className={`suggestions-list ${showSuggestions ? "" : "hidden"}`}>
           {/* Films suggérés par titre */}
           {suggestions.map((movie, index) => (
-            <li key={index} className="film-choice">
-              <div className="flex items-center">
-                <img
-                  src={movie.poster_path}
-                  alt={movie.title}
-                  className="w-16 h-auto mr-2"
-                />
-                <span className="text-black ">{movie.title}</span>
-              </div>
-            </li>
+            // eslint-disable-next-line react/jsx-key
+            <Link to={`/movie/searchbar/${movie.id}`}>
+              <li key={index} className="film-choice">
+                <div className="flex items-center">
+                  <img
+                    src={movie.poster_path}
+                    alt={movie.title}
+                    className="w-16 h-auto mr-2"
+                  />
+                  <span className="text-black ">{movie.title}</span>
+                </div>
+              </li>
+            </Link>
+            //<Link to={`/movie/${movie.id}`}>
+            //   <li key={index} className="film-choice" >
+            //   <div className="flex items-center">
+            //     <img
+            //       src={movie.poster_path}
+            //       alt={movie.title}
+            //       className="w-16 h-auto mr-2"
+            //     />
+            //     <span className="text-black ">{movie.title}</span>
+            //   </div>
+            // </li>
+            //</Link>
           ))}
           {/* Option pour afficher les films suggérés par acteur */}
           <li

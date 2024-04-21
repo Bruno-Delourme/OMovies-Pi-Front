@@ -4,7 +4,7 @@ import { useAppSelector } from "../../hooks/redux";
 import axios from "axios";
 function Footer() {
     const user = useAppSelector((state) => state.user);
-    const email ='omovies@outlook.fr'
+    const email ='omovies@out@look.fr'
     const userPseudo = user.pseudo;
     const token = user.token;
     const [isOpen, setIsOpen] = useState(false);
