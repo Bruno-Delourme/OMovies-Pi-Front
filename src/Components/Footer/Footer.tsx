@@ -7,6 +7,10 @@ import { addComment, addLike, fetchComments, getLikeCount } from "../../store/ac
 
 import './Footer.scss';
 
+const commentlogo = "../../../public/commentlogo.svg";
+
+import { Button } from "@mui/material";
+
 function Footer() {
 
   const dispatch = useAppDispatch();
@@ -94,10 +98,11 @@ function Footer() {
         </div>
         <div className="commentaire-div space-y-2">
           <div className="font-bold">
-            <button className="btn-comment" onClick={openCommentModal}>Laisser nous un commentaire</button>
+          <img src={commentlogo} alt="comment" />
+            <button className="btn-comment" onClick={openCommentModal}>Laisser nous un commentaire </button>
           </div>
           <div className="font-bold">
- 
+            <p className="comment-list">Liste des commentaires</p>
             <ul className="list-comments">
               {comments && comments.data && comments.data.map((cmt) => (
                <li className="comment" key={cmt.id}>
@@ -114,6 +119,11 @@ function Footer() {
 
       </div>
 
+      
+
+      <div className="underline">
+        <p className="">Team O'MOVIES : Bruno, Gwendoline, Fadwa, Mathias</p>
+      </div>
 
     </div>
     
