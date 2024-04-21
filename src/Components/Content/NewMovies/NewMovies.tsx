@@ -46,25 +46,25 @@ return (
               <ChevronLeftIcon className="chevron-design"/>
             </button>}
             <div className="movies-container-design">
-            {newMovies.movies.map((movie) => (
-              <div className="movies-path-design">
-                <OneMovie {...movie} 
-                poster_path={movie.poster_path}
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                overview={movie.overview}
-                release_date={movie.release_date}
-                vote_average={movie.vote_average} 
-                adult={false} 
-                original_title={""} 
-                original_language={""} 
-                cast_id={0} 
-                character={""} 
-                name={""} 
-                />   
-              </div>  
-            ))}
+                {newMovies.movies.map((movie) => (
+                  <div className="movies-path-design" key={movie.id}>
+                    <OneMovie
+                      {...movie}
+                      poster_path={movie.poster_path}
+                      id={movie.id}
+                      title={movie.title}
+                      overview={movie.overview}
+                      release_date={movie.release_date}
+                      vote_average={movie.vote_average}
+                      adult={false}
+                      original_title={""}
+                      original_language={""}
+                      cast_id={0}
+                      character={""}
+                      name={""}
+                    />
+                  </div>
+                ))}
             </div>
             <button className="scroll-right-configuration"
             onClick={() => {

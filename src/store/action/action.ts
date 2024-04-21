@@ -378,6 +378,7 @@ const axiosInstance = axios.create({
       const response = await axiosInstance.get("/showComment");
       const AllComments = response.data as Comment[];
       return AllComments;
+      console.log(AllComments);
     });
 
 
@@ -389,25 +390,79 @@ const axiosInstance = axios.create({
       token: string;
       comment: string;
     }
-    const ADDCOMMENT= "ADDCOMMENT"
+    const ADDCOMMENT = "ADDCOMMENT";
     export const addComment = createAsyncThunk<Comment, AddCommentParams>(
       ADDCOMMENT,
-      async ({ userId, token, comment }) => {
-        const state = thunkAPI.getState() as RootState; // get pseudo user via state Redux using thunkAPI.getState()
+      async (params, thunkAPI) => { // Ajouter thunkAPI en tant que deuxième paramètre
+        const state = thunkAPI.getState() as RootState;
         const pseudo = state.user.pseudo;
         const response = await axiosInstance.post<Comment>(
-          `/createComment/${userId}`,
+          `/createComment/${params.userId}`,
           {
             pseudo,
-            comment,
+            comment: params.comment,
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${params.token}`,
             },
           }
         );
         const newComment = response.data;
+        console.log(newComment);
         return newComment;
+      }
+    );
+
+// Add like
+// need token and userId using params { userId: number, token: string }
+interface AddLikeParams {
+  userId: number;
+  token: string;
+  like: number;
+}
+
+const ADDLIKE = "ADDLIKE";
+
+export const addLike = createAsyncThunk<Like, AddLikeParams>(
+  ADDLIKE,
+  async (params, thunkAPI) => {
+    const response = await axiosInstance.post<Like>(
+      `/like/${params.userId}`,
+      { like: params.like }, 
+      {
+        headers: {
+          Authorization: `Bearer ${params.token}`,
+        },
+      }
+    );
+    const newLike = response.data;
+    console.log(newLike);
+    return newLike;
+  }
+);
+
+    // Show like count // need update table like on Data Base with Gwen 
+    interface GetLikeCountParams {
+      token: string;
+      nbrLikes: number;
+    }
+
+    const GETLIKECOUNT = "GETLIKECOUNT";
+
+    export const getLikeCount = createAsyncThunk<number, GetLikeCountParams>(
+      GETLIKECOUNT,
+      async (params, thunkAPI) => {
+        const response = await axiosInstance.get<{ count: number }>(
+          `/showTotalLikes`,
+          {
+            headers: {
+              Authorization: `Bearer ${params.token}`,
+            },
+          }
+        );
+        const likeCount = response.data.count;
+        console.log(likeCount);
+        return likeCount;
       }
     );

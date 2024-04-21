@@ -51,7 +51,8 @@ const router = createBrowserRouter([
     ]},
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+//using (!), i explain to TypeScript that i'm sure that value  that document.getElementById("root") sent is not  null ou undefined.
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 root.render(
   <Provider store={store}>
