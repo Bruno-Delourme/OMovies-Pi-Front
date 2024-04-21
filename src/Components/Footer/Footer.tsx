@@ -10,24 +10,25 @@ import './Footer.scss';
 const commentlogo = "../../../public/commentlogo.svg";
 
 import { Button } from "@mui/material";
+import { RootState } from "../../store";
 
 function Footer() {
 
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state: RootState) => state.user);
+  const comments = useAppSelector((state: RootState) => state.comment.comments);
+  const likeError = useAppSelector((state: RootState) => state.like.error);
 
+  const nbrlikes = useAppSelector((state) => state.like.nbrlikes.total_likes);
+  console.log(nbrlikes);
 
-  
-  const user = useAppSelector((state) => state.user);
-  //const comments = useAppSelector((state) => state.comments);
-  const comments = useAppSelector((state) => state.comment.comments);
 
   const email = "omovies@outlook.fr";
   const userPseudo = user.pseudo;
   const token = user.token;
-
   const [isOpen, setIsOpen] = useState(false);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState<Comment[]>([]);
   const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
@@ -69,19 +70,27 @@ function Footer() {
     }
   };
 
+
   const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newComment = { userId: user.id, token, comment };
     const response = await dispatch(addComment(newComment));
-    setComment([...comments, response.payload]); // mettre à jour l'état local avec le nouveau commentaire ajouté
+    dispatch(fetchComments()); // Récupérer à nouveau tous les commentaires du serveur
     closeCommentModal();
     setComment("");
   };
 
 
   const handleLikeClick = async () => {
-    await dispatch(addLike({ userId: user.id, token }));
-    setLikeCount(likeCount + 1); // update state with new count 
+    try {
+      await dispatch(addLike({ userId: user.id, token }));
+      setLikeCount(likeCount + 1); // update state with new count
+    } catch (error) {
+      console.error("Error when liking the site:", error);
+      if (axios.isAxiosError(error) && error?.response?.status === 400) {
+        alert("Vous avez déjà liké le site.");
+      }
+    }
   };
 
 
@@ -113,17 +122,20 @@ function Footer() {
           </div>
         </div>
         <div className="like-div space-x-3 inline-flex">
-          <p>Liker si vous aimer notre site :</p>
-          <button className="font-bold" ><div className="lds-heart" onClick={handleLikeClick} ><div></div></div></button>
+        <div className="like-button-container">
+          <div>Liker si vous aimer notre site :</div>
+          <button className="font-bold" onClick={handleLikeClick}>
+            <div className="lds-heart">
+              <div></div>
+            </div>
+          </button>
         </div>
+        <div className="nbr-likes">Total de Like: {nbrlikes}</div>
+      </div>
 
       </div>
 
-      
 
-      <div className="underline">
-        <p className="">Team O'MOVIES : Bruno, Gwendoline, Fadwa, Mathias</p>
-      </div>
 
     </div>
     
@@ -227,6 +239,7 @@ function Footer() {
   );
 }
 export default Footer;
+
 
 
 

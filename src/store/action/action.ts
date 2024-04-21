@@ -1,9 +1,16 @@
-import { RootState } from '../index';
+//import { RootState } from '../index';
 
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Movie } from "../../@types/movie";
 //import { RootState } from "../../@types/RooteState";
+
+
+import { Like } from "../../@types/like";
+
+import { RootState } from "../../../src/@types/RooteState";
+
+
 
 
 import { UserFormData, UserState } from "../../@types/user";
@@ -419,50 +426,51 @@ const axiosInstance = axios.create({
 interface AddLikeParams {
   userId: number;
   token: string;
-  like: number;
 }
 
 const ADDLIKE = "ADDLIKE";
 
-export const addLike = createAsyncThunk<Like, AddLikeParams>(
-  ADDLIKE,
-  async (params, thunkAPI) => {
-    const response = await axiosInstance.post<Like>(
-      `/like/${params.userId}`,
-      { like: params.like }, 
-      {
-        headers: {
-          Authorization: `Bearer ${params.token}`,
-        },
-      }
-    );
-    const newLike = response.data;
-    console.log(newLike);
-    return newLike;
+export const addLike = createAsyncThunk<Like, { userId: number, token: string }>(
+  "ADDLIKE",
+  async ({ userId, token }) => {
+    try {
+      const response = await axiosInstance.post(
+        `/like/${userId}`,
+        {}, // corps de la requête vide
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const newLike = response.data as Like;
+      console.log(newLike);
+      return newLike;
+    } catch (error) {
+      console.error('Error when liking the site :', error);
+      throw error; // rejeter la promesse avec l'erreur
+      
+    }
   }
 );
+
 
     // Show like count // need update table like on Data Base with Gwen 
     interface GetLikeCountParams {
       token: string;
-      nbrLikes: number;
+      like: number;
     }
 
     const GETLIKECOUNT = "GETLIKECOUNT";
-
-    export const getLikeCount = createAsyncThunk<number, GetLikeCountParams>(
-      GETLIKECOUNT,
-      async (params, thunkAPI) => {
-        const response = await axiosInstance.get<{ count: number }>(
-          `/showTotalLikes`,
-          {
-            headers: {
-              Authorization: `Bearer ${params.token}`,
-            },
-          }
-        );
-        const likeCount = response.data.count;
-        console.log(likeCount);
-        return likeCount;
+    export const getLikeCount = createAsyncThunk<number, void, { rejectValue: string }>(
+      "GETLIKECOUNT",
+      async (_, { rejectWithValue }) => {
+        try {
+          const response = await axiosInstance.get("/showTotalLikes");
+          const totalLikes = response.data.data;
+          return totalLikes;
+        } catch (error) {
+          return rejectWithValue("Une erreur s'est produite lors de la récupération du nombre de likes.");
+        }
       }
     );

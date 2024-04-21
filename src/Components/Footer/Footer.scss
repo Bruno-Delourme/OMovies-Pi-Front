@@ -113,8 +113,23 @@
         .btn-comment {
             margin-right: 20%;
         }
-
-      
+        .like-div {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .like-button-container {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+        
+        .nbr-likes {
+          font-size: 14px;
+          color: #fff;
+        }
+        
     }
   
   
