@@ -26,33 +26,12 @@ export const MovieDetailSearch = () => {
         console.debug("titi");
       }
     };
-
-    // const timeoutId = setTimeout(() => {
     fetchMovie();
-    // }, 500);
+    
   }, [movieId]);
 
-  //   useEffect(() => {
-  //     // async () => {
-  //     //   const url = `http://localhost:3000/api/movie/${movieId}`;
-  //     //   const response = await fetch(url);
-  //     //   const data = await response.json();
-  //     //   console.log(data);
-  //     //   setMovie(data.movie);
-  //     // };
-  //     async function fetchMovie() {
-  //       const response = await fetch(
-  //         `http://localhost:3000/api/movie/${movieId}`
-  //       );
-  //       const movieResponse = await response.json();
-  //       console.log(movieResponse);
-  //       setMovie(movieResponse);
-  //     }
 
-  //     fetchMovie();
-  //   }, [movieId]);
-
-  // ici il faut fetch (sans redux) by id comme ça quand on arrive sur cette page on peut fetch LE movie que l'on veut afficher
+  // ici on fetch (sans redux) by id 
   
   return movie ? (
     <div className="">

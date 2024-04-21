@@ -29,7 +29,7 @@ import MovieDetails from "../MovieDetails/MovieDetails";
 import { Button } from "@mui/material";
 import axios from "axios";
 import MemberSpace from "../MemberSpace/MemberSpace";
-import movieDetailsModal from "../MovieDetails/MovieDetailsModal";
+
 
 const LogoPlus = "../../../public/circle-plus.svg";
 const LogoMinus = "../../../public/circle-minus.svg";
@@ -110,7 +110,7 @@ function OneMovie({
   const handleDeleteFromFavorite = () => {
     if (user.id && id && token) {
       dispatch(deleteFromFavorite({ userId: user.id, movieId: id, token }));
-      // setIsFavorite(false); // Mettre à jour l'état isFavorite
+      // setIsFavorite(false); // Met à jour l'état isFavorite par défaut à Faux
     }
   };
 
@@ -173,25 +173,7 @@ function OneMovie({
               )}
             </Link>
           )}
-          {/* <div className="">
-          <label htmlFor="movieDetails_modal" className="">
-            {poster_path && ( 
-              <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} className="movie-poster rounded-xl" />
-            )}   
-          </label>
-            <input type="checkbox" id="movieDetails_modal" className="modal-toggle" />
-              <div id="movieDetails_modal" className="modal" role="dialog">       
-                  <div className="modal-box bg-black">
-                      <div className="">
-                        <Routes>
-                        <Route path="/" element={<MovieDetails/>} />
-                      </Routes>
-                      </div>
-                    </div>
-                    <label className="modal-backdrop" htmlFor="movieDetails_modal">Close</label>
-                  </div>  
-
-          </div> */}
+          
           <div className="action-buttons min-full">
             <Button className={likeButtonClass} onClick={toggleLike}>
               <img src={LogoLike} alt="Like" />

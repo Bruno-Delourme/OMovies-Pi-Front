@@ -1,4 +1,4 @@
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../src/hooks/redux";
 import { Movie } from "../../../src/@types/movie";
 import OneMovie from "../../Components/OneMovie/OneMovie";
@@ -21,7 +21,6 @@ function MovieDetails() {
       <KeywordBar />
       <div className="max-h-full max-w-full flex flex-wrap justify-center pb-4">
         <div className="flex">
-          {/* <Link to={`/`}> */}
           {movie && <OneMovie poster_path={movie.poster_path} />}
         </div>
         <div className="text-white space-y-2 pt-4 max-w-screen-lg">
@@ -34,7 +33,6 @@ function MovieDetails() {
           <p className="pt-4 font-bold text-xl pl-4">
             Vote Average: {movie.vote_average}
           </p>
-          {/* </Link> */}
         </div>
       </div>
       <Footer />
