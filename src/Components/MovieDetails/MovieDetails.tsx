@@ -1,22 +1,21 @@
-import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../../src/hooks/redux";
-import { Movie } from "../../../src/@types/movie";
-import OneMovie from "../../Components/OneMovie/OneMovie";
-import Header from "../Header/Header";
-import KeywordBar from "../KeywordBar/KeywordBar";
-import Footer from "../Footer/Footer";
-
-function MovieDetails() {
-  //Get id from URL using useParams
-  //convert string id (get from url) to number using parseInt().
-  const { id } = useParams<{ id: string }>();
-  const movieId = parseInt(id, 10);
-  //Get info movie from store Redux id of movie
-  const movies = useAppSelector((state) => state.movies.newMovies.movies);
-  const movie = movies.find((movie: Movie) => movie.id === movieId);
-
-  return (
-    <div className="">
+import { Link, useParams} from 'react-router-dom';
+import { useAppSelector } from '../../../src/hooks/redux';
+import { Movie } from '../../../src/@types/movie';
+import OneMovie from '../../Components/OneMovie/OneMovie';
+import Header from '../Header/Header';
+import KeywordBar from '../KeywordBar/KeywordBar';
+import Footer from '../Footer/Footer';
+function MovieDetails({ title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {
+    //Get id from URL using useParams
+    //convert string id (get from url) to number using parseInt().
+    const { id } = useParams<{ id: string }>();
+    const movieId = parseInt(id, 10);
+    //Get info movie from store Redux id of movie
+    const movies = useAppSelector((state) => state.movies.newMovies.movies);
+    const movie = movies.find((movie: Movie) => movie.id === movieId);
+    
+    return (
+      <div className="">
       <Header />
       <KeywordBar />
       <div className="max-h-full max-w-full flex flex-wrap justify-center pb-4">

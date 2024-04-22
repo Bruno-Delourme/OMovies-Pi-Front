@@ -48,29 +48,30 @@ const checkToken = () => {
         state.pseudo = pseudo; // Set pseudo state to username or empty string
         state.token = token; // Set token state to token or null
       })
-      // Show comments
+      // Show comment 
       .addCase(fetchComments.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         state.loading = false;
-        state.comments = action.payload;
+        state.comments = action.payload as Comment[];
+        console.log(state.comments);
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || null;
       })
-      
-      // Add comment 
+      // Add comment
       .addCase(addComment.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(addComment.fulfilled, (state, action) => {
         state.loading = false;
-        state.comments.push(action.payload);
+        state.comments = { ...state.comments, data: [...state.comments.data, action.payload] };
       })
+
       .addCase(addComment.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || null;

@@ -25,20 +25,20 @@ const router = createBrowserRouter([
       { path: "/group/:id", element: <Group /> },
       { path: "/list/:id", element: <List /> },
       // { path: "/profil/:id", element: <MemberSpace /> },
-      { path: "/movies/romance", element: <ResultKeywordBar /> },
-      { path: "/moviesRating/romance", element: <ResultKeywordBar /> },
+      { path: "/movies/romance/*", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/romance/*", element: <ResultKeywordBar /> },
 
-      { path: "/movies/familial", element: <ResultKeywordBar /> },
-      { path: "/moviesRating/familial", element: <ResultKeywordBar /> },
+      { path: "/movies/familial/*", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/familial/*", element: <ResultKeywordBar /> },
 
-      { path: "/movies/action", element: <ResultKeywordBar /> },
-      { path: "/moviesRating/action", element: <ResultKeywordBar /> },
+      { path: "/movies/action/*", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/action/*", element: <ResultKeywordBar /> },
 
-      { path: "/movies/science-fiction", element: <ResultKeywordBar /> },
-      { path: "/moviesRating/science-fiction", element: <ResultKeywordBar /> },
+      { path: "/movies/science-fiction/*", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/science-fiction/*", element: <ResultKeywordBar /> },
 
-      { path: "/movies/documentaire", element: <ResultKeywordBar /> },
-      { path: "/moviesRating/documentaire", element: <ResultKeywordBar /> },
+      { path: "/movies/documentaire/*", element: <ResultKeywordBar /> },
+      { path: "/moviesRating/documentaire/*", element: <ResultKeywordBar /> },
 
       { path: "/movie/:id", element: <MovieDetails /> },
       { path: "/movie/searchbar/:id", element: <MovieDetailSearch /> },
@@ -54,7 +54,8 @@ const router = createBrowserRouter([
     ]},
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+//using (!), i explain to TypeScript that i'm sure that value  that document.getElementById("root") sent is not  null ou undefined.
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 root.render(
   <Provider store={store}>

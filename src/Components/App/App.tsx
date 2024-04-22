@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import '../App/App.scss'
-
 import { Outlet } from 'react-router-dom';
 import React from 'react';
 import { useAppDispatch } from '../../hooks/redux';

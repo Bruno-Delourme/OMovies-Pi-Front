@@ -2,11 +2,8 @@ import { useState } from 'react';
 import { FaRegCircle } from "react-icons/fa";
 import LoginForm from "../../Header/LoginForm/LoginForm";
 import SearchBar from "../../Header/SearchBar/SearchBar";
-import SubscribeForm from "../../Header/SubscribeForm/SuscribeForm";
 import Group from "../../Group/Group";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { GrUserNew } from "react-icons/gr";
-import "./HeaderGroup.scss";
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../../../hooks/redux';
 
