@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'; // npm install sweetalert2
 
 import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
@@ -65,8 +66,25 @@ function Footer() {
         }
       });
       console.log(response);
+  
+      // Afficher le popup de confirmation
+      Swal.fire({
+        title: 'Succès!',
+        text: 'Votre message a été envoyé avec succès.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+  
     } catch (error) {
       console.error(error);
+  
+      // Afficher le popup d'erreur
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Une erreur s\'est produite lors de l\'envoi du message.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
 
