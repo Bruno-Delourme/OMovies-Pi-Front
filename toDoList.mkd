@@ -1,15 +1,3 @@
 # To Do List
 
-- La suggestion List proposera 3 sous catégories : Titre directement visible, une autre grisée cliquable: filmo, une troisième grisée aussi et cliquable : tags.
-
-- Login form a crée
-
-- Ajouter police Kodaschan
-
-- Ajouter reset CSS
-
 ## To Do List V_02
-
-- ajouter algo pour que les films sans miniature ne soit pas référencé avec un icone "no png"
-
-- Transition searchbar agrandissement

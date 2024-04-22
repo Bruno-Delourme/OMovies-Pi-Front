@@ -158,7 +158,7 @@ function Footer() {
 
     </div>
     
-    <p className="team">Team O'MOVIES : Bruno, Gwendoline, Fadwa, Mathias</p><Transition appear show={isOpen} as={Fragment}>
+    <p className="team"></p><Transition appear show={isOpen} as={Fragment}>
     
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
             <Transition.Child
