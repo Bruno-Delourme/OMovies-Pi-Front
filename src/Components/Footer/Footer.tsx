@@ -74,6 +74,7 @@ function Footer() {
         icon: 'success',
         confirmButtonText: 'OK'
       });
+      closeModal();
   
     } catch (error) {
       console.error(error);
