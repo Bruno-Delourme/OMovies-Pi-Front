@@ -99,11 +99,10 @@ function Footer() {
     setComment("");
   };
 
-
   const handleLikeClick = async () => {
     try {
       await dispatch(addLike({ userId: user.id, token }));
-      setLikeCount(likeCount + 1); // update state with new count
+      dispatch(getLikeCount()); // Mettre à jour le nombre de likes dans Redux
     } catch (error) {
       console.error("Error when liking the site:", error);
       if (axios.isAxiosError(error) && error?.response?.status === 400) {
@@ -149,7 +148,7 @@ function Footer() {
             </div>
           </button>
         </div>
-        <div className="nbr-likes">Total de Like: {nbrlikes}</div>
+        <div className="nbr-likes">Total de Like: {nbrlikes ? nbrlikes : 0}</div>
       </div>
 
       </div>
