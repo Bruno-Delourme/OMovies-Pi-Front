@@ -5,6 +5,7 @@ import commentReducer from "./reducers/comments";
 import likeReducer from "./reducers/like";
 import userReducer from "./reducers/user";
 
+import searchMovieReducer from "./reducers/searchMovie";
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
       comment: commentReducer,
       movies: moviesReducer,
       like: likeReducer,
+      searchMovie: searchMovieReducer,
     },
   });
 

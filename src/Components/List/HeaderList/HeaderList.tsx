@@ -10,18 +10,18 @@
 // import { Link } from "react-router-dom";
 // import { useAppSelector } from '../../../hooks/redux';
 
-import "./HeaderList.scss";
+
 
 import Layout from "../../Layout/Layout";
 import Header from "../../Header/Header";
-
-const LogoPandaRoux = "../../../src/assets/pandaRoux2.png";
+import SearchBar from "../../Header/SearchBar/SearchBar";
 
 function HeaderList() {
     return (
         <div className="BodyAllProject">
         <Layout>
             <Header />
+            <SearchBar />
         </Layout>
         </div>
     );

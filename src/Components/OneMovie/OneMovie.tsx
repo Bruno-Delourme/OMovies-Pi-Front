@@ -23,7 +23,8 @@ const LogoLike = "../../../public/thumbs-up.svg";
 const LogoPlateform = "../../../public/presentation.svg";
 const repeat = "../../../public/repeat.svg";
 const repeat1 = "../../../public/repeat1.svg";
-
+const group = "../../../public/group.svg";
+const ungroup = "../../../public/ungroup.svg";
 
 function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {
 
@@ -45,6 +46,7 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
 
   const [plusActivated, setPlusActivated] = useState(false);
   const [plusAnimation, setPlusAnimation] = useState(false);
+
 
 
 
@@ -79,14 +81,14 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
         poster_path: poster_path as string,
         overview: overview as string,
       }, token }));
-     // setIsFavorite(true); // Mettre à jour l'état isFavorite
+
     }
   };
   
   const handleDeleteFromFavorite = () => {
     if (user.id && id && token) {
       dispatch(deleteFromFavorite({ userId: user.id, movieId: id, token }));
-     // setIsFavorite(false); // Mettre à jour l'état isFavorite
+  
     }
   };
 
@@ -100,14 +102,14 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
         original_language: '',
         key: 0
       }, token }));
-     // setIsToReview(true); 
+ 
     }
   };
 
   const handleDeleteFromReview = () => {
     if (user.id && id) {
       dispatch(deleteFromReview({ userId: user.id, movieId: id, token }));
-    //  setIsToReview(false); 
+
     }
   };
 
@@ -147,9 +149,11 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
 
           </div> */}
           <div className="action-buttons min-full">
-            <Button className={likeButtonClass} onClick={toggleLike} >
-              <img src={LogoLike} alt="Like" />
-            </Button>
+            {/*
+              <Button className={likeButtonClass} onClick={toggleLike} >
+                <img src={LogoLike} alt="Like" />
+              </Button>
+             */ }
 
             {isFavorite ? (
               <Button className="minus-button" onClick={handleDeleteFromFavorite}>
@@ -171,10 +175,16 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
             </Button>
             )}
 
-
+            {/*            
             <Button className="platform-button">
               <img src={LogoPlateform} alt="Platform" />
-            </Button>
+            </Button> 
+            */}
+
+            <Button className="group-button">
+              <img src={group} alt="group" />
+            </Button> 
+            
           </div>
         </div>
       </div>

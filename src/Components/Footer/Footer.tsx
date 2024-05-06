@@ -1,14 +1,19 @@
-import Swal from 'sweetalert2'; // npm install sweetalert2
+
+import Swal from 'sweetalert2'; // npm install sweetalert2 //For mail contact 
 
 import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import axios from "axios";
-import { addComment, addLike, fetchComments, getLikeCount } from "../../store/action/action";
+import { addComment, addLike, disLike, fetchComments, getLikeCount } from "../../store/action/action";
 
 import './Footer.scss';
 
 const commentlogo = "../../../public/commentlogo.svg";
+const maillogo = "../../../public/mail.svg";
+
+const heart = "../../../public/heart.svg";
+const heartoff = "../../../public/heartoff.svg";
 
 import { Button } from "@mui/material";
 import { RootState } from "../../store";
@@ -21,8 +26,8 @@ function Footer() {
   const likeError = useAppSelector((state: RootState) => state.like.error);
 
   const nbrlikes = useAppSelector((state) => state.like.nbrlikes.total_likes);
-  console.log(nbrlikes);
-
+  //console.log(nbrlikes);
+  const [isLiked, setIsLiked] = useState(false);
 
   const email = "omovies@outlook.fr";
   const userPseudo = user.pseudo;
@@ -31,6 +36,11 @@ function Footer() {
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [comment, setComment] = useState<Comment[]>([]);
   const [likeCount, setLikeCount] = useState(0);
+
+
+  const [likeNotification, setLikeNotification] = useState(false);
+  const [commentNotification, setCommentNotification] = useState(false);
+  const [dislikeNotification, setDislikeNotification] = useState(false);
 
   useEffect(() => {
     dispatch(fetchComments());
@@ -90,19 +100,12 @@ function Footer() {
   };
 
 
-  const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const newComment = { userId: user.id, token, comment };
-    const response = await dispatch(addComment(newComment));
-    dispatch(fetchComments()); // Récupérer à nouveau tous les commentaires du serveur
-    closeCommentModal();
-    setComment("");
-  };
-
   const handleLikeClick = async () => {
     try {
       await dispatch(addLike({ userId: user.id, token }));
-      dispatch(getLikeCount()); // Mettre à jour le nombre de likes dans Redux
+      dispatch(getLikeCount());
+      setIsLiked(true);
+      setLikeNotification(true); // Ajouter cette ligne
     } catch (error) {
       console.error("Error when liking the site:", error);
       if (axios.isAxiosError(error) && error?.response?.status === 400) {
@@ -110,46 +113,85 @@ function Footer() {
       }
     }
   };
-
+  
+  const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const newComment = { userId: user.id, token, comment };
+    const response = await dispatch(addComment(newComment));
+    dispatch(fetchComments());
+    closeCommentModal();
+    setComment("");
+    setCommentNotification(true); // Ajouter cette ligne
+  };
+  
+  const handleDislikeClick = async () => {
+    try {
+      await dispatch(disLike({ userId: user.id, token }));
+      dispatch(getLikeCount());
+      setIsLiked(false);
+      setDislikeNotification(true); // Ajouter cette ligne
+    } catch (error) {
+      console.error("Error when disliking the site:", error);
+    }
+  };
 
 
   return (
     <>
     <div className="footer-container">
+      
       <div className="bg-black text-white p-5 flex justify-between">
-        <div className="contact-div space-y-2">
-          <h1 className="text-3xl">Besoin d'informations ?</h1>
+        
+        <div >
           <div className="font-bold">
+          <img src={maillogo} alt="mail" />
             <button onClick={openModal}>Nous contacter</button>
           </div>
         </div>
-        <div className="commentaire-div space-y-2">
+
+        <div className="like">
+          
+          <div >
+              <div className="lds-heart">
+                <div></div>
+              </div>
+          </div>
+
+            <div >
+             {isLiked ? (
+              <button>
+                 <img src={heartoff} alt="heartoff" onClick={handleDislikeClick}/>
+              </button>
+              ) : (
+               <button>
+                 <img src={heart} alt="heart" onClick={handleLikeClick} />
+                </button>
+              )}
+                        <div className="nbr-likes">{nbrlikes ? nbrlikes : 0} Likes </div>
+            </div>
+
+
+        </div>
+
+
+        <div >
           <div className="font-bold">
           <img src={commentlogo} alt="comment" />
             <button className="btn-comment" onClick={openCommentModal}>Laisser nous un commentaire </button>
           </div>
           <div className="font-bold">
-            <p className="comment-list">Liste des commentaires</p>
+     
             <ul className="list-comments">
-              {comments && comments.data && comments.data.map((cmt) => (
-               <li className="comment" key={cmt.id}>
+              {comments && comments.data && comments.data.map((cmt, index) => (
+               <li className="comment" key={index}>
                  <strong>{cmt.pseudo}:</strong> {cmt.content}
                </li>
                ))}
             </ul>
           </div>
         </div>
-        <div className="like-div space-x-3 inline-flex">
-        <div className="like-button-container">
-          <div>Liker si vous aimer notre site :</div>
-          <button className="font-bold" onClick={handleLikeClick}>
-            <div className="lds-heart">
-              <div></div>
-            </div>
-          </button>
-        </div>
-        <div className="nbr-likes">Total de Like: {nbrlikes ? nbrlikes : 0}</div>
-      </div>
+
+        
 
       </div>
 
@@ -157,7 +199,10 @@ function Footer() {
 
     </div>
     
-    <p className="team">Team O'MOVIES : Bruno, Gwendoline, Fadwa, Mathias</p><Transition appear show={isOpen} as={Fragment}>
+    <p className="team">Team O'MOVIES : Bruno, Gwendoline, Fadwa, Mathias</p>
+    
+    
+    <Transition appear show={isOpen} as={Fragment}>
     
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
             <Transition.Child
@@ -186,19 +231,20 @@ function Footer() {
                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                       Nous contacter
                     </Dialog.Title>
-                    <form className="mt-2" onSubmit={sendEmail}>
-                      <input type="email" name="email" placeholder="Email" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" defaultValue={email} disabled />
-                      <input type="text" name="subject" placeholder="Objet" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                      <textarea name="message" placeholder="Veuillez écrire votre message en indiquant vos coordonnées" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                      <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">Envoyer</button>
+                    <form className="mt-2 space-y-4" onSubmit={sendEmail}>
+                      <input type="email" name="email" className="block w-full rounded-md border-gray-300 bg-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-white  sm:text-sm py-2" defaultValue={email} disabled />
+                      <input type="text" name="subject" placeholder="Objet" className="block w-full rounded-md border-gray-300 bg-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-white sm:text-sm py-2" />
+                      <textarea name="message" placeholder="Veuillez écrire votre message en indiquant vos coordonnées" className="block w-full rounded-md border-gray-300 bg-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-white sm:text-sm py-5"></textarea>
+                      <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 text-white bg-orange-700">Envoyer</button>
                     </form>
                   </Dialog.Panel>
                 </Transition.Child>
               </div>
             </div>
       </Dialog>
-
-      </Transition><Transition appear show={isCommentOpen} as={Fragment}>
+      </Transition>
+      
+      <Transition appear show={isCommentOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeCommentModal}>
           <Transition.Child
             as={Fragment}
@@ -226,19 +272,19 @@ function Footer() {
                   <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                     Laisser un commentaire
                   </Dialog.Title>
-                  <form className="mt-2" onSubmit={handleCommentSubmit}>
-                    <p className="text-sm font-medium text-gray-700">
+                  <form className="mt-2 space-y-4" onSubmit={handleCommentSubmit}>
+                    <p className="text-sm font-medium text-white-700  bg-black py-2">
                       Pseudo : {userPseudo}
                     </p>
                     <textarea
                       name="comment"
                       placeholder="Votre commentaire"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-5"
                       value={comment}
                       onChange={(e) => setComment(e.target.value)} />
                     <button
                       type="submit"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2  text-white bg-orange-700"
                     >
                       Envoyer
                     </button>
@@ -257,6 +303,9 @@ function Footer() {
   );
 }
 export default Footer;
+
+
+
 
 
 

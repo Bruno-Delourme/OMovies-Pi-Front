@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import KeywordBar from "../KeywordBar/KeywordBar";
 import Content from "../Content/Content";
 import Footer from "../Footer/Footer";
+import SearchBar from "../Header/SearchBar/SearchBar";
 
 
 function Home() {
@@ -10,6 +11,7 @@ function Home() {
         <div className="BodyAllProject">
         <Layout>
             <Header />
+            <SearchBar />
             <KeywordBar />
             <Content />
             <Footer />

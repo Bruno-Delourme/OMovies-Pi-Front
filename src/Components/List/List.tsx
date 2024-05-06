@@ -66,8 +66,8 @@ function List() {
         <div className="pl-10">-
         {showReviewList && (
           <ul className="inline-flex flex-wrap max-w-auto">
-            {moviesToReview.map((movie) => (
-              <li className="p-1 max-w-72">
+            {moviesToReview.map((movie, index) => (
+              <li className="p-1 max-w-72" key={index}>
               <OneMovie {...movie} 
               key={movie.id}
               />

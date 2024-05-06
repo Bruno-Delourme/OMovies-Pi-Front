@@ -5,7 +5,8 @@ import SearchBar from "./SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../../hooks/redux';
 
-const LogoPandaRoux = "../../../src/assets/pandaRoux2.png";
+const logo = "../../../src/assets/logo.png";
+
 
 const scrollToTop = () => {
       window.scrollTo({
@@ -22,36 +23,9 @@ const Header = () => {
 
   return (
     <div className="black-banner">
-      <Link to="/"><img src={LogoPandaRoux} className="LogoPandaRoux pl-4" alt="Logo" /></Link>
-      <SearchBar />
+      <Link to="/"><img src={logo} className="Logo pl-4" alt="Logo" /></Link>
+
       <div className="flex flex-col gap-1vh">
-        {userId !== 0 && (
-          <div>
-            {/* <Link to={`/group/${userId}`}>
-              <button className="acces-buttons" id="group-btn" onClick={Group}>
-                <FaPeopleGroup size={32} />
-              </button>
-            </Link> */}
-
-            {/* <Link to={`/list/${userId}`}>
-              <button className="btn" id="list-btn" >
-              <FaListCheck size={32} />
-              </button>
-            </Link> */}
-          </div>
-        )}
-
-        {userId === 0 && (
-          <>
-              {/* <button className="acces-buttons-disabled" id="group-btn-disabled" onClick={Group}>
-                <FaPeopleGroup size={32} />
-              </button> */}
-            
-              {/* <button className="acces-buttons-disabled" id="list-btn-disabled">
-              <FaListCheck size={32} />
-              </button> */}
-          </>
-        )}
 
         <div className="pt-4">
         <label htmlFor="loggin_modal" className="btn mr-4">
