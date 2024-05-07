@@ -37,18 +37,12 @@ const LogoLike = "../../../public/thumbs-up.svg";
 const LogoPlateform = "../../../public/presentation.svg";
 const repeat = "../../../public/repeat.svg";
 const repeat1 = "../../../public/repeat1.svg";
+const group = "../../../public/group.svg";
+const ungroup = "../../../public/ungroup.svg";
 
-function OneMovie({
-  id,
-  title,
-  poster_path,
-  overview,
-  name,
-  genre_ids,
-  release_date,
-  vote_average,
-}: Partial<Movie>) {
-    const dispatch = useAppDispatch();
+function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {
+
+  const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.user); // access to redux user state
   const token = useAppSelector((state) => state.user.token);
@@ -66,6 +60,9 @@ function OneMovie({
 
   const [plusActivated, setPlusActivated] = useState(false);
   const [plusAnimation, setPlusAnimation] = useState(false);
+
+
+
 
   // Gère l'activation de l'animation lors du survol de la souris
   const toggleAnimation = () => {
@@ -90,60 +87,41 @@ function OneMovie({
 
   //Favoris
   const handleAddToFavorite = () => {
-    if (user.id && token) {
-      dispatch(
-        addToFavorite({
-          userId: user.id,
-          movie: {
-            id: id as number,
-            title: title as string,
-            poster_path: poster_path as string,
-            overview: overview as string,
-          },
-          token,
-        })
-      );
-      // setIsFavorite(true); // Mettre à jour l'état isFavorite
+    if (user.id) {
+      dispatch(addToFavorite({ userId: user.id, movie: {
+        id: id as number,
+        title: title as string,
+        poster_path: poster_path as string,
+        overview: overview as string,
+      }, token }));
+
     }
   };
 
   const handleDeleteFromFavorite = () => {
     if (user.id && id && token) {
       dispatch(deleteFromFavorite({ userId: user.id, movieId: id, token }));
-      // setIsFavorite(false); // Met à jour l'état isFavorite par défaut à Faux
+  
     }
   };
 
   // To review
   const handleAddToReview = () => {
     if (user.id) {
-      dispatch(
-        addToReview({
-          userId: user.id,
-          movie: {
-            id,
-            title,
-            poster_path,
-            overview,
-            name,
-            genre_ids,
-            release_date,
-            vote_average,
-            adult: false,
-            original_language: "",
-            key: 0,
-          },
-          token,
-        })
-      );
-      // setIsToReview(true);
+      dispatch(addToReview({ userId: user.id, movie: {
+        id, title, poster_path, overview, name, genre_ids, release_date, vote_average,
+        adult: false,
+        original_language: '',
+        key: 0
+      }, token }));
+ 
     }
   };
 
   const handleDeleteFromReview = () => {
     if (user.id && id) {
       dispatch(deleteFromReview({ userId: user.id, movieId: id, token }));
-      //  setIsToReview(false);
+
     }
   };
 
@@ -175,9 +153,11 @@ function OneMovie({
           )}
           
           <div className="action-buttons min-full">
-            <Button className={likeButtonClass} onClick={toggleLike}>
-              <img src={LogoLike} alt="Like" />
-            </Button>
+            {/*
+              <Button className={likeButtonClass} onClick={toggleLike} >
+                <img src={LogoLike} alt="Like" />
+              </Button>
+             */ }
 
             {isFavorite ? (
               <Button
@@ -205,9 +185,16 @@ function OneMovie({
               </Button>
             )}
 
+            {/*            
             <Button className="platform-button">
               <img src={LogoPlateform} alt="Platform" />
-            </Button>
+            </Button> 
+            */}
+
+            <Button className="group-button">
+              <img src={group} alt="group" />
+            </Button> 
+            
           </div>
         </div>
       </div>

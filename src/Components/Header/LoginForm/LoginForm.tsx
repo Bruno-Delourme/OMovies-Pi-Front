@@ -4,10 +4,12 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { changeField, login, logout } from "../../../store/action/action";
 import SubscribeForm from "../SubscribeForm/SuscribeForm";
 import { Link, useMatch, Route, Routes, Navigate } from "react-router-dom";
-import { FaListCheck } from "react-icons/fa6";
+import { FaListCheck, FaUsers } from "react-icons/fa6";
 
 import MemberSpace from '../../MemberSpace/MemberSpace';
+import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 
+import './LoginForm.scss';
 function LoginForm() {
   const dispatch = useAppDispatch();
 
@@ -42,43 +44,120 @@ function LoginForm() {
   const match = useMatch(`/profil/${userId}`);
 
 
+  //Group and membre functions 
+
+  // function GroupButton({ userId })  ( Need add userId as params )
+
+  /* 
+  const [groupName, setGroupName] = useState('');
+  const [memberPseudo, setMemberPseudo] = useState('');
+
+
+  const handleAddGroup = () => {
+    dispatch(addGroup({ name: groupName, members: [userId], admin: userId }));
+  };
+
+  const handleAddMember = () => {
+    // TODO: Ajouter le membre à la liste des membres du groupe
+  };
+  */
+
   return (
     <div className="login-form">
       {isLogged && (
-              <div className="inline-flex items-center justify-evenly p-6">
-                <p className="login-form-message pr-4 pl-4">
-                  Bienvenue {pseudo}
-                </p>
-                <div className="mr-4">
-                  <Link to={`/list/${userId}`} className="btn">
-                    <FaListCheck size={32} />
-                    <span className="ml-1">Ma liste</span>
-                  </Link>
+      <>
+        <p className="login-form-message pr-4 pl-4">
+          Bienvenue {pseudo}
+        </p>
+        
+        <div className="login-form-buttons inline-flex items-center justify-evenly p-6">
+           
+  
+            <Link to={`/list/${userId}`} className="btn">
+                <FaListCheck size={32} />
+                <span className="ml-1">Liste</span>
+            </Link>
+
+
+      <label htmlFor="group_modal" className="btn mr-4">
+        <FaUsers size={32} />
+        <span className="ml-1">Groupe</span>
+      </label>
+
+      <input type="checkbox" id="group_modal" className="modal-toggle" />
+      <div id="group_modal" className="modal" role="dialog">
+        <div className="bg-white absolute rounded-lg">
+          <div className="p-4">
+
+            <label htmlFor="group_name" className="block font-medium text-gray-700">
+              Nom du groupe
+            </label>
+            <input
+              type="text"
+              id="group_name"
+              className="border border-gray-300 rounded-md px-3 py-2 w-full"  />
+              {/* ajouter value={groupName} onChange={(e) => setGroupName(e.target.value)} */}
+
+     
+            <button type="button" className="btn mt-4"  > {/* ajouter onClick={handleAddGroup} */}
+              Ajouter le groupe
+            </button>
+
+            <label htmlFor="member_pseudo" className="block font-medium text-gray-700 mt-4">
+              Ajouter le pseudo d'un membre
+            </label>
+            
+            
+            <input
+              type="text"
+              id="member_pseudo"
+              className="border border-gray-300 rounded-md px-3 py-2 w-full" />
+              {/* ajouter  value={memberPseudo} onChange={(e) => setMemberPseudo(e.target.value)} */}
+
+            <button type="button" className="btn mt-4"> {/* ajouter  onClick={handleAddMember} */}
+              Ajouter un membre
+            </button>
+          </div>
+
+
+          <Link to={`/group/${userId}`} className="vote btn mt-4 "> {/* modifier la route en ajoutant $ pou id  */}
+              Aller voter
+          </Link>
+
+        </div>
+        <label className="modal-backdrop" htmlFor="group_modal">Close</label>
+      </div>
+
+            <label htmlFor="userProfil_modal" className="btn mr-4">
+              <FaUserCircle size={32} /> 
+               Profil
+            </label>
+
+            <input type="checkbox" id="userProfil_modal" className="modal-toggle" />
+            <div id="userProfil_modal" className="modal" role="dialog">
+              <div className="bg-white absolute rounded-lg">
+                <div className="">
+                  <Routes>
+                    <Route path="/" element={<MemberSpace id={0} />} />
+                  </Routes>
                 </div>
-                <label htmlFor="userProfil_modal" className="btn mr-4">
-                  Mon Profil
-                </label>
-                <input type="checkbox" id="userProfil_modal" className="modal-toggle" />
-                  <div id="userProfil_modal" className="modal" role="dialog">       
-                    <div className="bg-white absolute rounded-lg">
-                      <div className="">
-                      <Routes>
-                        <Route path="/" element={<MemberSpace id={0}/>} />
-                      </Routes>
-                      </div>
-                    </div>
-                    <label className="modal-backdrop" htmlFor="userProfil_modal">Close</label>
-                  </div>
-                <button
-                  type="button"
-                  className="login-form-button btn mr-4"
-                  onClick={handleLogout}
-                  >Déconnexion
-                </button>
               </div>
+              <label className="modal-backdrop" htmlFor="userProfil_modal">Close</label>
+            </div>
+            
+            <button type="button"className="login-form-button btn mr-4" onClick={handleLogout}>
+                <FaSignOutAlt size={20} className="mr-1" /> 
+                Déconnexion
+            </button>
+
+          </div>
+          
+
+            
+      </>
             )}
       {!isLogged && (
-        <div className="">
+        <div className="login-form-container">
             <div className=""> 
                 <form 
                   autoComplete="off"
@@ -101,7 +180,8 @@ function LoginForm() {
               </div>     
               </form>
             </div>
-{/* Suscribe button */}
+            
+            {/* Suscribe button */}
               <div className="pt-4">
                 <button className="btn" onClick={()=>document.getElementById('inscription_modal').showModal()}>S'inscrire</button>
                   <dialog id="inscription_modal" className="modal">

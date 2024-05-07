@@ -16,7 +16,10 @@ function SubscribeForm() {
 
   //const dispatch = useDispatch();
   type AppThunkAction = ThunkAction<void, RootState, unknown, Action<string>>;
-  type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+  type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>; 
+  // AppDispatch is a custom type defined using ThunkDispatch from Redux Toolkit, 
+  // representing a dispatch function that accepts thunk actions with a specific state type (RootState), 
+  // an unknown second argument, and returning any valid Redux action (AnyAction).
   
   const dispatch = useDispatch<AppDispatch>();
 
@@ -84,13 +87,14 @@ function SubscribeForm() {
           <button type="submit" className="btn mr-4">
             S'inscrire
           </button>
-          <form method="dialog">
-            <button className="btn">Annuler</button>
-          </form>
+
+            <button className="btn" onClick={() => window.location.href = '/'} >Annuler</button>
+
         </div>
       </form>
     </div>
   );
 }
+
 
 export default SubscribeForm;

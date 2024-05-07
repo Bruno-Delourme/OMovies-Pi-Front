@@ -1,0 +1,33 @@
+/* Pour les écrans de taille inférieure à 640px */
+@media screen and (max-width: 639px) {
+    .login-form-buttons {
+      flex-direction: column;
+    }
+  
+    .login-form-buttons .btn {
+      font-size: 1.2rem;
+      padding: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    .login-form-buttons .btn span {
+      display: none;
+    }
+  }
+  
+  /* Pour les écrans de taille inférieure à 768px */
+  @media screen and (max-width: 767px) {
+    .login-form-container {
+      flex-direction: column;
+    }
+  
+    .login-form-container form {
+      margin-bottom: 1rem;
+    }
+  }
+  
+  .vote{
+margin-left: 20em;
+margin-bottom: 2em;
+margin-right: 2em;
+  }

@@ -27,7 +27,7 @@ useEffect(() => {
 
   return (
     <div id="suggestionMovies">
-        <h1 className="title-configuration">Suggestion : films populaire </h1>
+        <h1 className="title-configuration">Films populaire </h1>
       <div className="relative">
         {loading ? (
         <p>Chargement...</p>

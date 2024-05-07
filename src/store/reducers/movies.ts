@@ -3,7 +3,7 @@ import { RootState } from '../index';
 
 import { createReducer, createSelector } from "@reduxjs/toolkit";
 import { Movie, MoviesResponse } from "../../@types/movie";
-import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchFavoriteMovies, addToFavorite, deleteFromFavorite, addToReview, deleteFromReview, fetchMoviesToReview, fetchRomanceRatingMovies, fetchFamilialRatingMovies, fetchActionRatingMovies, fetchScienceFictionRatingMovies, fetchDocumentaireRatingMovies } from "../action/action";
+import { fetchDocumentaireMovies, fetchFamilialMovies, fetchActionMovies, fetchRomanceMovies, fetchScienceFictionMovies, setRomanceMovies, fetchNewMovies, fetchSuggestionMovies, fetchByGenreMovies, fetchByActorMovies, fetchFavoriteMovies, addToFavorite, deleteFromFavorite, addToReview, deleteFromReview, fetchMoviesToReview, fetchRomanceRatingMovies, fetchFamilialRatingMovies, fetchActionRatingMovies, fetchScienceFictionRatingMovies, fetchDocumentaireRatingMovies, fetchMovieById, fetchRecommendationWithRandomMovie } from "../action/action";
 
 
 export const selectFavoriteMovies = createSelector(
@@ -15,6 +15,7 @@ export const selectMoviesToReview = createSelector(
   (state: RootState) => state.movies,
   (movies) => movies.moviesToReview
 );
+
 
 
 interface MoviesState {
@@ -34,9 +35,11 @@ interface MoviesState {
     moviesByActor: Movie[],
     favoriteMovies: Movie[]
     moviesToReview: Movie[],
+    forYou: Movie[],
     loading: boolean;
     error: string | null;
   }
+  
   export const initialState: MoviesState = {
     romanceMovies: [],
     romanceMoviesRating : [],
@@ -54,6 +57,7 @@ interface MoviesState {
     moviesByActor: [],
     favoriteMovies: [],
     moviesToReview: [],
+    forYou: [],
     loading: false,
     error: null,
   };
@@ -62,6 +66,10 @@ interface MoviesState {
   
   const moviesReducer = createReducer(initialState, (builder) => {
     builder
+
+
+
+  
     //Romance movies
       .addCase(fetchRomanceMovies.pending, (state) => {
         state.loading = true;
@@ -312,5 +320,21 @@ interface MoviesState {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch movies";
       })
+      //show forYou movies 
+      .addCase(fetchRecommendationWithRandomMovie.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchRecommendationWithRandomMovie.fulfilled, (state, action) => {
+        state.loading = false;
+        state.forYou = action.payload; // Update state with fetched forYou movies
+        console.log(action.payload);
+        console.log(state.forYou);
+      })
+      .addCase(fetchRecommendationWithRandomMovie.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch movies";
+      })
+
     });
   export default moviesReducer;

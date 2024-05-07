@@ -12,8 +12,9 @@ import Group from "./Components/Group/Group";
 import MemberSpace from "./Components/MemberSpace/MemberSpace";
 import ResultKeywordBar from "./Components/ResultKeywordBar/ResultKeywordBar";
 import MovieDetails from "./Components/MovieDetails/MovieDetails";
-
-import { MovieDetailSearch } from "./Components/Header/SearchBar/MovieDetailSearch";
+import MovieDetailsModal from "./Components/MovieDetails/MovieDetailsModal";
+import MovieSearchBar from "./Components/Header/SearchBar/MovieSearchBar";
+import SearchBar from "./Components/Header/SearchBar/SearchBar";
 
 const router = createBrowserRouter([
   {
@@ -41,16 +42,9 @@ const router = createBrowserRouter([
       { path: "/moviesRating/documentaire/*", element: <ResultKeywordBar /> },
 
       { path: "/movie/:id", element: <MovieDetails /> },
-      { path: "/movie/searchbar/:id", element: <MovieDetailSearch /> },
+      { path: "/movie/searchbar/:id", element: <MovieSearchBar /> },
 
-      // {path: "/movie", element: <MovieDetailsModal />,
-      //   children: [
-      //     {
-      //       path: ":id",
-      //       element: <MovieDetails />,
-      //     },
-      //   ],
-      // },
+
     ]},
 ]);
 

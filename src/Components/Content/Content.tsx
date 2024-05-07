@@ -33,7 +33,7 @@ function Content() {
 
     return (
         <div className="">
-            <NewMovie /><Suggestion />{logged && <SuggestionForYou />}<ByGenre /><ByActor />
+            <ByActor /><NewMovie /><Suggestion />{logged && <SuggestionForYou />}<ByGenre />
              <Outlet /> {/* Render ResultKeywordBar when movies are available */}
 
         </div>

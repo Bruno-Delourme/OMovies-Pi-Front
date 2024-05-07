@@ -1,198 +1,105 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
+
+import { useEffect, useRef, useState } from "react";
+import { fetchMovieById, searchMovies } from "../../../store/action/action";
+import { AsyncThunkAction } from "@reduxjs/toolkit";
+import { AsyncThunkConfig } from "@reduxjs/toolkit/dist/createAsyncThunk";
+import { Movie } from "../../../@types/movie";
+
+import { useAppDispatch } from "../../../hooks/redux";
+import { useNavigate } from 'react-router-dom';
+
+import './SearchBar.scss';
+import { SearchMoviesResponse } from "../../../@types/searchMovies";
 
 const clapperboard = "../../../src/assets/clapperboard.png";
 
-type Movie = {
-  id: number;
-  title: string;
-  poster_path?: string;
-};
 
-function SearchBar() {
-  const [query, setQuery] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<Movie[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const [showMoviesByActor, setShowMoviesByActor] = useState<boolean>(false);
-  const [showMoviesByKeyword, setShowMoviesByKeyword] =
-    useState<boolean>(false);
-  const [moviesByActor, setMoviesByActor] = useState<Movie[]>([]);
-  const [moviesByKeyword, setMoviesByKeyword] = useState<Movie[]>([]);
+function SearchBar({ id, title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {
 
- 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      if (query.length > 2) {
-        const url = `http://localhost:3000/api/searchBar?query=${query}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log("DATA MOVIE SEARCH should have id ", data.moviesByTitle);
-        // Vérifiez si data.moviesByTitle existe avant de faire le mapping
-        if (data.moviesByTitle) {
-          const moviesWithPosterPath = data.moviesByTitle.map(
-            (movie: Movie) => ({
-              ...movie,
-              poster_path: movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : clapperboard,
-            })
-          );
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState<SearchMoviesResponse | null>(null);
 
-          setSuggestions(moviesWithPosterPath.slice(0, 5));
-        } else {
-          setSuggestions([]);
-        }
+  // Creates a new reference object in the DOM using the hook useRef with event onClick (inside my useEffect)
+  // Reference object will refer to a div element ( div inside my return of compnent ref={searchBarRef} )
+  const searchBarRef = useRef<HTMLDivElement>(null);
+  
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-        // Traitement et mise à jour de moviesByActor
-        if (data.moviesByActor) {
-          const actorMoviesWithPoster = extractMovies(data.moviesByActor).map(
-            (movie: Movie) => ({
-              ...movie,
-              poster_path: movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : clapperboard,
-            })
-          );
-          setMoviesByActor(actorMoviesWithPoster.slice(0, 5));
-        } else {
-          setMoviesByActor([]);
-        }
-
-        // Traitement et mise à jour de par mot-clés
-        if (data.moviesByKeyword) {
-          const keywordMoviesWithPoster = extractMovies(
-            data.moviesByKeyword
-          ).map((movie: Movie) => ({
-            ...movie,
-            poster_path: movie.poster_path
-              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-              : clapperboard,
-          }));
-          setMoviesByKeyword(keywordMoviesWithPoster.slice(0, 5));
-        } else {
-          setMoviesByKeyword([]);
-        }
-
-        setShowSuggestions(true);
-      } else {
-        setSuggestions([]);
-        setShowSuggestions(false);
-      }
-    };
-
-    const timeoutId = setTimeout(() => {
-      fetchMovies();
-    }, 500);
-
-    return () => clearTimeout(timeoutId);
-  }, [query]);
-
-  const extractMovies = (moviesArray: any[]) => {
-    return Array.isArray(moviesArray)
-      ? moviesArray.flatMap((category) =>
-          Array.isArray(category) ? Object.values(category).flat() : []
-        )
-      : [];
+  // handle submit search 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const results = await dispatch(searchMovies(searchTerm));
+    setSearchResults(results.payload as SearchMoviesResponse);
   };
-  console.log(suggestions);
+
+//handle click events outside the search bar
+  const handleClickOutside = (event: MouseEvent) => {
+    if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
+      setSearchTerm('');
+      setSearchResults(null);
+    }
+  };
+
+  const handleMovieClick = (movieId: number) => {
+    
+    navigate(`/movie/searchbar/${movieId}`);
+    dispatch(fetchMovieById({ movieId }));
+  };
+  
+
+
+  // Use the useEffect hook to add an event listener for click events on the document
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [handleMovieClick]); // Specify an empty dependency array to only run the effect once on mount and unmount
+
+  
+  const renderDropdownItems = () => {
+    if (!searchResults) return null;
+    return (
+      <ul className="suggestions-list">
+        {searchResults.moviesByTitle.map((movie) => (
+          <li key={movie.id} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"  onClick={() => handleMovieClick(movie.id)} >
+            <div className="flex items-center">
+              <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="w-16 h-auto mr-2" />
+              <span className="text-black">{movie.title}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    );
+  };
   return (
-    <>
-      <div
-        className={`flex items-center relative w-2/4 ${
-          showSuggestions ? "active" : ""
-        }`}
-      >
-        <input
-          className="search-bar"
-          type="text"
-          placeholder="Rechercher un titre de film..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+    <div className="div-search-bar">
+        <div className="flex items-center relative w-2/4" ref={searchBarRef}>
+          <form onSubmit={handleSubmit} className="form-search-bar">
 
-        <button className="button-searchBar">
-          <img src={clapperboard} alt="Search" />
-        </button>
+            <input
+              className="search-bar"
+              type="text"
+              placeholder="Rechercher un titre de film..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
 
-        <ul className={`suggestions-list ${showSuggestions ? "" : "hidden"}`}>
-          {/* Films suggérés par titre */}
-          {suggestions.map((movie, index) => (
-            // eslint-disable-next-line react/jsx-key
-            <Link to={`/movie/searchbar/${movie.id}`}>
-              <li key={index} className="film-choice">
-                <div className="flex items-center">
-                  <img
-                    src={movie.poster_path}
-                    alt={movie.title}
-                    className="w-16 h-auto mr-2"
-                  />
-                  <span className="text-black ">{movie.title}</span>
-                </div>
-              </li>
-            </Link>
-            //<Link to={`/movie/${movie.id}`}>
-            //   <li key={index} className="film-choice" >
-            //   <div className="flex items-center">
-            //     <img
-            //       src={movie.poster_path}
-            //       alt={movie.title}
-            //       className="w-16 h-auto mr-2"
-            //     />
-            //     <span className="text-black ">{movie.title}</span>
-            //   </div>
-            // </li>
-            //</Link>
-          ))}
-          {/* Option pour afficher les films suggérés par acteur */}
-          <li
-            className="clickable text-black cursor-pointer"
-            onClick={() => setShowMoviesByActor(!showMoviesByActor)}
-          >
-            Movies By Actor
-          </li>
-          {showMoviesByActor &&
-            moviesByActor.map((movie, index) => (
-              <li
-                key={index}
-                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-              >
-                <div className="flex items-center">
-                  <img
-                    src={movie.poster_path}
-                    alt={movie.title}
-                    className="w-16 h-auto mr-2"
-                  />
-                  <span className="text-black">{movie.title}</span>
-                </div>
-              </li>
-            ))}
-          {/* Option pour afficher les films suggérés par mot-clé */}
-          <li
-            className="clickable text-black cursor-pointer"
-            onClick={() => setShowMoviesByKeyword(!showMoviesByKeyword)}
-          >
-            Movies By Keyword
-          </li>
-          {showMoviesByKeyword &&
-            moviesByKeyword.map((movie, index) => (
-              <li
-                key={index}
-                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-              >
-                <div className="flex items-center">
-                  <img
-                    src={movie.poster_path}
-                    alt={movie.title}
-                    className="w-16 h-auto mr-2"
-                  />
-                  <span className="text-black">{movie.title}</span>
-                </div>
-              </li>
-            ))}
-        </ul>
-      </div>
-    </>
+            <button className="button-searchBar">
+              <img src={clapperboard} alt="Search" />
+            </button>
+
+          </form>
+          {renderDropdownItems()}
+        </div>
+    </div>
   );
 }
 
 export default SearchBar;
+
+
+
+

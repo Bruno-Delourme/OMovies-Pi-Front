@@ -15,12 +15,12 @@ function ByGenre() {
 
   useEffect(() => {
     dispatch(fetchByGenreMovies());
-    //console.log(moviesByGenre);
+    console.log(moviesByGenre);
   }, [dispatch]);
 
   return (
     <div className="byGenreMovies">
-        <p className="title-configuration">By genre : action</p>
+        <p className="title-configuration">Film d'action</p>
         <div className="relative">
       {loading ? (
         <p>Chargement...</p>

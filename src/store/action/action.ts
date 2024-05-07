@@ -17,7 +17,44 @@ import { UserFormData, UserState } from "../../@types/user";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
 });
-//ACTION MOVIES
+
+
+// SearchBar 
+interface SearchMoviesResponse {
+  moviesByTitle: Movie[];
+  moviesByGenre: Movie[];
+  actors: string[];
+  moviesByActor: Movie[][];
+}
+
+
+const SEARCH_MOVIES = "SEARCH_MOVIES"
+
+export const searchMovies = createAsyncThunk<SearchMoviesResponse, string>(
+  SEARCH_MOVIES,
+  async (searchTerm: string) => {
+    const response = await axiosInstance.get<SearchMoviesResponse>(`/searchBar?query=${searchTerm}`);
+    const movies = response.data ;
+    console.log(movies);
+    return movies;
+  }
+);
+
+
+// Movie By Id , movieId en params 
+const FETCH_MOVIE_BY_ID = "FETCH_MOVIE_BY_ID";
+export const fetchMovieById = createAsyncThunk<Movie, { movieId: number}>(
+  FETCH_MOVIE_BY_ID,
+  async ({ movieId }) => { 
+    const response = await axiosInstance.get(`/movie/${movieId}`);
+    const movie = response.data as Movie; 
+    //console.log(movie);
+    return movie;
+  }
+);
+
+
+//ROMANCE MOVIES
     //Romance movies
     const FETCH_ROMANCE_MOVIES = "FETCH_ROMANCE_MOVIES";
     export const fetchRomanceMovies = createAsyncThunk<Movie[]>(
@@ -175,15 +212,16 @@ const axiosInstance = axios.create({
     );
     // Movies By actor
     const FETCH_BYACTOR_MOVIES = "FETCH_BYACTOR_MOVIES";
-    export const fetchByActorMovies = createAsyncThunk<Movie[]>(
+    export const fetchByActorMovies = createAsyncThunk<Movie[], string>(
       FETCH_BYACTOR_MOVIES,
-      async () => {
-        const response = await axiosInstance.get("/moviesByActor/Cillian%20Murphy");
+      async (actorName: string) => {
+        const response = await axiosInstance.get(`/moviesByActor/${encodeURIComponent(actorName)}`);
         const movies = response.data as Movie[];
         console.log(movies);
         return movies;
       }
     );
+
 
 
 
@@ -292,6 +330,29 @@ const axiosInstance = axios.create({
           return MoviesToReview;
         }
       );
+
+      // ForYou suggestion movies 
+      const FETCH_RECOMMENDATION_BY_FAVORITES = "FETCH_RECOMMENDATION_BY_FAVORITES";
+      export const fetchRecommendationWithRandomMovie = createAsyncThunk<Movie[], { userId: number, token: string, page?: number }>(
+        "FETCH_RECOMMENDATION_BY_FAVORITES",
+        async ({ userId, token, page }) => {
+          const response = await axiosInstance.get(`/recommendationByFavoris/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            },
+            params: {
+              page
+            }
+          });
+          const recommendedMovies = response.data as Movie[];
+          console.log(recommendedMovies);
+          return recommendedMovies;
+        }
+      );
+
+
+
+
 // ACTION USER
     //Interface USER
     interface FormField {
@@ -308,6 +369,7 @@ const axiosInstance = axios.create({
     // Check token
     const CHECK_TOKEN = "CHECK_TOKEN";
     export const CheckToken = createAction(CHECK_TOKEN);
+
     // Subscribe user
     const REGISTER = "REGISTER"; // Ajout pour l'enregistrement de l'utilisateur
     export const register = createAsyncThunk<
@@ -324,6 +386,7 @@ const axiosInstance = axios.create({
       const response = await axiosInstance.post("/createUser", FormData);
       return response.data;
     });
+    
     // Login user
     const LOGIN = "LOGIN";
     export const login = createAsyncThunk<
@@ -436,7 +499,7 @@ export const addLike = createAsyncThunk<Like, { userId: number, token: string }>
     try {
       const response = await axiosInstance.post(
         `/like/${userId}`,
-        {}, // corps de la requête vide
+        {}, 
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -454,8 +517,41 @@ export const addLike = createAsyncThunk<Like, { userId: number, token: string }>
   }
 );
 
+// Dislike
+// need token and userId using params { userId: number, token: string }
+interface AddDisLikeParams {
+  userId: number;
+  token: string;
+}
 
-    // Show like count // need update table like on Data Base with Gwen 
+const DISLIKE = "DISLIKE";
+
+export const disLike = createAsyncThunk<Like, { userId: number, token: string }>(
+  "DISLIKE",
+  async ({ userId, token }) => {
+    try {
+      const response = await axiosInstance.delete(
+        `/dislike/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const newLike = response.data as Like;
+      console.log(newLike);
+      return newLike;
+    } catch (error) {
+      console.error('Error when disliking the site :', error);
+      throw error;
+    }
+  }
+);
+
+
+
+
+    // Show like count
     interface GetLikeCountParams {
       token: string;
       like: number;
@@ -472,5 +568,18 @@ export const addLike = createAsyncThunk<Like, { userId: number, token: string }>
         } catch (error) {
           return rejectWithValue("Une erreur s'est produite lors de la récupération du nombre de likes.");
         }
+      }
+    );
+
+
+
+    // ADD GROUPE
+    const ADD_GROUP = 'ADD_GROUP';
+
+    export const addGroup = createAsyncThunk<Group, { name: string; userId: number; token: string }>(
+      ADD_GROUP,
+      async ({ name, userId, token }) => {
+        const response = await axiosInstance.post(`/createGroup/${userId}`, { name }, { headers: { Authorization: `Bearer ${token}` } });
+        return response.data.data;
       }
     );
