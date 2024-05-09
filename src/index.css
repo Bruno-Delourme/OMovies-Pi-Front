@@ -24,10 +24,10 @@ body {
     @apply bg-black flex items-center justify-between  top-0 w-full p-2 ;
     z-index: 8;
   }
+  
   /* Tailwind CSS du Logo PandaRoux */
   .Logo {
     @apply h-32;
-    border-radius: 50%;
     block-size: 8em;
   }
   /* Tailwind CSS des boutons login/groupe etc */
@@ -38,23 +38,28 @@ body {
   .search-bar {
     @apply w-full h-full focus:outline-none px-2 py-2.5 text-white rounded-l;
   }
+
   /* Tailwind CSS du bouton recherche de la search-bar */
   .button-searchBar {
     @apply h-full bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded-r;
   }
+
   /* Tailwind CSS de la liste déroulante des suggestions */
   .suggestions-list {
     @apply absolute top-full left-0 w-full bg-white border border-gray-300 rounded-b shadow-md;
     z-index: 10;
   }
+
   .film-choice {
     @apply flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer duration-300 transform hover:scale-105;
   }
+
   /* Tailwind CSS du KEYWORDBAR + des boutons individuellement*/
   .keywordbar {
     @apply flex flex-wrap justify-center gap-2 mb-10 mt-5;
     z-index: 9;
   }
+
   .genre-btn {
     @apply rounded-lg shadow-md font-bold whitespace-nowrap mb-2 sm:mb-0 sm:mr-2 duration-300 transform hover:scale-110;
     @apply px-8 py-2;
@@ -66,6 +71,7 @@ body {
   .resultKeywordBar-container {
     @apply flex-wrap;
   }
+
   /* .vignette-movie {
     @apply pb-5 rounded-md transition-transform duration-300 transform hover:scale-105
   } */
