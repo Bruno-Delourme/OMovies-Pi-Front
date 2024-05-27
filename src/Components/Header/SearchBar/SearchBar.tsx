@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import './SearchBar.scss';
 import { SearchMoviesResponse } from "../../../@types/searchMovies";
 
-const clapperboard = "../../../src/assets/clapperboard.png";
+const clapperboard = "../../../public/assets/clapperboard.png";
 
 
 function SearchBar({ id, title, poster_path, overview, name, genre_ids, release_date, vote_average }: Partial<Movie>) {

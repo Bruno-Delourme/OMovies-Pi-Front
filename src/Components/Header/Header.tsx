@@ -5,7 +5,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import { useAppSelector } from '../../hooks/redux';
 
-const logo = "../../../src/assets/pandaRoux2.png";
+const logo = "../../../public/assets/pandaRoux2.png";
 
 
 const scrollToTop = () => {

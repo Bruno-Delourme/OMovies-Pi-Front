@@ -36,7 +36,7 @@ body {
   }
   /* Tailwind CSS de la search-bar */
   .search-bar {
-    @apply w-full h-full focus:outline-none px-2 py-2.5 text-white rounded-l;
+    @apply w-full h-full focus:outline-none px-2 py-2.5 text-black rounded-l;
   }
 
   /* Tailwind CSS du bouton recherche de la search-bar */
