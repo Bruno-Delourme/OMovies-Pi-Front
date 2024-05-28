@@ -50,3 +50,9 @@
     }
   }
 }
+.movie-poster {
+  width: 350px; // Remplacez par la largeur souhaitée
+  height: auto; // Maintenir le ratio d'aspect
+  max-width: 100%; // Pour s'assurer que l'image ne dépasse pas le conteneur
+  border-radius: 10px; // Maintenir l'arrondi
+}
