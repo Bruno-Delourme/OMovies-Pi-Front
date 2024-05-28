@@ -1,3 +1,81 @@
+.footer-container {
+  background-color: #000;
+  color: #fff;
+  padding: 2rem 0;
+
+  .contact-div,
+  .commentaire-div,
+  .like-div {
+    flex: 1;
+  }
+
+  .contact-div {
+    text-align: center;
+  }
+
+  .commentaire-div {
+    text-align: center;
+  }
+
+  .like-div {
+    text-align: right;
+  }
+
+  .commentaire-div,
+  .like-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .commentaire-div button,
+  .like-div button {
+    margin-left: 1rem;
+  }
+
+  .list-comments {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .comment {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    max-width: 100%;
+    background-color: #333;
+  }
+
+  .comment-list {
+    margin-bottom: 2rem;
+  }
+
+  .btn-comment {
+    margin-top: 1rem;
+  }
+
+  .like-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .like-button-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .nbr-likes {
+    font-size: 14px;
+    color: #fff;
+  }
+}
+
 .lds-heart {
   display: inline-block;
   position: relative;
@@ -52,85 +130,3 @@
     transform: scale(0.9);
   }
 }
-
-
-.footer-container {
-    background-color: #000;
-    color: #fff;
-    padding: 2rem 0;
-  
-    .contact-div,
-    .commentaire-div,
-    .like-div {
-      width: 100%;
-    }
-  
-    .contact-div {
-      text-align: left;
-    }
-  
-    .commentaire-div {
-      text-align: center;
-    }
-  
-    .like-div {
-      text-align: right;
-    }
-  
-    .commentaire-div,
-.like-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.commentaire-div button,
-.like-div button {
-  margin-left: 1rem;
-}
-
-
-    .list-comments {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        max-height: 200px;
-        overflow-y: auto;
-      }
-
-
-      
-      .comment {
-          margin: 0.5rem 0;
-        padding: 0.5rem;
-        border-radius: 1rem;
-        max-width: 100%;
-        background-color: #333;
-      }
-      .comment-list {
-          margin-bottom: 2rem;
-        }
-      .btn-comment {
-          margin-right: 20%;
-      }
-      .like-div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .like-button-container {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      
-      .nbr-likes {
-        font-size: 14px;
-        color: #fff;
-      }
-      
-  }
-
-
-
