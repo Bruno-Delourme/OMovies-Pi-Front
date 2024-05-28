@@ -1,84 +1,136 @@
+.lds-heart {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  transform: rotate(45deg);
+  transform-origin: 40px 40px;
+}
+.lds-heart div {
+  top: 32px;
+  left: 32px;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.lds-heart div:after,
+.lds-heart div:before {
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: #fff;
+}
+.lds-heart div:before {
+  left: -24px;
+  border-radius: 50% 0 0 50%;
+}
+.lds-heart div:after {
+  top: -24px;
+  border-radius: 50% 50% 0 0;
+}
+@keyframes lds-heart {
+  0% {
+    transform: scale(0.95);
+  }
+  5% {
+    transform: scale(1.1);
+  }
+  39% {
+    transform: scale(0.85);
+  }
+  45% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
 
 .footer-container {
-background-color: #000;
-color: #fff;
-padding: 2rem 0;
+    background-color: #000;
+    color: #fff;
+    padding: 2rem 0;
+  
+    .contact-div,
+    .commentaire-div,
+    .like-div {
+      width: 100%;
+    }
+  
+    .contact-div {
+      text-align: left;
+    }
+  
+    .commentaire-div {
+      text-align: center;
+    }
+  
+    .like-div {
+      text-align: right;
+    }
+  
+    .commentaire-div,
+.like-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.commentaire-div button,
+.like-div button {
+  margin-left: 1rem;
 }
 
 
-.list-comments {
-margin: 0;
-padding: 0;
-list-style: none;
-max-height: 200px;
-overflow-y: auto;
-}
-
-.comment {
-margin: 0.5rem 0;
-padding: 0.5rem;
-border-radius: 1rem;
-max-width: 100%;
-background-color: #333;
-}
+    .list-comments {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        max-height: 200px;
+        overflow-y: auto;
+      }
 
 
-.nbr-likes {
-font-size: 20px;
-color: #fff;
-}
-
-.like{
-  position: fixed; /* ou position: absolute; si vous voulez que la div soit positionnée par rapport à son parent le plus proche qui a une position définie (autre que static) */
-  bottom: 50px; /* Ajustez cette valeur pour modifier la distance par rapport au bas de l'écran */
-  left: 0px; 
-  background-color: #333333af;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-/* for phones (480px and less) */
-@media only screen and (max-width: 480px) {
-  .footer-container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+      
+      .comment {
+          margin: 0.5rem 0;
+        padding: 0.5rem;
+        border-radius: 1rem;
+        max-width: 100%;
+        background-color: #333;
+      }
+      .comment-list {
+          margin-bottom: 2rem;
+        }
+      .btn-comment {
+          margin-right: 20%;
+      }
+      .like-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .like-button-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      
+      .nbr-likes {
+        font-size: 14px;
+        color: #fff;
+      }
+      
   }
 
-  .footer-container div:not(:last-child) {
-    margin-bottom: 1rem;
-  }
-}
 
 
-/* For display (768px and more) */
-@media only screen and (min-width: 768px) {
-  .footer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer-container > div {
-    width: 100%;
-    max-width: 768px;
-  }
-
-  .footer-container div:not(:last-child) {
-    margin-bottom: 1rem;
-  }
-}
-
-/*  For display desktop (1024px and more) */
-@media only screen and (min-width: 1024px) {
-  .footer-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .footer-container div:not(:last-child) {
-    margin-bottom: 0;
-  }
-}
