@@ -28,7 +28,7 @@ function MovieDetails({ title, poster_path, overview, name, genre_ids, release_d
           {movie && <OneMovie poster_path={movie.poster_path} />}
         </div>
         <div className="text-white space-y-2 pt-4 max-w-screen-lg">
-          <h1 className="font-bold text-4xl pl-20 pb-12">{movie.title}</h1>
+          <h1 className="font-bold text-2xl pl-15 pb-5 pt-10">{movie.title}</h1>
           <p className="font-semibold underline pl-4 text-xl">Résumé :</p>
           <p className="pt-4 pl-10 text-lg">{movie.overview}</p>
           <p className="font-extralight pt-4 pl-4">

@@ -140,6 +140,7 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
         onPointerLeave={handlePointerLeave}
       >
         <div className="">
+          
           {poster_path && (
             <Link to={`/movie/${id}`} htmlFor="movieDetails_modal" className="">
               {poster_path && (
@@ -151,7 +152,6 @@ function OneMovie({ id, title, poster_path, overview, name, genre_ids, release_d
               )}
             </Link>
           )}
-          
           <div className="action-buttons min-full">
             {/*
               <Button className={likeButtonClass} onClick={toggleLike} >

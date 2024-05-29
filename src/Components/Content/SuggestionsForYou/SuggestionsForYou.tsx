@@ -27,7 +27,7 @@ function SuggestionForYou() {
 
     return (
         <div id="forYouMovies">
-            <h1 className="titleSuggestionForYou">ForYou</h1>
+            <h1 className="titleSuggestionForYou">Suggestions de film</h1>
             <div className="relative">
         {loading ? (
         <p>Chargement...</p>

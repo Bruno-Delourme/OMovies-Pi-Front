@@ -80,7 +80,7 @@ body {
   /* Titre de sections */
   .title-configuration {
     @apply text-white;
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 2rem;
     margin-left: 2rem;
   }
@@ -119,6 +119,8 @@ body {
 
 
   /* Formulaire inscription */
+  
+  
 
   .input-filed {
     @apply border-gray-300 px-4 py-2 focus:outline-none focus:border-black
